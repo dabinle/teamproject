@@ -11,4 +11,9 @@ public class MemberDAO {
 		session.close();
 		return userName;
 	}
+	
+	public void join(MemberDTO dto) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		
+	}
 }
