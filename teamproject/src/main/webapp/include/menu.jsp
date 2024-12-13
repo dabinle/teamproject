@@ -10,6 +10,7 @@
 <c:choose>
 	<c:when test="${sessionScope.userID == null}">
 		<a href="/teamproject/shop/login.jsp">로그인</a> |
+		<a href="/teamproject/shop/join.jsp">회원가입</a> |
 		<a href="/teamproject/shop/admin_login.jsp">관리자 로그인</a> | 
 	</c:when>
 	<c:otherwise>
