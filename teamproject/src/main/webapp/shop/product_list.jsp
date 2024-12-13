@@ -19,7 +19,7 @@ $(function(){
 <body>
 <%@ include file="../include/admin_menu.jsp" %>
 <h2>상품목록</h2>
-<c:if test="${sessionScope.admin_userid != null}">
+<c:if test="${sessionScope.adminId != null}">
 	<button type="button" id="btn_add">상품등록</button>
 </c:if>
 <table border="1" width="500px">
@@ -35,7 +35,7 @@ $(function(){
 		</td>
 		<td><a href="/teamproject/product_servlet/detail.do?productNum=${row.productNum}">
 		${row.productName}</a>
-		<c:if test="${sessionScope.admin_userid != null}">
+		<c:if test="${sessionScope.adminId != null}">
 			<br>
 			<a href="/teamproject/product_servlet/edit.do?productNum=${row.productNum}">[편집]</a>
 		</c:if></td>
