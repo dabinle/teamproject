@@ -27,4 +27,13 @@
   	<servlet-name>HomeController</servlet-name>
   	<url-pattern>/home_servlet/*</url-pattern>
   </servlet-mapping>
+  <!-- 상품 -->
+  <servlet>
+  	<servlet-name>ProductController</servlet-name>
+  	<servlet-class>shop.ProductController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ProductController</servlet-name>
+  	<url-pattern>/product_servlet/*</url-pattern>
+  </servlet-mapping>
 </web-app>
