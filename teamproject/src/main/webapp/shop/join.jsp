@@ -14,9 +14,6 @@ function idCheck() {
 }
 
 
-
-<!-- 주소 띄우는 화면 -->
-<script>
 function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안에 있음
 	new daum.Postcode({
 		oncomplete:function(data){
@@ -37,8 +34,8 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 				fullAddr += (extraAddr !== "" ? "(" + extraAddr + ")" : "");
 			}
 			document.getElementById("post_code").value = data.zonecode;  // 우편 번호 카피
-			document.getElementById("address1").value = fullAddr;  // 주소 카피
-			document.getElementById("address2").focus();  // 상세 주소로 마우스
+			document.getElementById("address").value = fullAddr;  // 주소 카피
+			document.getElementById("addressDetail").focus();  // 상세 주소로 마우스
 		}
 	}).open();
 }
@@ -67,10 +64,10 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 		<td>비밀번호</td>
 		<td><input type="password" name="userPwd"></td>
 	</tr>
-	<tr>
+	<!-- <tr>
 		<td>비밀번호 확인</td>
 		<td><input type="password" name="userPwd"></td>
-	</tr>
+	</tr>  -->
 	<tr>
 		<td>전화번호</td>
 		<td><input name="phoneNum"></td>
@@ -83,12 +80,17 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 	</tr>
 	<tr>
 		<td>주소</td> 
-		<td><input name="address" id="address1" size="60"></td>
+		<td><input name="address" id="address" size="60"></td>
 	</tr>
 	<tr>
 		<td>상세주소</td>
-		<td><input name="addressDetail" id="address2"></td>
+		<td><input name="addressDetail" id="addressDetail"></td>
 	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<input type="submit" value="회원가입">
+		</td>
+	</tr> 
 </table>
 </form>
 </body>

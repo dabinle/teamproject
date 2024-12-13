@@ -5,7 +5,12 @@
 		select userName from member where userID=#{userID} and userPwd=#{userPwd}
 	</select>
 	
+	<select id="idCheck" resultType="String">
+		select count(*) from member where userID=#{userID}
+	</select>
+	
 	<insert id="join">
 		insert into member(userID, userName, userPwd, email, phoneNum, zipCode, address, addressDetail) values (#{userID}, #{userName}, #{userPwd}, #{email}, #{phoneNum}, #{zipCode}, #{address}, #{addressDetail})
 	</insert>
+	
 </mapper>

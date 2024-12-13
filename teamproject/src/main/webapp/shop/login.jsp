@@ -34,6 +34,7 @@
 		<td colspan="2" align="center">
 			<input type="submit" value="로그인">
 		</td>
+	</tr>
 </table>
 </form>
 </body>

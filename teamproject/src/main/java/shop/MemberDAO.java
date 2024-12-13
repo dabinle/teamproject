@@ -14,6 +14,14 @@ public class MemberDAO {
 	
 	public void join(MemberDTO dto) {
 		SqlSession session = Mybatis.getInstance().openSession();
-		
+		try {
+			session.insert("member.join", dto);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null)
+				session.close();
+		}		
 	}
 }
