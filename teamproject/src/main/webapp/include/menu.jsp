@@ -13,7 +13,7 @@
 		<span><a href="/teamproject/shop/admin_login.jsp">관리자 로그인</a></span> 
 	</c:when>
 	<c:otherwise>
-		${sessionScope.userName}님이 로그인중입니다.
+		${sessionScope.userName}님 환영합니다.
 		<a href="/teamproject/cart_servlet/list.do">장바구니</a>
 		<a href="/teamproject/shop/myPageHome.jsp">마이페이지</a>
 		<a href="/teamproject/shop/memberCenter.jsp">고객센터</a>
