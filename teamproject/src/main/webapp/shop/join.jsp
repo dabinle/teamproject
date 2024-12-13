@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../include/menu.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +8,42 @@
 <title>Insert title here</title>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-function idCheck() {
-	$.ajax({
-		url: "/"
-	})
+
+function join() {
+	let userName = document.form1.userName.value;
+	let userID = document.form1.userID.value;
+	let email = document.form1.email.value;
+	let userPwd = document.form1.userPwd.value;
+	let phoneNum = document.form1.phoneNum.value;
+	
+	
+	if(userID == ""){
+		alert("아이디를 입력하세요.");
+		document.form1.userID.focus();
+		return;
+	}
+	if(userName == ""){
+		alert("이름을 입력하세요.");
+		document.form1.userName.focus();
+		return;
+	}
+	if(email == ""){
+		alert("이메일을 입력하세요.");
+		document.form1.email.focus();
+		return;
+	}
+	if(userPwd == ""){
+		alert("비밀번호를 입력하세요.");
+		document.form1.userPwd.focus();
+		return;
+	}
+	if(phoneNum == ""){
+		alert("전화번호를 입력하세요.");
+		document.form1.phoneNum.focus();
+		return;
+	}
+	document.form1.action = "/teamproject/login_servlet/join.do";
+	document.form1.submit();
 }
 
 
@@ -43,7 +76,7 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 </head>
 <body>
 <h2>회원가입</h2>
-<form name="form1" method="post" action="/teamproject/login_servlet/join.do">
+<form name="form1" method="post">
 <table>
 	<tr>
 		<td>아이디</td>
@@ -88,7 +121,7 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-			<input type="submit" value="회원가입">
+			<input type="button" value="회원가입" onclick="join()"> 
 		</td>
 	</tr> 
 </table>
