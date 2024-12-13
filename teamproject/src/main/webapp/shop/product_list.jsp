@@ -17,7 +17,7 @@ $(function(){
 </script>
 </head>
 <body>
-<%@ include file="../include/admin_menu.jsp" %>
+<%@ include file="../include/menu.jsp" %>
 <h2>상품목록</h2>
 <c:if test="${sessionScope.adminId != null}">
 	<button type="button" id="btn_add">상품등록</button>

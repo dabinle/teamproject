@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-${sessionScope.result}
+<%
+response.sendRedirect("/teamproject/shop/product_list.jsp");
+%>
 </body>
 </html>
