@@ -30,10 +30,8 @@ public class LoginController extends HttpServlet{
 				HttpSession session = request.getSession();
 				session.setAttribute("userID", userID);
 				session.setAttribute("userName", userName);
-				request.setAttribute("result", userName+" 님 환영합니다.");
-				String page = "/shop/home.jsp";
-				RequestDispatcher rd = request.getRequestDispatcher(page);
-				rd.forward(request, response);
+				String page = "/teamproject/shop/home.jsp";
+				response.sendRedirect(page);
 			}
 		} else if (url.indexOf("logout.do") != -1) {
 			HttpSession session = request.getSession();
