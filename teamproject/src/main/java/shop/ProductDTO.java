@@ -7,7 +7,7 @@ public class ProductDTO {
 	private int price;
 	private int amount;
 	private String productImage;
-	
+
 	public int getProducNum() {
 		return producNum;
 	}
