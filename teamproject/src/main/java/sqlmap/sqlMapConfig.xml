@@ -14,6 +14,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         </environment>
     </environments>
     <mappers>
-    
+    	<mapper resource="shop/admin.xml"/>
     </mappers>
 </configuration>

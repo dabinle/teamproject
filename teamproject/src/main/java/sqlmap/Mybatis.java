@@ -7,10 +7,10 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-public class Mtbatis {
+public class Mybatis {
 	private static SqlSessionFactory instance;
 	
-	public Mtbatis() {
+	public Mybatis() {
 		// TODO Auto-generated constructor stub
 	}
 	
