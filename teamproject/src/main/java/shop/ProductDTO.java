@@ -13,4 +13,8 @@ public class ProductDTO {
 	private String description;
 	private int price;
 	private String productImage;
+	private int companyNum;
+	private String companyName;
+	private int p_categoryNum;
+	private int p_parentCatogory;
 }
