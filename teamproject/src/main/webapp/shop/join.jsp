@@ -8,22 +8,6 @@
 <title>Insert title here</title>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-function idCheck() {
-	$.ajax({
-		url:"/shop/idCheck",
-		type:"POST",
-		dataType:"JSON",
-		data : {"userID" : $("#userID").val()},
-		success : function(data) {
-			if(data == 1){
-				alert("중복된 이메일입니다.");
-			} else if(data == 0){
-				#("idCheck").attr("value", "Y");
-				alert("사용 가능한 이메일입니다.")
-			}
-		}
-	});
-}
 
 function join() {
 	let userName = document.form1.userName.value;

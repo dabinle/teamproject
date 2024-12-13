@@ -36,7 +36,7 @@ public class LoginController extends HttpServlet{
 		} else if (url.indexOf("logout.do") != -1) {
 			HttpSession session = request.getSession();
 			session.invalidate();
-			String page = path + "/shop/login.jsp?message=logout";
+			String page = path + "/shop/home.jsp";
 			response.sendRedirect(page);
 		} else if(url.indexOf("join.do") != -1) {
 			String userID = request.getParameter("userID");
