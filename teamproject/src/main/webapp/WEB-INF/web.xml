@@ -9,7 +9,7 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  
+  <!-- 관리자 -->
   <servlet>
   	<servlet-name>AdminController</servlet-name>
   	<servlet-class>shop.AdminController</servlet-class>
@@ -17,5 +17,14 @@
   <servlet-mapping>
   	<servlet-name>AdminController</servlet-name>
   	<url-pattern>/admin_servlet/*</url-pattern>
+  </servlet-mapping>
+  <!-- 홈페이지 -->
+  <servlet>
+  	<servlet-name>HomeController</servlet-name>
+  	<servlet-class>shop.HomeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>HomeController</servlet-name>
+  	<url-pattern>/home_servlet/*</url-pattern>
   </servlet-mapping>
 </web-app>
