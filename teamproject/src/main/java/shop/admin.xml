@@ -4,8 +4,4 @@
 	<select id="login" resultType="String">
 		select adminName from admin where adminId=#{adminId} and adminPwd=#{adminPwd}
 	</select>
-	
-	<insert id="join">
-		insert into admin(adminId, adminPwd, adminName) values (#{adminId}, #{adminPwd}, #{adminName})
-	</insert>
 </mapper>
