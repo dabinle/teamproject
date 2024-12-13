@@ -7,7 +7,7 @@
 <title>product_write</title>
 <script>
 function product_write(){
-	let productNum = document.form1.productName.value;
+	let productName = document.form1.productName.value;
 	let price = document.form1.price.value;
 	let description = document.form1.description.value;
 	if (productName == "") {

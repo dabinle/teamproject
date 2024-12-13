@@ -14,12 +14,12 @@
 		select * from product where productNum=#{productNum}
 	</select>
 	
-	<insert id="insert_prduct">
+	<insert id="insert_product">
 		insert into product (productNum, productName, price, description, productImage) values (seq_product.nextval, #{productName}, #{price}, #{description}, #{productImage})
 	</insert>
 	
 	<update id="update_product">
-		update product set productName=#{productName}, price=#{price}, description=#{description}, ProductImage=#{productImage} where productNum=#{productNum}
+		update product set productName=#{productName}, price=#{price}, description=#{description}, productImage=#{productImage} where productNum=#{productNum}
 	</update>
 	
 	<delete id="delete_product">
