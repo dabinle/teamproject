@@ -57,6 +57,7 @@ public class LoginController extends HttpServlet{
 			dto.setZipCode(zipCode);
 			dto.setAddress(address);
 			dto.setAddressDetail(addressDetail);
+			dao.join(dto);
 			response.sendRedirect(path + "/shop/login.jsp");
 
 		}
