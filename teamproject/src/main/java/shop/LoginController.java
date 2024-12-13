@@ -30,7 +30,7 @@ public class LoginController extends HttpServlet{
 				HttpSession session = request.getSession();
 				session.setAttribute("userID", userID);
 				session.setAttribute("userName", userName);
-				request.setAttribute("result", userName+"님 환영합니다.");
+				request.setAttribute("result", userName+" 님 환영합니다.");
 				String page = "/shop/login_result.jsp";
 				RequestDispatcher rd = request.getRequestDispatcher(page);
 				rd.forward(request, response);

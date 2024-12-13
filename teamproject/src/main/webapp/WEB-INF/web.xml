@@ -36,7 +36,7 @@
   	<servlet-name>ProductController</servlet-name>
   	<url-pattern>/product_servlet/*</url-pattern>
   </servlet-mapping>
-  <!-- 회원 -->
+  <!-- 회원  -->
   <servlet>
   	<servlet-name>LoginController</servlet-name>
   	<servlet-class>shop.LoginController</servlet-class>
