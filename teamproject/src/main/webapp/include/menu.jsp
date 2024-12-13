@@ -2,11 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div style="text-align: right"></div>
-<c:if test="${sessionScope.userID != null}">
-	<a href="/teamproject/cart_servlet/list.do">장바구니</a>
-</c:if>
-
 <div style="text-align: right;">
 <c:choose>
 	<c:when test="${sessionScope.userID == null}">
