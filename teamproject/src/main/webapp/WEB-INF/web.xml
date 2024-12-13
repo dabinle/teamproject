@@ -18,4 +18,13 @@
   	<servlet-name>AdminController</servlet-name>
   	<url-pattern>/admin_servlet/*</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ProductController</servlet-name>
+  	<servlet-class>shop.ProductController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ProductController</servlet-name>
+  	<url-pattern>/product_servlet/*</url-pattern>
+  </servlet-mapping>
 </web-app>
