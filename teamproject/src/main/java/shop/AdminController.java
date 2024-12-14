@@ -40,7 +40,7 @@ public class AdminController extends HttpServlet{
 		} else if (url.indexOf("logout.do") != -1){
 			HttpSession session = request.getSession();
 			session.invalidate();
-			String page = path + "/shop/admin_login.jsp?message=logout";
+			String page = path + "/shop/home.jsp";
 			response.sendRedirect(page);
 		}
 	}

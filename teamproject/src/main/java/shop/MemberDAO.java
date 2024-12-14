@@ -24,4 +24,16 @@ public class MemberDAO {
 				session.close();
 		}		
 	}
+	
+	public boolean idCheck(String userID) {
+	    SqlSession session = Mybatis.getInstance().openSession();
+	    try {
+	        int count = session.selectOne("member.idCheck", userID);
+	        return count > 0;  // 중복이면 true
+	    } finally {
+	        if (session != null) 
+	        	session.close();
+	    }
+	}
+
 }

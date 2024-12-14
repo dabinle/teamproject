@@ -5,7 +5,7 @@
 		select userName from member where userID=#{userID} and userPwd=#{userPwd}
 	</select>
 	
-	<select id="idCheck" resultType="String">
+	<select id="idCheck" resultType="int">
 		select count(*) from member where userID=#{userID}
 	</select>
 	

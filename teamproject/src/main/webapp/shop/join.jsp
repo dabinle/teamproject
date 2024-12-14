@@ -6,10 +6,42 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+function idCheck() {
+    let userID = document.form1.userID.value;
+
+    if (userID == "") {
+        alert("아이디를 입력하세요.");
+        document.form1.userID.focus();
+        return;
+    }
+    
+    $.ajax({
+    	url: "/teamproject/login_servlet/idCheck.do",
+    	type: "POST",
+    	dataType: "JSON",
+    	data : {userID : userID},
+    	success: function(data) {
+            if (data.exists) {
+                alert("중복된 아이디입니다.");
+                $("#idCheckStatus").val("N");
+            } else {
+                alert("사용 가능한 아이디입니다.");
+                $("#idCheckStatus").val("Y"); // 중복 확인 상태 업데이트
+            }
+        }
+    });
+}    
 
 function join() {
+	
+  	if ($("#idCheck").val() !== "Y") {
+        alert("아이디 중복 확인을 해주세요.");
+        return;
+    }
+  	
 	let userName = document.form1.userName.value;
 	let userID = document.form1.userID.value;
 	let email = document.form1.email.value;
@@ -75,13 +107,24 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 </script>
 </head>
 <body>
+<% 
+String message = (String) request.getAttribute("message");
+if (message != null) {
+%>
+<script>
+    alert('<%= message %>');
+</script>
+<%
+}
+%>
 <h2>회원가입</h2>
 <form name="form1" method="post">
 <table>
 	<tr>
 		<td>아이디</td>
 		<td><input name="userID">
-		<input type="button" class="idCheck" value="중복확인" id="idCheck" onclick="idCheck()">
+			<input type="button" value="중복확인" id="checkBtn" onclick="idCheck()">
+
 		</td>
 	</tr>
 	<tr>
@@ -125,6 +168,8 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 		</td>
 	</tr> 
 </table>
+<input type="hidden" id="idCheckStatus" value="N"> <!-- 중복 확인 상태를 관리하는 hidden 필드 -->
+
 </form>
 </body>
 </html>

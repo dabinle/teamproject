@@ -33,12 +33,14 @@ public class LoginController extends HttpServlet{
 				String page = "/teamproject/shop/home.jsp";
 				response.sendRedirect(page);
 			}
-		} else if (url.indexOf("logout.do") != -1) {
+		} 
+		else if (url.indexOf("logout.do") != -1) {
 			HttpSession session = request.getSession();
 			session.invalidate();
 			String page = path + "/shop/home.jsp";
 			response.sendRedirect(page);
-		} else if(url.indexOf("join.do") != -1) {
+		} 
+		else if(url.indexOf("join.do") != -1) {
 			String userID = request.getParameter("userID");
 			String userName = request.getParameter("userName");
 			String email = request.getParameter("email");
@@ -58,9 +60,21 @@ public class LoginController extends HttpServlet{
 			dto.setAddress(address);
 			dto.setAddressDetail(addressDetail);
 			dao.join(dto);
-			response.sendRedirect(path + "/shop/login.jsp");
+			
+			request.setAttribute("message", "회원가입이 완료되었습니다.");
+			RequestDispatcher rd = request.getRequestDispatcher("/shop/login.jsp");
+			rd.forward(request, response);
 
+		} else if (url.indexOf("idCheck.do") != -1) {
+		    String userID = request.getParameter("userID");
+		    boolean exists = dao.idCheck(userID); // DB에서 아이디 중복 여부 확인
+
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("UTF-8");
+		    response.getWriter().write("{\"exists\": " + exists + "}");
+		    return;
 		}
+
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
