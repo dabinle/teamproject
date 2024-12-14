@@ -37,7 +37,7 @@ function idCheck() {
 
 function join() {
 	
-  	if ($("#idCheck").val() !== "Y") {
+  	if ($("#idCheckStatus").val() !== "Y") {
         alert("아이디 중복 확인을 해주세요.");
         return;
     }
@@ -107,16 +107,7 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 </script>
 </head>
 <body>
-<% 
-String message = (String) request.getAttribute("message");
-if (message != null) {
-%>
-<script>
-    alert('<%= message %>');
-</script>
-<%
-}
-%>
+
 <h2>회원가입</h2>
 <form name="form1" method="post">
 <table>
