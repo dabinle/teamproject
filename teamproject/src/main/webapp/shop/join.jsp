@@ -24,10 +24,10 @@ function idCheck() {
     	dataType: "JSON",
     	data : {userID : userID},
     	success: function(data) {
-            if (data.exists) {
+            if (data.exists) {  // true
                 alert("중복된 아이디입니다.");
                 $("#idCheckStatus").val("N");
-            } else {
+            } else { // false
                 alert("사용 가능한 아이디입니다.");
                 $("#idCheckStatus").val("Y"); // 중복 확인 상태 업데이트
             }
@@ -160,7 +160,6 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 	</tr> 
 </table>
 <input type="hidden" id="idCheckStatus" value="N"> <!-- 중복 확인 상태를 관리하는 hidden 필드 -->
-
 </form>
 </body>
 </html>

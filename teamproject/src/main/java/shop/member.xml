@@ -13,4 +13,11 @@
 		insert into member(userID, userName, userPwd, email, phoneNum, zipCode, address, addressDetail) values (#{userID}, #{userName}, mypack.encrypt(#{userPwd}), #{email}, #{phoneNum}, #{zipCode}, #{address}, #{addressDetail})
 	</insert>
 	
+	<update id="update">
+		update member set userName=#{userName}, userPwd=#{userPwd}, email=#{email}, phoneNum=#{phoneNum}, zipCode=#{zipCode}, address=#{address}, addressDetail=#{addressDetail} where userID=#{userID}
+	</update>
+	
+	<delete id="delete">
+		delete from member where userID=#{userID}
+	</delete>
 </mapper>

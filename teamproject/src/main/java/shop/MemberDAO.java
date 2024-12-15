@@ -35,5 +35,30 @@ public class MemberDAO {
 	        	session.close();
 	    }
 	}
-
+	
+	public void update(MemberDTO dto) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		try {
+			session.update("member.update", dto);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+	
+	public void delete(int num) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		try {
+			session.delete("member.delete", num);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
 }

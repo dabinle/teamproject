@@ -67,11 +67,12 @@ public class LoginController extends HttpServlet{
 
 		} else if (url.indexOf("idCheck.do") != -1) {
 		    String userID = request.getParameter("userID");
-		    boolean exists = dao.idCheck(userID); // DB에서 아이디 중복 여부 확인
+		    boolean exists = dao.idCheck(userID); // true면 아이디가 이미 존재
 
-		    response.setContentType("application/json");
+		    response.setContentType("application/json"); //  응답 데이터가 JSON 형식
 		    response.setCharacterEncoding("UTF-8");
 		    response.getWriter().write("{\"exists\": " + exists + "}");
+		    // 아이디가 존재하면 {"exists": true}
 		    return;
 		}
 
