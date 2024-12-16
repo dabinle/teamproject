@@ -44,26 +44,26 @@ public class ProductController extends HttpServlet {
 
         // 관리자 관련 요청
         } else if (url.indexOf("admin_insert.do") != -1) {
-           List<CategoryDTO> category = adminDao.adminListCategory();
+        	List<CategoryDTO> category = adminDao.adminListCategory();
             List<CompanyDTO> company = adminDao.adminListCompany();
             request.setAttribute("category", category);
             request.setAttribute("company", company);
             
-           ServletContext application = request.getSession().getServletContext();
-           String img_path = application.getRealPath("/images/");
-           String productImage = "";
+            ServletContext application = request.getSession().getServletContext();
+            String img_path = application.getRealPath("/images/");
+            String productImage = "";
            
-           try {
-              for (Part part : request.getParts()) { // 요청에서 받은 파일 처리 후 이미지 파일을 지정된 경로에 저장
+            try {
+            	for (Part part : request.getParts()) { // 요청에서 받은 파일 처리 후 이미지 파일을 지정된 경로에 저장
                     productImage = part.getSubmittedFileName();
                     if (productImage != null && !productImage.trim().equals("")) {
                        part.write(img_path + productImage);
                         break;
                     }
                 }
-           } catch (Exception e) {
+            } catch (Exception e) {
             e.printStackTrace();
-         }
+            }
            
            String productName = request.getParameter("productName");
             int price = Integer.parseInt(request.getParameter("price"));
