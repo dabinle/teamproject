@@ -38,18 +38,16 @@ function idCheck() {
 
 
 function check() {
-    let userPwd= $("#userPwd").val();
-    let userPwCheck = $("#userPwCheck").val();
+	let userPwd = document.form1.userPwd.value;
+	let userPwdCheck = document.form1.userPwdCheck.value;
  
-    if (userPwd != userPwCheck) {
-        $("#check").show();
-    } else{
-        $("#check").hide();
+    if (userPwd == userPwdCheck) {
+        $("#checkMsg").html("");
+    } else if (userPwd != userPwdCheck){
+    	$("#sheckMsg").html("비밀번호 불일치")
     }
 }
-    $(document).ready(function() {
-    $("#check").hide();
-});
+
 
 
 
@@ -147,12 +145,12 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 	
 	<tr>
 		<td>비밀번호</td>
-		<td><input type="password" id="pw1" name="userPwd"></td>
+		<td><input type="password" id="userPwd" name="userPwd"></td>
 	</tr>
 	<tr>
 		<td>비밀번호 확인</td>
-		<td><input type="password" id="pw2" name="userPwd2"></td>
-		
+		<td><input type="password" id="userPwdCheck" name="userPwd2" onkeyup="check()"></td>
+		<td><h5 id="checkMsg"></h5></td>
 	</tr> 
 	<tr>
 		<td>전화번호</td>
