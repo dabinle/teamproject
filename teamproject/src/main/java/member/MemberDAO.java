@@ -49,10 +49,10 @@ public class MemberDAO {
 		}
 	}
 	
-	public void delete(int num) {
+	public void delete(String userID) {
 		SqlSession session = Mybatis.getInstance().openSession();
 		try {
-			session.delete("member.delete", num);
+			session.delete("member.delete", userID);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
