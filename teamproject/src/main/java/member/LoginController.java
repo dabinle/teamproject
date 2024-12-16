@@ -123,7 +123,11 @@ public class LoginController extends HttpServlet{
 			String userID = request.getParameter("userID");
 			dao.delete(userID);
 			
-			request.setAttribute("message", "회원탈퇴가 완료되었습니다.");
+			// 세션 종료
+		    HttpSession session = request.getSession();
+		    session.invalidate();
+			
+			request.setAttribute("message", userID + "님 회원탈퇴가 완료되었습니다.");
 			RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
 			rd.forward(request, response);
 		}

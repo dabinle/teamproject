@@ -130,6 +130,7 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 	<tr>
 		<td colspan="2" align="center">
 			<input type="button" value="수정" onclick="member_update()"> 
+			<input type="button" value="홈" onclick="location.href='/teamproject/home/home.jsp'"> 
 		</td>
 	</tr> 
 </table>
