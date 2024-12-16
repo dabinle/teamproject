@@ -97,7 +97,7 @@ public class LoginController extends HttpServlet{
 			dao.update(dto);
 
 			request.setAttribute("message", "회원수정이 완료되었습니다.");
-			RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/home/home.jsp");
 			rd.forward(request, response);
 		}
 		else if(url.indexOf("delete.do") != -1) {
