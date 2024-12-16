@@ -149,8 +149,8 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 	</tr>
 	<tr>
 		<td>비밀번호 확인</td>
-		<td><input type="password" id="userPwdCheck" name="userPwd2" onkeyup="checkPwd()"></td>
-		<td><h5 id="checkMsg"></h5></td>
+		<td><input type="password" id="userPwdCheck" name="userPwd2" onkeyup="checkPwd()"><div id="checkMsg"></div></td>
+		
 	</tr> 
 	<tr>
 		<td>전화번호</td>
