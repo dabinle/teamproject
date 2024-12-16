@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.container {
+	background-color: yellow;
+}
+
+.topMenu {
+	background-color: red;
+}
+
+.logo {
+	background-color: pink;
+}
+
+.search{
+	background-color: green;
+}
+
+.content {
+	background-color: blue;
+}
