@@ -1,4 +1,4 @@
-package shop;
+package home;
 
 public class HomeController {
 
