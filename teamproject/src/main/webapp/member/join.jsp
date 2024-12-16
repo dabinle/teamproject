@@ -35,7 +35,6 @@ function idCheck() {
     });
 }    
 
-<<<<<<< HEAD
 
 function checkPwd() {
 		let userPwd = document.form1.userPwd.value;
@@ -46,22 +45,6 @@ function checkPwd() {
 		} else if (userPwd != userPwdCheck) {
 			$("#checkMsg").html("비밀번호 불일치..");			
 		}
-=======
-let compare_result = false;
-function passConfirm() {
-	let userPwd = document.form1.userPwd.value;				//비밀번호 
-	let passwordConfirm = document.form1.userPwdCheck.value;		//비밀번호 확인 값
-	let result = $("#result");				//확인 메세지
-	
-	if(userPwd == passwordConfirm){ //password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
-		commpare_result = true;
-		result.text("비밀번호 일치");
-		return;
->>>>>>> branch 'main' of https://github.com/dabinle/teamproject.git
-	}
-	compare_result = false;
-	result.text("비밀번호 불일치");
-}
 
 
 function join() {
@@ -167,15 +150,8 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 	</tr>
 	<tr>
 		<td>비밀번호 확인</td>
-<<<<<<< HEAD
 		<td><input type="password" id="userPwdCheck" name="userPwd2" onkeyup="checkPwd()"></td>
 		<td><h5 id="checkMsg"></h5></td>
-=======
-		<td>
-			<input type="password" id="userPwCheck" name="userPwd2" onKeyUp="passConfirm()">
-			<span id="result" style="font-size: 12px;">비밀번호가 일치하지 않습니다.</span>
-		</td>
->>>>>>> branch 'main' of https://github.com/dabinle/teamproject.git
 	</tr> 
 	<tr>
 		<td>전화번호</td>
