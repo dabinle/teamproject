@@ -37,15 +37,15 @@ function idCheck() {
 
 
 
-function check() {
+function checkPwd() {
 	let userPwd = document.form1.userPwd.value;
 	let userPwdCheck = document.form1.userPwdCheck.value;
- 
-    if (userPwd == userPwdCheck) {
-        $("#checkMsg").html("");
-    } else if (userPwd != userPwdCheck){
-    	$("#sheckMsg").html("비밀번호 불일치")
-    }
+	
+	if (userPwd == userPwdCheck){
+		$("#checkMsg").html("");
+	} else if (userPwd != userPwdCheck) {
+		$("#checkMsg").html("비밀번호 불일치..");			
+	}
 }
 
 
@@ -149,7 +149,7 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 	</tr>
 	<tr>
 		<td>비밀번호 확인</td>
-		<td><input type="password" id="userPwdCheck" name="userPwd2" onkeyup="check()"></td>
+		<td><input type="password" id="userPwdCheck" name="userPwd2" onkeyup="checkPwd()"></td>
 		<td><h5 id="checkMsg"></h5></td>
 	</tr> 
 	<tr>
