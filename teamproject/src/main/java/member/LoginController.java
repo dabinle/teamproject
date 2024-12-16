@@ -85,6 +85,16 @@ public class LoginController extends HttpServlet{
 			String address = request.getParameter("address");
 			String addressDetail = request.getParameter("addressDetail");
 			
+			 // 전달된 값 확인 (로그)
+		    System.out.println("userID: " + userID);
+		    System.out.println("userName: " + userName);
+		    System.out.println("userPwd: " + userPwd);
+		    System.out.println("email: " + email);
+		    System.out.println("phoneNum: " + phoneNum);
+		    System.out.println("zipCode: " + zipCode);
+		    System.out.println("address: " + address);
+		    System.out.println("addressDetail: " + addressDetail);
+			
 			MemberDTO dto = new MemberDTO();
 			dto.setUserID(userID);
 			dto.setUserName(userName);
@@ -94,6 +104,7 @@ public class LoginController extends HttpServlet{
 			dto.setZipCode(zipCode);
 			dto.setAddress(address);
 			dto.setAddressDetail(addressDetail);
+			
 			dao.update(dto);
 
 			request.setAttribute("message", "회원수정이 완료되었습니다.");

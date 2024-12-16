@@ -35,6 +35,24 @@ function idCheck() {
     });
 }    
 
+
+
+function check() {
+    let userPwd= $("#userPwd").val();
+    let userPwCheck = $("#userPwCheck").val();
+ 
+    if (userPwd != userPwCheck) {
+        $("#check").show();
+    } else{
+        $("#check").hide();
+    }
+}
+    $(document).ready(function() {
+    $("#check").hide();
+});
+
+
+
 function join() {
 	
   	if ($("#idCheckStatus").val() !== "Y") {
@@ -129,12 +147,13 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 	
 	<tr>
 		<td>비밀번호</td>
-		<td><input type="password" name="userPwd"></td>
+		<td><input type="password" id="userPwd" name="userPwd"></td>
 	</tr>
-	<!-- <tr>
+	<tr>
 		<td>비밀번호 확인</td>
-		<td><input type="password" name="userPwd"></td>
-	</tr>  -->
+		<td><input type="password" id="userPwCheck" name="userPwd2" onchange="check()" ></td>
+		
+	</tr> 
 	<tr>
 		<td>전화번호</td>
 		<td><input name="phoneNum"></td>

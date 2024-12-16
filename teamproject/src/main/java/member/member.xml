@@ -14,7 +14,7 @@
 	</insert>
 	
 	<update id="update">
-		update member set userName=#{userName}, userPwd=#{userPwd}, phoneNum=#{phoneNum}, zipCode=#{zipCode}, address=#{address}, addressDetail=#{addressDetail} where userID=#{userID}
+		update member set userName=#{userName}, userPwd=mypack.encrypt(#{userPwd}), phoneNum=#{phoneNum}, zipCode=#{zipCode}, address=#{address}, addressDetail=#{addressDetail} where userID=#{userID}
 	</update>
 	
 	<delete id="delete">
