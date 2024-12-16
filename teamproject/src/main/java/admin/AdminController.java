@@ -1,4 +1,4 @@
-package shop;
+package admin;
 
 import java.io.IOException;
 

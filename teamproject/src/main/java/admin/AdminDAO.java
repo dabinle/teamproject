@@ -1,4 +1,4 @@
-package shop;
+package admin;
 
 import org.apache.ibatis.session.SqlSession;
 import sqlmap.Mybatis;
