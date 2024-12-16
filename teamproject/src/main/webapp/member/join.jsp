@@ -42,9 +42,11 @@ function checkPwd() {
 	let userPwdCheck = document.form1.userPwdCheck.value;
 	
 	if (userPwd == userPwdCheck){
-		$("#checkMsg").html("");
+		$("#checkMsg").html("");  // 일치
+		$("#PwdCheckStatus").val("Y");
 	} else if (userPwd != userPwdCheck) {
-		$("#checkMsg").html("비밀번호 불일치..");			
+		$("#checkMsg").html("비밀번호 불일치");	
+		$("#PwdCheckStatus").val("N");
 	}
 }
 
@@ -55,6 +57,11 @@ function join() {
 	
   	if ($("#idCheckStatus").val() !== "Y") {
         alert("아이디 중복 확인을 해주세요.");
+        return;
+    }
+  	
+  	if ($("#PwdCheckStatus").val() !== "Y") {
+        alert("비밀번호를 확인 해주세요.");
         return;
     }
   	
@@ -177,6 +184,7 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 	</tr> 
 </table>
 <input type="hidden" id="idCheckStatus" value="N"> <!-- 중복 확인 상태를 관리하는 hidden 필드 -->
+<input type="hidden" id="PwdCheckStatus" value="N">
 </form>
 </body>
 </html>
