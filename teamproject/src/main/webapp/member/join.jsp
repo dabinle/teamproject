@@ -40,16 +40,15 @@ function idCheck() {
 function check() {
     let userPwd= $("#userPwd").val();
     let userPwCheck = $("#userPwCheck").val();
- 
+ 	
     if (userPwd != userPwCheck) {
-        $("#check").show();
-    } else{
-        $("#check").hide();
-    }
+    	$("#checkPwd").html("비밀번호가 일치하지 않습니다.");
+    	document.form1.userPwCheck.val("");
+    	document.form1.userPwCheck.focus();
+    } else {
+		$("checkPwd").html("비밀번호가 일치합니다");
+	}
 }
-    $(document).ready(function() {
-    $("#check").hide();
-});
 
 
 
@@ -152,7 +151,6 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 	<tr>
 		<td>비밀번호 확인</td>
 		<td><input type="password" id="userPwCheck" name="userPwd2" onchange="check()" ></td>
-		
 	</tr> 
 	<tr>
 		<td>전화번호</td>
