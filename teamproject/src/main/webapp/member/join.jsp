@@ -43,7 +43,7 @@ function checkPwd() {
 		if (userPwd == userPwdCheck){
 			$("#checkMsg").html("");
 		} else if (userPwd != userPwdCheck) {
-			$("#checkMsg").html("비밀번호 불일치.");			
+			$("#checkMsg").html("비밀번호 불일치..");			
 		}
 	}
 
