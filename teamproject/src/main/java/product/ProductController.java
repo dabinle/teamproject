@@ -12,102 +12,124 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
-@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10) 
 public class ProductController extends HttpServlet {
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = request.getRequestURI();
-		String path = request.getContextPath();
-		ProductDAO dao = new ProductDAO();
-		if (url.indexOf("list.do") != -1) {
-			List<ProductDTO> items = dao.listProduct();
-			request.setAttribute("list", items);
-			RequestDispatcher rd = request.getRequestDispatcher("/product/product_list.jsp");
-			rd.forward(request, response);
-		} else if (url.indexOf("detail.do") != -1) {
-			int productNum = Integer.parseInt(request.getParameter("productNum"));
-			ProductDTO dto = dao.detailProduct(productNum);
-			request.setAttribute("dto", dto);
-			RequestDispatcher rd = request.getRequestDispatcher("/product/product_list.jsp");
-			rd.forward(request, response);
-		} else if (url.indexOf("insert_product.do") != -1) {
-			ServletContext application = request.getSession().getServletContext();
-			String img_path = application.getRealPath("/images/");
-			String productImage = "";
-			try {
-				for (Part part : request.getParts()) {
-					productImage = part.getSubmittedFileName();
-					if (productImage != null && !productImage.trim().equals("")) {
-						part.write(img_path + productImage);
-						break;
-					}
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			String productName = request.getParameter("productName");
-			int price = Integer.parseInt(request.getParameter("price"));
-			String description = request.getParameter("description");
-			ProductDTO dto = new ProductDTO();
-			dto.setProductName(productName);
-			dto.setPrice(price);
-			dto.setDescription(description);
-			if (productImage == null || productImage.trim().equals("")) {
-				productImage = "-";
-			}
-			dto.setProductImage(productImage);
-			dao.insertProduct(dto);
-			String page = path + "/product_servlet/list.do";
-			response.sendRedirect(page);
-		} else if (url.indexOf("edit.do") != -1) {
-			int productNum = Integer.parseInt(request.getParameter("productNum"));
-			ProductDTO dto = dao.detailProduct(productNum);
-			request.setAttribute("dto", dto);
-			RequestDispatcher rd = request.getRequestDispatcher("/product/product_list.jsp");
-			rd.forward(request, response);
-		} else if (url.indexOf("update.do") != -1) {
-			ServletContext application = request.getSession().getServletContext();
-			String img_path = application.getRealPath("/images/");
-			String productImage = "";
-			try {
-				for (Part part : request.getParts()) {
-					productImage = part.getSubmittedFileName();
-					if (productImage != null && !productImage.trim().equals("")) {
-						part.write(img_path + productImage);
-						break;
-					}
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			String productName = request.getParameter("productName");
-			int price = Integer.parseInt(request.getParameter("price"));
-			String description = request.getParameter("description");
-			int productNum = Integer.parseInt(request.getParameter("productNum"));
-			ProductDTO dto = new ProductDTO();
-			dto.setProductName(productName);
-			dto.setPrice(price);
-			dto.setDescription(description);
-			dto.setProducNum(productNum);
-			if (productImage == null || productImage.trim().equals("")) {
-				ProductDTO dto2 = dao.detailProduct(productNum);
-				productImage = dto2.getProductImage();
-				dto.setProductImage(productImage);
-			} else {
-				dto.setProductImage(productImage);
-			}
-			dao.updateProduct(dto);
-			String page = path + "/product_servlet/list.do";
-			response.sendRedirect(page);
-		} else if (url.indexOf("delete.do") != -1) {
-			int productNum = Integer.parseInt(request.getParameter("productNum"));
-			dao.deleteProduct(productNum);
-			String page = path + "/product_servlet/list.do";
-			response.sendRedirect(page);
-		}
-	} 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String url = request.getRequestURI();
+        String path = request.getContextPath();
+        ProductDAO productDao = new ProductDAO();  
+        AdminProductDAO adminDao = new AdminProductDAO();  
+
+        // 고객 관련 요청
+        if (url.contains("list.do")) {
+            List<ProductDTO> items = productDao.listProduct(); 
+            request.setAttribute("list", items);
+            forward(request, response, "/product/product_list.jsp");
+
+        } else if (url.contains("detail.do")) {
+            int productNum = Integer.parseInt(request.getParameter("productNum"));
+            ProductDTO dto = productDao.detailProduct(productNum);  
+            request.setAttribute("dto", dto);
+            forward(request, response, "/product/product_detail.jsp");
+
+        } else if (url.contains("category_list.do")) {
+            int p_categoryNum = Integer.parseInt(request.getParameter("p_categoryNum"));
+            List<ProductDTO> items = productDao.listProductsByCategory(p_categoryNum);  
+            request.setAttribute("list", items);
+            forward(request, response, "/product/product_list.jsp");
+
+        // 관리자 관련 요청
+        } else if (url.contains("admin_insert.do")) {
+            setupCategoryCompanyData(request, adminDao);
+            forward(request, response, "/product/admin_product_insert.jsp");
+
+        } else if (url.contains("admin_edit.do")) {
+            int productNum = Integer.parseInt(request.getParameter("productNum"));
+            ProductDTO dto = adminDao.admin_detailProduct(productNum); 
+            setupCategoryCompanyData(request, adminDao);
+            request.setAttribute("dto", dto);
+            forward(request, response, "/product/admin_product_edit.jsp");
+
+        } else if (url.contains("admin_delete.do")) {
+            int productNum = Integer.parseInt(request.getParameter("productNum"));
+            adminDao.admin_deleteProduct(productNum);  
+            response.sendRedirect(path + "/product_servlet/admin_list.do");
+            
+        } else if (url.contains("admin_list.do")) {
+            List<ProductDTO> items = adminDao.admin_listProduct();  
+            request.setAttribute("list", items);
+            forward(request, response, "/product/admin_product_list.jsp");   
+        
+        } else if (url.contains("admin_update.do")) {
+            int productNum = Integer.parseInt(request.getParameter("productNum"));
+            ProductDTO dto = adminDao.admin_detailProduct(productNum); // 기존 상품 정보를 가져옴
+            request.setAttribute("dto", dto);
+            setupCategoryCompanyData(request, adminDao);
+            forward(request, response, "/product/admin_product_edit.jsp");
+        }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response); 
+    }
+
+    // 상품 추가/수정 공통 처리
+    private void insertOrUpdateProduct(HttpServletRequest request, AdminProductDAO dao, boolean isUpdate) throws IOException, ServletException {
+        String img_path = request.getSession().getServletContext().getRealPath("/images/"); 
+        String productImage = handleFileUpload(request, img_path);
+        
+        String productName = request.getParameter("productName");
+        int price = Integer.parseInt(request.getParameter("price"));
+        String description = request.getParameter("description");
+        int p_categoryNum = Integer.parseInt(request.getParameter("p_categoryNum"));
+        int companyNum = Integer.parseInt(request.getParameter("companyNum"));
+        
+        ProductDTO dto = new ProductDTO();
+        dto.setProductName(productName);
+        dto.setPrice(price);
+        dto.setDescription(description);
+        dto.setP_categoryNum(p_categoryNum);
+        dto.setCompanyNum(companyNum);
+
+        if (isUpdate) {
+            int productNum = Integer.parseInt(request.getParameter("productNum"));
+            dto.setProductNum(productNum);
+        }
+
+        dto.setProductImage(productImage.isEmpty() ? "-" : productImage);
+        
+        if (isUpdate) {
+            dao.admin_updateProduct(dto);  // 관리자용 상품 정보 수정
+        } else {
+            dao.admin_insertProduct(dto);  // 관리자용 상품 추가
+        }
+    }
+
+    // 파일 업로드 처리 메서드
+    private String handleFileUpload(HttpServletRequest request, String img_path) throws IOException, ServletException {
+        String productImage = "";
+        for (Part part : request.getParts()) { // 요청에서 받은 파일 처리 후 이미지 파일을 지정된 경로에 저장
+            productImage = part.getSubmittedFileName();
+            if (productImage != null && !productImage.trim().isEmpty()) {
+                part.write(img_path + productImage);
+                break;
+            }
+        }
+        return productImage;
+    }
+
+    // 카테고리와 회사 목록 설정
+    private void setupCategoryCompanyData(HttpServletRequest request, AdminProductDAO dao) {
+        List<CategoryDTO> category = dao.admin_listCategories();
+        List<CompanyDTO> company = dao.admin_listCompany();
+        request.setAttribute("category", category);
+        request.setAttribute("company", company);
+    }
+
+    // JSP 페이지로 포워딩
+    private void forward(HttpServletRequest request, HttpServletResponse response, String path) throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher(path);
+        rd.forward(request, response);
+    }
 }
