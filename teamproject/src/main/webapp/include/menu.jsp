@@ -5,12 +5,12 @@
 <div style="text-align: right;">
 <c:choose>
 	<c:when test="${sessionScope.userID == null}">
-		<span><a href="/teamproject/shop/join.jsp">회원가입</a></span> 
-		<span><a href="/teamproject/shop/login.jsp">로그인</a></span> 
-		<span><a href="/teamproject/shop/login.jsp">장바구니</a></span> 
-		<span><a href="/teamproject/shop/login.jsp">마이페이지</a></span> 
-		<span><a href="/teamproject/shop/memberCenter.jsp">고객센터</a> </span> 
-		<span><a href="/teamproject/shop/admin_login.jsp">관리자 로그인</a></span> 
+		<span><a href="/teamproject/member/join.jsp">회원가입</a></span> 
+		<span><a href="/teamproject/member/login.jsp">로그인</a></span> 
+		<span><a href="/teamproject/member/login.jsp">장바구니</a></span> 
+		<span><a href="/teamproject/member/login.jsp">마이페이지</a></span> 
+		<span><a href="/teamproject/member/memberCenter.jsp">고객센터</a> </span> 
+		<span><a href="/teamproject/admin/admin_login.jsp">관리자 로그인</a></span> 
 	</c:when>
 	<c:otherwise>
 		${sessionScope.userName}님 환영합니다.
