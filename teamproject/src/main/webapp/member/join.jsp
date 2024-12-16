@@ -35,9 +35,7 @@ function idCheck() {
     });
 }    
 
-
-
-function check() {
+function checkPW() {
     let userPwd= $("#userPwd").val();
     let userPwCheck = $("#userPwCheck").val();
  
@@ -50,7 +48,6 @@ function check() {
     $(document).ready(function() {
     $("#check").hide();
 });
-
 
 
 function join() {
@@ -137,7 +134,6 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 		<td>아이디</td>
 		<td><input name="userID">
 			<input type="button" value="중복확인" id="checkBtn" onclick="idCheck()">
-
 		</td>
 	</tr>
 	<tr>
@@ -151,8 +147,7 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 	</tr>
 	<tr>
 		<td>비밀번호 확인</td>
-		<td><input type="password" id="userPwCheck" name="userPwd2" onchange="check()" ></td>
-		
+		<td><input type="password" id="userPwCheck" name="userPwd2" onchange="checkPW()" ></td>
 	</tr> 
 	<tr>
 		<td>전화번호</td>
