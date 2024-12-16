@@ -7,8 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="./css/home.css">
 </head>
 <body>
-비로그인 홈페이지여
+<div class="container">
+	<div class="topMenu"></div>
+	<div class="middleMenu">
+		<span class="logo">logo </span>
+		<span class="search">search</span>
+	</div>
+	<div class="content">content</div>
+</div>
 </body>
 </html>

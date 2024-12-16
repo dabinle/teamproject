@@ -8,13 +8,14 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ProductDTO {
-	private int producNum;
-	private String productName;
-	private String description;
-	private int price;
-	private String productImage;
-	private int companyNum;
-	private String companyName;
-	private int p_categoryNum;
-	private int p_parentCatogory;
+   private int productNum;
+   private String productName;
+   private double price;
+   private int amount;
+   private int companyNum;
+   private String companyName;
+   private int p_parentCategory;
+   private int p_categoryNum;
+   private String description;
+   private String productImage;
 }
