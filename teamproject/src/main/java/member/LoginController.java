@@ -75,7 +75,39 @@ public class LoginController extends HttpServlet{
 		    // 아이디가 존재하면 {"exists": true}
 		    return;
 		}
+		else if(url.indexOf("update.do") != -1) {
+			String userID = request.getParameter("userID");
+			String userName = request.getParameter("userName");
+			String userPwd = request.getParameter("userPwd");
+			String email = request.getParameter("email");
+			String phoneNum = request.getParameter("phoneNum");
+			int zipCode = Integer.parseInt(request.getParameter("zipCode")); 
+			String address = request.getParameter("address");
+			String addressDetail = request.getParameter("addressDetail");
+			
+			MemberDTO dto = new MemberDTO();
+			dto.setUserID(userID);
+			dto.setUserName(userName);
+			dto.setUserPwd(userPwd);
+			dto.setEmail(email);
+			dto.setPhoneNum(phoneNum);
+			dto.setZipCode(zipCode);
+			dto.setAddress(address);
+			dto.setAddressDetail(addressDetail);
+			dao.update(dto);
 
+			request.setAttribute("message", "회원수정이 완료되었습니다.");
+			RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
+			rd.forward(request, response);
+		}
+		else if(url.indexOf("delete.do") != -1) {
+			String userID = request.getParameter("userID");
+			dao.delete(userID);
+			
+			request.setAttribute("message", "회원탈퇴가 완료되었습니다.");
+			RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
+			rd.forward(request, response);
+		}
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

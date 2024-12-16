@@ -112,15 +112,15 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 <form name="form1" method="post">
 <table>
 	<tr>
+		<td>이름</td>
+		<td><input name="userName"></td>
+	</tr>
+	<tr>
 		<td>아이디</td>
 		<td><input name="userID">
 			<input type="button" value="중복확인" id="checkBtn" onclick="idCheck()">
 
 		</td>
-	</tr>
-	<tr>
-		<td>이름</td>
-		<td><input name="userName"></td>
 	</tr>
 	<tr>
 		<td>이메일</td>
