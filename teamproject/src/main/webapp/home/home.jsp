@@ -13,7 +13,7 @@
 <div class="container">
 	<div class="topMenu"></div>
 	<div class="middleMenu">
-		<span class="logo">logo</span>
+		<span class="logo">logo </span>
 		<span class="search">search</span>
 	</div>
 	<div class="content">content</div>
