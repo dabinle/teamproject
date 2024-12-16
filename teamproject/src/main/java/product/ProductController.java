@@ -25,48 +25,56 @@ public class ProductController extends HttpServlet {
         if (url.contains("list.do")) {
             List<ProductDTO> items = productDao.listProduct(); 
             request.setAttribute("list", items);
-            forward(request, response, "/product/product_list.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/product/product_list.jsp");
+            rd.forward(request, response);
 
         } else if (url.contains("detail.do")) {
             int productNum = Integer.parseInt(request.getParameter("productNum"));
             ProductDTO dto = productDao.detailProduct(productNum);  
             request.setAttribute("dto", dto);
-            forward(request, response, "/product/product_detail.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/product/product_detail.jsp");
+            rd.forward(request, response);
 
         } else if (url.contains("category_list.do")) {
             int p_categoryNum = Integer.parseInt(request.getParameter("p_categoryNum"));
             List<ProductDTO> items = productDao.listProductsByCategory(p_categoryNum);  
             request.setAttribute("list", items);
-            forward(request, response, "/product/product_list.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/product/product_list.jsp");
+            rd.forward(request, response);
 
         // 관리자 관련 요청
         } else if (url.contains("admin_insert.do")) {
             setupCategoryCompanyData(request, adminDao);
-            forward(request, response, "/product/admin_product_insert.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_insert.jsp");
+            rd.forward(request, response);
 
         } else if (url.contains("admin_edit.do")) {
             int productNum = Integer.parseInt(request.getParameter("productNum"));
             ProductDTO dto = adminDao.admin_detailProduct(productNum); 
             setupCategoryCompanyData(request, adminDao);
             request.setAttribute("dto", dto);
-            forward(request, response, "/product/admin_product_edit.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_edit.jsp");
+            rd.forward(request, response);
 
         } else if (url.contains("admin_delete.do")) {
             int productNum = Integer.parseInt(request.getParameter("productNum"));
             adminDao.admin_deleteProduct(productNum);  
-            response.sendRedirect(path + "/product_servlet/admin_list.do");
+            RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_list.jsp");
+            rd.forward(request, response);
             
         } else if (url.contains("admin_list.do")) {
             List<ProductDTO> items = adminDao.admin_listProduct();  
             request.setAttribute("list", items);
-            forward(request, response, "/product/admin_product_list.jsp");   
+            RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_list.jsp");
+            rd.forward(request, response);  
         
         } else if (url.contains("admin_update.do")) {
             int productNum = Integer.parseInt(request.getParameter("productNum"));
             ProductDTO dto = adminDao.admin_detailProduct(productNum); // 기존 상품 정보를 가져옴
             request.setAttribute("dto", dto);
             setupCategoryCompanyData(request, adminDao);
-            forward(request, response, "/product/admin_product_edit.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_edit.jsp");
+            rd.forward(request, response);
         }
     }
 
