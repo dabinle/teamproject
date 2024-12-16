@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 function idCheck() {
@@ -36,15 +36,21 @@ function idCheck() {
 }    
 
 
-function checkPwd() {
-		let userPwd = document.form1.userPwd.value;
-		let userPwdCheck = document.form1.userPwdCheck.value;
-		
-		if (userPwd == userPwdCheck){
-			$("#checkMsg").html("");
-		} else if (userPwd != userPwdCheck) {
-			$("#checkMsg").html("비밀번호 불일치..");			
-		}
+
+function check() {
+    let userPwd= $("#userPwd").val();
+    let userPwCheck = $("#userPwCheck").val();
+ 
+    if (userPwd != userPwCheck) {
+        $("#check").show();
+    } else{
+        $("#check").hide();
+    }
+}
+    $(document).ready(function() {
+    $("#check").hide();
+});
+
 
 
 function join() {
@@ -86,12 +92,6 @@ function join() {
 		document.form1.phoneNum.focus();
 		return;
 	}
-	
-   if(!compare_result){
-   		alert('비밀번호가 일치하지 않습니다.');
-	    return;
-   }
-		                     
 	document.form1.action = "/teamproject/login_servlet/join.do";
 	document.form1.submit();
 }
@@ -137,6 +137,7 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 		<td>아이디</td>
 		<td><input name="userID">
 			<input type="button" value="중복확인" id="checkBtn" onclick="idCheck()">
+
 		</td>
 	</tr>
 	<tr>
@@ -146,12 +147,12 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 	
 	<tr>
 		<td>비밀번호</td>
-		<td><input type="password" id="userPwd" name="userPwd"></td>
+		<td><input type="password" id="pw1" name="userPwd"></td>
 	</tr>
 	<tr>
 		<td>비밀번호 확인</td>
-		<td><input type="password" id="userPwdCheck" name="userPwd2" onkeyup="checkPwd()"></td>
-		<td><h5 id="checkMsg"></h5></td>
+		<td><input type="password" id="pw2" name="userPwd2"></td>
+		
 	</tr> 
 	<tr>
 		<td>전화번호</td>
