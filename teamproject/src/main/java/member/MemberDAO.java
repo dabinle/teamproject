@@ -25,6 +25,17 @@ public class MemberDAO {
 		}		
 	}
 	
+	public MemberDTO getMemberInfo(String userID) {
+	    SqlSession session = Mybatis.getInstance().openSession();
+	    try {
+	        return session.selectOne("member.getMemberInfo", userID);
+	    } finally {
+	        if (session != null) 
+	            session.close();
+	    }
+	}
+
+	
 	public boolean idCheck(String userID) {
 	    SqlSession session = Mybatis.getInstance().openSession();
 	    try {

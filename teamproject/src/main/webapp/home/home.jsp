@@ -10,6 +10,12 @@
 <link rel="stylesheet" href="./css/home.css">
 </head>
 <body>
+<% String message = (String) request.getAttribute("message");
+if (message != null) { %>
+    <script>
+        alert('<%= message %>');
+    </script>
+<% } %>
 <div class="container">
 	<div class="topMenu"></div>
 	<div class="middleMenu">

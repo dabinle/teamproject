@@ -81,43 +81,52 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 </script>
 </head>
 <body>
+
 <h2>회원정보 수정</h2>
 <form name="form1" method="post">
 <table>
 	<tr>
-		<td>이름</td>
-		<td><input name="userName" value="${dto.userName}"></td>
-	</tr>
-	<tr>
-		<td>아이디</td>
-		<td><input name="userID" value="${dto.userID}" readonly></td>
-	</tr>
-	<tr>
-		<td>이메일</td>
-		<td><input name="email" value="${dto.email}" readonly></td>
-	</tr>
-	<tr>
-		<td>비밀번호</td>
-		<td><input type="password" name="userPwd" value="${dto.userPwd}"></td>
-	</tr>
-	<tr>
-		<td>전화번호</td>
-		<td><input name="phoneNum" value="${dto.phoneNum}"></td>
-	</tr>
-	<tr>
-		<td>우편번호</td>
-		<td><input name="zipCode" id="post_code" value="${dto.zipCode}" readonly>
-		<input type="button" onclick="showPostcode()" value="우편번호 찾기">
-		</td>
-	</tr>
-	<tr>
-		<td>주소</td> 
-		<td><input name="address" id="address" value="${dto.address}" size="60"></td>
-	</tr>
-	<tr>
-		<td>상세주소</td>
-		<td><input name="addressDetail" value="${dto.addressDetail}" id="addressDetail"></td>
-	</tr>
+    <td>이름</td>
+    <td><input name="userName" value="${dto.userName}"></td>
+</tr>
+<tr>
+    <td>아이디</td>
+    <td>
+        <input name="userID" value="${dto.userID}" readonly>
+        <input type="hidden" name="userID" value="${dto.userID}">
+    </td>
+</tr>
+<tr>
+    <td>이메일</td>
+    <td>
+        <input name="email" value="${dto.email}" readonly>
+        <input type="hidden" name="email" value="${dto.email}">
+    </td>
+</tr>
+<tr>
+    <td>비밀번호</td>
+    <td><input type="password" name="userPwd" value="${dto.userPwd}"></td>
+</tr>
+<tr>
+    <td>전화번호</td>
+    <td><input name="phoneNum" value="${dto.phoneNum}"></td>
+</tr>
+<tr>
+    <td>우편번호</td>
+    <td>
+        <input name="zipCode" id="post_code" value="${dto.zipCode}" readonly>
+        <input type="button" onclick="showPostcode()" value="우편번호 찾기">
+    </td>
+</tr>
+<tr>
+    <td>주소</td>
+    <td><input name="address" id="address" value="${dto.address}" size="60"></td>
+</tr>
+<tr>
+    <td>상세주소</td>
+    <td><input name="addressDetail" id="addressDetail" value="${dto.addressDetail}"></td>
+</tr>
+
 	<tr>
 		<td colspan="2" align="center">
 			<input type="button" value="수정" onclick="member_update()"> 

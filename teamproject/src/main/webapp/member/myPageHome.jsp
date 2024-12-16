@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="/teamproject/login_servlet/update.do?userID=${userID}">회원정보 수정</a><br>
-<a href="/teamproject/login_servlet/delete.do?userID=${userID}">회원 탈퇴</a><br>
+<a href="/teamproject/login_servlet/updatePage.do">회원정보 수정</a><br>
+<a href="/teamproject/member/member_delete.jsp">회원 탈퇴</a><br>
 </body>
 </html>

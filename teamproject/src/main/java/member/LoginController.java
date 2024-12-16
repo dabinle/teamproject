@@ -85,16 +85,6 @@ public class LoginController extends HttpServlet{
 			String address = request.getParameter("address");
 			String addressDetail = request.getParameter("addressDetail");
 			
-			 // 전달된 값 확인 (로그)
-		    System.out.println("userID: " + userID);
-		    System.out.println("userName: " + userName);
-		    System.out.println("userPwd: " + userPwd);
-		    System.out.println("email: " + email);
-		    System.out.println("phoneNum: " + phoneNum);
-		    System.out.println("zipCode: " + zipCode);
-		    System.out.println("address: " + address);
-		    System.out.println("addressDetail: " + addressDetail);
-			
 			MemberDTO dto = new MemberDTO();
 			dto.setUserID(userID);
 			dto.setUserName(userName);
@@ -106,11 +96,29 @@ public class LoginController extends HttpServlet{
 			dto.setAddressDetail(addressDetail);
 			
 			dao.update(dto);
+			
+		    HttpSession session = request.getSession();
+		    session.setAttribute("userName", userName);
 
-			request.setAttribute("message", "회원수정이 완료되었습니다.");
-			RequestDispatcher rd = request.getRequestDispatcher("/home/home.jsp");
-			rd.forward(request, response);
+		    request.setAttribute("message", "회원수정이 완료되었습니다.");
+            RequestDispatcher rd = request.getRequestDispatcher("/home/home.jsp");
+            rd.forward(request, response);
 		}
+		
+		else if (url.indexOf("updatePage.do") != -1) {
+		    HttpSession session = request.getSession();
+		    String userID = (String) session.getAttribute("userID");
+
+		    if (userID != null) {
+		        MemberDTO dto = dao.getMemberInfo(userID); // DB에서 회원정보 가져오기
+		        request.setAttribute("dto", dto);
+		        RequestDispatcher rd = request.getRequestDispatcher("/member/member_edit.jsp");
+		        rd.forward(request, response);
+		    } else {
+		        response.sendRedirect(path + "/member/login.jsp?message=loginRequired");
+		    }
+		}
+
 		else if(url.indexOf("delete.do") != -1) {
 			String userID = request.getParameter("userID");
 			dao.delete(userID);
