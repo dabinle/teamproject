@@ -1,4 +1,4 @@
-package shop;
+package member;
 
 import lombok.Getter;
 import lombok.Setter;

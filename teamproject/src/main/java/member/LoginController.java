@@ -1,4 +1,4 @@
-package shop;
+package member;
 
 import java.io.IOException;
 
