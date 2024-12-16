@@ -12,7 +12,7 @@
   <!-- 관리자 -->
   <servlet>
   	<servlet-name>AdminController</servlet-name>
-  	<servlet-class>shop.AdminController</servlet-class>
+  	<servlet-class>admin.AdminController</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>AdminController</servlet-name>
@@ -21,7 +21,7 @@
   <!-- 홈페이지 -->
   <servlet>
   	<servlet-name>HomeController</servlet-name>
-  	<servlet-class>shop.HomeController</servlet-class>
+  	<servlet-class>home.HomeController</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>HomeController</servlet-name>
@@ -30,7 +30,7 @@
   <!-- 상품 -->
   <servlet>
   	<servlet-name>ProductController</servlet-name>
-  	<servlet-class>shop.ProductController</servlet-class>
+  	<servlet-class>product.ProductController</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>ProductController</servlet-name>
@@ -39,7 +39,7 @@
   <!-- 회원  -->
   <servlet>
   	<servlet-name>LoginController</servlet-name>
-  	<servlet-class>shop.LoginController</servlet-class>
+  	<servlet-class>member.LoginController</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>LoginController</servlet-name>

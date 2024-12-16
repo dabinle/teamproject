@@ -24,7 +24,7 @@ public class AdminController extends HttpServlet{
 			String adminName = dao.login(dto);
 			
 			if(adminName == null) {
-				String page = path + "/shop/admin_login.jsp?message=error";
+				String page = path + "/admin/admin_login.jsp?message=error";
 				response.sendRedirect(page);
 			} else {
 				HttpSession session = request.getSession();
@@ -33,14 +33,14 @@ public class AdminController extends HttpServlet{
 				session.setAttribute("adminId", adminId);
 				session.setAttribute("adminName", adminName);
 				session.setAttribute("result", adminName + "님 환영합니다.");
-				String page = "/shop/admin_result.jsp";
+				String page = "/admin/admin_result.jsp";
 				RequestDispatcher rd = request.getRequestDispatcher(page);
 				rd.forward(request, response);
 			}
 		} else if (url.indexOf("logout.do") != -1){
 			HttpSession session = request.getSession();
 			session.invalidate();
-			String page = path + "/shop/home.jsp";
+			String page = path + "/home/home.jsp";
 			response.sendRedirect(page);
 		}
 	}

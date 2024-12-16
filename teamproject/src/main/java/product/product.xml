@@ -6,11 +6,11 @@
 		select productImage from product where productNum=#{productNum}
 	</select>
 	
-	<select id="list_product" resultType="shop.ProductDTO">
+	<select id="list_product" resultType="product.ProductDTO">
 		select * from product order by productName
 	</select>
 
-	<select id="detail_product" resultType="shop.ProductDTO">
+	<select id="detail_product" resultType="product.ProductDTO">
 		select * from product where productNum=#{productNum}
 	</select>
 	

@@ -11,7 +11,7 @@
 <script>
 $(function(){
 	$("#btn_add").click(function(){
-		location.href="/teamproject/shop/product_write.jsp";
+		location.href="/teamproject/product/product_write.jsp";
 	});
 });
 </script>

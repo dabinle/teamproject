@@ -24,20 +24,20 @@ public class LoginController extends HttpServlet{
 			String userName = dao.login(dto);
 			
 			if(userName == null) {
-				String page = "/shop/login.jsp?message=error";
+				String page = "/member/login.jsp?message=error";
 				response.sendRedirect(path + page);
 			} else {
 				HttpSession session = request.getSession();
 				session.setAttribute("userID", userID);
 				session.setAttribute("userName", userName);
-				String page = "/teamproject/shop/home.jsp";
+				String page = "/teamproject/home/home.jsp";
 				response.sendRedirect(page);
 			}
 		} 
 		else if (url.indexOf("logout.do") != -1) {
 			HttpSession session = request.getSession();
 			session.invalidate();
-			String page = path + "/shop/home.jsp";
+			String page = path + "/home/home.jsp";
 			response.sendRedirect(page);
 		} 
 		else if(url.indexOf("join.do") != -1) {
@@ -62,7 +62,7 @@ public class LoginController extends HttpServlet{
 			dao.join(dto);
 			
 			request.setAttribute("message", "회원가입이 완료되었습니다.");
-			RequestDispatcher rd = request.getRequestDispatcher("/shop/login.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
 			rd.forward(request, response);
 
 		} else if (url.indexOf("idCheck.do") != -1) {

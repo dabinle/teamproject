@@ -22,13 +22,13 @@ public class ProductController extends HttpServlet {
 		if (url.indexOf("list.do") != -1) {
 			List<ProductDTO> items = dao.listProduct();
 			request.setAttribute("list", items);
-			RequestDispatcher rd = request.getRequestDispatcher("/shop/product_list.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/product/product_list.jsp");
 			rd.forward(request, response);
 		} else if (url.indexOf("detail.do") != -1) {
 			int productNum = Integer.parseInt(request.getParameter("productNum"));
 			ProductDTO dto = dao.detailProduct(productNum);
 			request.setAttribute("dto", dto);
-			RequestDispatcher rd = request.getRequestDispatcher("/shop/product_list.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/product/product_list.jsp");
 			rd.forward(request, response);
 		} else if (url.indexOf("insert_product.do") != -1) {
 			ServletContext application = request.getSession().getServletContext();
@@ -63,7 +63,7 @@ public class ProductController extends HttpServlet {
 			int productNum = Integer.parseInt(request.getParameter("productNum"));
 			ProductDTO dto = dao.detailProduct(productNum);
 			request.setAttribute("dto", dto);
-			RequestDispatcher rd = request.getRequestDispatcher("/shop/product_list.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/product/product_list.jsp");
 			rd.forward(request, response);
 		} else if (url.indexOf("update.do") != -1) {
 			ServletContext application = request.getSession().getServletContext();
