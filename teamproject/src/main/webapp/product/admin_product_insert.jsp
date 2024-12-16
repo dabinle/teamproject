@@ -21,15 +21,15 @@
 
         <label for="category">카테고리:</label>
         <select id="category" name="categoryNum" required>
-            <c:forEach var="category" items="${category}">
-                <option value="${category.categoryNum}">${category.categoryName}</option>
+            <c:forEach var="row" items="${category}">
+                <option value="${row.p_categoryNum}">${row.p_categoryNum}</option>
             </c:forEach>
         </select><br><br>
 
         <label for="company">회사:</label>
         <select id="company" name="companyNum" required>
-            <c:forEach var="company" items="${company}">
-                <option value="${company.companyNum}">${company.companyName}</option>
+            <c:forEach var="row" items="${company}">
+                <option value="${row.companyNum}">${row.companyNum}</option>
             </c:forEach>
         </select><br><br>
 

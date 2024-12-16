@@ -44,11 +44,6 @@ public class ProductController extends HttpServlet {
 
         // 관리자 관련 요청
         } else if (url.indexOf("admin_insert.do") != -1) {
-        	List<CategoryDTO> category = adminDao.adminListCategory();
-            List<CompanyDTO> company = adminDao.adminListCompany();
-            request.setAttribute("category", category);
-            request.setAttribute("company", company);
-            
             ServletContext application = request.getSession().getServletContext();
             String img_path = application.getRealPath("/images/");
             String productImage = "";
@@ -85,6 +80,7 @@ public class ProductController extends HttpServlet {
             }
             dto.setProductImage(productImage);
             adminDao.adminInsertProduct(dto);
+            // 홈으로 가게 바꾹기
             String page ="/prodcuct/admin_product_insert.jsp";
             RequestDispatcher rd = request.getRequestDispatcher(page);
             rd.forward(request, response);
