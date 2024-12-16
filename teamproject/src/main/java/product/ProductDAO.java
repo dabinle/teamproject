@@ -22,7 +22,7 @@ public class ProductDAO {
         return category;
     }
 
-    public List<ProductDTO> listProductsByCategory(int p_categoryNum) { // 특정 카테고리에 속한 상품 조회 
+    public List<ProductDTO> listProductByCategory(int p_categoryNum) { // 특정 카테고리에 속한 상품 조회 
         SqlSession session = Mybatis.getInstance().openSession();
         List<ProductDTO> list = session.selectList("product.list_products_by_category", p_categoryNum);
         session.close();

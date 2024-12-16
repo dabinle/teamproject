@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>상품 등록</h1>
-    <form method="post" action="<c:url value='/product/product_servlet/admin_insert.do'/>" enctype="multipart/form-data">
+    <form method="post" action="/product/product_servlet/admin_insert.do" enctype="multipart/form-data">
         
         <label for="productName">상품 이름:</label>
         <input type="text" id="productName" name="productName" required><br><br>
@@ -39,6 +39,6 @@
         <button type="submit">상품 등록</button>
     </form>
     <br>
-    <a href="<c:url value='/teamproject/admin/admin_home.jsp'/>">관리자 Home</a>
+    <a href="/teamproject/admin/admin_home.jsp">관리자 Home</a>
 </body>
 </html>

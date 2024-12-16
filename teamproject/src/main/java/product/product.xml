@@ -3,60 +3,28 @@
 <mapper namespace="product">
 
     <!-- 특정 카테고리에 속한 상품 목록 조회 -->
-    <select id="list_products_by_category" parameterType="int" resultType="product.ProductDTO">
-        SELECT 
-            productNum, 
-            productName, 
-            price, 
-            companyName, 
-            description, 
-            productImage,
-            p_parentCategory, 
-            p_categoryNum
+    <select id="list_product_by_category" parameterType="int" resultType="product.ProductDTO">
+        SELECT productNum, productName, price, companyName, description, productImage, p_parentCategory, p_categoryNum
         FROM product
         WHERE p_categoryNum = #{p_categoryNum}
     </select>
 
     <!-- 상품 상세 조회 -->
     <select id="detail_product" parameterType="int" resultType="product.ProductDTO">
-        SELECT 
-            productNum, 
-            productName, 
-            price, 
-            companyName, 
-            description, 
-            productImage,
-            p_parentCategory, 
-            p_categoryNum
+        SELECT productNum, productName, price, companyName, description, productImage, p_parentCategory, p_categoryNum
         FROM product
         WHERE productNum = #{productNum}
     </select>
 
     <!-- 상품 목록 조회 -->
     <select id="list_product" resultType="product.ProductDTO">
-        SELECT 
-            productNum, 
-            productName, 
-            price, 
-            companyName, 
-            description, 
-            productImage,
-            p_parentCategory, 
-            p_categoryNum
+        SELECT productNum, productName, price, companyName, description, productImage,p_parentCategory, p_categoryNum
         FROM product
     </select>
 
     <!-- 상품 상세 조회 (관리자) -->
     <select id="admin_detail_product" parameterType="int" resultType="product.ProductDTO">
-        SELECT 
-            productNum, 
-            productName, 
-            price, 
-            companyName, 
-            description, 
-            productImage,
-            p_parentCategory, 
-            p_categoryNum
+        SELECT productNum, productName, price, companyName, description, productImage,p_parentCategory, p_categoryNum
         FROM product
         WHERE productNum = #{productNum}
     </select>
@@ -64,14 +32,8 @@
     <!-- 상품 정보 수정 -->
     <update id="update_product" parameterType="product.ProductDTO">
         UPDATE product
-        SET 
-            productName = #{productName},
-            price = #{price},
-            companyName = #{companyName},
-            description = #{description},
-            productImage = #{productImage},
-            p_parentCategory = #{p_parentCategory},
-            p_categoryNum = #{p_categoryNum}
+        SET productName = #{productName}, price = #{price}, companyName = #{companyName}, description = #{description},
+            productImage = #{productImage}, p_parentCategory = #{p_parentCategory}, p_categoryNum = #{p_categoryNum}
         WHERE productNum = #{productNum}
     </update>
 
@@ -109,7 +71,7 @@
     </select> 
 
     <!-- 부모 카테고리, 하위 카테고리 목록 조회 -->
-    <select id="list_categories" resultType="product.CategoryDTO">
+    <select id="p_list_category" resultType="product.CategoryDTO">
         SELECT p_categoryNum, p_categoryName, p_parentCategory
         FROM product_category
     </select>

@@ -15,12 +15,12 @@
     <h1>관리자 홈페이지</h1>
 
     <h2>상품 등록</h2>
-    <form method="get" action="<c:url value='/teamproject/product/product_servlet/admin_insert.do'/>">
+    <form method="post" action="/teamproject/product_servlet/admin_insert.do" enctype="multipart/form-data">
         <button type="submit">상품 등록</button>
     </form>
 
     <h2>상품 목록</h2>
-    <form method="get" action="<c:url value='/teamproject/product/product_servlet/admin_list.do'/>">
+    <form method="post" action="/teamproject/product_servlet/admin_list.do" enctype="multipart/form-data">
         <button type="submit">상품 목록</button>
     </form>
 
