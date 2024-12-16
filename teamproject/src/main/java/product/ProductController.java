@@ -57,7 +57,7 @@ public class ProductController extends HttpServlet {
             	for (Part part : request.getParts()) { // 요청에서 받은 파일 처리 후 이미지 파일을 지정된 경로에 저장
                     productImage = part.getSubmittedFileName();
                     if (productImage != null && !productImage.trim().equals("")) {
-                       part.write(img_path + productImage);
+                    	part.write(img_path + productImage);
                         break;
                     }
                 }
@@ -65,8 +65,9 @@ public class ProductController extends HttpServlet {
             e.printStackTrace();
             }
            
-           String productName = request.getParameter("productName");
+            String productName = request.getParameter("productName");
             int price = Integer.parseInt(request.getParameter("price"));
+            int amount = Integer.parseInt(request.getParameter("amount"));
             String description = request.getParameter("description");
             int p_categoryNum = Integer.parseInt(request.getParameter("p_categoryNum"));
             int companyNum = Integer.parseInt(request.getParameter("companyNum"));
@@ -74,6 +75,7 @@ public class ProductController extends HttpServlet {
             ProductDTO dto = new ProductDTO();
             dto.setProductName(productName);
             dto.setPrice(price);
+            dto.setAmount(amount);
             dto.setDescription(description);
             dto.setP_categoryNum(p_categoryNum);
             dto.setCompanyNum(companyNum);
@@ -83,9 +85,9 @@ public class ProductController extends HttpServlet {
             }
             dto.setProductImage(productImage);
             adminDao.adminInsertProduct(dto);
-            String page = path + "/product_servlet/admin_home.do";
-            response.sendRedirect(page);
-
+            String page ="/prodcuct/admin_product_insert.jsp";
+            RequestDispatcher rd = request.getRequestDispatcher(page);
+            rd.forward(request, response);
         } else if (url.indexOf("admin_edit.do") != -1) {
             int productNum = Integer.parseInt(request.getParameter("productNum"));
             ProductDTO dto = adminDao.adminDetailProduct(productNum); 

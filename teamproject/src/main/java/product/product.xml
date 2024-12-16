@@ -51,10 +51,10 @@
     <!-- 상품 추가 -->
     <insert id="insert_product">
         INSERT INTO product 
-        (productNum, productName, price, companyName, description, productImage, p_parentCategory, p_categoryNum)
+        (productNum, productName, price, amount, companyName, description, productImage, p_categoryNum)
         VALUES
-        (product_seq.nextval, #{productName}, #{price}, #{companyName}, 
-         #{description}, #{productImage}, #{p_parentCategory}, #{p_categoryNum})
+        (seq_product.nextval, #{productName}, #{price}, #{amount}, #{companyName}, 
+         #{description}, #{productImage}, #{p_categoryNum})
     </insert>
 
     <!-- 파일 정보 조회 -->
