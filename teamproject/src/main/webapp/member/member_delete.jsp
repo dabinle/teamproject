@@ -9,5 +9,6 @@
 </head>
 <body>
 <h2>회원탈퇴</h2>
+<form action=""></form>
 </body>
 </html>

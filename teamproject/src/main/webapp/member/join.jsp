@@ -132,35 +132,36 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 <body>
 
 <h2>회원가입</h2>
+<h3>*는 필수 항목입니다.</h3>
 <form name="form1" method="post">
 <table>
 	<tr>
-		<td>이름</td>
+		<td>* 이름</td>
 		<td><input name="userName"></td>
 	</tr>
 	<tr>
-		<td>아이디</td>
+		<td>* 아이디</td>
 		<td><input name="userID">
 			<input type="button" value="중복확인" id="checkBtn" onclick="idCheck()">
 
 		</td>
 	</tr>
 	<tr>
-		<td>이메일</td>
+		<td>* 이메일</td>
 		<td><input name="email"></td>
 	</tr>
 	
 	<tr>
-		<td>비밀번호</td>
+		<td>* 비밀번호</td>
 		<td><input type="password" id="userPwd" name="userPwd"></td>
 	</tr>
 	<tr>
-		<td>비밀번호 확인</td>
+		<td>* 비밀번호 확인</td>
 		<td><input type="password" id="userPwdCheck" name="userPwd2" onkeyup="checkPwd()"><div id="checkMsg"></div></td>
 		
 	</tr> 
 	<tr>
-		<td>전화번호</td>
+		<td>* 전화번호</td>
 		<td><input name="phoneNum"></td>
 	</tr>
 	<tr>
