@@ -8,13 +8,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="./css/home.css">
 </head>
-<style>
-div > a {
-	text-align: right;
-	text-decoration: none;
-	color: black;
-}
-</style>
 <body>
 <%@ include file="../include/menu.jsp" %>
 <header>Header</header>
