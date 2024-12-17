@@ -63,9 +63,9 @@ public class LoginController extends HttpServlet{
 			dto.setAddressDetail(addressDetail);
 			dao.join(dto);
 			
-			request.setAttribute("message", "회원가입이 완료되었습니다.");
-			RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
-			rd.forward(request, response);
+			response.setContentType("text/html;charset=UTF-8");
+
+		    response.getWriter().write("<script> alert('회원가입 되었습니다.'); location.href='" + path + "/member/login.jsp';</script>");
 
 		} else if (url.indexOf("idCheck.do") != -1) {
 		    String userID = request.getParameter("userID");
@@ -101,10 +101,10 @@ public class LoginController extends HttpServlet{
 			
 		    HttpSession session = request.getSession();
 		    session.setAttribute("userName", userName);
+		    
+		    response.setContentType("text/html;charset=UTF-8");
 
-		    request.setAttribute("message", "회원수정이 완료되었습니다.");
-            RequestDispatcher rd = request.getRequestDispatcher("/home/home.jsp");
-            rd.forward(request, response);
+		    response.getWriter().write("<script> alert('회원 수정 되었습니다.'); location.href='" + path + "/home/home.jsp';</script>");
 		}
 		
 		else if (url.indexOf("updatePage.do") != -1) {
@@ -119,31 +119,23 @@ public class LoginController extends HttpServlet{
 		    } else {
 		        response.sendRedirect(path + "/member/login.jsp?message=loginRequired");
 		    }
-		} else if(url.indexOf("delete.do") != -1) {
-			HttpSession session = request.getSession();
-		    String userID = (String) session.getAttribute("userID");
-		    String userPwd = request.getParameter("userPwd");
-		    dao.delete(userID);
-		    
-		    String page = "/home/home.jsp";
-		    RequestDispatcher rd = request.getRequestDispatcher(page);
-		    rd.forward(request, response);   
-		} 
-		
-		else if(url.indexOf("check_pwd.do") != -1) {
-			String userID = request.getParameter("userID");
-			String userPwd = request.getParameter("usesrPwd");
-			String result = dao.check_pwd(userID, userPwd);
-			System.out.println("ㅈㄷ");
-			System.out.println(result);
-			String page = "";
-			
-			if(result != null) {
-				page ="/member/member_delete2.jsp";
-				RequestDispatcher rd = request.getRequestDispatcher(page);
-				rd.forward(request, response);
-			}
-		}
+		} else if (url.indexOf("delete.do") != -1) {
+            HttpSession session = request.getSession();
+            String userID = (String) session.getAttribute("userID");
+            String userPwd = request.getParameter("userPwd");
+
+            response.setContentType("text/html;charset=UTF-8");
+
+            String result = dao.check_pwd(userID, userPwd); // 비밀번호 확인
+
+            if (result != null) { // 비밀번호 일치
+                dao.delete(userID); // 회원 삭제
+                session.invalidate(); // 세션 종료
+                response.getWriter().write("<script> alert('탈퇴되었습니다.'); location.href='" + path + "/home/home.jsp';</script>");
+            } else { // 비밀번호 불일치
+                response.getWriter().write("<script> alert('비밀번호가 틀렸습니다.'); history.back();</script>");
+            }
+        }
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -19,16 +19,6 @@
 </c:if>
 </head>
 <body>
-<% 
-String message = (String) request.getAttribute("message");
-if (message != null) {
-%>
-<script>
-    alert('<%= message %>');
-</script>
-<%
-}
-%>
 <h2>로그인</h2>
 <form method="post" action="/teamproject/login_servlet/login.do">
 <table border="1">

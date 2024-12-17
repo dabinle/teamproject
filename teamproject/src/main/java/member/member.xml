@@ -16,10 +16,9 @@
 	</select>
 	
 	<select id="check_pwd" resultType="String">
-		select userID, mypack.decrypt(userPwd) from member
-		where userID=#{userID}
+	    select userID from member 
+	    where userID=#{userID} and userPwd=mypack.encrypt(#{userPwd})
 	</select>
-	
 	
 	<insert id="join">
 		insert into member(userID, userName, userPwd, email, phoneNum, zipCode, address, addressDetail) values (#{userID}, #{userName}, mypack.encrypt(#{userPwd}), #{email}, #{phoneNum}, #{zipCode}, #{address}, #{addressDetail})
