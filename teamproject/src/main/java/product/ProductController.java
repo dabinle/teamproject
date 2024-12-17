@@ -80,20 +80,12 @@ public class ProductController extends HttpServlet {
             dto.setDescription(description);
             dto.setP_categoryNum(p_categoryNum);
             dto.setCompanyNum(companyNum);
-<<<<<<< HEAD
             
             List<CategoryDTO> categoryList = adminDao.adminListCategory();
             List<CompanyDTO> companyList = adminDao.adminListCompany();
             request.setAttribute("category", categoryList);
             request.setAttribute("company", companyList);
-            
-         
 
-            
-=======
-          
-           
->>>>>>> branch 'main' of https://github.com/dabinle/teamproject.git
             if (productImage == null || productImage.trim().equals("")) {
                productImage = "-";
             }
