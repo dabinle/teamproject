@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ public class LoginController extends HttpServlet{
 		if(url.indexOf("login.do") != -1) {
 			String userID = request.getParameter("userID");
 			String userPwd = request.getParameter("userPwd");
+			
 			MemberDTO dto = new MemberDTO();
 			dto.setUserID(userID);
 			dto.setUserPwd(userPwd);
@@ -117,19 +119,30 @@ public class LoginController extends HttpServlet{
 		    } else {
 		        response.sendRedirect(path + "/member/login.jsp?message=loginRequired");
 		    }
-		}
-
-		else if(url.indexOf("delete.do") != -1) {
+		} else if(url.indexOf("delete.do") != -1) {
+			HttpSession session = request.getSession();
+		    String userID = (String) session.getAttribute("userID");
+		    String userPwd = request.getParameter("userPwd");
+		    dao.delete(userID);
+		    
+		    String page = "/home/home.jsp";
+		    RequestDispatcher rd = request.getRequestDispatcher(page);
+		    rd.forward(request, response);   
+		} 
+		
+		else if(url.indexOf("check_pwd.do") != -1) {
 			String userID = request.getParameter("userID");
-			dao.delete(userID);
+			String userPwd = request.getParameter("usesrPwd");
+			String result = dao.check_pwd(userID, userPwd);
+			System.out.println("ㅈㄷ");
+			System.out.println(result);
+			String page = "";
 			
-			// 세션 종료
-		    HttpSession session = request.getSession();
-		    session.invalidate();
-			
-			request.setAttribute("message", userID + "님 회원탈퇴가 완료되었습니다.");
-			RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
-			rd.forward(request, response);
+			if(result != null) {
+				page ="/member/member_delete2.jsp";
+				RequestDispatcher rd = request.getRequestDispatcher(page);
+				rd.forward(request, response);
+			}
 		}
 	}
 	

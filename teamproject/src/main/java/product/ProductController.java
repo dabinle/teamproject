@@ -48,6 +48,8 @@ public class ProductController extends HttpServlet {
 
         // 관리자 관련 요청
         } else if (url.indexOf("admin_insert.do") != -1) {
+        	List<CategoryDTO> category = productDao.listCategory();  
+            request.setAttribute("category", category);
             ServletContext application = request.getSession().getServletContext();
             String img_path = application.getRealPath("/images/");
             String productImage = "";
@@ -78,6 +80,7 @@ public class ProductController extends HttpServlet {
             dto.setDescription(description);
             dto.setP_categoryNum(p_categoryNum);
             dto.setCompanyNum(companyNum);
+<<<<<<< HEAD
             
             List<CategoryDTO> categoryList = adminDao.adminListCategory();
             List<CompanyDTO> companyList = adminDao.adminListCompany();
@@ -87,6 +90,10 @@ public class ProductController extends HttpServlet {
          
 
             
+=======
+          
+           
+>>>>>>> branch 'main' of https://github.com/dabinle/teamproject.git
             if (productImage == null || productImage.trim().equals("")) {
                productImage = "-";
             }

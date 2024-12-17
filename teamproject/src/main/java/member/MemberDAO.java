@@ -1,5 +1,8 @@
 package member;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
 import sqlmap.Mybatis;
@@ -72,4 +75,31 @@ public class MemberDAO {
 				session.close();
 		}
 	}
+	
+	public String check_pwd(String userID, String userPwd) {
+		String result = null;
+		SqlSession session = Mybatis.getInstance().openSession();
+		try {
+			Map<String, Object> map = new HashMap<>();
+			map.put("userID", userID);
+			map.put("userPwd", userPwd);
+			result = session.selectOne("member.check_pwd", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		return result;
+	}
+	
+	/* 사용자의 암호화된 비밀번호 가져오기
+    public String getUserEncodedPassword(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
+            return user.getPassword(); // 사용자의 암호화된 비밀번호 반환
+        }
+        return null;
+    }
+    */
 }
