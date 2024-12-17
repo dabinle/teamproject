@@ -12,7 +12,7 @@ $(function() {
     $("#btnDelete").click(function() {
         const userPwd = $("#userPwd").val().trim();
 
-        if (!userPwd) {
+        if (userPwd == "") {
             alert("비밀번호를 입력해주세요.");
             return;
         }
@@ -34,6 +34,7 @@ $(function() {
             <td>비밀번호</td>
             <td>
                 <input type="password" name="userPwd" id="userPwd" required>
+                <!-- required 반드시 입력되어야하는 -->
             </td>
         </tr>
         <tr>

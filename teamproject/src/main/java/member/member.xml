@@ -9,6 +9,10 @@
 		select count(*) from member where userID=#{userID}
 	</select>
 	
+	<select id="idFind" resultType="String">
+		select userID from member where userName=#{userName} and email=#{email}
+	</select>
+	
 	<select id="getMemberInfo" resultType="member.MemberDTO">
 	    select userID, userName, email, mypack.decrypt(userPwd), phoneNum, zipCode, address, addressDetail 
 	    from member 

@@ -21,9 +21,9 @@
 <body>
 <h2>로그인</h2>
 <form method="post" action="/teamproject/login_servlet/login.do">
-<table border="1">
+<table>
 	<tr>
-		<td>아이디</td>
+		<td align="center">아이디</td>
 		<td><input name="userID"></td>
 	</tr>
 	<tr>
@@ -32,7 +32,8 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-			<input type="submit" value="로그인">
+			<input type="submit" value="로그인"><br>
+			<a href="/teamproject/member/id_find.jsp">아이디 찾기</a>
 		</td>
 	</tr>
 </table>

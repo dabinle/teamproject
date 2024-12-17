@@ -78,6 +78,26 @@ public class LoginController extends HttpServlet{
 		    // 아이디가 존재하면 {"exists": true}
 		    return;
 		}
+		else if(url.indexOf("idFind.do") != -1) {
+			String userName = request.getParameter("userName");
+			String email = request.getParameter("email");
+			
+			MemberDTO dto = new MemberDTO();
+			dto.setUserName(userName);
+			dto.setEmail(email);
+			String userID = dao.idFind(dto);
+			
+			 if(userID == null) {
+				 response.sendRedirect(path + "/member/id_FindResult.jsp?message=noID");
+			    } else {
+			    	// 아이디를 찾았다면 해당 아이디를 출력
+			        request.setAttribute("userID", userID);
+			        request.setAttribute("userName", userName);
+			        RequestDispatcher rd = request.getRequestDispatcher("/member/id_FindResult.jsp");
+			        rd.forward(request, response);
+			    }
+
+		} 
 		else if(url.indexOf("update.do") != -1) {
 			String userID = request.getParameter("userID");
 			String userName = request.getParameter("userName");

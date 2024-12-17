@@ -50,6 +50,13 @@ public class MemberDAO {
 	    }
 	}
 	
+	public String idFind(MemberDTO dto) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		String userID = session.selectOne("member.idFind", dto);
+		session.close();
+		return userID;
+	}
+	
 	public void update(MemberDTO dto) {
 		SqlSession session = Mybatis.getInstance().openSession();
 		try {
