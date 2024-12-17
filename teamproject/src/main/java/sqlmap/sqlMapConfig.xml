@@ -2,16 +2,23 @@
 <!DOCTYPE configuration
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <typeAliases>
-    </typeAliases>
-    <environments default="">
-        <environment id="">
+	<properties>
+      <property name="hostname" value="localhost"/>
+      <property name="portnumber" value="1521"/>
+      <property name="username" value="project"/>
+      <property name="password" value="project1234"/>
+	</properties>
+	
+    
+    <environments default="development">
+        <environment id="development">
             <transactionManager type="JDBC" />
             <dataSource type="JNDI">
                 <property name="data_source" value="java:comp/env/oraDB" />
             </dataSource>
         </environment>
     </environments>
+    
     <mappers>
     	<mapper resource="admin/admin.xml"/>
     	<mapper resource="product/product.xml"/>

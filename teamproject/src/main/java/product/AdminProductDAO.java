@@ -1,6 +1,10 @@
 package product;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import sqlmap.Mybatis;
 
@@ -58,11 +62,12 @@ public class AdminProductDAO {
         return list;
     }
 
-    public List<CategoryDTO> adminListCategory() { // 카테고리 목록 조회
-        SqlSession session = Mybatis.getInstance().openSession();
-        List<CategoryDTO> category = session.selectList("product.list_category");
-        session.close();
-        return category;
+    
+    public List<CategoryDTO> adminListCategory() {
+    	SqlSession session = Mybatis.getInstance().openSession();
+    	List<CategoryDTO> list = session.selectList("product.category_list");
+    	session.close();
+    	return list;
     }
 
     public List<ProductDTO> adminListProductByCategory(int p_categoryNum) { // 특정 카테고리에 속한 상품 조회

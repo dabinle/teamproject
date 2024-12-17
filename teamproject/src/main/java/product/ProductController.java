@@ -1,8 +1,12 @@
 package product;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import admin.AdminDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -75,43 +79,46 @@ public class ProductController extends HttpServlet {
             dto.setP_categoryNum(p_categoryNum);
             dto.setCompanyNum(companyNum);
             
-            List<CategoryDTO> list = productDao.listCategory();  
-            request.setAttribute("category", list);
-           
+            List<CategoryDTO> categoryList = adminDao.adminListCategory();
+            List<CompanyDTO> companyList = adminDao.adminListCompany();
+            request.setAttribute("category", categoryList);
+            request.setAttribute("company", companyList);
+            
+         
+
+            
             if (productImage == null || productImage.trim().equals("")) {
                productImage = "-";
             }
             dto.setProductImage(productImage);
             adminDao.adminInsertProduct(dto);
-            // 홈으로 가게 바꾹기
-            String page ="/prodcuct/admin_product_insert.jsp";
+            
+            String page ="/product/admin_product_home.jsp";
             RequestDispatcher rd = request.getRequestDispatcher(page);
             rd.forward(request, response);
-        } else if (url.indexOf("admin_edit.do") != -1) {
+            
+            // 수정하려는 상품의 기존 정보를 불러와 수정 페이지에 출력
+        } else if (url.indexOf("admin_edit.do") != -1) { 
             int productNum = Integer.parseInt(request.getParameter("productNum"));
             ProductDTO dto = adminDao.adminDetailProduct(productNum); 
             request.setAttribute("dto", dto);
             RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_edit.jsp");
             rd.forward(request, response);
 
-        } else if (url.indexOf("admin_delete.do") != -1) {
+        } else if (url.indexOf("admin_delete.do") != -1) { // 관리자 상품 삭제
             int productNum = Integer.parseInt(request.getParameter("productNum"));
             adminDao.adminDeleteProduct(productNum);  
             String page = path + "/product_servlet/admin_list.do";
             response.sendRedirect(page);
             
-        } else if (url.indexOf("admin_list.do") != -1) {
+        } else if (url.indexOf("admin_list.do") != -1) { // 관리자 상품 목록
             List<ProductDTO> items = adminDao.adminListProduct();  
             request.setAttribute("list", items);
             RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_list.jsp");
             rd.forward(request, response);  
         
-        } else if (url.indexOf("admin_update.do") != -1) {
-           List<CategoryDTO> category = adminDao.adminListCategory();
-            List<CompanyDTO> company = adminDao.adminListCompany();
-            request.setAttribute("category", category);
-            request.setAttribute("company", company);
-            
+           // 수정된 상품 정보를 받아 데이터베이스에 저장
+        } else if (url.indexOf("admin_update.do") != -1) { 
            ServletContext application = request.getSession().getServletContext();
            String img_path = application.getRealPath("/images/");
            String productImage = "";
@@ -128,12 +135,13 @@ public class ProductController extends HttpServlet {
             e.printStackTrace();
          }
            
-           int productNum = Integer.parseInt(request.getParameter("productNum"));
-           String productName = request.getParameter("productName");
+            int productNum = Integer.parseInt(request.getParameter("productNum"));
+            String productName = request.getParameter("productName");
             int price = Integer.parseInt(request.getParameter("price"));
             String description = request.getParameter("description");
             int p_categoryNum = Integer.parseInt(request.getParameter("p_categoryNum"));
             int companyNum = Integer.parseInt(request.getParameter("companyNum"));
+           
             
             ProductDTO dto = new ProductDTO();
             dto.setProductNum(productNum);
@@ -143,6 +151,11 @@ public class ProductController extends HttpServlet {
             dto.setP_categoryNum(p_categoryNum);
             dto.setCompanyNum(companyNum);
            
+			List<CategoryDTO> category = adminDao.adminListCategory();
+            List<CompanyDTO> company = adminDao.adminListCompany();
+            request.setAttribute("category", category);
+            request.setAttribute("company", company);
+            
             if (productImage == null || productImage.trim().equals("")) {
                ProductDTO dto2 = adminDao.adminDetailProduct(productNum);
                productImage = dto2.getProductImage();
