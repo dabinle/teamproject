@@ -74,6 +74,9 @@ public class ProductController extends HttpServlet {
             dto.setDescription(description);
             dto.setP_categoryNum(p_categoryNum);
             dto.setCompanyNum(companyNum);
+            
+            List<CategoryDTO> list = productDao.listCategory();  
+            request.setAttribute("category", list);
            
             if (productImage == null || productImage.trim().equals("")) {
                productImage = "-";
@@ -125,7 +128,7 @@ public class ProductController extends HttpServlet {
             e.printStackTrace();
          }
            
-           int productNum = Integer.parseInt(request.getParameter("produceNum"));
+           int productNum = Integer.parseInt(request.getParameter("productNum"));
            String productName = request.getParameter("productName");
             int price = Integer.parseInt(request.getParameter("price"));
             String description = request.getParameter("description");

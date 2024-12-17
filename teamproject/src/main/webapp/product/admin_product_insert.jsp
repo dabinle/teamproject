@@ -22,7 +22,7 @@
         <label for="category">카테고리:</label>
         <select id="category" name="categoryNum" required>
             <c:forEach var="row" items="${category}">
-                <option value="${row.p_categoryNum}">${row.p_categoryNum}</option>
+                <option value="${row.p_categoryNum}">${row.p_categoryName}</option>
             </c:forEach>
         </select><br><br>
 
