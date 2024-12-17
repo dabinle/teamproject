@@ -10,13 +10,18 @@
 <link rel="stylesheet" href="./css/home.css">
 </head>
 <body>
-<div class="container">
-	<div class="topMenu"></div>
-	<div class="middleMenu">
-		<span class="logo">logo </span>
-		<span class="search">search</span>
-	</div>
-	<div class="content">content</div>
+<header>Header</header>
+<main>
+	<nav>
+		<a href="#">카테고리</a>
+		<a href="#">신상</a>
+		<a href="#">랭킹</a>
+		<a href="#">추천</a>
+		<a href="#">쿠폰</a>
+	</nav>
+	<div class="contents">Contents</div>
+</main>
+<footer>Footer</footer>
 </div>
 </body>
 </html>

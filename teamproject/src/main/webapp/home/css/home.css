@@ -1,21 +1,39 @@
 @charset "UTF-8";
 
-.container {
-	background-color: yellow;
+* {
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	min-height: 100vh;
 }
 
-.topMenu {
-	background-color: gray;
+header {
+	border: 2px solid yellow;
+	height: 200px;
 }
 
-.logo {
-	background-color: pink;
+main {
+	border: 2px solid red;
+	height: 1000px;
 }
 
-.search{
-	background-color: green;
+nav {
+	border: 2px solid pink;
 }
 
-.content {
-	background-color: blue;
+nav a {
+	text-decoration: none;
+	color: black;
+	font-size: 20px;
+	margin: 2em;
+}
+
+contents {
+	border: 2px solid green;
+	height: 500px;
+}
+
+footer {
+	border: 2px solid blue;
+	height: 100px;
 }
