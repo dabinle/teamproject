@@ -63,8 +63,9 @@ public class LoginController extends HttpServlet{
 			dto.setAddressDetail(addressDetail);
 			dao.join(dto);
 			
-			response.setContentType("text/html;charset=UTF-8");
-
+			response.setContentType("text/html;charset=UTF-8");  // 한글
+			
+			// 클라이언트의 화면에 출력하기 위해
 		    response.getWriter().write("<script> alert('회원가입 되었습니다.'); location.href='" + path + "/member/login.jsp';</script>");
 
 		} else if (url.indexOf("idCheck.do") != -1) {
