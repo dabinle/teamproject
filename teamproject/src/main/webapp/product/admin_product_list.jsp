@@ -10,7 +10,7 @@
 <script>
     $(function() {
       $("#btn_insert").click(function() {
-         location.href="/teamproject/product_servlet/insert_detail.do";
+         location.href="/teamproject/product_servlet/insert.do";
       });
    });
     </script>  

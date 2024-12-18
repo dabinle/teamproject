@@ -114,6 +114,8 @@ public class ProductController extends HttpServlet {
         } else if (url.indexOf("admin_list.do") != -1) { // 관리자 상품 목록
             List<ProductDTO> items = adminDao.adminListProduct();  
             request.setAttribute("list", items);
+            
+            //response.getWriter().write("<script> location.href='" + path + "/product/admin_product_list.jsp';</script>");
             RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_list.jsp");
             rd.forward(request, response);  
         
