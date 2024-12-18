@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="getMemberInfo" resultType="member.MemberDTO">
-	    select userID, userName, email, mypack.decrypt(userPwd), phoneNum, zipCode, address, addressDetail 
+	    select userID, userName, email, mypack.decrypt(userPwd) AS userPwd, phoneNum, zipCode, address, addressDetail 
 	    from member 
 	    where userID=#{userID}
 	</select>
@@ -30,11 +30,6 @@
 	<update id="update">
 		update member set userName=#{userName}, userPwd=mypack.encrypt(#{userPwd}), phoneNum=#{phoneNum}, zipCode=#{zipCode}, address=#{address}, addressDetail=#{addressDetail} where userID=#{userID}
 	</update>
-	
-	<update id="pwd_update">
-    update member set userPwd=mypack.encrypt(#{userPwd}) where userID=#{userID}
-</update>
-
 	
 	<delete id="delete">
 		delete from member where userID=#{userID}

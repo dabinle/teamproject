@@ -105,7 +105,7 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 </tr>
 <tr>
     <td>비밀번호</td>
-    <td><input type="password" name="userPwd" value="${dto.userPwd}"></td>
+    <td><input type="password" name="userPwd" value="${dto.userPwd}"></td></td>
 </tr>
 <tr>
     <td>전화번호</td>
