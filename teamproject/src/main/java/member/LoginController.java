@@ -137,20 +137,27 @@ public class LoginController extends HttpServlet{
 		    }
 		}
 		else if (url.indexOf("pwd_update.do") != -1) {
-			HttpSession session = request.getSession();
-            String userID = (String) session.getAttribute("userID");
-            String userPwd = request.getParameter("userPwd");
-            
-            MemberDTO dto = new MemberDTO();
-            dto.setUserPwd(userPwd);
-            dao.pwd_update(dto);
-            
-		   // session.setAttribute("userName", userName);
-		    
+		    HttpSession session = request.getSession();
+		    String userID = (String) session.getAttribute("userID");
+		    String currentPwd = request.getParameter("userPwd");
+		    String newPwd = request.getParameter("userPwd2");
+
+		    MemberDTO dto = new MemberDTO();
+		    int checkResult = dao.check_pwd(userID, currentPwd); // 현재 비밀번호 검증
+
 		    response.setContentType("text/html;charset=UTF-8");
 
-		    response.getWriter().write("<script> alert('회원 수정이 되었습니다.'); location.href='" + path + "/home/home.jsp';</script>");
+		    if (checkResult != 0) { // 현재 비밀번호 일치
+		        dto.setUserID(userID);
+		        dto.setUserPwd(newPwd); // 새 비밀번호 설정
+		        dao.pwd_update(dto); // 비밀번호 업데이트
+		        session.invalidate(); // 세션 종료
+		        response.getWriter().write("<script>alert('비밀번호가 변경되었습니다. 다시 로그인해주세요.'); location.href='" + path + "/member/login.jsp';</script>");
+		    } else { // 현재 비밀번호 불일치
+		        response.getWriter().write("<script>alert('현재 비밀번호가 올바르지 않습니다.'); history.back();</script>");
+		    }
 		}
+
 		else if (url.indexOf("delete.do") != -1) {
             HttpSession session = request.getSession();
             String userID = (String) session.getAttribute("userID");

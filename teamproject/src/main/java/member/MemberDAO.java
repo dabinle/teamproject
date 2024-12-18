@@ -71,17 +71,18 @@ public class MemberDAO {
 	}
 	
 	public void pwd_update(MemberDTO dto) {
-		SqlSession session = Mybatis.getInstance().openSession();
-		try {
-			session.update("member.pwd_update", dto);
-			session.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null)
-				session.close();
-		}
+	    SqlSession session = Mybatis.getInstance().openSession();
+	    try {
+	        session.update("member.pwd_update", dto);
+	        session.commit();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (session != null)
+	            session.close();
+	    }
 	}
+
 	
 	public void delete(String userID) {
 		SqlSession session = Mybatis.getInstance().openSession();

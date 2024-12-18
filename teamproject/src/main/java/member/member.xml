@@ -32,8 +32,9 @@
 	</update>
 	
 	<update id="pwd_update">
-		update member set userPwd=mypack.encrypt(#{userPwd}) where userID=#{userID}
-	</update>
+    update member set userPwd=mypack.encrypt(#{userPwd}) where userID=#{userID}
+</update>
+
 	
 	<delete id="delete">
 		delete from member where userID=#{userID}
