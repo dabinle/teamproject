@@ -7,8 +7,10 @@
     <title>관리자 홈페이지</title>
 </head>
 <body>
-<%
-response.sendRedirect("/teamproject/product_servlet/admin_list.do");
-%>
+    <h1>관리자 홈페이지</h1>
+
+    <a href="/teamproject/product_servlet/insert_detail.do">상품등록</a>
+    <a href="/teamproject/product_servlet/list.do">상품목록</a>
+    <a href="/teamproject/home/index.jsp">Home</a>
 </body>
 </html>
