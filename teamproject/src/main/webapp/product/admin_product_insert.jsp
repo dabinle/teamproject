@@ -33,7 +33,7 @@ function insert() {
       document.form1.amount.focus();
       return;
    }
-   document.form1.action = "/teamproject/product_servlet/admin_insert.do";
+   document.form1.action = "/teamproject/product_servlet/insert.do";
    document.form1.submit();
 }
 </script>
@@ -57,21 +57,21 @@ function insert() {
    <input type="file" id="productImage" name="productImage">
    <br>
    <label for="p_categoryNum">카테고리: </label>
-   <select id="p_categoryNum" name="p_categoryNum" required="required">
+   <select id="p_categoryNum" name="p_categoryName" required="required">
       <c:forEach var="row" items="${category }">
-         <option value="${row.p_categoryNum}">${row.p_categoryName}</option>
+         <option value="${row.p_categoryName}">${row.p_categoryName}</option>
       </c:forEach>
    </select>
    <br>
    <label for="comanyNum">회사명:</label>
-   <select id="comanyNum" name="companyNum" required="required">
+   <select id="comanyNum" name="companyName" required="required">
       <c:forEach var="row" items="${company }">
-         <option value="${row.companyNum }">${row.companyName }</option>
+         <option value="${row.companyName }">${row.companyName }</option>
       </c:forEach>
    </select>
    <br>
    <input type="button" value="상품등록" onclick="insert()">
-   <input type="button" value="상품목록" onclick="location.href='/teamproject/product_servlet/admin_list.do'">
+   <input type="button" value="상품목록" onclick="location.href='/teamproject/product/admin_product_list.jsp'">
 </form>
 </body>
 </html>

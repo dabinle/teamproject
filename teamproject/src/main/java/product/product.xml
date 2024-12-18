@@ -50,7 +50,7 @@
 
     <!-- 카테고리 목록 조회 -->
     <select id="list_category" resultType="product.CategoryDTO">
-        select * from product_category
+        select p_categoryName from product_category where p_categoryNum = #{p_categoryNum}
     </select>
 	
 	<select id="company_product" resultType="product.ProductDTO">

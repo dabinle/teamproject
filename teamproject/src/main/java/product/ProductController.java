@@ -58,6 +58,12 @@ public class ProductController extends HttpServlet {
             rd.forward(request, response);
 
         } else if (url.indexOf("insert.do") != -1) {
+        	// List<CategoryDTO> categoryList = adminDao.adminListCategory();  
+            // request.setAttribute("category", categoryList);
+            
+            // List<CompanyDTO> companyList = adminDao.adminListCompany();
+            // request.setAttribute("company", companyList);
+            
             ServletContext application = request.getSession().getServletContext();
             String img_path = application.getRealPath("/images/");
             String productImage = "";
@@ -78,16 +84,18 @@ public class ProductController extends HttpServlet {
             int price = Integer.parseInt(request.getParameter("price"));
             int amount = Integer.parseInt(request.getParameter("amount"));
             String description = request.getParameter("description");
-            int p_categoryNum = Integer.parseInt(request.getParameter("p_categoryNum"));
-            int companyNum = Integer.parseInt(request.getParameter("companyNum"));
+            // int p_categoryNum = Integer.parseInt(request.getParameter("p_categoryNum"));
+            String p_categoryName = request.getParameter("p_categoryName");
+            // int companyNum = Integer.parseInt(request.getParameter("companyNum"));
+            String companyName = request.getParameter("companyName");
             
             ProductDTO dto = new ProductDTO();
             dto.setProductName(productName);
             dto.setPrice(price);
             dto.setAmount(amount);
             dto.setDescription(description);
-            dto.setP_categoryNum(p_categoryNum);
-            dto.setCompanyNum(companyNum);
+            dto.setP_categoryName(p_categoryName);
+            dto.setCompanyName(companyName);
 
             if (productImage == null || productImage.trim().equals("")) {
                productImage = "-";
@@ -97,6 +105,8 @@ public class ProductController extends HttpServlet {
             
             String page = path + "/product_servlet/admin_list.do";
             response.sendRedirect(page);
+            
+            
             
         } else if (url.indexOf("admin_edit.do") != -1) { // 수정하려는 상품의 기존 정보를 불러와 수정 페이지에 출력 
             int productNum = Integer.parseInt(request.getParameter("productNum"));
