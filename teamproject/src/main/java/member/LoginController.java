@@ -125,7 +125,7 @@ public class LoginController extends HttpServlet{
 		    
 		    response.setContentType("text/html;charset=UTF-8");
 
-		    response.getWriter().write("<script> alert('회원 수정 되었습니다.'); location.href='" + path + "/home/home.jsp';</script>");
+		    response.getWriter().write("<script> alert('회원 수정이 되었습니다.'); location.href='" + path + "/home/home.jsp';</script>");
 		}
 		
 		else if (url.indexOf("updatePage.do") != -1) {
@@ -150,7 +150,7 @@ public class LoginController extends HttpServlet{
             String result = dao.check_pwd(userID, userPwd); // 비밀번호 확인
 
             if (result != null) { // 비밀번호 일치
-                dao.delete(userID); // 회원 삭제
+                dao.delete(userID); 
                 session.invalidate(); // 세션 종료
                 response.getWriter().write("<script> alert('탈퇴되었습니다.'); location.href='" + path + "/home/home.jsp';</script>");
             } else { // 비밀번호 불일치
