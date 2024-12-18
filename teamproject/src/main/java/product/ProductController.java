@@ -22,11 +22,13 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = request.getRequestURI();
         String path = request.getContextPath();
+        System.out.println("url:"+url+"path:"+path);
         ProductDAO productDao = new ProductDAO();  
         AdminProductDAO adminDao = new AdminProductDAO();  
 
         // 고객 관련 요청
         if (url.indexOf("list.do") != -1) {
+        	System.out.println("그냥 리스트");
             List<ProductDTO> items = productDao.listProduct(); 
             request.setAttribute("list", items);
             RequestDispatcher rd = request.getRequestDispatcher("/product/product_list.jsp");
@@ -122,12 +124,13 @@ public class ProductController extends HttpServlet {
             response.sendRedirect(page);
             
         } else if (url.indexOf("admin_list.do") != -1) { // 관리자 상품 목록
+        	System.out.println("어드민 리스트");
             List<ProductDTO> items = adminDao.adminListProduct();  
             request.setAttribute("list", items);
             
-            //response.getWriter().write("<script> location.href='" + path + "/product/admin_product_list.jsp';</script>");
-            RequestDispatcher rd = request.getRequestDispatcher("/teamproject/product/admin_product_list.jsp");
-            rd.forward(request, response);  
+            response.getWriter().write("<script> location.href='" + path + "/product/admin_product_list.jsp';</script>");
+//            RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_list.jsp");
+//            rd.forward(request, response);  
         
            // 수정된 상품 정보를 받아 데이터베이스에 저장
         } else if (url.indexOf("admin_update.do") != -1) { 
