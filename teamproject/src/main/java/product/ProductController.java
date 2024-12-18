@@ -58,11 +58,11 @@ public class ProductController extends HttpServlet {
             rd.forward(request, response);
 
         } else if (url.indexOf("insert.do") != -1) {
-        	// List<CategoryDTO> categoryList = adminDao.adminListCategory();  
-            // request.setAttribute("category", categoryList);
+        	List<CategoryDTO> categoryList = adminDao.adminListCategory();  
+            request.setAttribute("category", categoryList);
             
-            // List<CompanyDTO> companyList = adminDao.adminListCompany();
-            // request.setAttribute("company", companyList);
+            List<CompanyDTO> companyList = adminDao.adminListCompany();
+            request.setAttribute("company", companyList);
             
             ServletContext application = request.getSession().getServletContext();
             String img_path = application.getRealPath("/images/");
@@ -77,14 +77,14 @@ public class ProductController extends HttpServlet {
                     }
                 }
             } catch (Exception e) {
-            e.printStackTrace();
+            	e.printStackTrace();
             }
            
             String productName = request.getParameter("productName");
             int price = Integer.parseInt(request.getParameter("price"));
             int amount = Integer.parseInt(request.getParameter("amount"));
             String description = request.getParameter("description");
-            // int p_categoryNum = Integer.parseInt(request.getParameter("p_categoryNum"));
+            //int p_categoryNum = Integer.parseInt(request.getParameter("p_categoryNum"));
             String p_categoryName = request.getParameter("p_categoryName");
             // int companyNum = Integer.parseInt(request.getParameter("companyNum"));
             String companyName = request.getParameter("companyName");
@@ -126,7 +126,7 @@ public class ProductController extends HttpServlet {
             request.setAttribute("list", items);
             
             //response.getWriter().write("<script> location.href='" + path + "/product/admin_product_list.jsp';</script>");
-            RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_list.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/teamproject/product/admin_product_list.jsp");
             rd.forward(request, response);  
         
            // 수정된 상품 정보를 받아 데이터베이스에 저장

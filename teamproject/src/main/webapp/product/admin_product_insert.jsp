@@ -58,15 +58,15 @@ function insert() {
    <br>
    <label for="p_categoryNum">카테고리: </label>
    <select id="p_categoryNum" name="p_categoryName" required="required">
-      <c:forEach var="row" items="${category }">
-         <option value="${row.p_categoryName}">${row.p_categoryName}</option>
+      <c:forEach var="row" items="${category}">
+         <option value="${row.p_categoryNum}">${row.p_categoryName}</option>
       </c:forEach>
    </select>
    <br>
    <label for="comanyNum">회사명:</label>
    <select id="comanyNum" name="companyName" required="required">
-      <c:forEach var="row" items="${company }">
-         <option value="${row.companyName }">${row.companyName }</option>
+      <c:forEach var="row" items="${company}">
+         <option value="${row.companyNum}">${row.companyName }</option>
       </c:forEach>
    </select>
    <br>

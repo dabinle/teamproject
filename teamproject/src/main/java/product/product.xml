@@ -5,7 +5,9 @@
     
      <!-- 상품 목록 조회 --> <!--  부모카테고리 뺐음 -->
     <select id="list_product" resultType="product.ProductDTO">
-        select productNum, productName, price, p_categoryNum, companyNum, productImage from product
+        select productNum, productName, price, p.p_categoryNum, p.companyNum, productImage, pc.p_categoryName, c.companyName 
+	    from product p, company c, product_category pc
+	    where p.p_categoryNum = pc.p_categoryNum and p.companyNum = c.companyNum
     </select>
 
     <!-- 상품 상세 조회 --> <!-- 조인해야함 -->

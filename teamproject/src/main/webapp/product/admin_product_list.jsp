@@ -28,7 +28,9 @@
       <th>이미지</th>
       <th>가격</th>
       <th>상세카테고리</th>
+      <th>카테고리명</th>
       <th>업체명</th>
+      <th>업체번호</th>
    </tr>
    <c:forEach var="row" items="${list}">
    <tr align="center">
@@ -42,6 +44,8 @@
       <td><img src="/teamproject/images/${row.productImage}" width="100px" height="100px"></td>
       <td><fmt:formatNumber value="${row.price}" pattern="#,###"/></td>
       <td>${row.p_categoryNum}</td>
+      <td>${row.p_categoryName}</td>
+      <td>${row.companyName}</td>
       <td>${row.companyNum}</td>
    </tr>
    </c:forEach>

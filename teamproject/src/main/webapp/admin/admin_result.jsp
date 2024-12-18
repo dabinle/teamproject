@@ -9,7 +9,7 @@
 </head>
 <body>
 <%
-response.sendRedirect("/teamproject/product/admin_product_list.jsp");
+response.sendRedirect("/teamproject/product_servlet/admin_list.do");
 %>
 </body>
 </html>
