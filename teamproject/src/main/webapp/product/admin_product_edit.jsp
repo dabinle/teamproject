@@ -1,47 +1,84 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>관리자 상품 수정 페이지</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+function delete() {
+   if(confirm("삭제?")){
+      document.form1.action="/teamproject/product_servlet/admin_delete.do";
+      document.form1.submit();
+   }
+}
+
+function update() {
+   let productName = document.form1.productName.value;
+   let description = document.form1.description.value;
+   let price = document.form1.price.value;
+   let amount  = document.form1.amount .value;
+   if(productName == ""){
+      alert("상품명을 입력하세요");
+      document.form1.productName.focus();
+      return;
+   }
+   if(description == ""){
+      alert("설명을 입력하세요");
+      document.form1.description.focus();
+      return;
+   }
+   if(price == ""){
+      alert("가격을 입력하세요");
+      document.form1.price.focus();
+      return;
+   }
+   if(amount == ""){
+      alert("재고량을 입력하세요");
+      document.form1.amount.focus();
+      return;
+   }
+   document.form1.action="/teamproject/product_servlet/admin_update.do";
+   document.form1.submit();
+}
+</script>
 </head>
 <body>
-    <h1>상품 수정</h1>
-
-    <form method="post" action="<c:url value='/teamproject/product/product_servlet/admin_update.do'/>" enctype="multipart/form-data">
-        <input type="hidden" name="productNum" value="${product.productNum}">
-
-        <label for="productName">상품명:</label>
-        <input type="text" id="productName" name="productName" value="${product.productName}" required><br><br>
-
-        <label for="price">가격:</label>
-        <input type="number" id="price" name="price" value="${product.price}" required><br><br>
-
-        <label for="description">상품 설명:</label>
-        <textarea id="description" name="description">${product.description}</textarea><br><br>
-
-        <label for="category">카테고리:</label>
-        <select id="category" name="categoryNum" required>
-            <c:forEach var="category" items="${category}">
-                <option value="${category.categoryNum}" ${category.categoryNum == product.categoryNum ? 'selected' : ''}>${category.categoryName}</option>
-            </c:forEach>
-        </select><br><br>
-
-        <label for="company">회사:</label>
-        <select id="company" name="companyNum" required>
-            <c:forEach var="company" items="${company}">
-                <option value="${company.companyNum}" ${company.companyNum == product.companyNum ? 'selected' : ''}>${company.companyName}</option>
-            </c:forEach>
-        </select><br><br>
-
-        <label for="productImage">상품 이미지:</label>
-        <input type="file" id="productImage" name="productImage"><br><br>
-
-        <button type="submit">상품 수정</button>
-    </form>
-
-    <br>
-    <a href="<c:url value='/teamproject/product/product_servlet/admin_list.do'/>">상품 목록</a>
+<form name="form1" method="post" enctype="multipart/form-data">
+<table>
+   <tr>
+      <td>상품명</td>
+      <td><input name="productName" value="${dto.productName }"></td>
+   </tr>
+   <tr>
+      <td>가격</td>
+      <td><input name="price" value="${dto.price }"></td>
+   </tr>
+   <tr>
+      <td>재고량</td>
+      <td><input name="amount" value="${dto.amount }"></td>
+   </tr>
+   <tr>
+      <td>설명</td>
+      <td><input name="description" value="${dto.description }"></td>
+   </tr>
+   <tr>
+      <td>상품이미지</td>
+      <td>
+         <img src="/backup/images/${dto.productImage }" width="300px" height="300px">
+         <br>
+         <input type="file" name="productImage">
+      </td>
+   </tr>
+   <tr>
+      <td colspan="2" align="center">
+         <input type="hidden" name="productNum" value="${dto.productNum }">
+         <input type="button" value="수정" onclick="update()">
+         <input type="button" value="삭제" onclick="delete()">
+         <input type="button" value="목록" onclick="location.href='/teamproject/product_servlet/admin_list.do'">
+      </td>
+   </tr>
+</table>
+</form>
 </body>
 </html>

@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>관리자 홈페이지</h1>
-    <a href="/teamproject/product_servlet/admin_insert.do">상품등록</a>
+    <a href="/teamproject/product_servlet/insert.do">상품등록</a>
     <a href="/teamproject/product_servlet/admin_list.do">상품목록</a>
     <a href="/teamproject/home/index.jsp">Home</a>
 </body>

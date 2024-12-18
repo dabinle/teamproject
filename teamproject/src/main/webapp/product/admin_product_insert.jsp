@@ -1,61 +1,76 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>관리자 상품 등록 페이지</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+function insert() {
+   let productName = document.form1.productName.value;
+   let description = document.form1.description.value;
+   let price = document.form1.price.value;
+   let amount  = document.form1.amount .value;
+   if(productName == ""){
+      alert("상품명을 입력하세요");
+      document.form1.productName.focus();
+      return;
+   }
+   if(description == ""){
+      alert("설명을 입력하세요");
+      document.form1.description.focus();
+      return;
+   }
+   if(price == ""){
+      alert("가격을 입력하세요");
+      document.form1.price.focus();
+      return;
+   }
+   if(amount == ""){
+      alert("재고량을 입력하세요");
+      document.form1.amount.focus();
+      return;
+   }
+   document.form1.action = "/teamproject/product_servlet/admin_insert.do";
+   document.form1.submit();
+}
+</script>
 </head>
 <body>
-    <h1>상품 등록</h1>
-    <form method="post" action="/product/product_servlet/admin_insert.do" enctype="multipart/form-data">
-
-        <label for="productName">상품 이름:</label>
-        <input type="text" id="productName" name="productName" required><br><br>
-
-        <label for="price">가격:</label>
-        <input type="number" id="price" name="price" required><br><br>
-
-		<label for="amount">수량:</label>
-        <input type="number" id="amount" name="amount" required><br><br>
-
-        <label for="description">상품 설명:</label>
-        <textarea id="description" name="description" required></textarea><br><br>
-
-        <label for="category">카테고리:</label>
-		<select id="category" name="p_categoryNum" required>
-    		<c:choose>
-        		<c:when test="${not empty category}">
-            		<c:forEach var="row" items="${category}">
-                		<option value="${row.p_categoryNum}">${row.p_categoryName}</option>
-            		</c:forEach>
-        		</c:when>
-        		<c:otherwise>
-            		<option value="">카테고리가 없습니다</option>
-        		</c:otherwise>
-    		</c:choose>
-		</select><br><br>
-
-		<label for="company">업체:</label>
-		<select id="company" name="companyNum" required>
-    		<c:choose>
-        		<c:when test="${not empty company}">
-            		<c:forEach var="row" items="${company}">
-                		<option value="${row.companyNum}">${row.companyName}</option>
-            		</c:forEach>
-        		</c:when>
-        		<c:otherwise>
-            		<option value="">업체가 없습니다</option>
-        		</c:otherwise>
-    		</c:choose>
-		</select><br><br>
-
-        <label for="productImage">상품 이미지:</label>
-        <input type="file" id="productImage" name="productImage" required><br><br>
-
-        <button type="submit">상품 등록</button>
-    </form>
-    <br>
-    <a href="/teamproject/admin/admin_home.jsp">관리자 Home</a>
+<h2>상품등록</h2>
+<form name="form1" method="post" enctype="multipart/form-data">
+   <label for="productName">상품명:</label>
+   <input type="text" id="productName" name="productName" required="required">
+   <br>
+   <label for="price">가격:</label>
+   <input type="text" id="price" name="price" required="required">
+   <br>
+   <label for="amount">재고량:</label>
+   <input type="text" id="amount" name="amount" required="required">
+   <br>
+   <label for="description">설명:</label>
+   <input type="text" id="description" name="description" required="required">
+   <br>
+   <label for="productImage">상품이미지:</label>
+   <input type="file" id="productImage" name="productImage">
+   <br>
+   <label for="p_categoryNum">카테고리: </label>
+   <select id="p_categoryNum" name="p_categoryNum" required="required">
+      <c:forEach var="row" items="${category }">
+         <option value="${row.p_categoryNum}">${row.p_categoryName}</option>
+      </c:forEach>
+   </select>
+   <br>
+   <label for="comanyNum">회사명:</label>
+   <select id="comanyNum" name="companyNum" required="required">
+      <c:forEach var="row" items="${company }">
+         <option value="${row.companyNum }">${row.companyName }</option>
+      </c:forEach>
+   </select>
+   <br>
+   <input type="button" value="상품등록" onclick="insert()">
+   <input type="button" value="상품목록" onclick="location.href='/teamproject/product_servlet/admin_list.do'">
+</form>
 </body>
 </html>
