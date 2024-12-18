@@ -120,12 +120,7 @@ public class LoginController extends HttpServlet{
 			
 			dao.update(dto);
 			
-		    HttpSession session = request.getSession();
-		    session.setAttribute("userName", userName);
-		    
-		    response.setContentType("text/html;charset=UTF-8");
-
-		    response.getWriter().write("<script> alert('회원 수정이 되었습니다.'); location.href='" + path + "/home/home.jsp';</script>");
+		   
 		}
 		
 		else if (url.indexOf("updatePage.do") != -1) {
@@ -140,7 +135,23 @@ public class LoginController extends HttpServlet{
 		    } else {
 		        response.sendRedirect(path + "/member/login.jsp?message=loginRequired");
 		    }
-		} else if (url.indexOf("delete.do") != -1) {
+		}
+		else if (url.indexOf("pwd_update.do") != -1) {
+			HttpSession session = request.getSession();
+            String userID = (String) session.getAttribute("userID");
+            String userPwd = request.getParameter("userPwd");
+            
+            MemberDTO dto = new MemberDTO();
+            dto.setUserPwd(userPwd);
+            dao.pwd_update(dto);
+            
+		   // session.setAttribute("userName", userName);
+		    
+		    response.setContentType("text/html;charset=UTF-8");
+
+		    response.getWriter().write("<script> alert('회원 수정이 되었습니다.'); location.href='" + path + "/home/home.jsp';</script>");
+		}
+		else if (url.indexOf("delete.do") != -1) {
             HttpSession session = request.getSession();
             String userID = (String) session.getAttribute("userID");
             String userPwd = request.getParameter("userPwd");
