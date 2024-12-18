@@ -48,8 +48,9 @@ public class ProductController extends HttpServlet {
 
         // 관리자 관련 요청
         } else if (url.indexOf("admin_insert.do") != -1) {
-        	List<CategoryDTO> categoryList = productDao.listCategory();  
+        	List<CategoryDTO> categoryList = adminDao.adminListCategory();  
             request.setAttribute("category", categoryList);
+            
             List<CompanyDTO> companyList = adminDao.adminListCompany();
             request.setAttribute("company", companyList);
             

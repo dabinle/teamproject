@@ -19,7 +19,7 @@ public class AdminProductDAO {
 
     public ProductDTO adminDetailProduct(int productNum) { // 상품 상세 조회(관리자)
         SqlSession session = Mybatis.getInstance().openSession();
-        ProductDTO dto = session.selectOne("product.admin_detail_product", productNum);
+        ProductDTO dto = session.selectOne("product.detail_product", productNum);
         session.close();
         return dto;
     }
@@ -63,17 +63,17 @@ public class AdminProductDAO {
     }
 
     
-    public List<CategoryDTO> adminListCategory() {
+    public List<CategoryDTO> adminListCategory() { // 카테고리 조회
     	SqlSession session = Mybatis.getInstance().openSession();
-    	List<CategoryDTO> list = session.selectList("product.category_list");
+    	List<CategoryDTO> list = session.selectList("product.list_category");
     	session.close();
     	return list;
     }
 
-    public List<ProductDTO> adminListProductByCategory(int p_categoryNum) { // 특정 카테고리에 속한 상품 조회
-        SqlSession session = Mybatis.getInstance().openSession();
-        List<ProductDTO> list = session.selectList("product.list_product_by_category", p_categoryNum);
-        session.close();
-        return list;
-    }
+//    public List<ProductDTO> adminListProductByCategory(int p_categoryNum) { // 특정 카테고리에 속한 상품 조회
+//        SqlSession session = Mybatis.getInstance().openSession();
+//        List<ProductDTO> list = session.selectList("product.list_product_by_category", p_categoryNum);
+//        session.close();
+//        return list;
+//    }
 }
