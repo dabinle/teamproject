@@ -10,9 +10,9 @@
 <script>
     $(function() {
       $("#btn_insert").click(function() {
-    	 document.form1.action = "/teamproject/product_servlet/insert.do";
-    	 document.form1.submit();
-         //location.href="/teamproject/product_servlet/insert.do";
+    	 //document.form1.action = "/teamproject/product_servlet/insert.do";
+    	 //document.form1.submit();
+         location.href="/teamproject/product/admin_product_insert.jsp";
       });
    });
     </script>  
