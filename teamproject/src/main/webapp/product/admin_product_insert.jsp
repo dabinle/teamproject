@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../include/admin_menu.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@ function insert() {
    let productName = document.form1.productName.value;
    let description = document.form1.description.value;
    let price = document.form1.price.value;
-   let amount  = document.form1.amount .value;
+   let amount  = document.form1.amount.value;
    if(productName == ""){
       alert("상품명을 입력하세요");
       document.form1.productName.focus();

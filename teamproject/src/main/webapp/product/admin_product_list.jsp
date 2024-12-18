@@ -10,13 +10,16 @@
 <script>
     $(function() {
       $("#btn_insert").click(function() {
-         location.href="/teamproject/product_servlet/insert.do";
+    	 //document.form1.action = "/teamproject/product_servlet/insert.do";
+    	 //document.form1.submit();
+         location.href="/teamproject/product/admin_product_insert.jsp";
       });
    });
     </script>  
 </head>
 <body>
 <h2>상품목록</h2>
+<form name="form1" method="post">
 <button type="button" id="btn_insert">상품등록</button>
 <table border="1" width="500px">
    <tr align="center">
@@ -43,5 +46,6 @@
    </tr>
    </c:forEach>
 </table>
+</form>
 </body>
 </html>
