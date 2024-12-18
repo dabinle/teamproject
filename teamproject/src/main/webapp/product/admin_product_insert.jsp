@@ -11,7 +11,7 @@ function insert() {
    let productName = document.form1.productName.value;
    let description = document.form1.description.value;
    let price = document.form1.price.value;
-   let amount  = document.form1.amount .value;
+   let amount  = document.form1.amount.value;
    if(productName == ""){
       alert("상품명을 입력하세요");
       document.form1.productName.focus();
