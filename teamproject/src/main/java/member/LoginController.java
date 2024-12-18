@@ -147,9 +147,9 @@ public class LoginController extends HttpServlet{
 
             response.setContentType("text/html;charset=UTF-8");
 
-            String result = dao.check_pwd(userID, userPwd); // 비밀번호 확인
+            int result = dao.check_pwd(userID, userPwd); // 비밀번호 확인
 
-            if (result != null) { // 비밀번호 일치
+            if (result != 0) { // 비밀번호 일치
                 dao.delete(userID); 
                 session.invalidate(); // 세션 종료
                 response.getWriter().write("<script> alert('탈퇴되었습니다.'); location.href='" + path + "/home/home.jsp';</script>");
