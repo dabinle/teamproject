@@ -9,8 +9,14 @@
 <body>
     <h1>관리자 홈페이지</h1>
 
+<<<<<<< HEAD
     <a href="/teamproject/product_servlet/insert_detail.do">상품등록</a>
     <a href="/teamproject/product_servlet/list.do">상품목록</a>
     <a href="/teamproject/home/index.jsp">Home</a>
+=======
+    <a href="/backup/product_servlet/insert_detail.do">상품등록</a>
+    <a href="/backup/product_servlet/list.do">상품목록</a>
+    <a href="/backup/home/index.jsp">Home</a>
+>>>>>>> branch 'main' of https://github.com/dabinle/teamproject.git
 </body>
 </html>
