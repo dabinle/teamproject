@@ -99,14 +99,5 @@ public class MemberDAO {
 		}
 		return result;
 	}
-	
-	/* 사용자의 암호화된 비밀번호 가져오기
-    public String getUserEncodedPassword(String username) {
-        User user = userRepository.findByUsername(username);
-        if (user != null) {
-            return user.getPassword(); // 사용자의 암호화된 비밀번호 반환
-        }
-        return null;
-    }
-    */
+
 }
