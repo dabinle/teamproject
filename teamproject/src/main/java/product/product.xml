@@ -27,9 +27,8 @@
         set productName = #{productName},
             price = #{price},
             description = #{description},
+            amount = #{amount},
             productImage = #{productImage},
-            p_parentCategory = #{p_parentCategory},
-            p_categoryNum = #{p_categoryNum}
         where productNum = #{productNum}
     </update>
 
@@ -52,7 +51,7 @@
 
     <!-- 카테고리 목록 조회 -->
     <select id="list_category" resultType="product.CategoryDTO">
-        select p_categoryName from product_category where p_categoryNum = #{p_categoryNum}
+        select * from product_category 
     </select>
 	
 	<select id="company_product" resultType="product.ProductDTO">

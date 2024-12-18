@@ -31,7 +31,7 @@ public class ProductController extends HttpServlet {
         	System.out.println("그냥 리스트");
             List<ProductDTO> items = productDao.listProduct(); 
             request.setAttribute("list", items);
-            RequestDispatcher rd = request.getRequestDispatcher("/product/product_list.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_list.jsp");
             rd.forward(request, response);
 
         } else if (url.indexOf("detail.do") != -1) {
@@ -123,14 +123,7 @@ public class ProductController extends HttpServlet {
             String page = path + "/product_servlet/admin_list.do";
             response.sendRedirect(page);
             
-        } else if (url.indexOf("admin_list.do") != -1) { // 관리자 상품 목록
-        	System.out.println("어드민 리스트");
-            List<ProductDTO> items = adminDao.adminListProduct();  
-            request.setAttribute("list", items);
-            
-            response.getWriter().write("<script> location.href='" + path + "/product/admin_product_list.jsp';</script>");
-//            RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_list.jsp");
-//            rd.forward(request, response);  
+          
         
            // 수정된 상품 정보를 받아 데이터베이스에 저장
         } else if (url.indexOf("admin_update.do") != -1) { 
