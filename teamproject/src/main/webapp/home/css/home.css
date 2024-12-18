@@ -8,12 +8,14 @@ header, main, nav, contents, footer {
 
 header {
 	border: 2px solid yellow;
-	height: 70px;
+	height: 100px;
 }
 
 main {
 	border: 2px solid red;
-	height: 1000px;
+	height: 1500px;
+	width : 1300px;
+	margin: 0 auto;
 }
 
 nav {
