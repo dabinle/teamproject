@@ -19,9 +19,10 @@
 	    where userID=#{userID}
 	</select>
 	
-	<select id="check_pwd" resultType="int">
-	    select count(mypack.encrypt(#{userPwd})) from member where userID = #{userID}
-	</select>
+	<select id="check_pwd" resultType="String">
+        select userID from member
+        where userID=#{userID} and userPwd=mypack.encrypt(#{userPwd})
+    </select>
 	
 	<insert id="join">
 		insert into member(userID, userName, userPwd, email, phoneNum, zipCode, address, addressDetail) values (#{userID}, #{userName}, mypack.encrypt(#{userPwd}), #{email}, #{phoneNum}, #{zipCode}, #{address}, #{addressDetail})

@@ -84,8 +84,8 @@ public class MemberDAO {
 		}
 	}
 	
-	public int check_pwd(String userID, String userPwd) {
-		int result = 0;
+	public String check_pwd(String userID, String userPwd) {
+		String result = null;
 		SqlSession session = Mybatis.getInstance().openSession();
 		try {
 			Map<String, Object> map = new HashMap<>();
