@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 <c:if test="${param.message == 'error'}">
 	<script>
 		alert("아이디 또는 비밀번호가 일치하지 않습니다.")
