@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/admin_menu.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상품등록</title>
 <script>
 function insert() {
    let productName = document.form1.productName.value;
@@ -56,17 +55,17 @@ function insert() {
    <label for="productImage">상품이미지:</label>
    <input type="file" id="productImage" name="productImage">
    <br>
-   <label for="p_categoryNum">카테고리: </label>
+   <label for="p_categoryNum">카테고리:</label>
    <select id="p_categoryNum" name="p_categoryName" required="required">
       <c:forEach var="row" items="${category}">
          <option value="${row.p_categoryNum}">${row.p_categoryName}</option>
       </c:forEach>
    </select>
    <br>
-   <label for="comanyNum">회사명:</label>
-   <select id="comanyNum" name="companyName" required="required">
+   <label for="companyNum">회사명:</label>
+   <select id="companyNum" name="companyName" required="required">
       <c:forEach var="row" items="${company}">
-         <option value="${row.companyNum}">${row.companyName }</option>
+         <option value="${row.companyNum}">${row.companyName}</option>
       </c:forEach>
    </select>
    <br>

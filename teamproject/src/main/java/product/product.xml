@@ -51,12 +51,12 @@
 
     <!-- 카테고리 목록 조회 -->
     <select id="list_category" resultType="product.CategoryDTO">
-        select * from product_category 
+         select * from product_category
     </select>
 	
 	<select id="company_product" resultType="product.ProductDTO">
-      select * from product where companyNum = #{companyNum}
-   </select>
+      	select * from product where companyNum = #{companyNum}
+    </select>
    
    <select id="category_product" resultType="product.ProductDTO">
       select * from product where p_categoryNum = #{p_categoryNum}
