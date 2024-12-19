@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="../include/admin_menu.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,11 +52,11 @@
    <table>
       <tr>
          <td>상품명</td>
-         <td><input name="productName" value="${dto.productName }"></td>
+         <td><input name="productName" value="${dto.productName}"></td>
       </tr>
       <tr>
          <td>가격</td>
-         <td><input name="price" value="${dto.price }"></td>
+         <td><input type="text" name="price" value="${dto.price}"/></td>
       </tr>
       <tr>
          <td>재고량</td>

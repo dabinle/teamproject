@@ -71,7 +71,7 @@ function insert() {
    </select>
    <br>
    <input type="button" value="상품등록" onclick="insert()">
-   <input type="button" value="상품목록" onclick="location.href='/teamproject/product/admin_product_list.jsp'">
+   <input type="button" value="상품목록" onclick="location.href='/teamproject/product_servlet/list.do'">
 </form>
 </body>
 </html>
