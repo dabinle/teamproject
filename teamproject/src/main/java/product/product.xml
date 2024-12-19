@@ -26,8 +26,8 @@
         udpate product
         set productName = #{productName},
             price = #{price},
-            description = #{description},
             amount = #{amount},
+            description = #{description},
             productImage = #{productImage},
         where productNum = #{productNum}
     </update>

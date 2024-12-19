@@ -27,9 +27,9 @@ public class ProductController extends HttpServlet {
         AdminProductDAO adminDao = new AdminProductDAO();  
 
         // 고객 관련 요청
-        if (url.indexOf("list.do") != -1) {
+        if (url.indexOf("list.do") != -1) { // 관리자 상품 목록
         	System.out.println("그냥 리스트");
-            List<ProductDTO> items = productDao.listProduct(); 
+            List<ProductDTO> items = adminDao.adminListProduct(); 
             request.setAttribute("list", items);
             RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_list.jsp");
             rd.forward(request, response);
@@ -120,8 +120,10 @@ public class ProductController extends HttpServlet {
         } else if (url.indexOf("admin_delete.do") != -1) { // 관리자 상품 삭제
             int productNum = Integer.parseInt(request.getParameter("productNum"));
             adminDao.adminDeleteProduct(productNum);  
-            String page = path + "/product_servlet/admin_list.do";
+            String page = path + "/product_servlet/list.do";
             response.sendRedirect(page);
+            // RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_list.jsp");
+            // rd.forward(request, response);
             
           
         
@@ -149,7 +151,7 @@ public class ProductController extends HttpServlet {
             String description = request.getParameter("description");
             int p_categoryNum = Integer.parseInt(request.getParameter("p_categoryNum"));
             int companyNum = Integer.parseInt(request.getParameter("companyNum"));
-           
+            int amount = Integer.parseInt(request.getParameter("amount"));
             
             ProductDTO dto = new ProductDTO();
             dto.setProductNum(productNum);
@@ -158,6 +160,7 @@ public class ProductController extends HttpServlet {
             dto.setDescription(description);
             dto.setP_categoryNum(p_categoryNum);
             dto.setCompanyNum(companyNum);
+            dto.setAmount(amount);
            
 			List<CategoryDTO> category = adminDao.adminListCategory();
             List<CompanyDTO> company = adminDao.adminListCompany();
@@ -172,7 +175,7 @@ public class ProductController extends HttpServlet {
                dto.setProductImage(productImage);
             }
             adminDao.adminUpdateProduct(dto);
-            String page = path + "/product_servlet/admin_home.do";
+            String page = path + "/product_servlet/list.do";
             response.sendRedirect(page);
         }
     }
