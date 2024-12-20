@@ -61,6 +61,14 @@ public class AdminProductDAO {
         session.close();
         return list;
     }
+    
+    // 업체 리스트
+    public List<CompanyDTO> listCompany() {
+       SqlSession session = Mybatis.getInstance().openSession();
+       List<CompanyDTO> company = session.selectList("product.list_company");
+       session.close();
+       return company;
+    }
 
     
     public List<CategoryDTO> adminListCategory() { // 카테고리 조회
@@ -70,19 +78,37 @@ public class AdminProductDAO {
     	return list;
     }
     
+    // 부모카테고리 리스트
     public List<CategoryDTO> p_listCategory() {
-        SqlSession session = Mybatis.getInstance().openSession();
-        List<CategoryDTO> p_category = session.selectList("product.p_list_category");
-        session.close();
-        return p_category;   
-     }
+       SqlSession session = Mybatis.getInstance().openSession();
+       List<CategoryDTO> p_category = session.selectList("product.p_list_category");
+       session.close();
+       return p_category;   
+    }
     
-	  public List<CompanyDTO> listCompany() {
-	        SqlSession session = Mybatis.getInstance().openSession();
-	        List<CompanyDTO> company = session.selectList("product.list_company");
-	        session.close();
-	        return company;
-	     }
+	 // 업체별 상품
+	public List<ProductDTO> companyProduct(int companyNum) {
+	   SqlSession session = Mybatis.getInstance().openSession();
+	   List<ProductDTO> list_cate = session.selectList("product.company_product", companyNum);
+	   session.close();
+	   return list_cate;
+	}
+	
+	public List<CategoryDTO> listCategory(int p_parentCategory) {
+		   SqlSession session = Mybatis.getInstance().openSession();
+		   List<CategoryDTO> category = session.selectList("product.list_category", p_parentCategory);
+		   session.close();
+		   return category;
+	}
+	
+		// 카테고리별 상품
+	   public List<ProductDTO> categoryProduct(int p_categoryNum) {
+	      SqlSession session = Mybatis.getInstance().openSession();
+	      List<ProductDTO> list_com = session.selectList("product.category_product", p_categoryNum);
+	      session.close();
+	      return list_com;
+	   }
+    
 //    public List<ProductDTO> adminListProductByCategory(int p_categoryNum) { // 특정 카테고리에 속한 상품 조회
 //        SqlSession session = Mybatis.getInstance().openSession();
 //        List<ProductDTO> list = session.selectList("product.list_product_by_category", p_categoryNum);

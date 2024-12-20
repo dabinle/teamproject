@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,18 +8,22 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-function selectCategory() {
-   //let p_parentCategory = document.getElementById("p_parentCategory");
-   let p_parentCategory = $("#p_parentCategory").val();
-   $.ajax({
-      url: "/backup/product/if_select_category.do",
-      type: "post",
-      data: {"p_parentCategory":p_parentCategory},
-      success: function(txt){
-         $("#result").html(txt);
-      }
-   });
+/*function selectCategory() {
+	//let p_parentCategory = document.getElementById("p_parentCategory");
+	let p_parentCategory = $("#p_parentCategory").val();
+	$.ajax({
+		url: "/backup/product/select_category.jsp",
+		type: "post",
+		data: {"p_parentCategory":p_parentCategory},
+		success: function(txt){
+			$("#result").html(txt);
+		}
+	});
 }
+*/
+$(function() {
+	$("#select")	
+});
 
 function insert() {
    let productName = document.form1.productName.value;
@@ -74,6 +78,7 @@ function insert() {
       <c:forEach var="row" items="${p_category }">
          <option value="${row.p_parentCategory}">[${row.p_parentCategory}] ${row.p_categoryName}</option>
       </c:forEach>
+      <input type="button" id="select" onclick="select_category()">
    </select>
    <br>
    <div id="result">카테고리:</div>
