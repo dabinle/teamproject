@@ -61,5 +61,13 @@
    <select id="category_product" resultType="product.ProductDTO">
       select * from product where p_categoryNum = #{p_categoryNum}
    </select>
+   
+    <select id="p_list_category" resultType="product.CategoryDTO">
+	    select p_parentCategory, p_categoryName from product_category where p_categoryNum = p_parentCategory
+	 </select>
+	  
+	  <select id="list_company" resultType="product.CompanyDTO">
+	     select companyNum, companyName from company
+	  </select>
 	
 </mapper>

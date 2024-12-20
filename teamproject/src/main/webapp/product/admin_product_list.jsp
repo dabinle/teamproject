@@ -6,12 +6,19 @@
 <html>
     <meta charset="UTF-8">
     <title>관리자 상품 목록 페이지</title>
-    <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>  
+    <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script>
+	$(function() {
+	   $("#btn_insert").click(function() {
+	      location.href="/teamproject/product_servlet/select_category.do";
+	   });
+	});
+	</script>
 </head>
 <body>
 <h2>상품목록</h2>
 <form name="form1" method="post">
-<a href="/teamproject/product/admin_product_insert.jsp">상품등록</a>
+<button type="button" id="btn_insert">상품등록</button>
 <table border="1" width="800px">
    <tr align="center">
       <th>상품번호</th>

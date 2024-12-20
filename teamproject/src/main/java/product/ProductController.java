@@ -179,6 +179,16 @@ public class ProductController extends HttpServlet {
             String page = path + "/product_servlet/list.do";
             response.sendRedirect(page);
         }
+        
+        else if (url.indexOf("select_category.do")!=-1) {
+            System.out.println("셀렉카테고리");
+            List<CategoryDTO> p_category = productDao.p_listCategory();
+            request.setAttribute("p_category", p_category);
+            List<CompanyDTO> company = productDao.listCompany();
+            request.setAttribute("company", company);
+            RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_insert.jsp");
+            rd.forward(request, response);
+         }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
