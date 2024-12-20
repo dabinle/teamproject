@@ -36,10 +36,18 @@ public class ProductDAO {
         return dto;
     }
     
-    public List<CompanyDTO> listCompany() { // 업체 목록 조회
+    
+    public List<CategoryDTO> p_listCategory() {
         SqlSession session = Mybatis.getInstance().openSession();
-        List<CompanyDTO> company = session.selectList("product.list_company");
+        List<CategoryDTO> p_category = session.selectList("product.p_list_category");
         session.close();
-        return company;
-    }
+        return p_category;   
+     }
+    
+	  public List<CompanyDTO> listCompany() {
+	        SqlSession session = Mybatis.getInstance().openSession();
+	        List<CompanyDTO> company = session.selectList("product.list_company");
+	        session.close();
+	        return company;
+	     }
 }
