@@ -16,7 +16,7 @@
 	<td align="center">
 		<table>
 			<tr>
-				<td>카테고리 이름</td>
+				<td>카테고리</td>
 				<td>${dto.p_categoryName }</td>
 			</tr>
 			<tr>
