@@ -11,8 +11,9 @@
 <body>
 <jsp:forward page="/home/home.jsp"></jsp:forward>
 <%
-//response.sendRedirect("/teamproject/home/home.jsp");
-
+response.sendRedirect("/teamproject/home/home.jsp");
 %>
 </body>
 </html>
+
+
