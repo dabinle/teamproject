@@ -1,7 +1,7 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ include file="../include/admin_menu.jsp" %>
 <!DOCTYPE html>
 <html>
     <meta charset="UTF-8">
@@ -16,9 +16,19 @@
 	</script>
 </head>
 <body>
+<c:choose>
+	<c:when test="${sessionScope.adminId != null }">
+		<%@ include file="../include/admin_menu.jsp" %>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="../include/menu.jsp" %>
+	</c:otherwise>
+</c:choose>
 <h2>상품목록</h2>
 <form name="form1" method="post">
-<button type="button" id="btn_insert">상품등록</button>
+<c:if test="${sessionScope.adminId != null }">
+	<button type="button" id="btn_insert">상품등록</button>
+</c:if>
 <table border="1" width="800px">
    <tr align="center">
       <th>상품번호</th>
@@ -33,11 +43,12 @@
    <c:forEach var="row" items="${list}">
    <tr align="center">
       <td>${row.productNum}</td>      
-      <td>${row.productName}
-         <!-- <a href="/teamproject/product_servlet/detail.do?productNum=${row.productNum}">${row.productName}</a> -->
-         <br>
-         <a href="admin_edit.do?productNum=${row.productNum}">[수정]</a></td>
-       
+      <td><a href="detail.do?productNum=${row.productNum}">${row.productName}</a>
+      	<c:if test="${sessionScope.adminId != null }">
+      		<br>
+      		<a href="admin_edit.do?productNum=${row.productNum}">[수정]</a>
+      	</c:if>
+      </td>
       <td><img src="/teamproject/images/${row.productImage}" width="100px" height="100px"></td>
       <td><fmt:formatNumber value="${row.price}" pattern="#,###"/></td>
       <td>${row.p_categoryNum}</td>

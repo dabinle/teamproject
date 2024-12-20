@@ -34,6 +34,7 @@ public class ProductController extends HttpServlet {
             rd.forward(request, response);
 
         } 
+        
         else if (url.indexOf("select_category.do")!=-1) {
       	  System.out.println("셀렉카테고리");
            List<CategoryDTO> p_category = adminDao.p_listCategory();
