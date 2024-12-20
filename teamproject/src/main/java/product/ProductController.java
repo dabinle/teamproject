@@ -29,7 +29,6 @@ public class ProductController extends HttpServlet {
 
         // 고객 관련 요청
         if (url.indexOf("list.do") != -1) { // 관리자 상품 목록
-        	System.out.println("그냥 리스트");
             List<ProductDTO> items = adminDao.adminListProduct(); 
             request.setAttribute("list", items);
             RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_list.jsp");
@@ -52,10 +51,10 @@ public class ProductController extends HttpServlet {
         // 관리자 관련 요청
         } else if (url.indexOf("insert_detail.do") != -1) {
         	List<CategoryDTO> categoryList = adminDao.adminListCategory();  
-            request.setAttribute("category", categoryList);
-            
-            List<CompanyDTO> companyList = adminDao.adminListCompany();
-            request.setAttribute("company", companyList);
+        	request.setAttribute("category", categoryList);
+
+        	List<CompanyDTO> companyList = adminDao.adminListCompany();
+        	request.setAttribute("company", companyList);
             
             RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_insert.jsp");
             rd.forward(request, response);
@@ -106,9 +105,10 @@ public class ProductController extends HttpServlet {
             dto.setProductImage(productImage);
             adminDao.adminInsertProduct(dto);
             
-            String page = path + "/product_servlet/admin_list.do";
-            response.sendRedirect(page);
-            
+            RequestDispatcher rd = request.getRequestDispatcher("/product_servlet/admin_list.do");
+            rd.forward(request, response);
+            //String page = path + "/product_servlet/admin_list.do";
+            //response.sendRedirect(page);  
             
             
         } else if (url.indexOf("admin_edit.do") != -1) { // 수정하려는 상품의 기존 정보를 불러와 수정 페이지에 출력 
@@ -146,27 +146,28 @@ public class ProductController extends HttpServlet {
             e.printStackTrace();
          }
            
-            int productNum = Integer.parseInt(request.getParameter("productNum"));
+            
             String productName = request.getParameter("productName");
             int price = Integer.parseInt(request.getParameter("price"));
-            String description = request.getParameter("description");
-            int p_categoryNum = Integer.parseInt(request.getParameter("p_categoryNum"));
-            int companyNum = Integer.parseInt(request.getParameter("companyNum"));
             int amount = Integer.parseInt(request.getParameter("amount"));
+            String description = request.getParameter("description");
+            // int p_categoryNum = Integer.parseInt(request.getParameter("p_categoryNum"));
+            // int companyNum = Integer.parseInt(request.getParameter("companyNum"));
+            int productNum = Integer.parseInt(request.getParameter("productNum"));
             
             ProductDTO dto = new ProductDTO();
-            dto.setProductNum(productNum);
             dto.setProductName(productName);
             dto.setPrice(price);
-            dto.setDescription(description);
-            dto.setP_categoryNum(p_categoryNum);
-            dto.setCompanyNum(companyNum);
             dto.setAmount(amount);
-           
-			List<CategoryDTO> category = adminDao.adminListCategory();
-            List<CompanyDTO> company = adminDao.adminListCompany();
-            request.setAttribute("category", category);
-            request.setAttribute("company", company);
+            dto.setDescription(description);
+            // dto.setP_categoryNum(p_categoryNum);
+            // dto.setCompanyNum(companyNum);
+            dto.setProductNum(productNum);
+            
+			//List<CategoryDTO> category = adminDao.adminListCategory();
+            //List<CompanyDTO> company = adminDao.adminListCompany();
+            //request.setAttribute("category", category);
+            //request.setAttribute("company", company);
             
             if (productImage == null || productImage.trim().equals("")) {
                ProductDTO dto2 = adminDao.adminDetailProduct(productNum);

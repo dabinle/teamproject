@@ -11,8 +11,8 @@
 <body>
 <h2>상품목록</h2>
 <form name="form1" method="post">
-<a href="admin_product_insert.jsp">상품등록</a>
-<table border="1" width="500px">
+<a href="/teamproject/product/admin_product_insert.jsp">상품등록</a>
+<table border="1" width="800px">
    <tr align="center">
       <th>상품번호</th>
       <th>상품명</th>
