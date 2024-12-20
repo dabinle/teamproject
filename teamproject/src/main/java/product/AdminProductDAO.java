@@ -71,7 +71,7 @@ public class AdminProductDAO {
     }
 
     
-    public List<CategoryDTO> adminListCategory() { // 카테고리 조회
+    public List<CategoryDTO> ListCategory() { // 카테고리 조회
     	SqlSession session = Mybatis.getInstance().openSession();
     	List<CategoryDTO> list = session.selectList("product.list_category");
     	session.close();
@@ -108,6 +108,8 @@ public class AdminProductDAO {
 	      session.close();
 	      return list_com;
 	   }
+	   
+	   
     
 //    public List<ProductDTO> adminListProductByCategory(int p_categoryNum) { // 특정 카테고리에 속한 상품 조회
 //        SqlSession session = Mybatis.getInstance().openSession();
