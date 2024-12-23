@@ -54,4 +54,13 @@
   	<servlet-name>CartController</servlet-name>
   	<url-pattern>/cart_servlet/*</url-pattern>
   </servlet-mapping>
+  <!-- 공지사항 => 파일 업로드 -->
+  <servlet>
+  	<servlet-name>UploadController</servlet-name>
+  	<servlet-class>notice.UploadController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UploadController</servlet-name>
+  	<url-pattern>/upload.do</url-pattern>
+  </servlet-mapping>
 </web-app>
