@@ -2,16 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
 	<select id="list_product" resultType="product.ProductDTO"> 
-		select productNum, productName, description, price, amount, p.p_categoryNum, p.companyNum, productImage, pc.p_categoryName, c.companyName from product p, product_category pc, company c where p.p_categoryNum = pc.p_categoryNum and p.companyNum = c.companyNum order by productNum 
+		select productNum, productName, description, price, amount, p.p_categoryNum, p.companyNum, productImage, 
+		pc.p_categoryName, c.companyName 
+		from product p, product_category pc, company c 
+		where p.p_categoryNum = pc.p_categoryNum and p.companyNum = c.companyNum order by productNum 
 	</select>
 	
-	<select id="detail" resultType="product.ProductDTO"> 
+	<select id="detail_product" resultType="product.ProductDTO"> 
 		select productNum, productName, description, price, amount, p.p_categoryNum, p.companyNum, productImage, pc.p_categoryName, c.companyName from product p, product_category pc, company c where p.p_categoryNum = pc.p_categoryNum and p.companyNum = c.companyNum and productNum = #{productNum} 
 	</select>
 	
 	<update id="update_product">
 		 update product set productName = #{productName}, price = #{price}, description = #{description}, amount = #{amount}, productImage=#{productImage} where productNum = #{productNum} 
-		 </update>
+	</update>
 		 
 	<delete id="delete_product"> 
 		delete from product where productNum = #{productNum} 

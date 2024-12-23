@@ -35,6 +35,7 @@ public class ProductController extends HttpServlet {
             rd.forward(request, response);
 
         } 
+        
         else if (url.indexOf("select_category.do")!=-1) {
       	  System.out.println("셀렉카테고리");
            List<CategoryDTO> p_category = adminDao.p_listCategory();
@@ -69,7 +70,7 @@ public class ProductController extends HttpServlet {
 
         // 관리자 관련 요청
         } else if (url.indexOf("insert_detail.do") != -1) {
-        	List<CategoryDTO> categoryList = adminDao.adminListCategory();  
+        	List<CategoryDTO> categoryList = adminDao.ListCategory();  
         	request.setAttribute("category", categoryList);
 
         	List<CompanyDTO> companyList = adminDao.adminListCompany();
@@ -79,7 +80,7 @@ public class ProductController extends HttpServlet {
             rd.forward(request, response);
 
         } else if (url.indexOf("insert.do") != -1) {
-        	List<CategoryDTO> categoryList = adminDao.adminListCategory();  
+        	List<CategoryDTO> categoryList = adminDao.ListCategory();  
             request.setAttribute("category", categoryList);
             
             List<CompanyDTO> companyList = adminDao.adminListCompany();
