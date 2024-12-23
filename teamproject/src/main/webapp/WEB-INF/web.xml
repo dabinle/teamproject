@@ -45,4 +45,13 @@
   	<servlet-name>LoginController</servlet-name>
   	<url-pattern>/login_servlet/*</url-pattern>
   </servlet-mapping>
+  <!-- 장바구니 -->
+  <servlet>
+  	<servlet-name>CartController</servlet-name>
+  	<servlet-class>cart.CartController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CartController</servlet-name>
+  	<url-pattern>/cart_servlet/*</url-pattern>
+  </servlet-mapping>
 </web-app>
