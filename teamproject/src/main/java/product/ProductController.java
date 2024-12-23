@@ -37,21 +37,20 @@ public class ProductController extends HttpServlet {
         } 
         
         else if (url.indexOf("select_category.do")!=-1) {
-      	  System.out.println("셀렉카테고리");
-           List<CategoryDTO> p_category = adminDao.p_listCategory();
-           request.setAttribute("p_category", p_category);
-           List<CompanyDTO> company = adminDao.listCompany();
-           request.setAttribute("company", company);
-           RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_insert.jsp");
-           rd.forward(request, response);
+        	List<CategoryDTO> p_category = adminDao.p_listCategory();
+        	request.setAttribute("p_category", p_category);
+        	List<CompanyDTO> company = adminDao.listCompany();
+        	request.setAttribute("company", company);
+        	RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_insert.jsp");
+        	rd.forward(request, response);
         }
         
         else if(url.indexOf("if_select_category.do")!=-1){
-      	  int p_parentCategory = Integer.parseInt(request.getParameter("p_parentCategory"));
-      	  List<CategoryDTO> category = adminDao.listCategory(p_parentCategory);
-      	  request.setAttribute("category", category);
-      	  RequestDispatcher rd = request.getRequestDispatcher("/product/select_category.jsp");
-      	  rd.forward(request, response);
+        	int p_parentCategory = Integer.parseInt(request.getParameter("p_parentCategory"));
+      	  	List<CategoryDTO> category = adminDao.listCategory(p_parentCategory);
+      	  	request.setAttribute("category", category);
+      	  	RequestDispatcher rd = request.getRequestDispatcher("/product/select_category.jsp");
+      	  	rd.forward(request, response);
         }
         
         else if (url.indexOf("detail.do") != -1) {

@@ -16,11 +16,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<delete id="delete_cart">
-		delete from cart where cartID=#{cartID}
+		delete from cart where cartNum=#{cartNum}
 	</delete>
 	
 	<update id="update_cart">
-		update cart set cartAmount=#{cartAmount} where cartID=#{cartID}
+		update cart set cartAmount=#{cartAmount} where cartNum=#{cartNum}
 	</update>
 	
 	<delete id="clear_cart">

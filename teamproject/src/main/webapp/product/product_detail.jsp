@@ -39,7 +39,7 @@
 				<td colspan="2">
 					<form name="form1" method="post" action="/teamproject/cart_servlet/insert.do">
 					<input type="hidden" name="productNum" value="${dto.productNum }">
-						<select name="amount">
+						<select name="cartAmount">
 						<c:forEach begin="1" end="10" var="i">
 							<option value="${i}">${i}</option>
 						</c:forEach>

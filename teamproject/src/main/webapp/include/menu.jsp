@@ -14,6 +14,7 @@
 	</c:when>
 	<c:otherwise>
 		${sessionScope.userName}님 환영합니다.
+		<a href="/teamproject/home/home.jsp" style="text-decoration: none; color: black;">HOME</a>
 		<a href="/teamproject/cart_servlet/list.do" style="text-decoration: none; color: black;">장바구니</a>
 		<a href="/teamproject/member/myPageHome.jsp" style="text-decoration: none; color: black;">마이페이지</a>
 		<a href="/teamproject/member/memberCenter.jsp" style="text-decoration: none; color: black;">고객센터</a>

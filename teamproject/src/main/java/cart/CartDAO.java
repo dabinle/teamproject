@@ -43,11 +43,11 @@ public class CartDAO {
 		return list;
 	}
 	
-	public void delete_cart(int cartID) {
+	public void delete_cart(int cartNum) {
 		SqlSession session = null;
 		try {
 			session = Mybatis.getInstance().openSession();
-			session.delete("cart.delete_cart", cartID);
+			session.delete("cart.delete_cart", cartNum);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
