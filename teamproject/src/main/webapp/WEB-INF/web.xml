@@ -72,4 +72,13 @@
   	<servlet-name>NoticeController</servlet-name>
   	<url-pattern>/notice_servlet/*</url-pattern>
   </servlet-mapping>
+  <!-- 1:1 문의 -->
+  <servlet>
+  	<servlet-name>BoardController</servlet-name>
+  	<servlet-class>board.BoardController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>BoardController</servlet-name>
+  	<url-pattern>/board_servlet/*</url-pattern>
+  </servlet-mapping>
 </web-app>

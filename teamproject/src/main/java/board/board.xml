@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+
+	<select id="list" resultType="board.BoardDTO">
+		select * 
+		from (
+			select rownum as rn, A.*
+			from (
+				select boardNum, userID, boardTitle, boardDate, hit, (
+				select count(*) from board_comment where boardNum=b.boardNum)
+				count_comments, boardFileName, boardFileSize, down, groupNum, 
+				re_order, re_depth from board b
+				order by groupNum desc, re_order asc
+				) A
+			)
+			where rn between #{start} and #{end} 
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(*) from board
+	</select>
+	
+	<select id="check_pwd" resultType="String">
+		select userPwd 
+		from board b, member m
+		where  boardNum=#{boardNum} 
+				and userPwd=mypack.encrypt(#{userPwd}) 
+				and b.userID=m.userID 
+	</select>
+	
+	<select id="admin_check_pwd" resultType="String">
+		select adminPwd 
+		from board b, admin a
+		where  boardNum=#{boardNum} 
+				and adminPwd=#{adminPwd} 
+				and b.adminId=a.adminId  
+	</select>
+	
+	<select id="view" resultType="board.BoardDTO">
+		select * from board where boardNum=#{boardNum}
+	</select>
+	
+	<select id="list_comment" resultType="board.BoardCommentDTO">
+		select commentNum, boardNum, adminId, commentContent, 
+		to_char(commentDate, 'yyyy-mm-dd HH:mi:ss') commentDate
+		from board_comment bc
+		where boardNum=#{boardNum} 
+		order by commentNum
+	</select>
+	
+	<select id="filename" resultType="String">
+		select boardFileName from board where boardNum=#{boardNum}
+	</select>
+	
+	<select id="search_list" resultType="board.BoardDTO">
+		select * 
+		from (
+			select rownum as rn, A.*
+			from(
+				select boardNum, userID,boardTitle,boardDate,hit,
+				(select count(*) from board_comment where boardNum=b.boardnum) count_comments,
+				boardFileName,boardFileSize,down,groupNum,re_order,re_depth
+				from board b
+				<choose>
+					<when test="search_option != 'all' ">
+						where ${search_option} like '%' || #{keyword} || '%'
+					</when>
+					<when test="search_option == 'all' ">
+						where writer like '%' || #{keyword} || '%' 
+						or boardTitle like '%' || #{keyword} || '%' 
+						or boardContent like '%' || #{keyword} || '%'
+					</when>
+				</choose>  
+				order by groupNum desc, re_order asc 
+			) A
+		)
+		where rn between #{start} and #{end}
+	</select>
+	
+	<select id="search_count" resultType="int">
+		select count(*) from board
+		<choose>
+			<when test="search_option != 'all' ">
+				where ${search_option} like '%' || #{keyword} || '%'
+			</when>
+			<when test="search_option == 'all' ">
+				where userID like '%' || #{keyword} || '%' or boardTitle
+				like '%' || #{keyword} || '%' or boardContent like '%'
+				|| #{keyword} || '%'
+			</when>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		insert into board (boardNum, userID,boardTitle, userPwd,
+		groupNum,re_order,re_depth,boardContent,boardFileName,boardFileSize) 
+		values ((select nvl (max(boardNum)+1,1) from board), #{userID},#{boardTItle},
+			mypack.encrypt(#{userPwd}), (select nvl(max(boardNum)+1,1) from
+			board), 1,0,#{boardContent},#{boardFileName},#{boardFileSize})
+	</insert>
+	
+	<insert id="insert_comment">
+		insert into board_comment (commentNum,boardNum,userID,boardContent)
+		values ((select nvl(max(commentNum)+1,1) from board_comment), 
+		#{boardNum},#{userID},#{boardContent})
+	</insert>
+	
+	<insert id="insert_reply">
+		insert into board (boardNum,userID,boardTitle,userPwd,groupNum
+		re_order,re_depth,boardContent,boardFileName,boardFileSize)
+		values ((select nvl(max(boardNum)+1,1) from board), #{userID},
+		#{boardtitle},#{userPwd},#{groupNum},#{re_order},#{re_depth},
+		#{boardContent},#{boardFileName},#{boardFileSize})
+	</insert>
+	
+	<update id="plus_hit">
+		update board set hit=hit+1 where boardNum=#{boardNum}
+	</update>
+	
+	<update id="update">
+		update board set userID=#{userID}, boardTitle=#{boardTitle},
+		boardContent=#{boardContent},boardFileName=#{boardFileName},
+		boardFileSize=#{boardFileSize}, down=#{down} 
+		where boardNum=#{boardNum}
+	</update>
+	
+	<update id="update_order">
+		update board set re_order=re_order + 1 
+		where groupNum=#{groupNum} and re_order >= #{re_order}
+	</update>
+	
+	<update id="plus_down">
+		update board set down=down+1 where boardNum=#{boardNum}
+	</update>
+	
+	<delete id="delete">
+		delete from board where boardNum=#{boardNum}
+	</delete>
+</mapper>
