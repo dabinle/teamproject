@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:redirect url="notice_servlet/list.do"/>
+<c:redirect url="/notice_servlet/list.do"/>
 </body>
 </html>
