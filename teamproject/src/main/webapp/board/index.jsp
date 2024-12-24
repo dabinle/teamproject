@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>게시판!!!!!!!</h2>
+<h2>1:1문의</h2>
 </body>
 </html>
