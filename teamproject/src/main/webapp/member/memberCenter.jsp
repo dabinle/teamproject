@@ -9,6 +9,7 @@
 </head>
 <body>
 <h2>고객센터</h2>
-<a href="/teamproject/board/index.jsp">게시판</a><br>
+<a href="/teamproject/board/index.jsp">1:1 문의</a><br>
+<a href="/teamproject/board/notice.jsp">공지사항</a><br>
 </body>
 </html>
