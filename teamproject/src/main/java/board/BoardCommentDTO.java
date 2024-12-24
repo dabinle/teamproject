@@ -12,7 +12,7 @@ import lombok.ToString;
 public class BoardCommentDTO {
 	private int commentNum;
 	private int boardNum;
-	private String adminName;
+	private String adminId;
 	private String commentContent;
 	private Date commentDate;
 }

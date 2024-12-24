@@ -40,21 +40,21 @@ public class BoardDAO {
 			map.put("end", end);
 			list = session.selectList("board.search_list", map);
 			for (BoardDTO dto : list) {
-				String userName = dto.getUserName();
+				String userID = dto.getUserID();
 				String boardTitle = dto.getBoardTitle();
 				switch (search_option) {
 				case "all": 
-					userName = userName.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
+					userID = userID.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
 					boardTitle = boardTitle.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
 					break;
-				case "userName":
-					userName = userName.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
+				case "userID":
+					userID = userID.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
 					break;
 				case "boardTitle":
 					boardTitle = boardTitle.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
 					break;	
 				}
-				dto.setUserName(userName);
+				dto.setUserID(userID);
 				dto.setBoardTitle(boardTitle);
 			}
 		} catch (Exception e) {
