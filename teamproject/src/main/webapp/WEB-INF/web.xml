@@ -54,10 +54,10 @@
   	<servlet-name>CartController</servlet-name>
   	<url-pattern>/cart_servlet/*</url-pattern>
   </servlet-mapping>
-  <!-- 게시판 - 파일 업로드 -->
+  <!-- 1:1문의 - 파일 업로드 -->
   <servlet>
   	<servlet-name>UploadController</servlet-name>
-  	<servlet-class>notice.UploadController</servlet-class>
+  	<servlet-class>board.UploadController</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>UploadController</servlet-name>
