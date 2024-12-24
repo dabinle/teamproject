@@ -60,7 +60,7 @@
 	</select>
 	
 	<insert id="insert">
-		insert into notice(noticeNum, adminId, noticeTitle, noticeContent, noticeFile) values ((select nvl(max(num)+1, 1) from notice), #{adminId}, #{noticeTitle}, #{noticeContent}, #{noticeFile})
+		insert into notice(noticeNum, adminId, noticeTitle, noticeContent, noticeFile) values (seq_notice.nextval, #{adminId}, #{noticeTitle}, #{noticeContent}, #{noticeFile})
 	</insert>
 	
 	<update id="update">

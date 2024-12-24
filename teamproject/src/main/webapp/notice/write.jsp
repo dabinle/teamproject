@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../include/admin_menu.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +34,7 @@ $(function() {
 				return;
 			}
 		}
+		//document.form1.action="/teamproject/notice_servlet/insert.do";
 		document.form1.submit();
 	});
 });
@@ -40,7 +42,7 @@ $(function() {
 </head>
 <body>
 <h2>공지사항 글쓰기</h2>
-<form name= "form1" method="post" action="/teamproject/notice_servlet/insert.do" enctype="multipart/form-data">
+<form name= "form1" method="post" enctype="multipart/form-data">
 <table border="1" width="700px">
 	<tr>
 		<td align="center">이름</td>
