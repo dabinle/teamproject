@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+	<select id="list" resultType="notice.NoticeDTO">
+		select * 
+		from (
+			select rownum as rn, A.*
+			from (
+				select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate
+				from notice n, admin a
+				where n.adminId = a.adminId
+				order by noticeNum desc
+			) A
+		)
+		where rn between #{start} and #{end}
+	</select>
+	
+	<select id="view" resultType="notice.NoticeDTO">
+		select * from notice where noticeNum=#{noticeNum}
+	</select>
+	
+	<select id="filename" resultType="String">
+		select noticeFile from notice where noticeNum=#{noticeNum}
+	</select>
+	
+	<select id="search_list" resultType="notice.NoticeDTO">
+		select * 
+		from (
+			select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate
+			from notice n, admin a
+			where n.adminId = a.adminId  
+			<choose>
+				<when test="search_option != 'all'">
+					where ${search_option} like '%' || #{keyword} || '%'
+				</when>
+				<when test="search_option == 'all'">
+					where n.adminId like '%' || #{keyword} || '%' or noticeTitle like '%' || #{keyword} || '%' or noticeContent like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+			order by noticeNum desc
+		  ) A
+		)
+		where rn between #{start} and #{end}
+	</select>
+	
+	<select id="search_count" resultType="int">
+		select count(*) from notice
+		<choose>
+			<when test="search_option != 'all'">
+				where ${search_option} like '%' || #{keyword} || '%'
+			</when>
+			<when test="search_option == 'all'">
+				where n.adminId like '%' || #{keyword} || '%' or noticeTitle like '%' || #{keyword} || '%' or noticeContent like '%' || #{keyword} || '%'
+			</when>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		insert into notice(noticeNum, adminId, noticeTitle, noticeContent, noticeFile) values ((select nvl(max(num)+1, 1) from notice), #{adminId}, #{noticeTitle}, #{noticeContent}, #{noticeContent}, #{noticeFile})
+	</insert>
+	
+	<update id="update">
+		update notice set noticeTitle=#{noticeTitle}, noticeContent=#{noticeContent}, noticeFile=#{noticeFile} where noticeNum=#{noticeNum}
+	</update>
+	
+	<delete id="delete">
+		delete from notice where noticeNum=#{noticeNum}
+	</delete>
+</mapper>
