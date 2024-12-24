@@ -20,11 +20,19 @@
 </script>
 </head>
 <body>
+<c:choose>
+	<c:when test="${sessionScope.adminId != null }">
+		<%@ include file="../include/admin_menu.jsp" %>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="../include/menu.jsp" %>
+	</c:otherwise>
+</c:choose>
 <h2>공지사항</h2>
 <form name="form1" method="post" action="/teamproject/notice_servlet/search.do">
 <select name= "search_option">
 <c:choose>
-	<c:when test="${search_option == null || search_option == 'all}">
+	<c:when test="${search_option == null || search_option == 'all'}">
 		<option value="all" selected>전체검색</option>
 		<option value="noticeTitle">제목</option>
 		<option value="noticeContent">내용</option>
@@ -43,7 +51,9 @@
 </select>
 <input name="keyword" value="${keyword}">
 <input type="submit" value="검색" id="btnSearch">
-<button type="button" id="btnWrite"></button>
+<c:if test="${sessionScope.adminId != null }">
+    <button type="button" id="btnWrite">글쓰기</button>
+</c:if>
 </form>
 <table border="1" width="900px">
 	<tr>
