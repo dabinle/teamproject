@@ -21,10 +21,16 @@ public class UploadController extends HttpServlet {
 			for (Part part : request.getParts()) {
 				String noticeFile = part.getSubmittedFileName();
 				if (noticeFile != null) {
-					file_names.add(noticeFile)
+					file_names.add(noticeFile);
+					file_sizes.add(part.getSize());
+					part.write(noticeFile);
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
+		String adminName = request.getParameter("adminName");
+		String noticeName = request.getParameter("noticeName");
+		request.setAttribute("adminName", adminName);
 	}
 }
