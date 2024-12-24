@@ -10,7 +10,7 @@
 <script>
 	$(function() {
 		$("#btnWrite").click(function(){
-			location.href="/teamproject/notice/write.jsp";
+			location.href="/teamproject/notice/notice_write.jsp";
 		});
 	});
 		

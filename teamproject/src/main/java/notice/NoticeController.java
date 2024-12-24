@@ -32,7 +32,7 @@ public class NoticeController extends HttpServlet{
 			List<NoticeDTO> list = dao.list(start, end);
 			request.setAttribute("list", list);
 			request.setAttribute("page", page);
-			RequestDispatcher rd = request.getRequestDispatcher("/notice/list.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/notice/notice_list.jsp");
 			rd.forward(request, response);
 		} else if (url.indexOf("insert.do") != -1) {
 			NoticeDTO dto = new NoticeDTO();
