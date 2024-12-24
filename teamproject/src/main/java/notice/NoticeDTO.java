@@ -1,4 +1,4 @@
-package board;
+package notice;
 
 import java.util.Date;
 
