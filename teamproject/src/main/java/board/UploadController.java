@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
@@ -19,18 +20,28 @@ public class UploadController extends HttpServlet {
 		List<Long> file_sizes = new ArrayList<>();
 		try {
 			for (Part part : request.getParts()) {
-				String noticeFile = part.getSubmittedFileName();
-				if (noticeFile != null) {
-					file_names.add(noticeFile);
+				String boardFileName = part.getSubmittedFileName();
+				if (boardFileName != null) {
+					file_names.add(boardFileName);
 					file_sizes.add(part.getSize());
-					part.write(noticeFile);
+					part.write(boardFileName);
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String adminName = request.getParameter("adminName");
-		String noticeName = request.getParameter("noticeName");
-		request.setAttribute("adminName", adminName);
+		String name = request.getParameter("name");
+		String boardTitle = request.getParameter("boardTitle");
+		request.setAttribute("name", name);
+		request.setAttribute("boardTitle", boardTitle);
+		request.setAttribute("file_names", file_names);
+		request.setAttribute("file_sizes", file_sizes);
+		String page = "/board/upload.jsp";
+		RequestDispatcher rd = request.getRequestDispatcher(page);
+		rd.forward(request, response);
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);	
 	}
 }
