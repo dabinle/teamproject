@@ -15,7 +15,7 @@ public class BoardDTO {
 	private String adminPwd;
 	private String boardDate;
 	private int hit;
-	private int group_num;
+	private int groupNum;
 	private int re_order;
 	private int re_depth;
 	private String boardContent;
