@@ -18,6 +18,6 @@
 </c:choose>
 <h2>고객센터</h2>
 <a href="/teamproject/board/board_index.jsp">1:1 문의</a><br>
-<a href="/teamproject/board/notice_index.jsp">공지사항</a><br>
+<a href="/teamproject/notice/notice_index.jsp">공지사항</a><br>
 </body>
 </html>

@@ -27,13 +27,13 @@ $(function() {
 		let noticeFile = document.form1.file1.value;
 		let start = noticeFile.lastIndexOf(".")+1;
 		if(start != -1){
-			let ext = noticeFile.substring(start, filename.length);
+			let ext = noticeFile.substring(start, noticeFile.length);
 			if(ext == "jsp" || ext == "exe"){
 				alert("업로드 할 수 없는 파일입니다.");
 				return;
 			}
 		}
-		document.dorm1.submit();
+		document.form1.submit();
 	});
 });
 </script>
