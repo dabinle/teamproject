@@ -34,7 +34,7 @@ public class BoardController extends HttpServlet {
 			List<BoardDTO> list = dao.list(start, end);
 			request.setAttribute("list", list);
 			request.setAttribute("page", page);
-			RequestDispatcher rd = request.getRequestDispatcher("/board/list.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/board/board_list.jsp");
 			rd.forward(request, response);
 		} else if (url.indexOf("insert.do") != -1) {
 			BoardDTO dto = new BoardDTO();
@@ -66,14 +66,14 @@ public class BoardController extends HttpServlet {
 			dto.setBoardFileName(boardFileName);
 			dto.setBoardFileSize(boardFileSize);
 			dao.insert(dto);
-			response.sendRedirect(contextPath + "/board_servlet/list.do");
+			response.sendRedirect(contextPath + "/board_servlet/board_list.do");
 		} else if (url.indexOf("view.do") != -1) {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			HttpSession session = request.getSession();
 			dao.plus_hit(boardNum, session);
 			BoardDTO dto = dao.view(boardNum);
 			request.setAttribute("dto", dto);
-			RequestDispatcher rd = request.getRequestDispatcher("/board/view.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/board/board_view.jsp");
 			rd.forward(request, response);
 		} else if (url.indexOf("download.do") != -1) {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
@@ -259,7 +259,7 @@ public class BoardController extends HttpServlet {
 			request.setAttribute("search_option", search_option);
 			request.setAttribute("keyword", keyword);
 			request.setAttribute("page", page);
-			RequestDispatcher rd = request.getRequestDispatcher("/board/search.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/board/board_search.jsp");
 			rd.forward(request, response);
 		}
 	}
