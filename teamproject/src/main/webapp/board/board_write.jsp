@@ -38,6 +38,11 @@ $(function() {
 </head>
 <body>
 <h2>글쓰기</h2>
+<c:choose>
+   <c:when test="${sessionScope.userID != null }">
+      <%@ include file="../include/menu.jsp" %>
+   </c:when>
+</c:choose>
 <form name="form1" method="post" action="/teamproject/board_servlet/insert.do" enctype="multipart/form-data">
 <table border="1" width="700px">
 	<tr>
