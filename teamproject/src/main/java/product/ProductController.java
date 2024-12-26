@@ -131,8 +131,6 @@ public class ProductController extends HttpServlet {
             response.sendRedirect(page);
             // RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_list.jsp");
             // rd.forward(request, response);
-            
-          
         
            // 수정된 상품 정보를 받아 데이터베이스에 저장
         } else if (url.indexOf("admin_update.do") != -1) { 
@@ -150,9 +148,7 @@ public class ProductController extends HttpServlet {
                 }
            } catch (Exception e) {
             e.printStackTrace();
-         }
-           
-            
+         }    
             String productName = request.getParameter("productName");
             int price = Integer.parseInt(request.getParameter("price"));
             int amount = Integer.parseInt(request.getParameter("amount"));

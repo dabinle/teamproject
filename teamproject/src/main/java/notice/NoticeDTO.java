@@ -16,4 +16,6 @@ public class NoticeDTO {
 	private String noticeContent;
 	private String noticeFile;
 	private Date noticeDate;
+	private int n_categoryNum;
+	private String n_categoryName;
 }

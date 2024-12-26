@@ -9,19 +9,18 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-$(function() {
-	$("#btnSave").click(function() {
-		let noticeTitle = $("#noticeTitle").val();
-		let noticeContent = $("#noticeContent").val();
+function n_insert() {
+		let noticeTitle = document.form1.noticeTitle.value;
+		let noticeContent = document.form1.noticeContent.value;
 		
 		if(noticeTitle =""){
 			alert("제목을 입력하세요.");
-			$("#noticeTitle").focus();
+			document.form1.noticeTitle.focus();
 			return;
 		}
 		if(noticeContent =""){
 			alert("내용을 입력하세요.");
-			$("#noticeContent").focus();
+			document.form1.noticeContent.focus();
 			return;
 		}
 		
@@ -34,38 +33,35 @@ $(function() {
 				return;
 			}
 		}
-		//document.form1.action="/teamproject/notice_servlet/insert.do"
+		document.form1.action="/teamproject/notice_servlet/insert.do"
 		document.form1.submit();
-	});
-});
+}
 </script>
 </head>
 <body>
 <h2>공지사항 글쓰기</h2>
-<form name= "form1" method="post" action="/teamproject/notice_servlet/insert.do" enctype="multipart/form-data">
-<table border="1" width="700px">
-	<tr>
-		<td align="center">이름</td>
-		<td><input type="text" name="adminId" value="${adminId}" readonly></td>
-	</tr>
-	<tr>
-		<td align="center">제목</td>
-		<td><input name="noticeTitle" id="noticeTitle" size="60"></td>
-	</tr>
-	<tr>
-		<td align="center">본문</td>
-		<td><textarea rows="5" cols="60" name="noticeContent" id="noticeContent"></textarea></td>
-	</tr>	
-	<tr>
-		<td align="center">첨부파일</td>
-		<td><input type="file" name="file1"></td>
-	</tr>	
-	<tr>
-		<td colspan="2" align="center">
-			<input type="button" value="확인" id="btnSave">
-		</td>
-	</tr>
-</table>
+<form name= "form1" method="post" enctype="multipart/form-data">
+	<label for="n_categoryNum">카테고리: </label>
+	<select id="n_categoryNum" name="n_categoryNum" required="required">
+      <c:forEach var="row" items="${n_category }">
+         <option value="${row.n_categoryNum }">[${row.n_categoryNum }] ${row.n_categoryName }</option>
+      </c:forEach>
+	</select>
+	<br>
+	<label for="adminId">작성자: </label>
+	<input type="text" name="adminId" value="${adminId}" readonly>
+	<br>
+	<label>제목: </label>
+	<input type="text" name="noticeTitle" id="noticeTitle" size="60">
+	<br>
+	<label>본문: </label>
+	<input type="text" name="noticeContent" id="noticeContent" size="60">
+	<br>
+	<label>첨부파일: </label>
+	<input type="file" name="file1">
+	<br>
+	<input type="hidden" name="noticeNum">
+	<input type="button" value="등록" onclick="n_insert()">
 </form>
 </body>
 </html>

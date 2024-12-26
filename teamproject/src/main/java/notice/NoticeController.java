@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
+import product.CategoryDTO;
+import product.CompanyDTO;
 
 @MultipartConfig(maxFileSize = 1024*1024*10, location = "c:/upload")
 public class NoticeController extends HttpServlet{
@@ -52,9 +54,11 @@ public class NoticeController extends HttpServlet{
 			String adminId = request.getParameter("adminId");
 			String noticeTitle = request.getParameter("noticeTitle");
 			String noticeContent = request.getParameter("noticeContent");
+			int n_categoryNum = Integer.parseInt(request.getParameter("n_categoryNum"));
 			dto.setAdminId(adminId);
 			dto.setNoticeTitle(noticeTitle);
 			dto.setNoticeContent(noticeContent);
+			dto.setN_categoryNum(n_categoryNum);
 			
 			if(noticeFile == null || noticeFile.trim().equals("")) {
 				noticeFile = "-";
@@ -144,6 +148,13 @@ public class NoticeController extends HttpServlet{
 			RequestDispatcher rd = request.getRequestDispatcher("/notice/search.jsp");
 			rd.forward(request, response);
 		}
+		else if (url.indexOf("select_category.do")!=-1) {
+			System.out.println("하니");
+        	List<NoticeCategoryDTO> n_category = dao.listn_category();
+        	request.setAttribute("n_category", n_category);
+        	RequestDispatcher rd = request.getRequestDispatcher("/notice/notice_write.jsp");
+        	rd.forward(request, response);
+        }
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

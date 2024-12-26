@@ -10,7 +10,8 @@
 <script>
 	$(function() {
 		$("#btnWrite").click(function(){
-			location.href="/teamproject/notice/notice_write.jsp";
+			location.href="/teamproject/notice_servlet/select_category.do";
+			//location.href="/teamproject/notice/notice_write.jsp";
 		});
 	});
 		
@@ -57,14 +58,15 @@
 </form>
 <table border="1" width="900px">
 	<tr>
-		<th>번호</th>
-		<th>이름</th>
+		<th>카테고리</th>
+		<th>작성자</th>
 		<th>제목</th>
 		<th>날짜</th>
 	</tr>
 <c:forEach var="dto" items="${list}">
 	<tr align="center">
-		<td>${dto.noticeNum}</td>
+		<!-- <td>${dto.noticeNum}</td> -->
+		<td>${dto.n_categoryName}</td>
 		<td>${dto.adminId}</td>
 		<td><a href="/teamproject/notice_servlet/view.do?noticeNum=${dto.noticeNum}">${dto.noticeTitle}</a>
 	      	<c:if test="${sessionScope.adminId != null }">

@@ -6,9 +6,9 @@
 		from (
 			select rownum as rn, A.*
 			from (
-				select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate
-				from notice n, admin a
-				where n.adminId = a.adminId
+				select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate, nc.n_categoryName
+				from notice n, admin a, n_category nc
+				where n.adminId = a.adminId and n.n_categoryNum = nc.n_categoryNum
 				order by noticeNum desc
 			) A
 		)
@@ -24,7 +24,9 @@
 	</select>
 	
 	<select id="detail_notice" resultType="notice.NoticeDTO">
-		select * from notice where noticeNum=#{noticeNum}
+		select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate, nc.n_categoryName
+		from notice n, admin a, n_category nc
+		where n.adminId = a.adminId and n.n_categoryNum = nc.n_categoryNum and noticeNum=#{noticeNum}
 	</select>
 	
 	<select id="filename" resultType="String">
@@ -34,9 +36,9 @@
 	<select id="search_list" resultType="notice.NoticeDTO">
 		select * 
 		from (
-			select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate
-			from notice n, admin a
-			where n.adminId = a.adminId  
+			select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate, nc.n_categoryName
+			from notice n, admin a, n_category nc
+			where n.adminId = a.adminId and n.n_categoryNum = nc.n_categoryNum
 			<choose>
 				<when test="search_option != 'all'">
 					where ${search_option} like '%' || #{keyword} || '%'
@@ -63,8 +65,12 @@
 		</choose>
 	</select>
 	
+	<select id="list_n_category" resultType="notice.NoticeCategoryDTO"> 
+		select n_categoryNum, n_categoryName from n_category
+	</select>
+	
 	<insert id="insert">
-		insert into notice(noticeNum, adminId, noticeTitle, noticeContent, noticeFile) values (seq_notice.nextval, #{adminId}, #{noticeTitle}, #{noticeContent}, #{noticeFile})
+		insert into notice(noticeNum, adminId, noticeTitle, noticeContent, n_categoryNum, noticeFile) values (seq_notice.nextval, #{adminId}, #{noticeTitle}, #{noticeContent}, #{n_categoryNum}, #{noticeFile})
 	</insert>
 	
 	<update id="update">

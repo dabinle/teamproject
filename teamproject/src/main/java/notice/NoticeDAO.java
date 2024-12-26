@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import product.CompanyDTO;
 import sqlmap.Mybatis;
 
 public class NoticeDAO {
@@ -166,7 +167,7 @@ public class NoticeDAO {
 		SqlSession session = null;
 		try {
 			session = Mybatis.getInstance().openSession();
-			dto = session.selectOne("notice.view", noticeNum);
+			dto = session.selectOne("notice.detail_notice", noticeNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -175,4 +176,11 @@ public class NoticeDAO {
 		}
 		return dto;
 	}
+	
+	public List<NoticeCategoryDTO> listn_category() {
+        SqlSession session = Mybatis.getInstance().openSession();
+        List<NoticeCategoryDTO> n_category = session.selectList("notice.list_n_category");
+        session.close();
+        return n_category;
+     }
 }

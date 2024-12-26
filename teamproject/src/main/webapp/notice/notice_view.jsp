@@ -23,6 +23,10 @@
 		<td align="center">
 			<table>
 				<tr>
+					<td>카테고리</td>
+					<td>${dto.n_categoryName}</td>
+				</tr>
+				<tr>
 					<td>작성자</td>
 					<td>${dto.adminId}</td>
 				</tr>
