@@ -52,14 +52,14 @@ public class BoardController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			String userID = request.getParameter("userID");
+			// String userID = request.getParameter("userID");
 			String boardTitle = request.getParameter("boardTitle");
 			String boardContent = request.getParameter("boardTitle");
-			String userpwd = request.getParameter("userPwd");
-			dto.setUserID(userID);
+			// String userpwd = request.getParameter("userPwd");
+			// dto.setUserID(userID);
 			dto.setBoardTitle(boardTitle);
 			dto.setBoardContent(boardContent);
-			dto.setUserPwd(userpwd);
+			// dto.setUserPwd(userpwd);
 			if (boardFileName == null || boardFileName.trim().equals("")) {
 				boardFileName = "-";
 			}
@@ -122,7 +122,7 @@ public class BoardController extends HttpServlet {
 			String result = dao.check_pwd(boardNum, userPwd);
 			String page = "";
 			if (result != null ) {
-				page = "/board/edit.jsp";
+				page = "/board/board_edit.jsp";
 				request.setAttribute("dto", dao.view(boardNum));
 				RequestDispatcher rd = request.getRequestDispatcher(page);
 				rd.forward(request, response);
@@ -190,7 +190,7 @@ public class BoardController extends HttpServlet {
 				response.sendRedirect(page);
 			} else {
 				request.setAttribute("dto", dto);
-				String page = "/board/edit.jsp?pqd_error=y";
+				String page = "/board/board_edit.jsp?pqd_error=y";
 				RequestDispatcher rd = request.getRequestDispatcher(page);
 				rd.forward(request, response);
 			}
@@ -204,7 +204,7 @@ public class BoardController extends HttpServlet {
 				response.sendRedirect(page);
 			} else {
 				request.setAttribute("dto", dao.view(boardNum));
-				String page = "/board/edit.jsp?pwd_error=y";
+				String page = "/board/board_edit.jsp?pwd_error=y";
 				RequestDispatcher rd = request.getRequestDispatcher(page);
 				rd.forward(request, response);
 			}

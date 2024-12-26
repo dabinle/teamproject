@@ -28,6 +28,7 @@
 <form name="form1" method="post">
 <c:if test="${sessionScope.adminId != null }">
 	<button type="button" id="btn_insert">상품등록</button>
+	<a href="/teamproject/board_servlet/list.do">1:1문의 목록</a>
 </c:if>
 <table border="1" width="800px">
    <tr align="center">
