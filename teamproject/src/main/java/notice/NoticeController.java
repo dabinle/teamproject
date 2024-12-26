@@ -98,7 +98,7 @@ public class NoticeController extends HttpServlet{
 			String adminId = request.getParameter("adminId");
 			String noticeTitle = request.getParameter("noticeTitle");
 			String noticeContent = request.getParameter("noticeContent");
-			int noticeNum = Integer.parseInt(request.getParameter("noticeContent"));
+			int noticeNum = Integer.parseInt(request.getParameter("noticeNum"));
 			String delete_file = request.getParameter("delete_file");
 			if(delete_file != null && delete_file.equals("on")) {
 				String noticeFile2 = dao.getFilename(noticeNum);
@@ -108,12 +108,14 @@ public class NoticeController extends HttpServlet{
 				dto.setAdminId(adminId);
 				dto.setNoticeTitle(noticeTitle);
 				dto.setNoticeContent(noticeContent);
+				dto.setNoticeNum(noticeNum);
 				dao.update(dto);
 			}
 			dto.setNoticeNum(noticeNum);
 			dto.setAdminId(adminId);
 			dto.setNoticeTitle(noticeTitle);
 			dto.setNoticeContent(noticeContent);
+			dto.setNoticeNum(noticeNum);
 			
 			if(noticeFile == null || noticeFile.trim().equals("")) {
 				NoticeDTO dto2 = dao.view(noticeNum);

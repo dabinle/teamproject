@@ -38,6 +38,10 @@ function update_notice() {
 
 <table border="1" width="700px">
 	<tr>
+		<td align="center">카테고리</td>
+		<td><input type="text" name="n_categoryName" value="${n_categoryName}" readonly></td>
+	</tr>
+	<tr>
 		<td align="center">이름</td>
 		<td><input type="text" name="adminId" value="${adminId}" readonly></td>
 	</tr>
