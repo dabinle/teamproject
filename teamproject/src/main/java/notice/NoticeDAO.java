@@ -80,6 +80,13 @@ public class NoticeDAO {
 		return result;
 	}
 	
+	public NoticeDTO detailNotice(int noticeNum) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		NoticeDTO dto = session.selectOne("notice.detail_notice", noticeNum);
+		session.close();
+		return dto;
+	}
+	
 	public void update(NoticeDTO dto) {
 		SqlSession session = null;
 		try {
@@ -94,11 +101,11 @@ public class NoticeDAO {
 		}
 	}
 	
-	public void delete(int num) {
+	public void delete(int noticeNum) {
 		SqlSession session = null;
 		try {
 			session = Mybatis.getInstance().openSession();
-			session.delete("notice.delete", num);
+			session.delete("notice.delete", noticeNum);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -154,12 +161,12 @@ public class NoticeDAO {
 		}
 	}
 	
-	public NoticeDTO view(int num) {
+	public NoticeDTO view(int noticeNum) {
 		NoticeDTO dto = null;
 		SqlSession session = null;
 		try {
 			session = Mybatis.getInstance().openSession();
-			dto = session.selectOne("notice.view", num);
+			dto = session.selectOne("notice.view", noticeNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

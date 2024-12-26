@@ -23,6 +23,10 @@
 		select * from notice where noticeNum=#{noticeNum}
 	</select>
 	
+	<select id="detail_notice" resultType="notice.NoticeDTO">
+		select * from notice where noticeNum=#{noticeNum}
+	</select>
+	
 	<select id="filename" resultType="String">
 		select noticeFile from notice where noticeNum=#{noticeNum}
 	</select>

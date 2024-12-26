@@ -67,9 +67,15 @@ public class NoticeController extends HttpServlet{
 			HttpSession session = request.getSession();
 			NoticeDTO dto = dao.view(noticeNum);
 			request.setAttribute("dto", dto);
-			RequestDispatcher rd = request.getRequestDispatcher("/notice/view.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/notice/notice_view.jsp");
 			rd.forward(request, response);
-		} else if (url.indexOf("update.do") != -1) {
+		}else if(url.indexOf("edit.do") != -1) {
+			int noticeNum = Integer.parseInt(request.getParameter("noticeNum"));
+			NoticeDTO dto = dao.detailNotice(noticeNum);
+			request.setAttribute("dto", dto);
+			RequestDispatcher rd = request.getRequestDispatcher("/notice/notice_edit.jsp");
+		}
+		else if (url.indexOf("update.do") != -1) {
 			NoticeDTO dto = new NoticeDTO();
 			String noticeFile = "-";
 			
