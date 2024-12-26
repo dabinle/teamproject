@@ -44,6 +44,10 @@
    <tr align="center">
       <td>${row.productNum}</td>      
       <td><a href="detail.do?productNum=${row.productNum}">${row.productName}</a>
+      	<c:if test="${sessionScope.adminId != null }">
+      		<br>
+      		<a href="admin_edit.do?productNum=${row.productNum}">[수정]</a>
+      	</c:if>
       </td>
       <td><img src="/teamproject/images/${row.productImage}" width="100px" height="100px"></td>
       <td><fmt:formatNumber value="${row.price}" pattern="#,###"/></td>

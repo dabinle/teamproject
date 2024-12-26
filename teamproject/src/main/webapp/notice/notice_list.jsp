@@ -67,10 +67,10 @@
 		<td>${dto.noticeNum}</td>
 		<td>${dto.adminId}</td>
 		<td><a href="/teamproject/notice_servlet/view.do?num=${dto.noticeNum}">${dto.noticeTitle}</a>
-      	<c:if test="${sessionScope.adminId != null }">
-      		<br>
-      		<a href="update.do?productNum=${dto.productNum}">[수정]</a>
-      	</c:if>	
+	      	<c:if test="${sessionScope.adminId != null }">
+	      		<br>
+	      		<a href="update.do?noticeNum=${dto.noticeNum}">[수정]</a>
+	      	</c:if>	
 		</td>
 		<td>${dto.noticeDate}</td>                     
 </c:forEach>
