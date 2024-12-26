@@ -61,7 +61,7 @@ public class NoticeController extends HttpServlet{
 			}
 			dto.setNoticeFile(noticeFile);
 			dao.insert(dto);
-			response.sendRedirect(contextPath + "/board_servlet/list.do");
+			response.sendRedirect(contextPath + "/notice_servlet/list.do");
 		} else if(url.indexOf("view.do") != -1) {
 			int noticeNum = Integer.parseInt(request.getParameter("noticeNum"));
 			HttpSession session = request.getSession();
