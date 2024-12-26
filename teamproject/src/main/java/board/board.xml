@@ -69,7 +69,7 @@
 						where ${search_option} like '%' || #{keyword} || '%'
 					</when>
 					<when test="search_option == 'all' ">
-						where writer like '%' || #{keyword} || '%' 
+						where userID like '%' || #{keyword} || '%' 
 						or boardTitle like '%' || #{keyword} || '%' 
 						or boardContent like '%' || #{keyword} || '%'
 					</when>
@@ -95,11 +95,11 @@
 	</select>
 	
 	<insert id="insert">
-		insert into board (boardNum, userID,boardTitle, userPwd,
+		insert into board (boardNum,boardTitle,
 		groupNum,re_order,re_depth,boardContent,boardFileName,boardFileSize) 
-		values ((select nvl (max(boardNum)+1,1) from board), #{userID},#{boardTItle},
-			mypack.encrypt(#{userPwd}), (select nvl(max(boardNum)+1,1) from
-			board), 1,0,#{boardContent},#{boardFileName},#{boardFileSize})
+		values ((select nvl (max(boardNum)+1,1) from board), #{boardTItle}, 
+		(select nvl(max(boardNum)+1,1) from board), 1, 0, #{boardContent}, 
+		#{boardFileName},#{boardFileSize})
 	</insert>
 	
 	<insert id="insert_comment">
@@ -121,9 +121,12 @@
 	</update>
 	
 	<update id="update">
-		update board set userID=#{userID}, boardTitle=#{boardTitle},
-		boardContent=#{boardContent},boardFileName=#{boardFileName},
-		boardFileSize=#{boardFileSize}, down=#{down} 
+		update board set 
+		boardTitle=#{boardTitle},
+		boardContent=#{boardContent},
+		boardFileName=#{boardFileName},
+		boardFileSize=#{boardFileSize}, 
+		down=#{down} 
 		where boardNum=#{boardNum}
 	</update>
 	

@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>1:1문의 상세 페이지</title>
 <script src="http://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
 $(function() {
@@ -71,6 +70,14 @@ function list_comment() {
 		<td colspan="3">${dto.boardContent}</td>
 	</tr>
 	<tr>
+		<td align="center">비밀번호</td>
+		<td colspan="3"><input type="password" name="userPwd" id="userPwd">
+			<c:if test="${param.message == 'error'}">
+				<span style="color:red">비밀번호가 일치하지 않습니다.</span>
+			</c:if>
+		</td>
+	</tr>
+	<tr>
 		<td align="center">첨부파일</td>
 		<td colspan="3">
 			<c:if test="${dto.boardFileSize > 0}">
@@ -89,17 +96,5 @@ function list_comment() {
 	</tr>
 </table>
 </form>
-<table border="0" width="700px">
-	<tr>
-		<td><input id="userID" placeholder="아이디"></td>
-		<td rowspan="2">
-			<button id="btnSave" type="button">확인</button>
-		</td>
-	</tr>
-	<tr>
-		<td><textarea rows="5" cols="80" placeholder="내용" id="boardContent"></textarea></td>
-	</tr>
-</table>
-<div id="div_comment"></div>
 </body>
 </html>

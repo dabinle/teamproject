@@ -15,14 +15,9 @@ $(function() {
 		}
 	});
 	$("#btnUpdate").click(function() {
-		let userID = $("#userID").val();
 		let boardTitle = $("#boardTitle").val();
 		let boardContent = $("#boardContent").val();
-		if(userID == "") {
-			alert("이름을 입력하세요.");
-			$("#userID").focus();
-			return;
-		}
+		let userPwd = $("#userPwd").val();
 		if(boardTitle == "") {
 			alert("제목을 입력하세요.");
 			$("#boardTitle").focus();
@@ -31,6 +26,11 @@ $(function() {
 		if(boardContent == "") {
 			alert("내용을 입력하세요.");
 			$("#boardTitle").focus();
+			return;
+		}
+		if(userPwd == "") {
+			alert("비밀번호를 입력하세요.");
+			$("#userPwd").focus();
 			return;
 		}
 		let boardFileName = document.form1.file1.value;
@@ -52,10 +52,6 @@ $(function() {
 <form name="form1" method="post" enctype="multipart/form-data">
 <table border="1" width="700px">
 	<tr>
-		<td align="center">아이디</td>
-		<td><input name="userID" id="userID" value="${dto.userID}"></td>
-	</tr>
-	<tr>
 		<td align="center">제목</td>
 		<td><input name="boardTitle" id="boardTitle" size="60" value="${dto.boardTitle}"></td>
 	</tr>
@@ -71,6 +67,14 @@ $(function() {
 				<input type="checkbox" name="delete_file">첨부파일 삭제<br>
 			</c:if>
 			<input type="file" name="file1">
+		</td>
+	</tr>
+	<tr>
+		<td align="center">비밀번호</td>
+		<td><input type="password" name="userPwd" id="userPwd">
+			<c:if test="${param.pwd_error == 'y'}">
+				<span style="color:red">비밀번호가 틀렸습니다.</span>
+			</c:if>
 		</td>
 	</tr>
 	<tr>
