@@ -6,16 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script>
-$(function() {
-	$("#btnEdit").click(function() {
-		document.form1.action="/teamproject/notice_servlet/"
-	})
-})
-</script>
 </head>
 <body>
-
+<h2>공지사항</h2>
+<table></table>
 </body>
 </html>

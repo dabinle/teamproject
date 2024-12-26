@@ -21,7 +21,8 @@
 	</delete>
 	
 	<insert id="insert_product"> 
-		insert into product (productNum, companyNum, p_categoryNum, productName, description, price, amount, productImage) values (seq_product.nextval, #{companyNum}, #{p_categoryNum}, #{productName}, #{description}, #{price}, #{amount}, #{productImage}) 
+		 insert into product (productNum, companyNum, p_categoryNum, productName, description, price, amount, productImage) 
+      values (seq_product.nextval, #{companyNum}, #{p_categoryNum}, #{productName}, #{description}, #{price}, #{amount}, #{productImage}) 
 	</insert>
 	
 	<select id="file_info" resultType="String"> 
@@ -29,7 +30,7 @@
 	</select>
 	
 	<select id="p_list_category" resultType="product.CategoryDTO"> 
-		select p_parentCategory, p_categoryName from product_category where p_categoryNum = p_parentCategory 
+		select * from product_category where p_parentcategory is null 
 	</select>
 	
 	<select id="list_company" resultType="product.CompanyDTO"> 
@@ -37,7 +38,10 @@
 	</select>
 	
 	<select id="list_category" resultType="product.CategoryDTO"> 
-		select pc1.p_categoryName, pc1.p_categorynum from product_category pc1 inner join product_category pc2 on pc1.p_parentcategory = pc2.p_categorynum and pc1.p_parentcategory = #{p_parentCategory} 
+	  select pc2.* 
+      from product_category pc1 inner join product_category pc2 
+      on pc1.p_categoryNum = pc2.p_parentCategory
+      where pc1.p_categoryNum = #{p_categoryNum} 
 	</select>
 	
 	<select id="company_product" resultType="product.ProductDTO"> 

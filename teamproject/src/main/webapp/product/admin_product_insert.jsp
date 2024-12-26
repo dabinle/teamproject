@@ -9,22 +9,19 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-/*function selectCategory() {
-	//let p_parentCategory = document.getElementById("p_parentCategory");
-	let p_parentCategory = $("#p_parentCategory").val();
-	$.ajax({
-		url: "/backup/product/select_category.jsp",
-		type: "post",
-		data: {"p_parentCategory":p_parentCategory},
-		success: function(txt){
-			$("#result").html(txt);
-		}
-	});
-}
-*/
 $(function() {
-	$("#select")	
-});
+	   $("#select").click(function() {
+	      let p_categoryNum = $("#p_parentCategory").val();
+	      $.ajax({
+	         type:"post",
+	         url:"/teamproject/product_servlet/if_category.do",
+	         data : {"p_categoryNum" : p_categoryNum},
+	         success : function(date){
+	            $("#result").html(date);
+	         }
+	      });
+	   });   
+	});
 
 function insert() {
    let productName = document.form1.productName.value;
@@ -75,14 +72,14 @@ function insert() {
    <input type="file" id="productImage" name="productImage">
    <br>
    <label for="p_parentCategory">상위카테고리: </label>
-   <select id="p_parentCategory" name="p_parentCategory" required="required" onchange="selectCategory()">
+   <select id="p_parentCategory" name="p_parentCategory" required="required">
       <c:forEach var="row" items="${p_category }">
-         <option value="${row.p_parentCategory}">[${row.p_parentCategory}] ${row.p_categoryName}</option>
+         <option value="${row.p_categoryNum}">[${row.p_categoryNum}] ${row.p_categoryName}</option>
       </c:forEach>
-      <input type="button" id="select" onclick="select_category()">
    </select>
+   <input type="button" id="select" value="카테고리선택">
    <br>
-   <div id="result">카테고리:</div>
+   <div id="result">하위 카테고리 : </div>
    <label for="comanyNum">회사명:</label>
    <select id="comanyNum" name="companyNum" required="required">
       <c:forEach var="row" items="${company }">

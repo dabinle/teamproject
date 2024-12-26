@@ -51,29 +51,42 @@
 <form name="form1" method="post" enctype="multipart/form-data">
    <table>
       <tr>
-         <td>상품명</td>
-         <td><input name="productName" value="${dto.productName}"></td>
-      </tr>
-      <tr>
-         <td>가격</td>
-         <td><input type="text" name="price" value="${dto.price}"/></td>
-      </tr>
-      <tr>
-         <td>재고량</td>
-         <td><input name="amount" value="${dto.amount }"></td>
-      </tr>
-      <tr>
-         <td>설명</td>
-         <td><input name="description" value="${dto.description }"></td>
-      </tr>
-      <tr>
-         <td>상품이미지</td>
-         <td>
-            <img src="/teamproject/images/${dto.productImage }" width="300px" height="300px">
-            <br>
-            <input type="file" name="productImage">
-         </td>
-      </tr>
+        <td>상품번호</td>
+        <td>No.${dto.productNum}</td>
+   </tr>
+   <tr>
+      <td>상품명</td>
+      <td><input name="productName" value="${dto.productName }"></td>
+   </tr>
+   <tr>
+        <td>카테고리</td>
+        <td><input name="p_categoryNum" value="${dto.p_categoryName}" readonly="readonly"></td>
+   </tr>
+   <tr>
+        <td>업체</td>
+        <td><input name="companyNum" value="${dto.companyName}" readonly="readonly"></td>
+   </tr>
+   <tr>
+      <td>설명</td>
+      <td><input name="description" value="${dto.description }"></td>
+   </tr>
+   <tr>
+      <td>가격</td>
+      <td><input name="price" value="${dto.price }"></td>
+   </tr>
+   <tr>
+      <td>재고량</td>
+      <td><input name="amount" value="${dto.amount }"></td>
+   </tr>
+   
+   <tr>
+      <td>상품이미지</td>
+      <td>
+         <img src="/teamproject/images/${dto.productImage }" width="200px" height="200px">
+         <br>
+         <input type="file" name="productImage">
+      </td>
+   </tr>
       <tr>
          <td colspan="2" align="center">
             <input type="hidden" name="productNum" value="${dto.productNum }">
