@@ -137,46 +137,46 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 <table>
 	<tr>
 		<td>* 이름</td>
-		<td><input name="userName"></td>
+		<td><input name="userName" placeholder="이름 입력"></td>
 	</tr>
 	<tr>
 		<td>* 아이디</td>
-		<td><input name="userID">
+		<td><input name="userID" placeholder="아이디 입력">
 			<input type="button" value="중복확인" id="checkBtn" onclick="idCheck()">
 
 		</td>
 	</tr>
 	<tr>
 		<td>* 이메일</td>
-		<td><input name="email"></td>
+		<td><input name="email" placeholder="이메일 입력"></td>
 	</tr>
 	
 	<tr>
 		<td>* 비밀번호</td>
-		<td><input type="password" id="userPwd" name="userPwd"></td>
+		<td><input type="password" id="userPwd" name="userPwd" placeholder="비밀번호 입력"></td>
 	</tr>
 	<tr>
 		<td>* 비밀번호 확인</td>
-		<td><input type="password" id="userPwdCheck" name="userPwd2" onkeyup="checkPwd()"><div id="checkMsg"></div></td>
+		<td><input type="password" id="userPwdCheck" name="userPwd2" onkeyup="checkPwd()" placeholder="비밀번호 확인"><div id="checkMsg"></div></td>
 		
 	</tr> 
 	<tr>
 		<td>* 전화번호</td>
-		<td><input name="phoneNum"></td>
+		<td><input name="phoneNum" placeholder="전화번호"></td>
 	</tr>
 	<tr>
 		<td>우편번호</td>
-		<td><input name="zipCode" id="post_code" readonly>
+		<td><input name="zipCode" id="post_code" placeholder="우편번호 입력" readonly>
 		<input type="button" onclick="showPostcode()" value="우편번호 찾기">
 		</td>
 	</tr>
 	<tr>
 		<td>주소</td> 
-		<td><input name="address" id="address" size="60"></td>
+		<td><input name="address" id="address" size="60" placeholder="주소 입력"></td>
 	</tr>
 	<tr>
 		<td>상세주소</td>
-		<td><input name="addressDetail" id="addressDetail"></td>
+		<td><input name="addressDetail" id="addressDetail" placeholder="상세주소 입력"></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
