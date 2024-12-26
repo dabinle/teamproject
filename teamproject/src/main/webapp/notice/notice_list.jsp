@@ -81,6 +81,7 @@
 			<c:if test="${page.curPage > 1}">
 				<a href="#" onclick="list('${page.prevPage}')">[이전]</a>
 			</c:if>
+			
 			<c:forEach var="num" begin="${page.blockStart}" end="${page.blockEnd}">
 				<c:choose>
 					<c:when test="${num == page.curPage}">
