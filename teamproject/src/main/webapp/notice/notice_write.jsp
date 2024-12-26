@@ -13,12 +13,12 @@ function n_insert() {
 		let noticeTitle = document.form1.noticeTitle.value;
 		let noticeContent = document.form1.noticeContent.value;
 		
-		if(noticeTitle =""){
+		if(noticeTitle == ""){
 			alert("제목을 입력하세요.");
 			document.form1.noticeTitle.focus();
 			return;
 		}
-		if(noticeContent =""){
+		if(noticeContent == ""){
 			alert("내용을 입력하세요.");
 			document.form1.noticeContent.focus();
 			return;
