@@ -12,7 +12,7 @@
 $(function() {
 	$("#btnSave").click(function() {
 		let boardTitle = $("#boardTitle").val();
-		let boardContent = $("#boardContent").val();
+		let commentContent = $("#commentContent").val();
 		if(boardTitle == "") {
 			alert("제목을 입력하세요.");
 			$("#boardTitle").focus();
@@ -42,7 +42,7 @@ $(function() {
 	</tr>
 	<tr>
 		<td align="center">본문</td>
-		<td><textarea rows="5" cols="60" name="boardContent" id="boardContent"></textarea> </td>
+		<td><textarea rows="5" cols="60" name="commentContent" id="commentContent"></textarea> </td>
 	</tr>
 	<tr>
 		<td align="center">첨부파일</td>

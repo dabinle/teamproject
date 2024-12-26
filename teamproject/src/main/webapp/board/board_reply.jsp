@@ -14,14 +14,8 @@
 <script>
 $(function() {
 	$("#btnSave").click(function() {
-		let userId=$("#adminId").val();
 		let boardTitle=$("#boardTitle").val();
 		let boardContent=$("#boardContent").val();
-		if (adminId == "") {
-			alert("아이디를 입력하세요.");
-			$("#adminId").focus();
-			return;
-		}
 		if (boardTitle == "") {
 			alert("제목을 입력하세요.");
 			$("#boardTitle").focus();
@@ -38,13 +32,9 @@ $(function() {
 </script>
 </head>
 <body>
-<h2>답변 글쓰기</h2>
+<h2>답변 쓰기</h2>
 <form name="form1" method="post" action="/teamproject/board_servlet/insert_reply.do">
 <table border="1" width="700px">
-	<tr>
-		<td align="center">관리자아이디</td>
-		<td><input name="adminId" id="adminId"></td>
-	</tr>
 	<tr>
 		<td align="center">제목</td>
 		<td><input name="boardTitle" id="boardTitle" size="60" value="${dto.boardTitle}"></td>
