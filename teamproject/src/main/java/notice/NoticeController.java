@@ -74,6 +74,7 @@ public class NoticeController extends HttpServlet{
 			NoticeDTO dto = dao.detailNotice(noticeNum);
 			request.setAttribute("dto", dto);
 			RequestDispatcher rd = request.getRequestDispatcher("/notice/notice_edit.jsp");
+			rd.forward(request, response);
 		}
 		else if (url.indexOf("update.do") != -1) {
 			NoticeDTO dto = new NoticeDTO();
