@@ -213,7 +213,7 @@ public class BoardController extends HttpServlet {
 			BoardDTO dto = dao.view(boardNum);
 			dto.setBoardContent("=====contents====\n" + dto.getBoardContent());
 			request.setAttribute("dto", dto);
-			String page = "/board/reply.jsp";
+			String page = "/board/board_reply.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(page);
 			rd.forward(request, response);
 		} else if (url.indexOf("insert_reply.do") != -1) {

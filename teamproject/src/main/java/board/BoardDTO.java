@@ -23,4 +23,5 @@ public class BoardDTO {
 	private String boardFileName;
 	private int boardFileSize;
 	private int down;
+	private int count_comments;  
 }

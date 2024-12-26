@@ -1,17 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/menu.jsp" %>
-<%
-    if (session.getAttribute("userID") == null) {
-        response.sendRedirect("/teamproject/member/login.jsp");
-        return;
-    }
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>1:1문의 목록 페이지</title>
+<title>1:1문의 검색 페이지</title>
 <script src="http://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
 $(function() {

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../include/menu.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,12 +39,7 @@ $(function() {
 </script>
 </head>
 <body>
-<h2>글쓰기</h2>
-<c:choose>
-   <c:when test="${sessionScope.userID != null }">
-      <%@ include file="../include/menu.jsp" %>
-   </c:when>
-</c:choose>
+<h2>1:1문의 질문</h2>
 <form name="form1" method="post" action="/teamproject/board_servlet/insert.do" enctype="multipart/form-data">
 <table border="1" width="700px">
 	<tr>
