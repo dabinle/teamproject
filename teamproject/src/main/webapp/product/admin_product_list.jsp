@@ -25,6 +25,7 @@
 	</c:otherwise>
 </c:choose>
 <h2>상품목록</h2>
+<a href="/teamproject/board/board_reply.jsp">1:1문의 답변</a><br>
 <form name="form1" method="post">
 <c:if test="${sessionScope.adminId != null }">
 	<button type="button" id="btn_insert">상품등록</button>

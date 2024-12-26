@@ -10,6 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class BoardCommentDTO {
+	private int userID;
 	private int commentNum;
 	private int boardNum;
 	private String adminId;
