@@ -51,7 +51,8 @@ function update_notice() {
 	</tr>
 	<tr>
 		<td align="center">본문</td>
-		<td><textarea rows="5" cols="60" name="noticeContent" value="${dto.noticeContent}"></textarea></td>
+		<td><textarea rows="5" cols="60" name="noticeContent">${dto.noticeContent}</textarea>
+</td>
 	</tr>	
 	<tr>
 		<td align="center">첨부파일</td>
@@ -64,7 +65,7 @@ function update_notice() {
 		<td colspan="2" align="center">
 			<input type="hidden" name="noticeNum" value="${dto.noticeNum}">
 			<input type="button" value="수정" onclick="update_notice()">
-			<input type="button" value="삭제" onclick="update_delete()">
+			<input type="button" value="삭제" onclick="delete_notice()">
 		</td>
 	</tr>
 </table>

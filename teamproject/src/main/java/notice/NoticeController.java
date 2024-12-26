@@ -132,24 +132,24 @@ public class NoticeController extends HttpServlet{
 			dao.delete(noticeNum);
 			String page = contextPath + "/notice_servlet/list.do";
 			response.sendRedirect(page);
-		} else if(url.indexOf("search.do") != -1) {
-			String search_option = request.getParameter("search_option");
-			String keyword = request.getParameter("keyword");
-			int count = dao.count(search_option, keyword);
-			int cur_page = 1;
-			if(request.getParameter("cur_page") != null) {
-				cur_page = Integer.parseInt(request.getParameter("cur_page"));
-			}
-			PageUtil page = new PageUtil(count, cur_page);
-			int start = page.getPageBegin();
-			int end = page.getPageEnd();
-			List<NoticeDTO> list = dao.list_search(search_option, keyword, start, end);
-			request.setAttribute("list", list);
-			request.setAttribute("keyword", keyword);
-			request.setAttribute("page", page);
-			RequestDispatcher rd = request.getRequestDispatcher("/notice/search.jsp");
-			rd.forward(request, response);
-		}
+		} else  if (url.indexOf("search.do") != -1) {
+	        String search_option = request.getParameter("search_option");
+	        String keyword = request.getParameter("keyword");
+	        int count = dao.count(search_option, keyword);
+	        int cur_page = 1;
+	        if (request.getParameter("cur_page") != null) {
+	            cur_page = Integer.parseInt(request.getParameter("cur_page"));
+	        }
+	        PageUtil page = new PageUtil(count, cur_page);
+	        int start = page.getPageBegin();
+	        int end = page.getPageEnd();
+	        List<NoticeDTO> list = dao.list_search(search_option, keyword, start, end);
+	        request.setAttribute("list", list);
+	        request.setAttribute("keyword", keyword);
+	        request.setAttribute("page", page);
+	        RequestDispatcher rd = request.getRequestDispatcher("/notice/search.jsp");
+	        rd.forward(request, response);
+	    }
 		else if (url.indexOf("select_category.do")!=-1) {
         	List<NoticeCategoryDTO> n_category = dao.listn_category();
         	request.setAttribute("n_category", n_category);

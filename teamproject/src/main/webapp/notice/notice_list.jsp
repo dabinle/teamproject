@@ -31,25 +31,26 @@
 </c:choose>
 <h2>공지사항</h2>
 <form name="form1" method="post" action="/teamproject/notice_servlet/search.do">
-<select name= "search_option">
-<c:choose>
-	<c:when test="${search_option == null || search_option == 'all'}">
-		<option value="all" selected>전체검색</option>
-		<option value="noticeTitle">제목</option>
-		<option value="noticeContent">내용</option>
-	</c:when>
-	<c:when test="${search_option == 'noticeTitle'}">
-		<option value="all" >전체검색</option>
-		<option value="noticeTitle" selected>제목</option>
-		<option value="noticeContent">내용</option>
-	</c:when>
-	<c:when test="${search_option == 'noticeContent'}">
-		<option value="all" >전체검색</option>
-		<option value="noticeTitle">제목</option>
-		<option value="noticeContent" selected>내용</option>
-	</c:when>
-</c:choose>
+<select name="search_option">
+    <c:choose>
+        <c:when test="${search_option == null || search_option == 'all'}">
+            <option value="all" selected>전체검색</option>
+            <option value="noticeTitle">제목</option>
+            <option value="n_categoryName">카테고리</option>
+        </c:when>
+        <c:when test="${search_option == 'noticeTitle'}">
+            <option value="all">전체검색</option>
+            <option value="noticeTitle" selected>제목</option>
+            <option value="n_categoryName">카테고리</option>
+        </c:when>
+        <c:when test="${search_option == 'n_categoryName'}">
+            <option value="all">전체검색</option>
+            <option value="noticeTitle">제목</option>
+            <option value="n_categoryName" selected>카테고리</option>
+        </c:when>
+    </c:choose>
 </select>
+
 <input name="keyword" value="${keyword}">
 <input type="submit" value="검색" id="btnSearch">
 <c:if test="${sessionScope.adminId != null }">
@@ -88,7 +89,7 @@
 						<span style="color:red">${num}</span>
 					</c:when>
 					<c:otherwise>
-						<a href="#" onclick="('${num}')">${num}</a>
+						<a href="#" onclick="list(${num})">${num}</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>

@@ -11,59 +11,63 @@ import sqlmap.Mybatis;
 
 public class NoticeDAO {
 	public int count(String search_option, String keyword) {
-		int result = 0;
-		SqlSession session = Mybatis.getInstance().openSession();
-		try {
-			Map<String, Object> map = new HashMap<>();
-			map.put("search_option", search_option);
-			map.put("keyword", keyword);
-			result = session.selectOne("notice.search_count", map);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if(session != null)
-				session.close();
-		} 
-		return result;
+	    int result = 0;
+	    SqlSession session = Mybatis.getInstance().openSession();
+	    try {
+	        Map<String, Object> map = new HashMap<>();
+	        map.put("search_option", search_option);
+	        map.put("keyword", keyword);
+	        result = session.selectOne("notice.search_count", map);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (session != null)
+	            session.close();
+	    }
+	    return result;
 	}
+
 	
-	public List<NoticeDTO> list_search(String search_option, String keyword, int start, int end){
-		List<NoticeDTO> list = null;
-		SqlSession session = Mybatis.getInstance().openSession();
-		try {
-			Map<String, Object> map = new HashMap<>();
-			map.put("search_option", search_option);
-			map.put("keyword", keyword);
-			map.put("start", start);
-			map.put("end", end);
-			list = session.selectList("notice.search_list", map);
-			
-			for (NoticeDTO dto : list) {
-				String adminId = dto.getAdminId();
-				String noticeTitle = dto.getNoticeTitle();
-				
-				switch(search_option) {
-				case "all":
-					adminId = adminId.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
-					noticeTitle = noticeTitle.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
-					break;
-				case "adminId":
-					adminId = adminId.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
-					break;
-				case "noticeTitle":
-					noticeTitle = noticeTitle.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
-					break;
-				}
-				dto.setAdminId(adminId);
-				dto.setNoticeTitle(noticeTitle);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if(session != null)
-				session.close();
-		}
-		return list;
+	public List<NoticeDTO> list_search(String search_option, String keyword, int start, int end) {
+	    List<NoticeDTO> list = null;
+	    SqlSession session = Mybatis.getInstance().openSession();
+	    try {
+	        Map<String, Object> map = new HashMap<>();
+	        map.put("search_option", search_option);
+	        map.put("keyword", keyword);
+	        map.put("start", start);
+	        map.put("end", end);
+	        list = session.selectList("notice.search_list", map);
+
+	        for (NoticeDTO dto : list) {
+	            String adminId = dto.getAdminId();
+	            String noticeTitle = dto.getNoticeTitle();
+	            String n_categoryName = dto.getN_categoryName();
+
+	            switch (search_option) {
+	                case "all":
+	                    adminId = adminId.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
+	                    noticeTitle = noticeTitle.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
+	                    n_categoryName = n_categoryName.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
+	                    break;
+	                case "noticeTitle":
+	                    noticeTitle = noticeTitle.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
+	                    break;
+	                case "n_categoryName":
+	                    n_categoryName = n_categoryName.replace(keyword, "<span style='color:red'>" + keyword + "</span>");
+	                    break;
+	            }
+	            dto.setAdminId(adminId);
+	            dto.setNoticeTitle(noticeTitle);
+	            dto.setN_categoryName(n_categoryName);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (session != null)
+	            session.close();
+	    }
+	    return list;
 	}
 	
 	public String getFilename(int num) {
