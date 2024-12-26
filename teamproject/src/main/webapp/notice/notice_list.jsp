@@ -66,7 +66,7 @@
 	<tr align="center">
 		<td>${dto.noticeNum}</td>
 		<td>${dto.adminId}</td>
-		<td><a href="/teamproject/notice_servlet/view.do?num=${dto.noticeNum}">${dto.noticeTitle}</a>
+		<td><a href="/teamproject/notice_servlet/view.do?noticeNum=${dto.noticeNum}">${dto.noticeTitle}</a>
 	      	<c:if test="${sessionScope.adminId != null }">
 	      		<br>
 	      		<a href="update.do?noticeNum=${dto.noticeNum}">[수정]</a>

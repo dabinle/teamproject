@@ -52,7 +52,7 @@ function update_notice() {
 	<tr>
 		<td align="center">첨부파일</td>
 		<td> 
-			<img src="/teamproject/images/${dto.noticeFile }" width="300px" height="300px">
+			<img src="/teamproject/images/${dto.noticeFile}" width="300px" height="300px">
 			<input type="file" name="file1">
 		</td>
 	</tr>	

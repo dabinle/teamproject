@@ -8,6 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:choose>
+   <c:when test="${sessionScope.adminId != null }">
+      <%@ include file="../include/admin_menu.jsp" %>
+   </c:when>
+   <c:otherwise>
+      <%@ include file="../include/menu.jsp" %>
+   </c:otherwise>
+</c:choose>
 <h2>공지사항</h2>
 <table>
 	<tr>
@@ -32,6 +40,9 @@
 				</tr>
 				<tr>
 					<td><input type="hidden" name="noticeNum" value="${dto.noticeNum}">
+				</tr>
+				<tr>
+					<td><input type="button" value="목록" onclick="location.href='/teamproject/notice_servlet/list.do'"></td>
 				</tr>
 			</table>
 		</td>
