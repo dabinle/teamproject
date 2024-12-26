@@ -44,30 +44,44 @@ public class LoginController extends HttpServlet{
 		} 
 		else if(url.indexOf("join.do") != -1) {
 			String userID = request.getParameter("userID");
-			String userName = request.getParameter("userName");
-			String email = request.getParameter("email");
-			String userPwd = request.getParameter("userPwd");
-			String phoneNum = request.getParameter("phoneNum");
-			int zipCode = Integer.parseInt(request.getParameter("zipCode"));
-			String address = request.getParameter("address");
-			String addressDetail = request.getParameter("addressDetail");
-			
-			MemberDTO dto = new MemberDTO();
-			dto.setUserID(userID);
-			dto.setUserName(userName);
-			dto.setEmail(email);
-			dto.setUserPwd(userPwd);
-			dto.setPhoneNum(phoneNum);
-			dto.setZipCode(zipCode);
-			dto.setAddress(address);
-			dto.setAddressDetail(addressDetail);
-			dao.join(dto);
-			
-			response.setContentType("text/html;charset=UTF-8");  // 한글
-			
-			// 클라이언트의 화면에 출력하기 위해
-		    response.getWriter().write("<script> alert('회원가입 되었습니다.'); location.href='" + path + "/member/login.jsp';</script>");
-
+	         String userName = request.getParameter("userName");
+	         String email = request.getParameter("email");
+	         String userPwd = request.getParameter("userPwd");
+	         String phoneNum = request.getParameter("phoneNum");
+	         int zipCode = -1;
+	         String address = request.getParameter("address");
+	         String addressDetail = request.getParameter("addressDetail");
+	         if(zipCode != -1) {
+	            zipCode = Integer.parseInt(request.getParameter("zipCode"));
+	            MemberDTO dto = new MemberDTO();
+	            dto.setUserID(userID);
+	            dto.setUserName(userName);
+	            dto.setEmail(email);
+	            dto.setUserPwd(userPwd);
+	            dto.setPhoneNum(phoneNum);
+	            dto.setZipCode(zipCode);
+	            dto.setAddress(address);
+	            dto.setAddressDetail(addressDetail);
+	            dao.join(dto);
+	            
+	            response.setContentType("text/html;charset=UTF-8");  // 한글
+	            
+	            // 클라이언트의 화면에 출력하기 위해
+	             response.getWriter().write("<script> alert('회원가입 되었습니다.'); location.href='" + path + "/member/login.jsp';</script>");
+	         } else if (zipCode == -1){
+	            MemberDTO dto = new MemberDTO();
+	            dto.setUserID(userID);
+	            dto.setUserName(userName);
+	            dto.setEmail(email);
+	            dto.setUserPwd(userPwd);
+	            dto.setPhoneNum(phoneNum);
+	            dto.setZipCode(zipCode);
+	            dao.join(dto);
+	            response.setContentType("text/html;charset=UTF-8");  // 한글
+	            
+	            // 클라이언트의 화면에 출력하기 위해
+	             response.getWriter().write("<script> alert('회원가입 되었습니다.'); location.href='" + path + "/member/login.jsp';</script>");
+	         }
 		} else if (url.indexOf("idCheck.do") != -1) {
 		    String userID = request.getParameter("userID");
 		    boolean exists = dao.idCheck(userID); // true면 아이디가 이미 존재
