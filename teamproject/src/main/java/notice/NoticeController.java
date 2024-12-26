@@ -151,7 +151,6 @@ public class NoticeController extends HttpServlet{
 			rd.forward(request, response);
 		}
 		else if (url.indexOf("select_category.do")!=-1) {
-			System.out.println("하니");
         	List<NoticeCategoryDTO> n_category = dao.listn_category();
         	request.setAttribute("n_category", n_category);
         	RequestDispatcher rd = request.getRequestDispatcher("/notice/notice_write.jsp");
