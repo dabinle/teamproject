@@ -24,7 +24,7 @@ function n_insert() {
 			return;
 		}
 		
-		let noticeFile = document.form1.file1.value;
+		let noticeFile = document.form1.noticeFile.value;
 		let start = noticeFile.lastIndexOf(".")+1;
 		if(start != -1){
 			let ext = noticeFile.substring(start, noticeFile.length);
@@ -51,17 +51,18 @@ function n_insert() {
 	<label for="adminId">작성자: </label>
 	<input type="text" name="adminId" value="${adminId}" readonly>
 	<br>
-	<label>제목: </label>
+	<label for="noticeTitle">제목: </label>
 	<input type="text" name="noticeTitle" id="noticeTitle" size="60">
 	<br>
-	<label>본문: </label>
+	<label for="noticeContent">본문: </label>
 	<input type="text" name="noticeContent" id="noticeContent" size="60">
 	<br>
-	<label>첨부파일: </label>
-	<input type="file" name="file1">
+	<label for="noticeFile">첨부파일: </label>
+	<input type="file" name="noticeFile">
 	<br>
 	<input type="hidden" name="noticeNum">
 	<input type="button" value="등록" onclick="n_insert()">
+	<input type="button" value="목록" onclick="location.href='/teamproject/notice_servlet/list.do'">
 </form>
 </body>
 </html>

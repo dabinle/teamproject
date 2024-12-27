@@ -34,37 +34,40 @@
 	</select>
 	
 	<select id="search_list" resultType="notice.NoticeDTO">
-		select * 
-		from (
-			select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate, nc.n_categoryName
-			from notice n, admin a, n_category nc
-			where n.adminId = a.adminId and n.n_categoryNum = nc.n_categoryNum
-			<choose>
-				<when test="search_option != 'all'">
-					where ${search_option} like '%' || #{keyword} || '%'
-				</when>
-				<when test="search_option == 'all'">
-					where n.adminId like '%' || #{keyword} || '%' or noticeTitle like '%' || #{keyword} || '%' or noticeContent like '%' || #{keyword} || '%'
-				</when>
-			</choose>
-			order by noticeNum desc
-		  ) A
-		)
-		where rn between #{start} and #{end}
+    select * 
+    from (
+        select rownum as rn, A.*
+        from(
+            select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate, nc.n_categoryName
+            from notice n, admin a, n_category nc
+            where n.adminId = a.adminId and n.n_categoryNum = nc.n_categoryNum
+            <choose>
+                <when test="search_option != 'all'">
+                    and ${search_option} like '%' || #{keyword} || '%'
+                </when>
+                <when test="search_option == 'all'">
+                    and (n.adminId like '%' || #{keyword} || '%' or noticeTitle like '%' || #{keyword} || '%' or n_categoryName like '%' || #{keyword} || '%')
+                </when>
+            </choose>
+            order by noticeNum desc
+        ) A
+    )
+    where rn between #{start} and #{end}
 	</select>
+
 	
 	<select id="search_count" resultType="int">
-		select count(*) from notice
-		<choose>
-			<when test="search_option != 'all'">
-				where ${search_option} like '%' || #{keyword} || '%'
-			</when>
-			<when test="search_option == 'all'">
-				where n.adminId like '%' || #{keyword} || '%' or noticeTitle like '%' || #{keyword} || '%' or noticeContent like '%' || #{keyword} || '%'
-			</when>
-		</choose>
+    select count(*) from notice
+    <choose>
+        <when test="search_option != 'all'">
+            and ${search_option} like '%' || #{keyword} || '%'
+        </when>
+        <when test="search_option == 'all'">
+            and (n.adminId like '%' || #{keyword} || '%' or noticeTitle like '%' || #{keyword} || '%' or n_categoryName like '%' || #{keyword} || '%')
+        </when>
+    </choose>
 	</select>
-	
+
 	<select id="list_n_category" resultType="notice.NoticeCategoryDTO"> 
 		select n_categoryNum, n_categoryName from n_category
 	</select>

@@ -10,7 +10,8 @@
 <script>
 	$(function() {
 		$("#btnWrite").click(function(){
-			location.href="/teamproject/notice/write.jsp";
+			location.href="/teamproject/notice_servlet/select_category.do";
+			//location.href="/teamproject/notice/notice_write.jsp";
 		});
 	});
 		
@@ -30,25 +31,26 @@
 </c:choose>
 <h2>공지사항</h2>
 <form name="form1" method="post" action="/teamproject/notice_servlet/search.do">
-<select name= "search_option">
-<c:choose>
-	<c:when test="${search_option == null || search_option == 'all'}">
-		<option value="all" selected>전체검색</option>
-		<option value="noticeTitle">제목</option>
-		<option value="noticeContent">내용</option>
-	</c:when>
-	<c:when test="${search_option == 'noticeTitle'}">
-		<option value="all" >전체검색</option>
-		<option value="noticeTitle" selected>제목</option>
-		<option value="noticeContent">내용</option>
-	</c:when>
-	<c:when test="${search_option == 'noticeContent'}">
-		<option value="all" >전체검색</option>
-		<option value="noticeTitle">제목</option>
-		<option value="noticeContent" selected>내용</option>
-	</c:when>
-</c:choose>
+<select name="search_option">
+    <c:choose>
+        <c:when test="${search_option == null || search_option == 'all'}">
+            <option value="all" selected>전체검색</option>
+            <option value="noticeTitle">제목</option>
+            <option value="n_categoryName">카테고리</option>
+        </c:when>
+        <c:when test="${search_option == 'noticeTitle'}">
+            <option value="all">전체검색</option>
+            <option value="noticeTitle" selected>제목</option>
+            <option value="n_categoryName">카테고리</option>
+        </c:when>
+        <c:when test="${search_option == 'n_categoryName'}">
+            <option value="all">전체검색</option>
+            <option value="noticeTitle">제목</option>
+            <option value="n_categoryName" selected>카테고리</option>
+        </c:when>
+    </c:choose>
 </select>
+
 <input name="keyword" value="${keyword}">
 <input type="submit" value="검색" id="btnSearch">
 <c:if test="${sessionScope.adminId != null }">
@@ -57,21 +59,30 @@
 </form>
 <table border="1" width="900px">
 	<tr>
-		<th>번호</th>
-		<th>이름</th>
+		<th>카테고리</th>
+		<th>작성자</th>
 		<th>제목</th>
 		<th>날짜</th>
 	</tr>
 <c:forEach var="dto" items="${list}">
 	<tr align="center">
-		<td>${dto.noticeNum}</td>
+		<!-- <td>${dto.noticeNum}</td> -->
+		<td>${dto.n_categoryName}</td>
 		<td>${dto.adminId}</td>
-		<td><a href="/teamproject/notice_servlet/view.do?num=${dto.noticeNum}">${dto.noticeTitle}</a></td>
+		<td><a href="/teamproject/notice_servlet/view.do?noticeNum=${dto.noticeNum}">${dto.noticeTitle}</a>
+	      	<c:if test="${sessionScope.adminId != null }">
+	      		<br>
+	      		<a href="/teamproject/notice_servlet/edit.do?noticeNum=${dto.noticeNum}">[수정]</a>
+	      	</c:if>	
+		</td>
 		<td>${dto.noticeDate}</td>                     
 </c:forEach>
 	<tr align="center">
 		<td colspan="7">
-			<c:if test="${page.curPage > 1}">
+			<c:if test="test = ${page.curPage > 1}">
+				<a href="#" onclick="list('1')">[처음]</a>
+			</c:if>
+			<c:if test="${page.curBlock > 1}">
 				<a href="#" onclick="list('${page.prevPage}')">[이전]</a>
 			</c:if>
 			<c:forEach var="num" begin="${page.blockStart}" end="${page.blockEnd}">
@@ -80,7 +91,7 @@
 						<span style="color:red">${num}</span>
 					</c:when>
 					<c:otherwise>
-						<a href="#" onclick="('${num}')">${num}</a>
+						<a href="#" onclick="list('${num}')">${num}</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>

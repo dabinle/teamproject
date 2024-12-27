@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../include/admin_menu.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,11 +40,11 @@ function update_notice() {
 <table border="1" width="700px">
 	<tr>
 		<td align="center">카테고리</td>
-		<td><input type="text" name="n_categoryName" value="${n_categoryName}" readonly></td>
+		<td><input name="n_categoryName" value="${dto.n_categoryName}" readonly></td>
 	</tr>
 	<tr>
 		<td align="center">이름</td>
-		<td><input type="text" name="adminId" value="${adminId}" readonly></td>
+		<td><input type="text" name="adminId" value="${dto.adminId}" readonly></td>
 	</tr>
 	<tr>
 		<td align="center">제목</td>
@@ -51,14 +52,13 @@ function update_notice() {
 	</tr>
 	<tr>
 		<td align="center">본문</td>
-		<td><textarea rows="5" cols="60" name="noticeContent">${dto.noticeContent}</textarea>
-</td>
+		<td><textarea rows="5" cols="60" name="noticeContent">${dto.noticeContent}</textarea></td>
 	</tr>	
 	<tr>
 		<td align="center">첨부파일</td>
 		<td> 
 			<img src="/teamproject/images/${dto.noticeFile}" width="300px" height="300px">
-			<input type="file" name="file1">
+			<input type="file" name="noticeFile">
 		</td>
 	</tr>	
 	<tr>
@@ -66,6 +66,7 @@ function update_notice() {
 			<input type="hidden" name="noticeNum" value="${dto.noticeNum}">
 			<input type="button" value="수정" onclick="update_notice()">
 			<input type="button" value="삭제" onclick="delete_notice()">
+			<input type="button" value="목록" onclick="location.href='/teamproject/notice_servlet/list.do'">
 		</td>
 	</tr>
 </table>
