@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,8 +30,8 @@
 		<%@ include file="../include/menu.jsp" %>
 	</c:otherwise>
 </c:choose>
-<h2>공지사항</h2>
-<form name="form1" method="post" action="/teamproject/notice_servlet/search.do">
+<h2 align="center">공지사항</h2>
+<form name="form1" method="post" action="/teamproject/notice_servlet/search.do" align="center">
 <select name="search_option">
     <c:choose>
         <c:when test="${search_option == null || search_option == 'all'}">
@@ -57,12 +58,12 @@
     <button type="button" id="btnWrite">글쓰기</button>
 </c:if>
 </form>
-<table border="1" width="900px">
+<table border="1" width="900px" align="center">
 	<tr>
 		<th>카테고리</th>
 		<th>작성자</th>
 		<th>제목</th>
-		<th>날짜</th>
+		<th>업로드 일자</th>
 	</tr>
 <c:forEach var="dto" items="${list}">
 	<tr align="center">
@@ -75,30 +76,35 @@
 	      		<a href="/teamproject/notice_servlet/edit.do?noticeNum=${dto.noticeNum}">[수정]</a>
 	      	</c:if>	
 		</td>
-		<td>${dto.noticeDate}</td>                     
+		<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${dto.noticeDate}"/></td>                     
 </c:forEach>
 	<tr align="center">
 		<td colspan="7">
-			<c:if test="test = ${page.curPage > 1}">
+			<c:if test="${page.curPage > 1}">
 				<a href="#" onclick="list('1')">[처음]</a>
 			</c:if>
+			
 			<c:if test="${page.curBlock > 1}">
 				<a href="#" onclick="list('${page.prevPage}')">[이전]</a>
 			</c:if>
 			
 			<c:forEach var="num" begin="${page.blockStart}" end="${page.blockEnd}">
+									<!--  ex) 11 ~ 20 -->
 				<c:choose>
 					<c:when test="${num == page.curPage}">
-						<span style="color:red">${num}</span>
+						<span style = "color:red">${num}</span>
 					</c:when>
+					
 					<c:otherwise>
-						<a href="#" onclick="list('${num}')">${num}</a>
+						<a href="#" onclick="list('${num}')">${num }</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
+			
 			<c:if test="${page.curBlock < page.totBlock}">
 				<a href="#" onclick="list('${page.nextPage}')">[다음]</a>
 			</c:if>
+			
 			<c:if test="${page.curBlock < page.totPage}">
 				<a href="#" onclick="list('${page.totPage}')">[마지막]</a>
 			</c:if>

@@ -19,9 +19,9 @@
 </c:if>
 </head>
 <body>
-<h2>로그인</h2>
-<form method="post" action="/teamproject/login_servlet/login.do">
-<table>
+<h2 align="center">로그인</h2>
+<form method="post" action="/teamproject/login_servlet/login.do" align="center">
+<table align="center">
 	<tr>
 		<td align="center">아이디</td>
 		<td><input name="userID"></td>

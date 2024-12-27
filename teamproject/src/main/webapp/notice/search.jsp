@@ -79,25 +79,31 @@
 </c:forEach>
 	<tr align="center">
 		<td colspan="7">
-			<c:if test="test = ${page.curPage > 1}">
+			<c:if test="${page.curPage > 1}">
 				<a href="#" onclick="list('1')">[처음]</a>
 			</c:if>
+			
 			<c:if test="${page.curBlock > 1}">
 				<a href="#" onclick="list('${page.prevPage}')">[이전]</a>
 			</c:if>
+			
 			<c:forEach var="num" begin="${page.blockStart}" end="${page.blockEnd}">
+									<!--  ex) 11 ~ 20 -->
 				<c:choose>
 					<c:when test="${num == page.curPage}">
-						<span style="color:red">${num}</span>
+						<span style = "color:red">${num}</span>
 					</c:when>
+					
 					<c:otherwise>
-						<a href="#" onclick="list('${num}')">${num}</a>
+						<a href="#" onclick="list('${num}')">${num }</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
+			
 			<c:if test="${page.curBlock < page.totBlock}">
 				<a href="#" onclick="list('${page.nextPage}')">[다음]</a>
 			</c:if>
+			
 			<c:if test="${page.curBlock < page.totPage}">
 				<a href="#" onclick="list('${page.totPage}')">[마지막]</a>
 			</c:if>
