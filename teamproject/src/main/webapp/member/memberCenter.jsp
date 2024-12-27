@@ -6,6 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+ <style>
+ #n1{
+ 	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	color: black;
+	text-decoration: none;
+	font-size: 20px;
+ }
+ </style>
 </head>
 <body>
 <c:choose>
@@ -16,12 +26,10 @@
 		<%@ include file="../include/menu.jsp" %>
 	</c:otherwise>
 </c:choose>
-<h2 align="center">고객센터</h2>
-<table align="center">
-<tr>
-	<td><a href="/teamproject/board/board_index.jsp" >1:1 문의</a></td>
-	<td><a href="/teamproject/notice/notice_index.jsp">공지사항</a></td>
-</tr>
-</table>
+<h2>고객센터</h2>
+<nav id="n1">
+	<a href="/teamproject/board/board_index.jsp" >1:1 문의</a>
+	<a href="/teamproject/notice/notice_index.jsp">공지사항</a>
+</nav>
 </body>
 </html>

@@ -30,6 +30,7 @@
 		<%@ include file="../include/menu.jsp" %>
 	</c:otherwise>
 </c:choose>
+<%@ include file="../include/upbar.jsp" %>
 <h2 align="center">공지사항</h2>
 <form name="form1" method="post" action="/teamproject/notice_servlet/search.do" align="center">
 <select name="search_option">

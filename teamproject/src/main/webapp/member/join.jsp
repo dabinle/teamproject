@@ -130,7 +130,6 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 </script>
 </head>
 <body>
-
 <h2 align="center">회원가입</h2>
 <h3 align="center">*는 필수 항목입니다.</h3>
 <form name="form1" method="post" align="center">
