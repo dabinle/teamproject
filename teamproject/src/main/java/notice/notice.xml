@@ -1,86 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
-	<select id="list" resultType="notice.NoticeDTO">
-		select * 
-		from (
-			select rownum as rn, A.*
-			from (
-				select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate, nc.n_categoryName
-				from notice n, admin a, n_category nc
-				where n.adminId = a.adminId and n.n_categoryNum = nc.n_categoryNum
-				order by noticeNum desc
-			) A
-		)
-		where rn between #{start} and #{end}
+    
+    <select id="list" resultType="notice.NoticeDTO">
+        select * 
+        from (
+            select rownum as rn, A.*
+            from (
+                select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate, nc.n_categoryName
+                from notice n
+                join admin a on n.adminId = a.adminId
+                join n_category nc on n.n_categoryNum = nc.n_categoryNum
+                order by noticeNum desc
+            ) A
+        )
+        where rn between #{start} and #{end}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from notice
+    </select>
+    
+
+    <select id="view" resultType="notice.NoticeDTO">
+        select * from notice where noticeNum=#{noticeNum}
+    </select>
+    
+
+    <select id="detail_notice" resultType="notice.NoticeDTO">
+        select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate, nc.n_categoryName
+        from notice n
+        join admin a on n.adminId = a.adminId
+        join n_category nc on n.n_categoryNum = nc.n_categoryNum
+        where noticeNum=#{noticeNum}
+    </select>
+    
+
+    <select id="filename" resultType="String">
+        select noticeFile from notice where noticeNum=#{noticeNum}
+    </select>
+
+    <select id="search_list" resultType="notice.NoticeDTO">
+	    select * 
+	    from (
+	        select rownum as rn, A.*
+	        from (
+	            select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate, nc.n_categoryName
+	            from notice n
+	            join admin a on n.adminId = a.adminId
+	            join n_category nc on n.n_categoryNum = nc.n_categoryNum
+	            <choose>
+	                <when test="search_option != 'all'">
+	                    and ${search_option} like '%' || #{keyword} || '%'
+	                </when>
+	                <when test="search_option == 'all'">
+	                    and (n.adminId like '%' || #{keyword} || '%' 
+	                         or noticeTitle like '%' || #{keyword} || '%' 
+	                         or nc.n_categoryName like '%' || #{keyword} || '%')
+	                </when>
+	            </choose>
+	            order by noticeNum desc
+	        ) A
+	    )
+	    where rn between #{start} and #{end}
 	</select>
-	
-	<select id="count" resultType="int">
-		select count(*) from notice
-	</select>
-	
-	<select id="view" resultType="notice.NoticeDTO">
-		select * from notice where noticeNum=#{noticeNum}
-	</select>
-	
-	<select id="detail_notice" resultType="notice.NoticeDTO">
-		select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate, nc.n_categoryName
-		from notice n, admin a, n_category nc
-		where n.adminId = a.adminId and n.n_categoryNum = nc.n_categoryNum and noticeNum=#{noticeNum}
-	</select>
-	
-	<select id="filename" resultType="String">
-		select noticeFile from notice where noticeNum=#{noticeNum}
-	</select>
-	
-	<select id="search_list" resultType="notice.NoticeDTO">
-    select * 
-    from (
-        select rownum as rn, A.*
-        from(
-            select noticeNum, n.adminId, noticeTitle, noticeContent, noticeFile, noticeDate, nc.n_categoryName
-            from notice n, admin a, n_category nc
-            where n.adminId = a.adminId and n.n_categoryNum = nc.n_categoryNum
+
+
+
+    <select id="search_count" resultType="int">
+        select count(*) from notice
+        <where>
             <choose>
                 <when test="search_option != 'all'">
-                    and ${search_option} like '%' || #{keyword} || '%'
+                    ${search_option} like '%' || #{keyword} || '%'
                 </when>
                 <when test="search_option == 'all'">
-                    and (n.adminId like '%' || #{keyword} || '%' or noticeTitle like '%' || #{keyword} || '%' or n_categoryName like '%' || #{keyword} || '%')
+                    (n.adminId like '%' || #{keyword} || '%'
+                    or noticeTitle like '%' || #{keyword} || '%'
+                    or nc.n_categoryName like '%' || #{keyword} || '%')
                 </when>
             </choose>
-            order by noticeNum desc
-        ) A
-    )
-    where rn between #{start} and #{end}
-	</select>
+        </where>
+    </select>
 
-	
-	<select id="search_count" resultType="int">
-    select count(*) from notice
-    <choose>
-        <when test="search_option != 'all'">
-            and ${search_option} like '%' || #{keyword} || '%'
-        </when>
-        <when test="search_option == 'all'">
-            and (n.adminId like '%' || #{keyword} || '%' or noticeTitle like '%' || #{keyword} || '%' or n_categoryName like '%' || #{keyword} || '%')
-        </when>
-    </choose>
-	</select>
+  
+    <select id="list_n_category" resultType="notice.NoticeCategoryDTO"> 
+        select n_categoryNum, n_categoryName from n_category
+    </select>
+    
 
-	<select id="list_n_category" resultType="notice.NoticeCategoryDTO"> 
-		select n_categoryNum, n_categoryName from n_category
-	</select>
-	
-	<insert id="insert">
-		insert into notice(noticeNum, adminId, noticeTitle, noticeContent, n_categoryNum, noticeFile) values (seq_notice.nextval, #{adminId}, #{noticeTitle}, #{noticeContent}, #{n_categoryNum}, #{noticeFile})
-	</insert>
-	
-	<update id="update">
-		update notice set noticeTitle=#{noticeTitle}, noticeContent=#{noticeContent}, noticeFile=#{noticeFile} where noticeNum=#{noticeNum}
-	</update>
-	
-	<delete id="delete">
-		delete from notice where noticeNum=#{noticeNum}
-	</delete>
+    <insert id="insert">
+        insert into notice(noticeNum, adminId, noticeTitle, noticeContent, n_categoryNum, noticeFile)
+        values (seq_notice.nextval, #{adminId}, #{noticeTitle}, #{noticeContent}, #{n_categoryNum}, #{noticeFile})
+    </insert>
+
+    <update id="update">
+        update notice set noticeTitle=#{noticeTitle}, noticeContent=#{noticeContent}, noticeFile=#{noticeFile}
+        where noticeNum=#{noticeNum}
+    </update>
+    
+
+    <delete id="delete">
+        delete from notice where noticeNum=#{noticeNum}
+    </delete>
 </mapper>

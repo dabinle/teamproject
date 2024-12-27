@@ -76,7 +76,9 @@
 	      		<a href="/teamproject/notice_servlet/edit.do?noticeNum=${dto.noticeNum}">[수정]</a>
 	      	</c:if>	
 		</td>
-		<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${dto.noticeDate}"/></td>                     
+		<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${dto.noticeDate}"/></td>
+	</tr> 
+	                     
 </c:forEach>
 	<tr align="center">
 		<td colspan="7">

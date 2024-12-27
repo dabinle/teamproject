@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../home/css/home.css">
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 function n_insert() {
@@ -39,30 +40,42 @@ function n_insert() {
 </script>
 </head>
 <body>
-<h2>공지사항 글쓰기</h2>
-<form name= "form1" method="post" enctype="multipart/form-data">
-	<label for="n_categoryNum">카테고리: </label>
-	<select id="n_categoryNum" name="n_categoryNum" required="required">
-      <c:forEach var="row" items="${n_category }">
-         <option value="${row.n_categoryNum }">[${row.n_categoryNum }] ${row.n_categoryName }</option>
-      </c:forEach>
-	</select>
-	<br>
-	<label for="adminId">작성자: </label>
-	<input type="text" name="adminId" value="${adminId}" readonly>
-	<br>
-	<label for="noticeTitle">제목: </label>
-	<input type="text" name="noticeTitle" id="noticeTitle" size="60">
-	<br>
-	<label for="noticeContent">본문: </label>
-	<input type="text" name="noticeContent" id="noticeContent" size="60">
-	<br>
-	<label for="noticeFile">첨부파일: </label>
-	<input type="file" name="noticeFile">
-	<br>
-	<input type="hidden" name="noticeNum">
-	<input type="button" value="등록" onclick="n_insert()">
-	<input type="button" value="목록" onclick="location.href='/teamproject/notice_servlet/list.do'">
+<h2 align="center">공지사항 글쓰기</h2>
+<form name= "form1" method="post" enctype="multipart/form-data" align="center">
+	<table align="center">
+		<tr>
+			<td>카테고리: </td>
+			<td><select id="n_categoryNum" name="n_categoryNum" required="required">
+			      <c:forEach var="row" items="${n_category }">
+			         <option value="${row.n_categoryNum }">[${row.n_categoryNum }] ${row.n_categoryName }</option>
+			      </c:forEach>
+			      </select>
+			 </td>
+		</tr>
+		<tr>
+			 <td>작성자: </td>
+			 <td><input type="text" name="adminId" value="${adminId}" readonly></td>
+		</tr>
+		<tr>
+			<td>제목:</td>
+			<td><input type="text" name="noticeTitle" id="noticeTitle" size="60"></td>
+		</tr>
+		<tr>
+			<td>본문: </td>
+			<td><input type="text" name="noticeContent" id="noticeContent" size="60"></td>
+		</tr>
+		<tr>
+			<td>첨부파일: </td>
+			<td><input type="file" name="noticeFile"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<input type="hidden" name="noticeNum">
+			<input type="button" value="등록" onclick="n_insert()">
+			<input type="button" value="목록" onclick="location.href='/teamproject/notice_servlet/list.do'">
+			</td>	
+		</tr>
+	</table>
 </form>
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
@@ -65,8 +66,13 @@ public class NoticeController extends HttpServlet{
 			}
 			dto.setNoticeFile(noticeFile);
 			dao.insert(dto);
-			response.sendRedirect(contextPath + "/notice_servlet/list.do");
-		} else if(url.indexOf("view.do") != -1) {
+			
+		    response.setContentType("text/html;charset=UTF-8");  
+		   
+		    response.getWriter().write("<script> alert('공지사항이 등록되었습니다.'); location.href='" + contextPath + "/notice_servlet/list.do';</script>");
+			
+		} 
+		else if(url.indexOf("view.do") != -1) {
 			int noticeNum = Integer.parseInt(request.getParameter("noticeNum"));
 			HttpSession session = request.getSession();
 			NoticeDTO dto = dao.view(noticeNum);
@@ -81,75 +87,84 @@ public class NoticeController extends HttpServlet{
 			rd.forward(request, response);
 		}
 		else if (url.indexOf("update.do") != -1) {
-			NoticeDTO dto = new NoticeDTO();
-			String noticeFile = "-";
-			
-			try {
-				for (Part part : request.getParts()) {
-					noticeFile = part.getSubmittedFileName();
-					if(noticeFile != null) {
-						part.write(noticeFile);
-						break;
-					}
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			String adminId = request.getParameter("adminId");
-			String noticeTitle = request.getParameter("noticeTitle");
-			String noticeContent = request.getParameter("noticeContent");
-			int noticeNum = Integer.parseInt(request.getParameter("noticeNum"));
-			String delete_file = request.getParameter("delete_file");
-			if(delete_file != null && delete_file.equals("on")) {
-				String noticeFile2 = dao.getFilename(noticeNum);
-				File f = new File("c:/upload/" + noticeFile2);
-				f.delete();
-				dto.setNoticeNum(noticeNum);
-				dto.setAdminId(adminId);
-				dto.setNoticeTitle(noticeTitle);
-				dto.setNoticeContent(noticeContent);
-				dto.setNoticeNum(noticeNum);
-				dao.update(dto);
-			}
-			dto.setNoticeNum(noticeNum);
-			dto.setAdminId(adminId);
-			dto.setNoticeTitle(noticeTitle);
-			dto.setNoticeContent(noticeContent);
-			dto.setNoticeNum(noticeNum);
-			
-			if(noticeFile == null || noticeFile.trim().equals("")) {
-				NoticeDTO dto2 = dao.view(noticeNum);
-				String name = dto2.getNoticeFile();
-				dto.setNoticeFile(noticeFile);
-			} else {
-				dto.setNoticeFile(noticeFile);
-			}
-			dao.update(dto);
-			String page = contextPath + "/notice_servlet/list.do";
-			response.sendRedirect(page);
+		    NoticeDTO dto = new NoticeDTO();
+		    String noticeFile = "-"; 
+		    String uploadDir = "c:/upload";
+
+		    try {
+		        for (Part part : request.getParts()) {
+		            String uploadedFile = part.getSubmittedFileName();
+		            if (uploadedFile != null && !uploadedFile.trim().isEmpty()) {
+		                noticeFile = uploadedFile; 
+		                part.write(uploadDir + File.separator + uploadedFile); 
+		                break;
+		            }
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+
+		    String adminId = request.getParameter("adminId");
+		    String noticeTitle = request.getParameter("noticeTitle");
+		    String noticeContent = request.getParameter("noticeContent");
+		    int noticeNum = Integer.parseInt(request.getParameter("noticeNum"));
+		    String deleteFileOption = request.getParameter("delete_file");
+
+		    if ("on".equals(deleteFileOption)) {
+		        String existingFile = dao.getFilename(noticeNum);
+		        File fileToDelete = new File(uploadDir + File.separator + existingFile);
+		        if (fileToDelete.exists()) {
+		            fileToDelete.delete(); 
+		        }
+		        noticeFile = "-"; 
+		    }
+
+
+		    if (noticeFile.equals("-")) {
+		        NoticeDTO existingNotice = dao.view(noticeNum); // 원래 있던 이미지
+		        noticeFile = existingNotice.getNoticeFile(); 
+		    }
+		    dto.setNoticeNum(noticeNum);
+		    dto.setAdminId(adminId);
+		    dto.setNoticeTitle(noticeTitle);
+		    dto.setNoticeContent(noticeContent);
+		    dto.setNoticeFile(noticeFile);
+
+		    dao.update(dto);
+
+		    String page = contextPath + "/notice_servlet/list.do";
+		    response.sendRedirect(page);
+
 		} else if(url.indexOf("delete.do") != -1) {
 			int noticeNum = Integer.parseInt(request.getParameter("noticeNum"));
 			dao.delete(noticeNum);
 			String page = contextPath + "/notice_servlet/list.do";
 			response.sendRedirect(page);
-		} else  if (url.indexOf("search.do") != -1) {
-	        String search_option = request.getParameter("search_option");
-	        String keyword = request.getParameter("keyword");
-	        int count = dao.count(search_option, keyword);
-	        int cur_page = 1;
-	        if (request.getParameter("cur_page") != null) {
-	            cur_page = Integer.parseInt(request.getParameter("cur_page"));
-	        }
-	        PageUtil page = new PageUtil(count, cur_page);
-	        int start = page.getPageBegin();
-	        int end = page.getPageEnd();
-	        List<NoticeDTO> list = dao.list_search(search_option, keyword, start, end);
-	        request.setAttribute("list", list);
-	        request.setAttribute("keyword", keyword);
-	        request.setAttribute("page", page);
-	        RequestDispatcher rd = request.getRequestDispatcher("/notice/search.jsp");
-	        rd.forward(request, response);
-	    }
+		} else if (url.indexOf("search.do") != -1) {
+		    String search_option = request.getParameter("search_option");
+		    String keyword = request.getParameter("keyword");
+		    int count = dao.count(search_option, keyword);
+		    int cur_page = 1;
+
+		    if (request.getParameter("cur_page") != null) {
+		        cur_page = Integer.parseInt(request.getParameter("cur_page"));
+		    }
+
+		    PageUtil page = new PageUtil(count, cur_page);
+		    int start = page.getPageBegin();
+		    int end = page.getPageEnd();
+
+		    List<NoticeDTO> list = dao.list_search(search_option, keyword, start, end);
+
+		    request.setAttribute("list", list); 
+		    request.setAttribute("page", page); 
+		    request.setAttribute("search_option", search_option); 
+		    request.setAttribute("keyword", keyword); 
+
+		    RequestDispatcher rd = request.getRequestDispatcher("/notice/search.jsp");
+		    rd.forward(request, response);
+		}
+
 		else if (url.indexOf("select_category.do")!=-1) {
         	List<NoticeCategoryDTO> n_category = dao.listn_category();
         	request.setAttribute("n_category", n_category);

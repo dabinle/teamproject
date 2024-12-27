@@ -37,6 +37,7 @@ function update_notice() {
 <body>
 <h2 align="center">공지사항 수정</h2>
 <form name="form1" method="post" enctype="multipart/form-data" align="center">
+
 <table border="1" width="700px" align="center">
 	<tr>
 		<td align="center">카테고리</td>
