@@ -17,8 +17,8 @@
       <%@ include file="../include/menu.jsp" %>
    </c:otherwise>
 </c:choose>
-<h2>공지사항</h2>
-<table>
+<h2 align="center">공지사항</h2>
+<table align="center">
 	<tr>
 		<td><img src="/teamproject/images/${dto.noticeFile }" width="300px" height="300px"></td>
 		<td align="center">

@@ -16,8 +16,12 @@
 		<%@ include file="../include/menu.jsp" %>
 	</c:otherwise>
 </c:choose>
-<h2>고객센터</h2>
-<a href="/teamproject/board/board_index.jsp">1:1 문의</a><br>
-<a href="/teamproject/notice/notice_index.jsp">공지사항</a><br>
+<h2 align="center">고객센터</h2>
+<table align="center">
+<tr>
+	<td><a href="/teamproject/board/board_index.jsp" >1:1 문의</a></td>
+	<td><a href="/teamproject/notice/notice_index.jsp">공지사항</a></td>
+</tr>
+</table>
 </body>
 </html>

@@ -24,13 +24,13 @@
 		<%@ include file="../include/menu.jsp" %>
 	</c:otherwise>
 </c:choose>
-<h2>상품목록</h2>
-<form name="form1" method="post">
+<h2 align="center">상품목록</h2>
+<form name="form1" method="post" align="center">
 <c:if test="${sessionScope.adminId != null }">
 	<button type="button" id="btn_insert">상품등록</button>
 	<a href="/teamproject/board_servlet/list.do">1:1문의 목록</a>
 </c:if>
-<table border="1" width="800px">
+<table border="1" width="800px" align="center">
    <tr align="center">
       <th>상품번호</th>
       <th>상품명</th>

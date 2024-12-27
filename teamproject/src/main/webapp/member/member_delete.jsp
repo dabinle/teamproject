@@ -26,10 +26,10 @@ $(function() {
 </script>
 </head>
 <body>
-<h2>회원탈퇴</h2>
-<form name="form1" method="post">
+<h2 align="center">회원탈퇴</h2>
+<form name="form1" method="post" align="center">
     <input type="hidden" name="userID" value="${sessionScope.userID}">
-    <table>
+    <table align="center">
         <tr>
             <td>비밀번호</td>
             <td>

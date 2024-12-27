@@ -82,9 +82,9 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 </head>
 <body>
 
-<h2>회원정보 수정</h2>
-<form name="form1" method="post">
-<table>
+<h2 align="center">회원정보 수정</h2>
+<form name="form1" method="post" align="center">
+<table align="center">
 	<tr>
     <td>이름</td>
     <td><input name="userName" value="${dto.userName}"></td>

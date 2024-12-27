@@ -19,9 +19,9 @@
 </c:if>
 </head>
 <body>
-<h2>관리자 로그인</h2>
-<form method="post" name="form1" action="/teamproject/admin_servlet/login.do">
-<table border="1">
+<h2 align="center">관리자 로그인</h2>
+<form method="post" name="form1" action="/teamproject/admin_servlet/login.do" align="center">
+<table align="center">
 	<tr>
 		<td>아이디</td>
 		<td><input name="adminId"></td>
