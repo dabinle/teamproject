@@ -110,7 +110,7 @@ public class NoticeController extends HttpServlet{
 		    int noticeNum = Integer.parseInt(request.getParameter("noticeNum"));
 		    String deleteFileOption = request.getParameter("delete_file");
 
-		    if ("on".equals(deleteFileOption)) {
+		    if ("on".equals(deleteFileOption)) {  // 삭제
 		        String existingFile = dao.getFilename(noticeNum);
 		        File fileToDelete = new File(uploadDir + File.separator + existingFile);
 		        if (fileToDelete.exists()) {
@@ -120,7 +120,7 @@ public class NoticeController extends HttpServlet{
 		    }
 
 
-		    if (noticeFile.equals("-")) {
+		    if (noticeFile.equals("-")) { // 기존 데이터
 		        NoticeDTO existingNotice = dao.view(noticeNum); // 원래 있던 이미지
 		        noticeFile = existingNotice.getNoticeFile(); 
 		    }

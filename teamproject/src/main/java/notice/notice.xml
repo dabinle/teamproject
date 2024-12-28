@@ -18,8 +18,11 @@
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from notice
-    </select>
+	    select count(*)
+	    from notice n
+	    join n_category nc on n.n_categoryNum = nc.n_categoryNum
+	</select>
+
     
 
     <select id="view" resultType="notice.NoticeDTO">
@@ -68,20 +71,22 @@
 
 
     <select id="search_count" resultType="int">
-        select count(*) from notice
-        <where>
-            <choose>
-                <when test="search_option != 'all'">
-                    ${search_option} like '%' || #{keyword} || '%'
-                </when>
-                <when test="search_option == 'all'">
-                    (n.adminId like '%' || #{keyword} || '%'
-                    or noticeTitle like '%' || #{keyword} || '%'
-                    or nc.n_categoryName like '%' || #{keyword} || '%')
-                </when>
-            </choose>
-        </where>
-    </select>
+	    select count(*)
+	    from notice n
+	    join n_category nc on n.n_categoryNum = nc.n_categoryNum
+	    <where>
+	        <choose>
+	            <when test="search_option != 'all'">
+	                ${search_option} like '%' || #{keyword} || '%'
+	            </when>
+	            <when test="search_option == 'all'">
+	                (n.adminId like '%' || #{keyword} || '%'
+	                or noticeTitle like '%' || #{keyword} || '%'
+	                or nc.n_categoryName like '%' || #{keyword} || '%')
+	            </when>
+	        </choose>
+	    </where>
+	</select>
 
   
     <select id="list_n_category" resultType="notice.NoticeCategoryDTO"> 

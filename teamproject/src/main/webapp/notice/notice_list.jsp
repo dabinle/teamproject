@@ -30,7 +30,6 @@
 		<%@ include file="../include/menu.jsp" %>
 	</c:otherwise>
 </c:choose>
-<%@ include file="../include/upbar.jsp" %>
 <h2 align="center">공지사항</h2>
 <form name="form1" method="post" action="/teamproject/notice_servlet/search.do" align="center">
 <select name="search_option">
@@ -66,21 +65,26 @@
 		<th>제목</th>
 		<th>업로드 일자</th>
 	</tr>
-<c:forEach var="dto" items="${list}">
-	<tr align="center">
-		<!-- <td>${dto.noticeNum}</td> -->
-		<td>${dto.n_categoryName}</td>
-		<td>${dto.adminId}</td>
-		<td><a href="/teamproject/notice_servlet/view.do?noticeNum=${dto.noticeNum}">${dto.noticeTitle}</a>
-	      	<c:if test="${sessionScope.adminId != null }">
-	      		<br>
-	      		<a href="/teamproject/notice_servlet/edit.do?noticeNum=${dto.noticeNum}">[수정]</a>
-	      	</c:if>	
-		</td>
-		<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${dto.noticeDate}"/></td>
-	</tr> 
-	                     
-</c:forEach>
+	<c:if test="${list == null || list.isEmpty()}">
+		<tr align="center">
+			<td colspan="4">해당 키워드는 없습니다.</td>
+		</tr>
+	</c:if>
+	<c:forEach var="dto" items="${list}">
+		<tr align="center">
+			<!-- <td>${dto.noticeNum}</td> -->
+			<td>${dto.n_categoryName}</td>
+			<td>${dto.adminId}</td>
+			<td><a href="/teamproject/notice_servlet/view.do?noticeNum=${dto.noticeNum}">${dto.noticeTitle}</a>
+		      	<c:if test="${sessionScope.adminId != null }">
+		      		<br>
+		      		<a href="/teamproject/notice_servlet/edit.do?noticeNum=${dto.noticeNum}">[수정]</a>
+		      	</c:if>	
+			</td>
+			<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${dto.noticeDate}"/></td>
+		</tr> 
+		                     
+	</c:forEach>
 	<tr align="center">
 		<td colspan="7">
 			<c:if test="${page.curPage > 1}">
