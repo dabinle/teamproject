@@ -119,13 +119,11 @@ public class BoardController extends HttpServlet {
 		} else if (url.indexOf("check_pwd.do") != -1) {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			String userPwd = request.getParameter("userPwd");
-			String result = null;
+			String result = dao.check_pwd(boardNum, userPwd);
 			String page = "";
-			
-			result = dao.check_pwd(boardNum, userPwd);
-			
+
 			if (result != null) {
-				page = "/board/board_edit.jsp";
+				page = "/teamproject/board/board_edit.jsp";
 				request.setAttribute("dto", dao.view(boardNum));
 			} else {
 				page = contextPath + "/board_servlet/view.do?boardNum=" + boardNum + "&message=error";
@@ -135,18 +133,19 @@ public class BoardController extends HttpServlet {
 		} else if (url.indexOf("admin_check_pwd.do") != -1) {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			String adminPwd = request.getParameter("adminPwd");
+			System.out.println("adminPwd:" + adminPwd);
 			String result = null;
 			String page = "";
 			
 			result = dao.admin_check_pwd(boardNum, adminPwd);
 			
 			if (result != null) {
-				page = "/board/board_edit.jsp";
-				request.setAttribute("dto", dao.view(boardNum));
+			    page = "/board/board_edit.jsp";
+			    request.setAttribute("dto", dao.view(boardNum));
 			} else {
-				page = contextPath + "/board_servlet/view.do?boardNum=" + boardNum + "&message=error";
-				response.sendRedirect(page);
-				return;
+			    page = contextPath + "/board_servlet/view.do?boardNum=" + boardNum + "&message=error";
+			    response.sendRedirect(page);
+			    return;
 			}
 		} else if (url.indexOf("update.do") != -1) {
 			BoardDTO dto = new BoardDTO();

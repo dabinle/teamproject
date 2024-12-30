@@ -74,7 +74,7 @@ $(function() {
 		<td align="center">첨부파일</td>
 		<td colspan="3">
 			<c:if test="${dto.boardFileSize > 0}">
-				${dto.boardFileName} (${dto.boardFileName} bytes)
+				${dto.boardFileName} (${dto.boardFileSize} bytes)
 				<a href="/teamproject/board_servlet/download.do?boardNum=${dto.boardNum}">[다운로드]</a>
 			</c:if>
 		</td>
@@ -82,24 +82,24 @@ $(function() {
 	<tr>
 		<td colspan="4" align="center">
 			<input type="hidden" name="boardNum" value="${dto.boardNum}">
+			<c:choose>
+	    		<c:when test="${dto.re_depth == 0}">
+			        <c:if test="${dto.userID == sessionScope.userID}">
+			            <input type="button" value="수정/삭제" id="btnEdit">
+			        </c:if>
+			    </c:when>
+			    <c:when test="${dto.re_depth > 0}">        
+			        <c:if test="${dto.adminId == sessionScope.adminId}">
+			            <input type="button" value="수정/삭제" id="btnEdit2">
+			        </c:if>
+			    </c:when>
+			</c:choose>
 			
-			<c:if test="${dto.re_depth == 0}">
-				<c:if test="${dto.userID == sessionScope.userID}">
-					<input type="button" value="수정/삭제" id="btnEdit">
-				</c:if>
+			<c:if test="${sessionScope.adminId != null && dto.re_depth == 0}">
+    			<input type="hidden" id="adminId" value="${sessionScope.adminId}">
+    			<button type="button" id="btnReply">답변</button>
 			</c:if>
-			
-			<c:if test="${dto.re_depth > 0}">
-				<c:if test="${dto.adminId == sessionScope.adminId}">
-					<input type="button" value="수정/삭제" id="btnEdit2">
-				</c:if>
-			</c:if>
-      		<c:if test="${dto.re_depth == 0}">
-    			<c:if test="${sessionScope.adminId != null}">
-        			<input type="hidden" id="adminId" value="${sessionScope.adminId}">
-        			<button type="button" id="btnReply">답변</button>
-    			</c:if>
-			</c:if>		
+
 			<input type="button" value="목록" id="btnList">
 		</td>
 	</tr>
