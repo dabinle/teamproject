@@ -44,7 +44,7 @@ function update_notice() {
 		<td><input name="n_categoryName" value="${dto.n_categoryName}" readonly></td>
 	</tr>
 	<tr>
-		<td align="center">이름</td>
+		<td align="center">작성자</td>
 		<td><input type="text" name="adminId" value="${dto.adminId}" readonly></td>
 	</tr>
 	<tr>

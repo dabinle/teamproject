@@ -11,15 +11,14 @@
 <script>
 	$(function() {
 		$("#btnWrite").click(function(){
-			location.href="/teamproject/notice_servlet/select_category.do";
-			//location.href="/teamproject/notice/notice_write.jsp";
+			location.href="/teamproject/faq_servlet/select_category.do";
 		});
 	});
 		
 	function list(page) {
 	    var search_option = '${search_option}';
 	    var keyword = '${keyword}';
-	    location.href = "/teamproject/notice_servlet/list.do?cur_page=" + page 
+	    location.href = "/teamproject/faq_servlet/list.do?cur_page=" + page 
 	        + "&search_option=" + encodeURIComponent(search_option) 
 	        + "&keyword=" + encodeURIComponent(keyword);
 	}
@@ -34,38 +33,37 @@
 		<%@ include file="../include/menu.jsp" %>
 	</c:otherwise>
 </c:choose>
-<h2 align="center">공지사항</h2>
-<form name="form1" method="post" action="/teamproject/notice_servlet/search.do" align="center">
+
+<h2 align="center">FAQ</h2>
+<form name="form1" method="post" action="/teamproject/faq_servlet/search.do" align="center">
 <select name="search_option">
     <c:choose>
         <c:when test="${search_option == null || search_option == 'all'}">
             <option value="all" selected>전체검색</option>
-            <option value="noticeTitle">제목</option>
-            <option value="n_categoryName">카테고리</option>
+            <option value="qusetion">질문</option>
+            <option value="f_categoryName">카테고리</option>
         </c:when>
-        <c:when test="${search_option == 'noticeTitle'}">
+        <c:when test="${search_option == 'qusetion'}">
             <option value="all">전체검색</option>
-            <option value="noticeTitle" selected>제목</option>
-            <option value="n_categoryName">카테고리</option>
+            <option value="qusetion" selected>질문</option>
+            <option value="f_categoryName">카테고리</option>
         </c:when>
-        <c:when test="${search_option == 'n_categoryName'}">
+        <c:when test="${search_option == 'f_categoryName'}">
             <option value="all">전체검색</option>
-            <option value="noticeTitle">제목</option>
-            <option value="n_categoryName" selected>카테고리</option>
+            <option value="qusetion">질문</option>
+            <option value="f_categoryName" selected>카테고리</option>
         </c:when>
     </c:choose>
 </select>
 
 <input name="keyword" value="${keyword}" placeholder="검색 키워드를 입력하세요">
 <input type="submit" value="검색" id="btnSearch">
-
 </form>
 <table border="1" width="900px" align="center">
 	<tr>
 		<th>카테고리</th>
-		<th>제목</th>
+		<th>자주 묻는 질문</th>
 		<th>작성자</th>
-		<th>업로드 일자</th>
 	</tr>
 	<c:if test="${list == null || list.isEmpty()}">
 		<tr align="center">
@@ -74,19 +72,17 @@
 	</c:if>
 	<c:forEach var="dto" items="${list}">
 		<tr align="center">
-			<!-- <td>${dto.noticeNum}</td> -->
-			<td>${dto.n_categoryName}</td>
-			<td><a href="/teamproject/notice_servlet/view.do?noticeNum=${dto.noticeNum}">${dto.noticeTitle}</a>
+			<td>${dto.f_categoryName}</td>
+			<td><a href="/teamproject/faq_servlet/view.do?faqNum=${dto.faqNum}">${dto.qusetion}</a>
 		      	<c:if test="${sessionScope.adminId != null }">
 		      		<br>
-		      		<a href="/teamproject/notice_servlet/edit.do?noticeNum=${dto.noticeNum}">[수정]</a>
+		      		<a href="/teamproject/faq_servlet/edit.do?faqNum=${dto.faqNum}">[수정]</a>
 		      	</c:if>	
 			</td>
 			<td>${dto.adminId}</td>
-			<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${dto.noticeDate}"/></td>
 		</tr> 
-		                     
 	</c:forEach>
+	
 	<tr align="center">
 		<td colspan="7">
 			<c:if test="${page.curPage > 1}">
@@ -119,7 +115,7 @@
 			</c:if>
 		</td>
 	</tr>
-</table> 
+</table>
 <c:if test="${sessionScope.adminId != null }">
     <button type="button" id="btnWrite">글쓰기</button>
 </c:if>

@@ -63,8 +63,8 @@
 <table border="1" width="900px" align="center">
 	<tr>
 		<th>카테고리</th>
-		<th>작성자</th>
 		<th>제목</th>
+		<th>작성자</th>
 		<th>업로드 일자</th>
 	</tr>
 	<c:if test="${list == null || list.isEmpty()}">
@@ -76,13 +76,13 @@
 		<tr align="center">
 			<!-- <td>${dto.noticeNum}</td> -->
 			<td>${dto.n_categoryName}</td>
-			<td>${dto.adminId}</td>
 			<td><a href="/teamproject/notice_servlet/view.do?noticeNum=${dto.noticeNum}">${dto.noticeTitle}</a>
 		      	<c:if test="${sessionScope.adminId != null }">
 		      		<br>
 		      		<a href="/teamproject/notice_servlet/edit.do?noticeNum=${dto.noticeNum}">[수정]</a>
 		      	</c:if>	
 			</td>
+			<td>${dto.adminId}</td>
 			<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${dto.noticeDate}"/></td>
 		</tr> 
 		                     

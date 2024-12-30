@@ -34,7 +34,7 @@ function n_insert() {
 				return;
 			}
 		}
-		document.form1.action="/teamproject/notice_servlet/insert.do"
+		document.form1.action="/teamproject/notice_servlet/insert.do";
 		document.form1.submit();
 }
 </script>

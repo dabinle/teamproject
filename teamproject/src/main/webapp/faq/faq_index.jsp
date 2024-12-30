@@ -9,8 +9,7 @@
 </head>
 <body>
 <%
-response.sendRedirect("/teamproject/notice_servlet/list.do");
+response.sendRedirect("/teamproject/faq_servlet/list.do");
 %>
-
 </body>
 </html>
