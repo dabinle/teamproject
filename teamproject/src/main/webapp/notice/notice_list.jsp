@@ -56,7 +56,7 @@
     </c:choose>
 </select>
 
-<input name="keyword" value="${keyword}">
+<input name="keyword" value="${keyword}" placeholder="검색 키워드를 입력하세요">
 <input type="submit" value="검색" id="btnSearch">
 <c:if test="${sessionScope.adminId != null }">
     <button type="button" id="btnWrite">글쓰기</button>
