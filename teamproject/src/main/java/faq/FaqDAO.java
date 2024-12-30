@@ -26,6 +26,20 @@ public class FaqDAO {
 		return result;
 	}
 	
+	public int count() {
+		int result = 0;
+		SqlSession session = Mybatis.getInstance().openSession();
+		try {
+			result = session.selectOne("faq.count");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null)
+				session.close();
+		}
+		return result;
+	}
+	
 	public List<FaqDTO> list_search(String search_option, String keyword, int start, int end){
 		List<FaqDTO> list = null;
 		SqlSession session = Mybatis.getInstance().openSession();
@@ -149,9 +163,9 @@ public class FaqDAO {
 		return dto;
 	}
 	
-	public List<FapCategoryDTO> listf_category(){
+	public List<FaqCategoryDTO> listf_category(){
 		SqlSession session = Mybatis.getInstance().openSession();
-		List<FapCategoryDTO> f_category = session.selectList("faq.list_f_category");
+		List<FaqCategoryDTO> f_category = session.selectList("faq.list_f_category");
 		session.close();
 		return f_category;
 	}

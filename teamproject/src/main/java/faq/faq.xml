@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="faq">
+	<select id="list" resultType="faq.FaqDTO">
+		select *
+		from (
+			select rownum as rn, A.*
+			from (
+				select faqNum, f.adminId, qusetion, f_answer, fc.f_categoryName
+				from faq f
+				join admin a on f.adminId = a.adminId
+				join f_category fc on f.f_categoryNum = fc.f_categoryNum
+				order by faqNum desc
+			) A
+		)
+		where rn between #{start} and #{end}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(*)
+		from faq f
+		join f_category fc on f.f_categoryNum = fc.f_categoryNum
+	</select>
+	
+	<select id="view" resultType="faq.FaqDTO">
+		select * from faq where faqNum=#{faqNum}
+	</select>
+	
+	<select id="detail_faq" resultType="faq.FaqDTO">
+		select faqNum, f.adminId, qusetion, f_answer, fc.f_categoryName
+		from faq f
+		join admin a on f.adminId = a.adminId
+		join f_category fc on f.f_categoryNum = fc.f_categoryNum
+		where faqNum=#{faqNum}
+	</select>
+	
+	<select id="search_list" resultType="faq.FaqDTO">
+	    select * 
+	    from (
+	        select rownum as rn, A.*
+	        from (
+	            select faqNum, f.adminId, qusetion, f_answer, fc.f_categoryName
+	            from faq f
+	          	join admin a on f.adminId = a.adminId
+				join f_category fc on f.f_categoryNum = fc.f_categoryNum
+	            <where>
+	                <choose>
+	                    <when test="search_option != 'all'">
+	                        ${search_option} like '%' || #{keyword} || '%'
+	                    </when>
+	                    <when test="search_option == 'all'">
+	                        (f.adminId like '%' || #{keyword} || '%'
+	                         or qusetion like '%' || #{keyword} || '%'
+	                         or fc.f_categoryNum like '%' || #{keyword} || '%')
+	                    </when>
+	                </choose>
+	            </where>
+	            order by faqNum desc
+	        ) A
+	    )
+	    where rn between #{start} and #{end}
+	</select>
+	
+	<select id="search_count" resultType="int">
+	    select count(*)
+	    from faq f
+	    join f_category fc on f.f_categoryNum = fc.f_categoryNum
+	    <where>
+	        <choose>
+	            <when test="search_option != 'all'">
+	                ${search_option} like '%' || #{keyword} || '%'
+	            </when>
+	            <when test="search_option == 'all'">
+	                (n.adminId like '%' || #{keyword} || '%'
+	                or qusetion like '%' || #{keyword} || '%'
+	                or fc.f_categoryNum like '%' || #{keyword} || '%')
+	            </when>
+	        </choose>
+	    </where>
+	</select>
+	
+	<select id="list_f_category" resultType="faq.FaqCategoryDTO"> 
+        select fc.f_categoryNum, fc.f_categoryName from f_category
+    </select>
+    
+    <insert id="insert">
+    	insert into notice(faqNum, adminId, qusetion, f_answer, f_categoryNum)
+        values (seq_notice.nextval, #{adminId}, #{qusetion}, #{f_answer}, #{f_categoryNum})
+    </insert>
+    
+    <update id="update">
+    	update faq set qusetion=#{qusetion}, f_answer=#{f_answer}
+        where faqNum=#{faqNum}
+    </update>
+    
+    <delete id="delete">
+    	delete from faq where faqNum=#{faqNum}
+    </delete>
+</mapper>

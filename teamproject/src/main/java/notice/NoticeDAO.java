@@ -138,6 +138,20 @@ public class NoticeDAO {
 		return list;
 	}
 	
+	public int count() {
+		int result = 0;
+		SqlSession session = Mybatis.getInstance().openSession();
+		try {
+			result = session.selectOne("notice.count");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null)
+				session.close();
+		}
+		return result;
+	}
+	
 	public void insert(NoticeDTO dto) {
 		SqlSession session = null;
 		try {
