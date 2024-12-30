@@ -10,9 +10,9 @@ import lombok.ToString;
 public class BoardDTO {
 	private int boardNum;
 	private String userID;
+	private String adminId;
 	private String boardTitle;
 	private String userPwd;
-	private String adminPwd;
 	private String boardDate;
 	private int hit;
 	private int groupNum;

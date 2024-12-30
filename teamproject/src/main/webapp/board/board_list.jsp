@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../include/menu.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +18,14 @@ function list(page) {
 </script>
 </head>
 <body>
+<c:choose>
+	<c:when test="${sessionScope.adminId != null }">
+		<%@ include file="../include/admin_menu.jsp" %>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="../include/menu.jsp" %>
+	</c:otherwise>
+</c:choose>
 <h2>1:1 문의</h2>
 <form name="form1" method="post" action="teamproject/board_servlet/search.do">
 <select name="search_option">
@@ -51,7 +58,11 @@ function list(page) {
 </select>
 <input name="keyword" value="${keyword}">
 <input type="submit" value="검색" id="btnSearch">
-<button type="button" id="btnWrite">글쓰기</button>
+<!-- <button type="button" id="btnWrite">글쓰기</button>  -->
+<c:if test="${sessionScope.userID != null }">
+	<input type="hidden" id="userID" value="${sessionScope.userID}">
+    <button type="button" id="btnWrite">글쓰기</button>
+</c:if>
 </form>
 <table border="1" width="900px">
 	<tr>
@@ -71,7 +82,7 @@ function list(page) {
 				<c:forEach var="i" begin="1" end="${dto.re_depth}">
 					&nbsp;&nbsp;
 				</c:forEach>
-				<c:if test="$dto.re_depth > 0">Re:</c:if>
+				<c:if test="${dto.re_depth > 0}">Re:</c:if>
 				<a href="/teamproject/board_servlet/view.do?boardNum=${dto.boardNum}">${dto.boardTitle}</a>
 				<c:if test="${dto.count_comments > 0}">
 					<span style="color: green">( ${dto.count_comments} )</span>

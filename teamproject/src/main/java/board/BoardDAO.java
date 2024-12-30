@@ -149,7 +149,7 @@ public class BoardDAO {
 			session = Mybatis.getInstance().openSession();
 			Map<String, Object> map = new HashMap<>();
 			map.put("boardNum", boardNum);
-			map.put("userPwd", adminPwd);
+			map.put("adminPwd", adminPwd);
 			result = session.selectOne("board.admin_check_pwd", map);
 		} catch (Exception e) {
 			e.printStackTrace();

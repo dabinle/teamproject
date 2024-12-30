@@ -12,40 +12,22 @@ $(function() {
 		document.form1.action="/teamproject/board_servlet/check_pwd.do";
 		document.form1.submit();
 	});
+	
+	$("#btnEdit2").click(function() {
+		document.form1.action="/teamproject/board_servlet/admin_check_pwd.do";
+		document.form1.submit();
+	});
+	
 	$("#btnList").click(function() {
 		location.href="/teamproject/board_servlet/list.do";
 	});
+	
 	list_comment();
-	$("#btnSave").click(function() {
-		insert_comment();
-	});
 	$("#btnReply").click(function() {
 		document.form1.action="/teamproject/board_servlet/input_reply.do";
 		document.form1.submit();
 	});
 });
-function insert_comment() {
-	let params = {"boardNum": ${dto.boardNum}, "userID":$("#userID").val(), "boardContent":$("#boardContent").val()};
-	$.ajax({
-		type: "post",
-		url: "/teamproject/board_servlet/insert_comment.do",
-		data: params,
-		success: function() {
-			$("#userID").val("");
-			$("#boardContent").val("");
-			list_comment();
-		}
-	});
-}
-function list_comment() {
-	$.ajax({
-		url: "/teamproject/board_servlet/list_comment.do",
-		data: {"boardNum": ${dto.boardNum}},
-		success: function(txt) {
-			$("#div_comment").html(txt);
-		}
-	});
-}
 </script>
 </head>
 <body>
@@ -71,10 +53,21 @@ function list_comment() {
 	</tr>
 	<tr>
 		<td align="center">비밀번호</td>
-		<td colspan="3"><input type="password" name="userPwd" id="userPwd">
-			<c:if test="${param.message == 'error'}">
-				<span style="color:red">비밀번호가 일치하지 않습니다.</span>
-			</c:if>
+		<td colspan="3">
+			<c:choose>
+				<c:when test="${sessionScope.adminId != null}">
+					<input type="password" name="adminPwd" id="adminPwd">
+					<c:if test="${param.message == 'error'}">
+						<span style="color:red">비밀번호가 일치하지 않습니다.</span>
+					</c:if>
+				</c:when>
+				<c:otherwise>
+					<input type="password" name="userPwd" id="userPwd">
+					<c:if test="${param.message == 'error'}">
+						<span style="color:red">비밀번호가 일치하지 않습니다.</span>
+					</c:if>
+				</c:otherwise>
+			</c:choose>
 		</td>
 	</tr>
 	<tr>
@@ -89,8 +82,24 @@ function list_comment() {
 	<tr>
 		<td colspan="4" align="center">
 			<input type="hidden" name="boardNum" value="${dto.boardNum}">
-			<input type="button" value="수정/삭제" id="btnEdit">
-			<input type="button" value="답변" id="btnReply">
+			
+			<c:if test="${dto.re_depth == 0}">
+				<c:if test="${dto.userID == sessionScope.userID}">
+					<input type="button" value="수정/삭제" id="btnEdit">
+				</c:if>
+			</c:if>
+			
+			<c:if test="${dto.re_depth > 0}">
+				<c:if test="${dto.adminId == sessionScope.adminId}">
+					<input type="button" value="수정/삭제" id="btnEdit2">
+				</c:if>
+			</c:if>
+      		<c:if test="${dto.re_depth == 0}">
+    			<c:if test="${sessionScope.adminId != null}">
+        			<input type="hidden" id="adminId" value="${sessionScope.adminId}">
+        			<button type="button" id="btnReply">답변</button>
+    			</c:if>
+			</c:if>		
 			<input type="button" value="목록" id="btnList">
 		</td>
 	</tr>

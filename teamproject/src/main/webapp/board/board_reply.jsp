@@ -14,13 +14,22 @@
 <script>
 $(function() {
 	$("#btnSave").click(function() {
-		let boardTitle=$("#boardTitle").val();
-		let boardContent=$("#boardContent").val();
+		let adminId = $("#adminId").val();
+		let boardTitle = $("#boardTitle").val();
+		let boardContent = $("#boardContent").val();
+		
+		if (adminId == "") {
+			alert("아이디를 입력하세요.");
+			$("#adminId").focus();
+			return;
+		}
+		
 		if (boardTitle == "") {
 			alert("제목을 입력하세요.");
 			$("#boardTitle").focus();
 			return;
 		}
+		
 		if (boardContent == "") {
 			alert("내용을 입력하세요.");
 			$("#boardContent").focus();
@@ -35,6 +44,11 @@ $(function() {
 <h2>답변 쓰기</h2>
 <form name="form1" method="post" action="/teamproject/board_servlet/insert_reply.do">
 <table border="1" width="700px">
+	<tr>
+    	<td align="center">아이디</td>
+    	<td colspan="3">${sessionScope.adminId}
+    	<input type="hidden" name="adminId" value="${sessionScope.adminId}"></td>
+	</tr>
 	<tr>
 		<td align="center">제목</td>
 		<td><input name="boardTitle" id="boardTitle" size="60" value="${dto.boardTitle}"></td>

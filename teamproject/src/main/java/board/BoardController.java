@@ -17,7 +17,7 @@ import jakarta.servlet.http.Part;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10, location = "c:/upload/")
 public class BoardController extends HttpServlet {
-	
+	BoardDAO dao = new BoardDAO();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = request.getRequestURL().toString();
 		String contextPath = request.getContextPath();
@@ -52,14 +52,14 @@ public class BoardController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// String userID = request.getParameter("userID");
+			String userID = request.getParameter("userID");
 			String boardTitle = request.getParameter("boardTitle");
-			String boardContent = request.getParameter("boardTitle");
-			// String userpwd = request.getParameter("userPwd");
-			// dto.setUserID(userID);
+			String boardContent = request.getParameter("boardContent");
+			String userpwd = request.getParameter("userPwd");
+			dto.setUserID(userID);
 			dto.setBoardTitle(boardTitle);
 			dto.setBoardContent(boardContent);
-			// dto.setUserPwd(userpwd);
+			dto.setUserPwd(userpwd);
 			if (boardFileName == null || boardFileName.trim().equals("")) {
 				boardFileName = "-";
 			}
@@ -119,16 +119,34 @@ public class BoardController extends HttpServlet {
 		} else if (url.indexOf("check_pwd.do") != -1) {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			String userPwd = request.getParameter("userPwd");
-			String result = dao.check_pwd(boardNum, userPwd);
+			String result = null;
 			String page = "";
-			if (result != null ) {
+			
+			result = dao.check_pwd(boardNum, userPwd);
+			
+			if (result != null) {
 				page = "/board/board_edit.jsp";
 				request.setAttribute("dto", dao.view(boardNum));
-				RequestDispatcher rd = request.getRequestDispatcher(page);
-				rd.forward(request, response);
 			} else {
 				page = contextPath + "/board_servlet/view.do?boardNum=" + boardNum + "&message=error";
 				response.sendRedirect(page);
+				return;
+			}
+		} else if (url.indexOf("admin_check_pwd.do") != -1) {
+			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+			String adminPwd = request.getParameter("adminPwd");
+			String result = null;
+			String page = "";
+			
+			result = dao.admin_check_pwd(boardNum, adminPwd);
+			
+			if (result != null) {
+				page = "/board/board_edit.jsp";
+				request.setAttribute("dto", dao.view(boardNum));
+			} else {
+				page = contextPath + "/board_servlet/view.do?boardNum=" + boardNum + "&message=error";
+				response.sendRedirect(page);
+				return;
 			}
 		} else if (url.indexOf("update.do") != -1) {
 			BoardDTO dto = new BoardDTO();
@@ -148,7 +166,7 @@ public class BoardController extends HttpServlet {
 			}
 			String userID = request.getParameter("userID");
 			String boardTitle = request.getParameter("boardTitle");
-			String boardContent = request.getParameter("boardTitle");
+			String boardContent = request.getParameter("boardContent");
 			String userpwd = request.getParameter("userPwd");
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			String delete_file = request.getParameter("delete_file");
@@ -225,14 +243,14 @@ public class BoardController extends HttpServlet {
 			int group_num = dto.getGroupNum();
 			int re_order = dto.getRe_order() + 1;
 			int re_depth = dto.getRe_depth() + 1;
-			String userID = request.getParameter("userID");
+			String adminId = request.getParameter("adminId");
 			String boardTitle = request.getParameter("boardTitle");
 			String boardContent = request.getParameter("boardTitle");
-			String userpwd = request.getParameter("userPwd");
-			dto.setUserID(userID);
+			// String userpwd = request.getParameter("userPwd");
+			dto.setAdminId(adminId);
 			dto.setBoardTitle(boardTitle);
 			dto.setBoardContent(boardContent);
-			dto.setUserPwd(userpwd);
+			// dto.setUserPwd(userpwd);
 			dto.setGroupNum(group_num);
 			dto.setRe_order(re_order);
 			dto.setRe_depth(re_depth);
@@ -262,8 +280,18 @@ public class BoardController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/board/board_search.jsp");
 			rd.forward(request, response);
 		}
-	}
 	
+	}
+
+	// 관리자 비밀번호 체크
+	private String checkAdminPwd(int boardNum, String adminPwd) {
+	    return dao.admin_check_pwd(boardNum, adminPwd);
+	}
+
+	// 일반 사용자 비밀번호 체크
+	private String checkUserPwd(int boardNum, String userPwd) {
+	    return dao.check_pwd(boardNum, userPwd);
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);	
 	}
