@@ -17,7 +17,11 @@
 	});
 		
 	function list(page) {
-		location.href="/teamproject/notice_servlet/list.do?cur_page="+ page + "&search_option=${search_option}&keyword=${keyword}";
+	    var search_option = '${search_option}';
+	    var keyword = '${keyword}';
+	    location.href = "/teamproject/notice_servlet/list.do?cur_page=" + page 
+	        + "&search_option=" + encodeURIComponent(search_option) 
+	        + "&keyword=" + encodeURIComponent(keyword);
 	}
 </script>
 </head>

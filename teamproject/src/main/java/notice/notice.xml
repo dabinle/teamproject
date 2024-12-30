@@ -52,22 +52,23 @@
 	            from notice n
 	            join admin a on n.adminId = a.adminId
 	            join n_category nc on n.n_categoryNum = nc.n_categoryNum
-	            <choose>
-	                <when test="search_option != 'all'">
-	                    and ${search_option} like '%' || #{keyword} || '%'
-	                </when>
-	                <when test="search_option == 'all'">
-	                    and (n.adminId like '%' || #{keyword} || '%' 
-	                         or noticeTitle like '%' || #{keyword} || '%' 
+	            <where>
+	                <choose>
+	                    <when test="search_option != 'all'">
+	                        ${search_option} like '%' || #{keyword} || '%'
+	                    </when>
+	                    <when test="search_option == 'all'">
+	                        (n.adminId like '%' || #{keyword} || '%'
+	                         or noticeTitle like '%' || #{keyword} || '%'
 	                         or nc.n_categoryName like '%' || #{keyword} || '%')
-	                </when>
-	            </choose>
+	                    </when>
+	                </choose>
+	            </where>
 	            order by noticeNum desc
 	        ) A
 	    )
 	    where rn between #{start} and #{end}
 	</select>
-
 
 
     <select id="search_count" resultType="int">

@@ -23,20 +23,42 @@ public class NoticeController extends HttpServlet{
 		String contextPath = request.getContextPath();
 		NoticeDAO dao = new NoticeDAO();
 		
-		if(url.indexOf("list.do") != -1) {
-			int count = dao.count();
-			int cur_page = 1;
-			if(request.getParameter("cur_page") != null) {
-				cur_page = Integer.parseInt(request.getParameter("cur_page"));
-			}
-			PageUtil page = new PageUtil(count, cur_page);
-			int start = page.getPageBegin();
-			int end = page.getPageEnd();
-			List<NoticeDTO> list = dao.list(start, end);
-			request.setAttribute("list", list);
-			request.setAttribute("page", page);
-			RequestDispatcher rd = request.getRequestDispatcher("/notice/notice_list.jsp");
-			rd.forward(request, response);
+		if (url.indexOf("list.do") != -1) {
+		    String search_option = request.getParameter("search_option");
+		    String keyword = request.getParameter("keyword");
+		    int count;
+		    
+		    // 키워드에 맞게 페이지
+		    if (search_option != null && keyword != null && !keyword.isEmpty()) {
+		        count = dao.count(search_option, keyword); // 검색된 데이터 개수
+		    } else {
+		        count = dao.count(); // 전체 데이터 개수
+		    }
+
+		    int cur_page = 1;
+		    if (request.getParameter("cur_page") != null) {
+		        cur_page = Integer.parseInt(request.getParameter("cur_page"));
+		    }
+
+		    PageUtil page = new PageUtil(count, cur_page);
+		    int start = page.getPageBegin();
+		    int end = page.getPageEnd();
+
+		    List<NoticeDTO> list;
+		    if (search_option != null && keyword != null && !keyword.isEmpty()) {
+		        list = dao.list_search(search_option, keyword, start, end); 
+		    } else {
+		        list = dao.list(start, end); 
+		    }
+
+		    request.setAttribute("list", list);
+		    request.setAttribute("page", page);
+		    request.setAttribute("search_option", search_option); 
+		    request.setAttribute("keyword", keyword); 
+
+		    RequestDispatcher rd = request.getRequestDispatcher("/notice/notice_list.jsp");
+		    rd.forward(request, response);
+		
 		} else if (url.indexOf("insert.do") != -1) {
 			NoticeDTO dto = new NoticeDTO();
 			String noticeFile = "-";
@@ -131,15 +153,22 @@ public class NoticeController extends HttpServlet{
 		    dto.setNoticeFile(noticeFile);
 
 		    dao.update(dto);
+		    
+		    response.setContentType("text/html;charset=UTF-8");  
+			   
+		    response.getWriter().write("<script> alert('공지사항이 수정되었습니다.'); location.href='" + contextPath + "/notice_servlet/list.do';</script>");
 
-		    String page = contextPath + "/notice_servlet/list.do";
-		    response.sendRedirect(page);
+		    //String page = contextPath + "/notice_servlet/list.do";
+		    //response.sendRedirect(page);
 
 		} else if(url.indexOf("delete.do") != -1) {
 			int noticeNum = Integer.parseInt(request.getParameter("noticeNum"));
 			dao.delete(noticeNum);
-			String page = contextPath + "/notice_servlet/list.do";
-			response.sendRedirect(page);
+			
+			response.setContentType("text/html;charset=UTF-8");
+			response.getWriter().write("<script> alert('공지사항이 삭제되었습니다.'); location.href='" + contextPath + "/notice_servlet/list.do';</script>");
+			//String page = contextPath + "/notice_servlet/list.do";
+			//response.sendRedirect(page);
 		} else if (url.indexOf("search.do") != -1) {
 		    String search_option = request.getParameter("search_option");
 		    String keyword = request.getParameter("keyword");
