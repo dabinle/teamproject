@@ -19,7 +19,7 @@ $(function() {
 	$("#btnSave").click(function() {
 		let userID = $("#userID").val();
 		let boardTitle = $("#boardTitle").val();
-		let commentContent = $("#commentContent").val();
+		let boardContent = $("#boardContent").val();
 		let userPwd = $("#userPwd").val();
 		
 		if(userID == "") {
@@ -34,6 +34,11 @@ $(function() {
 			return;
 		}
 		
+		if(boardContent == "") {
+			alert("내용을 입력하세요.");
+			$("#boardContent").focus();
+			return;
+		}
 		
 		let boardFileName = document.form1.file1.value;
 		let start = boardFileName.lastIndexOf(".") + 1;

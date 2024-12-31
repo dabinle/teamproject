@@ -14,8 +14,6 @@ $(function() {
 	});
 	
 	$("#btnEdit2").click(function() {
-		var adminPwd = $("#adminPwd").val();  // adminPwd 입력 필드의 값을 가져옴
-	    console.log("adminPwd:", adminPwd);  
 		document.form1.action="/teamproject/board_servlet/admin_check_pwd.do";
 		document.form1.submit();
 	});
