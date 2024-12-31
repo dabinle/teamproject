@@ -12,3 +12,4 @@ response.sendRedirect("/teamproject/home/home.jsp");
 %>
 </body>
 </html>
+

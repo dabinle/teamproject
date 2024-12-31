@@ -36,7 +36,7 @@
 		select adminPwd 
 		from board b
 		join ADMIN a on b.adminId = a.adminId
-		where  b.boardNum=#{boardNum} 
+		where b.boardNum=#{boardNum} 
 		and a.adminPwd=#{adminPwd, jdbcType=VARCHAR}
 	</select>
 	
