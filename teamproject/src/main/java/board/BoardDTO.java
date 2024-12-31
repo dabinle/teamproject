@@ -13,6 +13,7 @@ public class BoardDTO {
 	private String adminId;
 	private String boardTitle;
 	private String userPwd;
+	private String adminPwd;
 	private String boardDate;
 	private int hit;
 	private int groupNum;

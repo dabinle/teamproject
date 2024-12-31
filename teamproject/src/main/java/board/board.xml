@@ -37,7 +37,7 @@
 		from board b
 		join ADMIN a on b.adminId = a.adminId
 		where  b.boardNum=#{boardNum} 
-		and adminPwd=#{adminPwd, jdbcType=VARCHAR}   
+		and adminPwd=#{adminPwd, jdbcType=VARCHAR}
 	</select>
 	
 	<select id="view" resultType="board.BoardDTO">

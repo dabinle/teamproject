@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>1:1문의 상세 페이지</title>
-<script src="http://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
 $(function() {
 	$("#btnEdit").click(function() {
@@ -14,6 +14,8 @@ $(function() {
 	});
 	
 	$("#btnEdit2").click(function() {
+		var adminPwd = $("#adminPwd").val();  // adminPwd 입력 필드의 값을 가져옴
+	    console.log("adminPwd:", adminPwd);  
 		document.form1.action="/teamproject/board_servlet/admin_check_pwd.do";
 		document.form1.submit();
 	});
@@ -22,7 +24,7 @@ $(function() {
 		location.href="/teamproject/board_servlet/list.do";
 	});
 	
-	list_comment();
+	// list_comment();
 	$("#btnReply").click(function() {
 		document.form1.action="/teamproject/board_servlet/input_reply.do";
 		document.form1.submit();
@@ -56,13 +58,13 @@ $(function() {
 		<td colspan="3">
 			<c:choose>
 				<c:when test="${sessionScope.adminId != null}">
-					<input type="password" name="adminPwd" id="adminPwd">
+					<input type="password" name="adminPwd" id="adminPwd" autocomplete="new-password">
 					<c:if test="${param.message == 'error'}">
 						<span style="color:red">비밀번호가 일치하지 않습니다.</span>
 					</c:if>
 				</c:when>
 				<c:otherwise>
-					<input type="password" name="userPwd" id="userPwd">
+					<input type="password" name="userPwd" id="userPwd" autocomplete="new-password">
 					<c:if test="${param.message == 'error'}">
 						<span style="color:red">비밀번호가 일치하지 않습니다.</span>
 					</c:if>

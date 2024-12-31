@@ -123,29 +123,29 @@ public class BoardController extends HttpServlet {
 			String page = "";
 
 			if (result != null) {
-				page = "/teamproject/board/board_edit.jsp";
+				page = "/board/board_edit.jsp";
 				request.setAttribute("dto", dao.view(boardNum));
+				RequestDispatcher rd = request.getRequestDispatcher(page);
+				rd.forward(request, response);
 			} else {
 				page = contextPath + "/board_servlet/view.do?boardNum=" + boardNum + "&message=error";
 				response.sendRedirect(page);
-				return;
 			}
 		} else if (url.indexOf("admin_check_pwd.do") != -1) {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			String adminPwd = request.getParameter("adminPwd");
-			System.out.println("adminPwd:" + adminPwd);
-			String result = null;
+			String result = dao.admin_check_pwd(boardNum, adminPwd);
 			String page = "";
-			
-			result = dao.admin_check_pwd(boardNum, adminPwd);
 			
 			if (result != null) {
 			    page = "/board/board_edit.jsp";
 			    request.setAttribute("dto", dao.view(boardNum));
+			    RequestDispatcher rd = request.getRequestDispatcher(page);
+				rd.forward(request, response);
+				
 			} else {
 			    page = contextPath + "/board_servlet/view.do?boardNum=" + boardNum + "&message=error";
 			    response.sendRedirect(page);
-			    return;
 			}
 		} else if (url.indexOf("update.do") != -1) {
 			BoardDTO dto = new BoardDTO();
@@ -244,7 +244,7 @@ public class BoardController extends HttpServlet {
 			int re_depth = dto.getRe_depth() + 1;
 			String adminId = request.getParameter("adminId");
 			String boardTitle = request.getParameter("boardTitle");
-			String boardContent = request.getParameter("boardTitle");
+			String boardContent = request.getParameter("boardContent");
 			// String userpwd = request.getParameter("userPwd");
 			dto.setAdminId(adminId);
 			dto.setBoardTitle(boardTitle);
@@ -282,15 +282,7 @@ public class BoardController extends HttpServlet {
 	
 	}
 
-	// 관리자 비밀번호 체크
-	private String checkAdminPwd(int boardNum, String adminPwd) {
-	    return dao.admin_check_pwd(boardNum, adminPwd);
-	}
-
-	// 일반 사용자 비밀번호 체크
-	private String checkUserPwd(int boardNum, String userPwd) {
-	    return dao.check_pwd(boardNum, userPwd);
-	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);	
 	}
