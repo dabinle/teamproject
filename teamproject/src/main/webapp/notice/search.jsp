@@ -26,14 +26,6 @@
 </script>
 </head>
 <body>
-<c:choose>
-	<c:when test="${sessionScope.adminId != null }">
-		<%@ include file="../include/admin_menu.jsp" %>
-	</c:when>
-	<c:otherwise>
-		<%@ include file="../include/menu.jsp" %>
-	</c:otherwise>
-</c:choose>
 <h2 align="center">공지사항</h2>
 <form name="form1" method="post" action="/teamproject/notice_servlet/search.do" align="center">
 <select name="search_option">

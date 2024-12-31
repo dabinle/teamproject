@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="../include/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,15 +26,6 @@
 </script>
 </head>
 <body>
-<c:choose>
-	<c:when test="${sessionScope.adminId != null }">
-		<%@ include file="../include/admin_menu.jsp" %>
-	</c:when>
-	<c:otherwise>
-		<%@ include file="../include/menu.jsp" %>
-	</c:otherwise>
-</c:choose>
-
 <h2 align="center">FAQ</h2>
 <form name="form1" method="post" action="/teamproject/faq_servlet/search.do" align="center">
 <select name="search_option">
