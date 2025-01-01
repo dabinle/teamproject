@@ -55,19 +55,20 @@ $(function() {
 		<td align="center">비밀번호</td>
 		<td colspan="3">
 			<c:choose>
-				<c:when test="${sessionScope.adminId = null}"> <!-- 관리자일때  -->
-					<input type="password" name="adminPwd" id="adminPwd" autocomplete="new-password">
-					<c:if test="${param.message == 'error'}">
-						<span style="color:red">비밀번호가 일치하지 않습니다.</span>
-					</c:if>
-				</c:when>
-				<c:otherwise>
-					<input type="password" name="userPwd" id="userPwd" autocomplete="new-password">
-					<c:if test="${param.message == 'error'}">
-						<span style="color:red">비밀번호가 일치하지 않습니다.</span>
-					</c:if>
-				</c:otherwise>
+			    <c:when test="${sessionScope.adminId == null}"> <!-- 사용자일 때 -->
+			        <input type="password" name="userPwd" id="userPwd" autocomplete="new-password">
+			        <c:if test="${param.message == 'error'}">
+			            <span style="color:red">비밀번호가 일치하지 않습니다.</span>
+			        </c:if>
+			    </c:when>
+			    <c:otherwise> <!-- 관리자일 때 -->
+			        <input type="password" name="adminPwd" id="adminPwd" autocomplete="new-password">
+			        <c:if test="${param.message == 'error'}">
+			            <span style="color:red">비밀번호가 일치하지 않습니다.</span>
+			        </c:if>
+			    </c:otherwise>
 			</c:choose>
+
 		</td>
 	</tr>
 	<tr>
