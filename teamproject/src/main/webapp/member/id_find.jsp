@@ -29,9 +29,9 @@ function IdFind() {
 </script>
 </head>
 <body>
-<h2>아이디 찾기</h2>
-<form name="form1" method="post">
-<table>
+<h2 align="center">아이디 찾기</h2>
+<form name="form1" method="post" align="center">
+<table align="center">
 	<tr>
 		<td align="center">이름</td>
 		<td><input name="userName"></td>
