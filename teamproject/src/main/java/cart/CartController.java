@@ -67,9 +67,9 @@ public class CartController  extends HttpServlet {
 			}
 			response.sendRedirect(path + "/cart_servlet/list.do");
 		} else if (url.indexOf("purchase.do") != -1) {
-			if (userID == null) {
-				response.sendRedirect(path + "/member/login.jsp");
-			}
+			// if (userID == null) {
+			//	response.sendRedirect(path + "/member/login.jsp");
+			//}
 			System.out.println("안녕");
 			CartDTO dto = new CartDTO();
 			dto.setUserID(request.getParameter("userID"));

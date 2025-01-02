@@ -63,7 +63,7 @@ $(function() {
 				<td>
 					<form name="form1" method="post">
 						<input type="hidden" name="productNum" value="${dto.productNum}">
-						<input type="button" value="바로구매" id="btnPurchase">
+						<input type="submit" value="바로구매" id="btnPurchase">
 					</form>
 				</td>
 			</tr>

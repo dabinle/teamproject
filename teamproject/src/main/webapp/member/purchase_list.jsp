@@ -9,6 +9,7 @@
     <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+<%@ include file="../include/menu.jsp" %>
 <h2 align="center">구매내역</h2>
 <form name="form1" method="post" align="center">
 <table border="1" width="800px" align="center">
