@@ -16,7 +16,7 @@ $(function() {
 	});
 	$("#btnDelete2").click(function() {
 		if(confirm("삭제하시겠습니까?")) {
-			document.form1.action="/teamproject/board_servlet/admin_delete.do";
+			document.form1.action="/teamproject/board_servlet/abc.do";
 			document.form1.submit();
 		}
 	});
@@ -79,7 +79,7 @@ $(function() {
 				return;
 			}
 		}
-		document.form1.action="/teamproject/board_servlet/admin_update.do";
+		document.form1.action="/teamproject/board_servlet/efg.do";
 		document.form1.submit();
 	});
 });

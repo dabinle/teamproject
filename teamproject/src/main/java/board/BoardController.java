@@ -217,7 +217,7 @@ public class BoardController extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher(page);
 				rd.forward(request, response);
 			}
-		} else if (url.indexOf("admin_update.do") != -1) {
+		} else if (url.indexOf("efg.do") != -1) {
 			BoardDTO dto = new BoardDTO();
 			String boardFileName = "-";
 			int boardFileSize = 0;
@@ -270,7 +270,7 @@ public class BoardController extends HttpServlet {
 				dto.setBoardFileName(boardFileName);
 				dto.setBoardFileSize(boardFileSize);
 			}
-			String result = dao.check_pwd(boardNum, adminPwd);
+			String result = dao.admin_check_pwd(boardNum, adminPwd);
 			if (result != null) {
 				dao.update(dto);
 				String page = contextPath + "/board_servlet/list.do";
@@ -295,7 +295,7 @@ public class BoardController extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher(page);
 				rd.forward(request, response);
 			}
-		} else if (url.indexOf("admin_delete.do") != -1) {
+		} else if (url.indexOf("abc.do") != -1) {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			String adminPwd = request.getParameter("adminPwd");
 			String result = dao.admin_check_pwd(boardNum, adminPwd);

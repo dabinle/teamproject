@@ -35,6 +35,15 @@ $(function() {
 			$("#boardContent").focus();
 			return;
 		}
+		let boardFileName = document.form1.file1.value;
+		let start = boardFileName.lastIndexOf(".") + 1;
+		if (start != -1) {
+			let ext = boardFileName.substring(start, boardFileName.length);
+			if (ext == "jsp" || ext == "exe") {
+				alert("업로드할 수 없는 파일입니다.");
+				return;
+			}
+		}
 		document.form1.submit();
 	});
 });
@@ -56,6 +65,10 @@ $(function() {
 	<tr>
 		<td align="center">본문</td>
 		<td><textarea rows="5" cols="60" name="boardContent" id="boardContent">${dto.boardContent}</textarea></td>
+	</tr>
+	<tr>
+		<td align="center">첨부파일</td>
+		<td><input type="file" name="file1"></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
