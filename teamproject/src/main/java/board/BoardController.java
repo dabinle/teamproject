@@ -135,7 +135,7 @@ public class BoardController extends HttpServlet {
 				response.sendRedirect(page);
 			}
 		}
-		else if (url.indexOf("admin_check_pwd.do") != -1) {
+		else if (url.indexOf("admin.do") != -1) {
 			//System.out.println("url:"+url+"path:"+contextPath);
 		    int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 		    String adminPwd = request.getParameter("adminPwd"); 
@@ -172,7 +172,7 @@ public class BoardController extends HttpServlet {
 			String userID = request.getParameter("userID");
 			String boardTitle = request.getParameter("boardTitle");
 			String boardContent = request.getParameter("boardContent");
-			String userpwd = request.getParameter("userPwd");
+			String userPwd = request.getParameter("userPwd");
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			String delete_file = request.getParameter("delete_file");
 			if (delete_file != null && delete_file.equals("on")) {
@@ -183,7 +183,7 @@ public class BoardController extends HttpServlet {
 				dto.setUserID(userID);
 				dto.setBoardTitle(boardTitle);
 				dto.setBoardContent(boardContent);
-				dto.setUserPwd(userpwd);
+				dto.setUserPwd(userPwd);
 				dto.setBoardFileName("-");
 				dto.setBoardFileSize(0);
 				dto.setDown(0);
@@ -193,7 +193,7 @@ public class BoardController extends HttpServlet {
 			dto.setUserID(userID);
 			dto.setBoardTitle(boardTitle);
 			dto.setBoardContent(boardContent);
-			dto.setUserPwd(userpwd);
+			dto.setUserPwd(userPwd);
 			if (boardFileName == null || boardFileName.trim().equals("")) {
 				BoardDTO dto2 = dao.view(boardNum);
 				String name = dto2.getBoardFileName();
@@ -206,7 +206,71 @@ public class BoardController extends HttpServlet {
 				dto.setBoardFileName(boardFileName);
 				dto.setBoardFileSize(boardFileSize);
 			}
-			String result = dao.check_pwd(boardNum, userpwd);
+			String result = dao.check_pwd(boardNum, userPwd);
+			if (result != null) {
+				dao.update(dto);
+				String page = contextPath + "/board_servlet/list.do";
+				response.sendRedirect(page);
+			} else {
+				request.setAttribute("dto", dto);
+				String page = "/board/board_edit.jsp?pqd_error=y";
+				RequestDispatcher rd = request.getRequestDispatcher(page);
+				rd.forward(request, response);
+			}
+		} else if (url.indexOf("admin_update.do") != -1) {
+			BoardDTO dto = new BoardDTO();
+			String boardFileName = "-";
+			int boardFileSize = 0;
+			try {
+				for (Part part : request.getParts()) {
+					boardFileName = part.getSubmittedFileName();
+					if (boardFileName != null) {
+						boardFileSize = (int) part.getSize();
+						part.write(boardFileName);
+						break;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			String adminId = request.getParameter("adminId");
+			String boardTitle = request.getParameter("boardTitle");
+			String boardContent = request.getParameter("boardContent");
+			String adminPwd = request.getParameter("adminPwd");
+			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+			String delete_file = request.getParameter("delete_file");
+			if (delete_file != null && delete_file.equals("on")) {
+				String fileName = dao.getFilename(boardNum);
+				File f = new File("c:/upload/" + fileName);
+				f.delete();
+				dto.setBoardNum(boardNum);
+				dto.setAdminId(adminId);
+				dto.setBoardTitle(boardTitle);
+				dto.setBoardContent(boardContent);
+				dto.setAdminPwd(adminPwd);
+				dto.setBoardFileName("-");
+				dto.setBoardFileSize(0);
+				dto.setDown(0);
+				dao.update(dto);
+			}
+			dto.setBoardNum(boardNum);
+			dto.setAdminId(adminId);
+			dto.setBoardTitle(boardTitle);
+			dto.setBoardContent(boardContent);
+			dto.setAdminPwd(adminPwd);
+			if (boardFileName == null || boardFileName.trim().equals("")) {
+				BoardDTO dto2 = dao.view(boardNum);
+				String name = dto2.getBoardFileName();
+				int size = dto2.getBoardFileSize();
+				int down = dto2.getDown();
+				dto.setBoardFileName(name);
+				dto.setBoardFileSize(size);
+				dto.setDown(down);
+			} else {
+				dto.setBoardFileName(boardFileName);
+				dto.setBoardFileSize(boardFileSize);
+			}
+			String result = dao.check_pwd(boardNum, adminPwd);
 			if (result != null) {
 				dao.update(dto);
 				String page = contextPath + "/board_servlet/list.do";
@@ -219,8 +283,8 @@ public class BoardController extends HttpServlet {
 			}
 		} else if (url.indexOf("delete.do") != -1) {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
-			String userpwd = request.getParameter("userPwd");
-			String result = dao.check_pwd(boardNum, userpwd);
+			String userPwd = request.getParameter("userPwd");
+			String result = dao.check_pwd(boardNum, userPwd);
 			if (result != null) {
 				dao.delete(boardNum);
 				String page = contextPath + "/board_servlet/list.do";
@@ -231,7 +295,25 @@ public class BoardController extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher(page);
 				rd.forward(request, response);
 			}
-		} else if (url.indexOf("input_reply.do") != -1) {
+		} else if (url.indexOf("admin_delete.do") != -1) {
+			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+			String adminPwd = request.getParameter("adminPwd");
+			
+			System.out.println("adminPwd: " + adminPwd); 
+			
+			String result = dao.admin_check_pwd(boardNum, adminPwd);
+			if (result != null) {
+				dao.delete(boardNum);
+				String page = contextPath + "/board_servlet/list.do";
+				response.sendRedirect(page);
+			} else {
+				request.setAttribute("dto", dao.view(boardNum));
+				String page = "/board/board_edit.jsp?pwd_error=y";
+				RequestDispatcher rd = request.getRequestDispatcher(page);
+				rd.forward(request, response);
+			}
+		} 
+		else if (url.indexOf("input_reply.do") != -1) {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			BoardDTO dto = dao.view(boardNum);
 			dto.setBoardContent("=====contents====\n" + dto.getBoardContent());

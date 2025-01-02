@@ -66,23 +66,27 @@ public class CartController  extends HttpServlet {
 				dao.update_cart(dto);
 			}
 			response.sendRedirect(path + "/cart_servlet/list.do");
-		} else if (url.indexOf("purchase_list.do") != -1) {
+		} else if (url.indexOf("purchase.do") != -1) {
 			if (userID == null) {
 				response.sendRedirect(path + "/member/login.jsp");
-			} else {
+			}
+			CartDTO dto = new CartDTO();
+			dto.setUserID(userID);
+			dto.setProductName(productName);
+			dto.setProductImage(productImage);
+			dto.setProductNum(Integer.parseInt(request.getParameter("productNum")));
+			dto.setPurchaseAmount(Integer.parseInt(request.getParameter("purchaseAmount")));
+			dto.setPrice(Integer.parseInt(request.getParameter("price")));
+			dao.purchase(dto);
+			response.sendRedirect(path + "/cart_servlet/purchase_list.do");
+		} else if (url.indexOf("purchase_list.do") != -1) {
 				CartDTO dto = new CartDTO();
-				dto.setUserID(userID);
-				dto.setProductName(productName);
-				dto.setProductImage(productImage);
-				dto.setProductNum(Integer.parseInt(request.getParameter("productNum")));
-				dto.setPurchaseAmount(Integer.parseInt(request.getParameter("purchaseAmount")));
-				dto.setPrice(Integer.parseInt(request.getParameter("price")));
-				List<CartDTO> items = dao.purchase(userID);
+				List<CartDTO> items = dao.purchase_list(userID);
 				request.setAttribute("list", items);
 				String page = "/member/purchase_list.jsp";
 				RequestDispatcher rd = request.getRequestDispatcher(page);
 				rd.forward(request, response);
-			}
+			
 		}
 	}
 	

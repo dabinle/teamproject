@@ -7,6 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-3.7.1.js"></script>
+<script>
+$(function() {
+	$("#btnPurchase").click(function() {
+		if(confirm("구매하시겠습니까?")) {
+			document.form2.action="/teamproject/cart_servlet/purchase.do";
+			document.form2.submit();
+		}
+	});
+});
+</script>
 </head>
 <body>
 <h2>상품 정보</h2>
@@ -50,9 +61,9 @@
 			</tr>
 			<tr>
 				<td>
-					<form name="form2" method="post" action="/teamproject/cart_servlet/purchase_list.do">
-					<input type="hidden" name="productNum" value="${dto.productNum}">
-						<input type="submit" value="바로 구매">
+					<form name="form2" method="post">
+						<input type="hidden" name="productNum" value="${dto.productNum}">
+						<input type="button" value="바로구매" id="btnPurchase">
 					</form>
 				</td>
 			</tr>

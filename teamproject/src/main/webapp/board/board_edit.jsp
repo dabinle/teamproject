@@ -14,6 +14,12 @@ $(function() {
 			document.form1.submit();
 		}
 	});
+	$("#admin_btnDelete").click(function() {
+		if(confirm("삭제하시겠습니까?")) {
+			document.form1.action="/teamproject/board_servlet/admin_delete.do";
+			document.form1.submit();
+		}
+	});
 	$("#btnUpdate").click(function() {
 		let boardTitle = $("#boardTitle").val();
 		let boardContent = $("#boardContent").val();
@@ -43,6 +49,37 @@ $(function() {
 			}
 		}
 		document.form1.action="/teamproject/board_servlet/update.do";
+		document.form1.submit();
+	});
+	$("#admin_btnUpdate").click(function() {
+		let boardTitle = $("#boardTitle").val();
+		let boardContent = $("#boardContent").val();
+		let adminPwd = $("#adminPwd").val();
+		if(boardTitle == "") {
+			alert("제목을 입력하세요.");
+			$("#boardTitle").focus();
+			return;
+		}
+		if(boardContent == "") {
+			alert("내용을 입력하세요.");
+			$("#boardTitle").focus();
+			return;
+		}
+		if(adminPwd == "") {
+			alert("비밀번호를 입력하세요.");
+			$("#adminPwd").focus();
+			return;
+		}
+		let boardFileName = document.form1.file1.value;
+		let start = boardFileName.lastIndexOf(".") + 1;
+		if (start != -1) {
+			let ext = boardFileName.substring(start, boardFileName.length);
+			if (ext == "jsp" || ext == "exe") {
+				alert("업로드할 수 없는 파일입니다.");
+				return;
+			}
+		}
+		document.form1.action="/teamproject/board_servlet/admin_update.do";
 		document.form1.submit();
 	});
 });
@@ -80,8 +117,20 @@ $(function() {
 	<tr>
 		<td colspan="2" align="center">
 			<input type="hidden" name="boardNum" value="${dto.boardNum}">
-			<input type="button" value="수정" id="btnUpdate">
-			<input type="button" value="삭제" id="btnDelete">
+			<c:choose>
+	    		<c:when test="${dto.re_depth == 0}">
+			        <c:if test="${dto.userID == sessionScope.userID}">
+			            <input type="button" value="수정" id="btnUpdate">
+			            <input type="button" value="삭제" id="btnDelete">
+			        </c:if>
+			    </c:when>
+			    <c:when test="${dto.re_depth > 0}">        
+			        <c:if test="${dto.adminId == sessionScope.adminId}">
+			            <input type="button" value="수정" id="admin_btnUpdate">
+			            <input type="button" value="삭제" id="admin_btnDelete">
+			        </c:if>
+			    </c:when>
+			</c:choose>
 		</td>
 	</tr>
 </table>
