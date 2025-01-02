@@ -48,6 +48,14 @@
 					</form>
 				</td>
 			</tr>
+			<tr>
+				<td>
+					<form name="form2" method="post" action="/teamproject/cart_servlet/purchase_list.do">
+					<input type="hidden" name="productNum" value="${dto.productNum}">
+						<input type="submit" value="바로 구매">
+					</form>
+				</td>
+			</tr>
 		</table>
 	</td>
 	</tr>

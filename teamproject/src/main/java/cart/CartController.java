@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import product.ProductDTO;
 
 public class CartController  extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -19,6 +20,8 @@ public class CartController  extends HttpServlet {
 		CartDAO dao = new CartDAO();
 		HttpSession session = request.getSession();
 		String userID = (String) session.getAttribute("userID");
+		String productName = (String) session.getAttribute("productName");
+		String productImage = (String) session.getAttribute("productImage");
 		
 		if (url.indexOf("insert.do") != -1) {
 			if (userID == null) {
@@ -63,6 +66,23 @@ public class CartController  extends HttpServlet {
 				dao.update_cart(dto);
 			}
 			response.sendRedirect(path + "/cart_servlet/list.do");
+		} else if (url.indexOf("purchase_list.do") != -1) {
+			if (userID == null) {
+				response.sendRedirect(path + "/member/login.jsp");
+			} else {
+				CartDTO dto = new CartDTO();
+				dto.setUserID(userID);
+				dto.setProductName(productName);
+				dto.setProductImage(productImage);
+				dto.setProductNum(Integer.parseInt(request.getParameter("productNum")));
+				dto.setPurchaseAmount(Integer.parseInt(request.getParameter("purchaseAmount")));
+				dto.setPrice(Integer.parseInt(request.getParameter("price")));
+				List<CartDTO> items = dao.purchase(userID);
+				request.setAttribute("list", items);
+				String page = "/member/purchase_list.jsp";
+				RequestDispatcher rd = request.getRequestDispatcher(page);
+				rd.forward(request, response);
+			}
 		}
 	}
 	

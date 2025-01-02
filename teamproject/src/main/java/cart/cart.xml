@@ -15,6 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by productName
 	</select>
 	
+	<select id="list_purchase" resultType="cart.CartDTO">
+		select productNum, productName, price, purchaseAmount, productImage
+		from member m, cart c, product p
+		where m.userID = c.userID and c.productNum=p.productNum and c.userID=#{userID}
+	</select>
+	
 	<delete id="delete_cart">
 		delete from cart where cartNum=#{cartNum}
 	</delete>
