@@ -18,15 +18,7 @@ function list(page) {
 </script>
 </head>
 <body>
-<c:choose>
-	<c:when test="${sessionScope.adminId != null }">
-		<%@ include file="../include/admin_menu.jsp" %>
-	</c:when>
-	<c:otherwise>
-		<%@ include file="../include/menu.jsp" %>
-	</c:otherwise>
-</c:choose>
-<h2>1:1 문의</h2>
+<h2 align="center">1:1 문의</h2>
 <form name="form1" method="post" action="teamproject/board_servlet/search.do">
 <select name="search_option">
 <c:choose>

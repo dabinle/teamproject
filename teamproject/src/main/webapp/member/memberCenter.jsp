@@ -57,7 +57,7 @@ $(function() {
     </c:otherwise>
 </c:choose>
 
-<h2 align="center">고객센터</h2>
+<h2>고객센터</h2>
 <nav id="n1">
     <a href="/teamproject/faq/faq_index.jsp">FAQ</a>
     <a href="/teamproject/board/board_index.jsp">1:1 문의</a>

@@ -121,6 +121,7 @@ public class BoardController extends HttpServlet {
 			String userPwd = request.getParameter("userPwd");
 			String result = dao.check_pwd(boardNum, userPwd);
 			String page = "";
+			System.out.println("url:"+url+"path:"+contextPath);
 			
 			System.out.println("userPwd: " + userPwd); 
 
@@ -133,7 +134,9 @@ public class BoardController extends HttpServlet {
 				page = contextPath + "/board_servlet/view.do?boardNum=" + boardNum + "&message=error";
 				response.sendRedirect(page);
 			}
-		} else if (url.indexOf("admin_check_pwd.do") != -1) {
+		}
+		else if (url.indexOf("admin_check_pwd.do") != -1) {
+			//System.out.println("url:"+url+"path:"+contextPath);
 		    int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 		    String adminPwd = request.getParameter("adminPwd"); 
 		    String result = dao.admin_check_pwd(boardNum, adminPwd); 
