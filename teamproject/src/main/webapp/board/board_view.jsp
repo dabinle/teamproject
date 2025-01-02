@@ -52,24 +52,23 @@ $(function() {
 		<td colspan="3">${dto.boardContent}</td>
 	</tr>
 	<tr>
-		<td align="center">비밀번호</td>
-		<td colspan="3">
-			<c:choose>
-			    <c:when test="${sessionScope.adminId == null}"> <!-- 사용자일 때 -->
-			        <input type="password" name="userPwd" id="userPwd" autocomplete="new-password">
-			        <c:if test="${param.message == 'error'}">
-			            <span style="color:red">비밀번호가 일치하지 않습니다.</span>
-			        </c:if>
-			    </c:when>
-			    <c:otherwise> <!-- 관리자일 때 -->
-			        <input type="password" name="adminPwd" id="adminPwd" autocomplete="new-password">
-			        <c:if test="${param.message == 'error'}">
-			            <span style="color:red">비밀번호가 일치하지 않습니다.</span>
-			        </c:if>
-			    </c:otherwise>
-			</c:choose>
-
-		</td>
+	    <td align="center">비밀번호</td>
+	    <td colspan="3">
+	        <c:choose>
+	            <c:when test="${sessionScope.adminId == null}"> <!-- 사용자일 때 -->
+	                <input type="password" name="userPwd" id="userPwd">
+	                <c:if test="${param.message == 'error'}">
+	                    <span style="color:red">비밀번호가 일치하지 않습니다.</span>
+	                </c:if>
+	            </c:when>
+	            <c:otherwise> <!-- 관리자일 때 -->
+	                <input type="password" name="adminPwd" id="adminPwd">
+	                <c:if test="${param.message == 'error'}">
+	                    <span style="color:red">비밀번호가 일치하지 않습니다.</span>
+	                </c:if>
+	            </c:otherwise>
+	        </c:choose>
+	    </td>
 	</tr>
 	<tr>
 		<td align="center">첨부파일</td>
@@ -95,7 +94,6 @@ $(function() {
 			        </c:if>
 			    </c:when>
 			</c:choose>
-			
 			<c:if test="${sessionScope.adminId != null && dto.re_depth == 0}">
     			<input type="hidden" id="adminId" value="${sessionScope.adminId}">
     			<button type="button" id="btnReply">답변</button>
