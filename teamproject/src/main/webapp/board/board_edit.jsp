@@ -14,7 +14,7 @@ $(function() {
 			document.form1.submit();
 		}
 	});
-	$("#admin_btnDelete").click(function() {
+	$("#btnDelete2").click(function() {
 		if(confirm("삭제하시겠습니까?")) {
 			document.form1.action="/teamproject/board_servlet/admin_delete.do";
 			document.form1.submit();
@@ -51,7 +51,7 @@ $(function() {
 		document.form1.action="/teamproject/board_servlet/update.do";
 		document.form1.submit();
 	});
-	$("#admin_btnUpdate").click(function() {
+	$("#btnUpdate2").click(function() {
 		let boardTitle = $("#boardTitle").val();
 		let boardContent = $("#boardContent").val();
 		let adminPwd = $("#adminPwd").val();
@@ -126,8 +126,8 @@ $(function() {
 			    </c:when>
 			    <c:when test="${dto.re_depth > 0}">        
 			        <c:if test="${dto.adminId == sessionScope.adminId}">
-			            <input type="button" value="수정" id="admin_btnUpdate">
-			            <input type="button" value="삭제" id="admin_btnDelete">
+			            <input type="button" value="수정" id="btnUpdate2">
+			            <input type="button" value="삭제" id="btnDelete2">
 			        </c:if>
 			    </c:when>
 			</c:choose>
