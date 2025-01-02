@@ -108,11 +108,22 @@ $(function() {
 	</tr>
 	<tr>
 		<td align="center">비밀번호</td>
-		<td><input type="password" name="userPwd" id="userPwd">
-			<c:if test="${param.pwd_error == 'y'}">
-				<span style="color:red">비밀번호가 틀렸습니다.</span>
-			</c:if>
-		</td>
+		<td colspan="3">
+	        <c:choose>
+	            <c:when test="${sessionScope.adminId == null}"> <!-- 사용자일 때 -->
+	                <input type="password" name="userPwd" id="userPwd">
+	                <c:if test="${param.message == 'error'}">
+	                    <span style="color:red">비밀번호가 일치하지 않습니다.</span>
+	                </c:if>
+	            </c:when>
+	            <c:otherwise> <!-- 관리자일 때 -->
+	                <input type="password" name="adminPwd" id="adminPwd">
+	                <c:if test="${param.message == 'error'}">
+	                    <span style="color:red">비밀번호가 일치하지 않습니다.</span>
+	                </c:if>
+	            </c:otherwise>
+	        </c:choose>
+	    </td>
 	</tr>
 	<tr>
 		<td colspan="2" align="center">

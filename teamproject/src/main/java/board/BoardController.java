@@ -298,9 +298,6 @@ public class BoardController extends HttpServlet {
 		} else if (url.indexOf("admin_delete.do") != -1) {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			String adminPwd = request.getParameter("adminPwd");
-			
-			System.out.println("adminPwd: " + adminPwd); 
-			
 			String result = dao.admin_check_pwd(boardNum, adminPwd);
 			if (result != null) {
 				dao.delete(boardNum);
