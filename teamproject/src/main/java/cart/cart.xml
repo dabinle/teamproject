@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="list_purchase" resultType="cart.CartDTO">
-		select productNum, productName, price, purchaseAmount, productImage
+		select productNum, productName, price, productImage
 		from member m, cart c, product p
 		where m.userID = c.userID and c.productNum=p.productNum and c.userID=#{userID, jdbcType=VARCHAR}
 	</select>

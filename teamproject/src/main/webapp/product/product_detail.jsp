@@ -12,8 +12,8 @@
 $(function() {
 	$("#btnPurchase").click(function() {
 		if(confirm("구매하시겠습니까?")) {
-			document.form2.action="/teamproject/cart_servlet/purchase.do";
-			document.form2.submit();
+			document.form1.action="/teamproject/cart_servlet/purchase.do";
+			document.form1.submit();
 		}
 	});
 });
@@ -61,9 +61,9 @@ $(function() {
 			</tr>
 			<tr>
 				<td>
-					<form name="form2" method="post">
+					<form name="form1" method="post">
 						<input type="hidden" name="productNum" value="${dto.productNum}">
-						<input type="button" value="바로구매" id="btnPurchase">
+						<input type="submit" value="바로구매" id="btnPurchase">
 					</form>
 				</td>
 			</tr>
