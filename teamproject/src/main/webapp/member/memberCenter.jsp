@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>FAQ</title>
+<link rel="stylesheet" href="../home/css/home.css">
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 $(function() {

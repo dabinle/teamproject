@@ -19,7 +19,7 @@ function list(page) {
 </head>
 <body>
 <h2 align="center">1:1 문의</h2>
-<form name="form1" method="post" action="teamproject/board_servlet/search.do">
+<form name="form1" method="post" action="teamproject/board_servlet/search.do" align="center">
 <select name="search_option">
 <c:choose>
 	<c:when test="${search_option == null || search_option == 'all' }">
@@ -56,7 +56,7 @@ function list(page) {
     <button type="button" id="btnWrite">글쓰기</button>
 </c:if>
 </form>
-<table border="1" width="900px">
+<table border="1" width="900px" align="center">
 	<tr>
 		<th>번호</th>
 		<th>아이디</th>
