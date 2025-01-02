@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="../include/header.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,6 +50,17 @@ $(function() {
 </script>
 </head>
 <body>
+<div>
+    <c:choose>
+        <c:when test="${sessionScope.adminId != null}">
+            <%@ include file="../include/admin_menu.jsp" %>
+        </c:when>
+        <c:otherwise>
+            <%@ include file="../include/menu.jsp" %>
+        </c:otherwise>
+    </c:choose>
+</div>
+
 <h2>고객센터</h2>
 <nav id="n1">
     <a href="/teamproject/faq/faq_index.jsp">FAQ</a>

@@ -34,9 +34,8 @@ function update_notice() {
 }
 </script>
 </head>
-<%@ include file="../include/header.jsp" %>
 <body>
-<h2 align="center">공지사항 수정</h2>
+<h2 align="center">FAQ 수정</h2>
 <form name="form1" method="post" align="center">
 
 <table border="1" width="700px" align="center">

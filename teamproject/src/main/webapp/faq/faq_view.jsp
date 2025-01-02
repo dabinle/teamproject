@@ -17,7 +17,7 @@
       <%@ include file="../include/menu.jsp" %>
    </c:otherwise>
 </c:choose>
-<h2 align="center">공지사항</h2>
+<h2 align="center">FAQ</h2>
 <table align="center">
 	<tr>
 		<td align="center">
