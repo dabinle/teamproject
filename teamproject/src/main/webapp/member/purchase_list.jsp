@@ -9,15 +9,7 @@
     <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-<c:choose>
-	<c:when test="${sessionScope.adminId != null }">
-		<%@ include file="../include/admin_menu.jsp" %>
-	</c:when>
-	<c:otherwise>
-		<%@ include file="../include/menu.jsp" %>
-	</c:otherwise>
-</c:choose>
-<h2 align="center">상품목록</h2>
+<h2 align="center">구매내역</h2>
 <form name="form1" method="post" align="center">
 <table border="1" width="800px" align="center">
    <tr align="center">
@@ -25,7 +17,6 @@
       <th>상품명</th>
       <th>이미지</th>
       <th>가격</th>
-      <th>개수</th>
    </tr>
    <c:forEach var="row" items="${list}">
    <tr align="center">
@@ -34,7 +25,6 @@
       </td>
       <td><img src="/teamproject/images/${row.productImage}" width="100px" height="100px"></td>
       <td><fmt:formatNumber value="${row.price}" pattern="#,###"/></td>
-      <td>${row.purchaseAmount}</td>
    </tr>
    </c:forEach>
 </table>
