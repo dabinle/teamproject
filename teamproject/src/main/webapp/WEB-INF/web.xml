@@ -90,4 +90,13 @@
   	<servlet-name>FaqController</servlet-name>
   	<url-pattern>/faq_servlet/*</url-pattern>
   </servlet-mapping>
+  <!-- 찜 -->
+  <servlet>
+  	<servlet-name>WishController</servlet-name>
+  	<servlet-class>wish.WishController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>WishController</servlet-name>
+  	<url-pattern>/wish_servlet/*</url-pattern>
+  </servlet-mapping>
 </web-app>
