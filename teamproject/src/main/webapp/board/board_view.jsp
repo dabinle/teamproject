@@ -33,6 +33,14 @@ $(function() {
 </script>
 </head>
 <body>
+<c:choose>
+   <c:when test="${sessionScope.adminId != null }">
+      <%@ include file="../include/admin_menu.jsp" %>
+   </c:when>
+   <c:otherwise>
+      <%@ include file="../include/menu.jsp" %>
+   </c:otherwise>
+</c:choose>
 <form name="form1" method="post">
 <table border="1" width="700px">
 	<tr>

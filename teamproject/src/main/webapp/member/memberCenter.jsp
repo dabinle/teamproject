@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="../include/header.jsp" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -51,8 +51,6 @@ $(function() {
 </script>
 </head>
 <body>
-
-
 <div id="content"></div>
 </body>
 </html>
