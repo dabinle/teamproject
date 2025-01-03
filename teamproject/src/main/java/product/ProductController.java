@@ -23,7 +23,7 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = request.getRequestURI();
         String path = request.getContextPath();
-        System.out.println("url:"+url+"path:"+path);
+        //System.out.println("url:"+url+"path:"+path);
         ProductDAO productDao = new ProductDAO();  
         AdminProductDAO adminDao = new AdminProductDAO();  
 
@@ -46,7 +46,7 @@ public class ProductController extends HttpServlet {
         }
         
         else if(url.indexOf("if_category.do")!=-1){
-            System.out.println("이프카테고리");
+            //System.out.println("이프카테고리");
             int p_categoryNum = Integer.parseInt(request.getParameter("p_categoryNum"));
             List<CategoryDTO> category = adminDao.listCategory(p_categoryNum);
             request.setAttribute("category", category);
@@ -80,7 +80,7 @@ public class ProductController extends HttpServlet {
             rd.forward(request, response);
 
         }  else if (url.indexOf("insert.do")!=-1) {
-            System.out.println("인서트");
+            //System.out.println("인서트");
             ServletContext application = request.getSession().getServletContext();
             String img_path = application.getRealPath("/images/");
             String productImage = "";
