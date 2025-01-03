@@ -44,10 +44,12 @@ public class ProductDAO {
         return p_category;   
      }
     
-	  public List<CompanyDTO> listCompany() {
-	        SqlSession session = Mybatis.getInstance().openSession();
-	        List<CompanyDTO> company = session.selectList("product.list_company");
-	        session.close();
-	        return company;
-	     }
+    public List<CompanyDTO> listCompany() {
+	     SqlSession session = Mybatis.getInstance().openSession();
+	     List<CompanyDTO> company = session.selectList("product.list_company");
+	     session.close();
+	     return company;
+	  }
+	  
+  
 }

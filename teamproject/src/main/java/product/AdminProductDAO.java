@@ -10,6 +10,8 @@ import sqlmap.Mybatis;
 
 public class AdminProductDAO {
 
+	
+	
     public List<ProductDTO> adminListProduct() { // 관리자용 상품 목록 조회
         SqlSession session = Mybatis.getInstance().openSession();
         List<ProductDTO> list = session.selectList("product.list_product");
