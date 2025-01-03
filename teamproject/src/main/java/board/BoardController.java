@@ -105,9 +105,6 @@ public class BoardController extends HttpServlet {
 			String userPwd = request.getParameter("userPwd");
 			String result = dao.check_pwd(boardNum, userPwd);
 			String page = "";
-			System.out.println("url:"+url+"path:"+contextPath);
-			
-			System.out.println("userPwd: " + userPwd); 
 
 			if (result != null) {
 				page = "/board/board_edit.jsp";
@@ -120,14 +117,11 @@ public class BoardController extends HttpServlet {
 			}
 		}
 		else if (url.indexOf("admin.do") != -1) {
-			//System.out.println("url:"+url+"path:"+contextPath);
 		    int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 		    String adminPwd = request.getParameter("adminPwd"); 
 		    String result = dao.admin_check_pwd(boardNum, adminPwd); 
 		    String page = "";
 		   
-		    System.out.println("adminPwd: " + adminPwd); 
-		    
 		    if (result != null) {
 		        page = "/board/board_edit.jsp";
 		        request.setAttribute("dto", dao.view(boardNum));
@@ -294,6 +288,7 @@ public class BoardController extends HttpServlet {
 				rd.forward(request, response);
 			}
 		} 
+		
 		else if (url.indexOf("input_reply.do") != -1) {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			BoardDTO dto = dao.view(boardNum);
@@ -302,11 +297,13 @@ public class BoardController extends HttpServlet {
 			String page = "/board/board_reply.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(page);
 			rd.forward(request, response);
+			
 		} else if (url.indexOf("insert_reply.do") != -1) {
 			int boardNum = 0;
 			if (request.getParameter("boardNum") != null) {
 				boardNum = Integer.parseInt(request.getParameter("boardNum")); 
 			}
+			
 			BoardDTO dto = dao.view(boardNum);
 			int group_num = dto.getGroupNum();
 			int re_order = dto.getRe_order() + 1;
@@ -314,11 +311,10 @@ public class BoardController extends HttpServlet {
 			String adminId = request.getParameter("adminId");
 			String boardTitle = request.getParameter("boardTitle");
 			String boardContent = request.getParameter("boardContent");
-			// String userpwd = request.getParameter("userPwd");
+
 			dto.setAdminId(adminId);
 			dto.setBoardTitle(boardTitle);
 			dto.setBoardContent(boardContent);
-			// dto.setUserPwd(userpwd);
 			dto.setGroupNum(group_num);
 			dto.setRe_order(re_order);
 			dto.setRe_depth(re_depth);
@@ -328,18 +324,22 @@ public class BoardController extends HttpServlet {
 			dao.update_order(group_num, re_order);
 			dao.insert_reply(dto);
 			String page = "/board_servlet/list.do";
-			response.sendRedirect(request.getContextPath() + page);			
+			response.sendRedirect(request.getContextPath() + page);	
+			
 		} else if (url.indexOf("search.do") != -1) {
 			String search_option = request.getParameter("search_option");
 			String keyword = request.getParameter("keyword");
 			int count = dao.count(search_option, keyword);
 			int cur_page = 1;
+			
 			if (request.getParameter("cur_page") != null) {
 				cur_page = Integer.parseInt(request.getParameter("cur_page"));
 			}
+			
 			PageUtil page = new PageUtil(count, cur_page);
 			int start = page.getPageBegin();
 			int end = page.getPageEnd();
+			
 			List<BoardDTO> list = dao.list_search(search_option, keyword, start, end);
 			request.setAttribute("list", list);
 			request.setAttribute("search_option", search_option);
@@ -348,9 +348,7 @@ public class BoardController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/board/board_search.jsp");
 			rd.forward(request, response);
 		}
-	
 	}
-
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);	

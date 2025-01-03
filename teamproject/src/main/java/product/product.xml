@@ -7,7 +7,7 @@
 		from product p, product_category pc, company c 
 		where p.p_categoryNum = pc.p_categoryNum and p.companyNum = c.companyNum order by productNum 
 	</select>
-	
+		
 	<select id="detail_product" resultType="product.ProductDTO"> 
 		select productNum, productName, description, price, amount, p.p_categoryNum, p.companyNum, productImage, pc.p_categoryName, c.companyName from product p, product_category pc, company c where p.p_categoryNum = pc.p_categoryNum and p.companyNum = c.companyNum and productNum = #{productNum} 
 	</select>

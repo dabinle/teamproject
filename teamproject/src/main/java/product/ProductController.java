@@ -29,7 +29,7 @@ public class ProductController extends HttpServlet {
 
         // 고객 관련 요청
         if (url.indexOf("list.do") != -1) { // 관리자 상품 목록
-            List<ProductDTO> items = adminDao.adminListProduct(); 
+            List<ProductDTO> items = adminDao.adminListProduct();         
             request.setAttribute("list", items);
             RequestDispatcher rd = request.getRequestDispatcher("/product/admin_product_list.jsp");
             rd.forward(request, response);
