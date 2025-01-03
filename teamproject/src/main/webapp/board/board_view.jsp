@@ -24,7 +24,6 @@ $(function() {
 		location.href="/teamproject/board_servlet/list.do";
 	});
 	
-	// list_comment();
 	$("#btnReply").click(function() {
 		document.form1.action="/teamproject/board_servlet/input_reply.do";
 		document.form1.submit();

@@ -95,34 +95,6 @@ public class BoardDAO {
 		}
 	}
 	
-	public void inser_comment(BoardCommentDTO dto) {
-		SqlSession session = null;
-		try {
-			session = Mybatis.getInstance().openSession();
-			session.insert("board.insert_comment", dto);
-			session.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null)
-				session.close();
-		}
-	}
-	
-	public List<BoardCommentDTO> list_comment(int boardNum) {
-		List<BoardCommentDTO> list = null;
-		SqlSession session = null;
-		try {
-			session = Mybatis.getInstance().openSession();
-			list = session.selectList("board.list_comment", boardNum);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null)
-				session.close();
-		}
-		return list;		
-	}
 	
 	public String check_pwd(int boardNum, String userPwd) {
 		String result = null;

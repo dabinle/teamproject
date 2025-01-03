@@ -100,22 +100,6 @@ public class BoardController extends HttpServlet {
 			out.close();
 			fis.close();
 			dao.plus_down(boardNum);
-		} else if (url.indexOf("insert_comment.do") != -1) {
-			BoardCommentDTO dto = new BoardCommentDTO();
-			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
-			String adminId = request.getParameter("userID");
-			String commentContent = request.getParameter("boardContent");
-			dto.setBoardNum(boardNum);
-			dto.setAdminId(adminId);
-			dto.setCommentContent(commentContent);
-			dao.inser_comment(dto);
-		} else if (url.indexOf("list_comment.do") != -1) {
-			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
-			List<BoardCommentDTO> list = dao.list_comment(boardNum);
-			request.setAttribute("list", list);
-			String page = "/board/list_comment.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(page);
-			rd.forward(request, response);
 		} else if (url.indexOf("check_pwd.do") != -1) {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			String userPwd = request.getParameter("userPwd");

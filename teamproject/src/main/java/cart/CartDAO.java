@@ -92,36 +92,4 @@ public class CartDAO {
 		session.close();
 		return total;
 	}
-	
-	public void purchase(CartDTO dto) {
-		SqlSession session = null;
-		try {
-			session = Mybatis.getInstance().openSession();
-			session.update("cart.list_purchase", dto);
-			session.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null)
-				session.close();
-		}
-	}
-
-	public List<CartDTO> purchase_list(String userID) {
-		SqlSession session = null;
-		List<CartDTO> list = null;
-		try {
-			session = Mybatis.getInstance().openSession();
-			session.selectList("cart.list_purchase", userID);
-			session.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null)
-				session.close();
-		}
-		return list;
-	}
-	
-	
 }

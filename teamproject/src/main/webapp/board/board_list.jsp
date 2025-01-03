@@ -20,7 +20,7 @@ function list(page) {
 </head>
 <body>
 <h2 align="center">1:1 문의</h2>
-<form name="form1" method="post" action="teamproject/board_servlet/search.do" align="center">
+<form name="form1" method="post" action="/teamproject/board_servlet/search.do" align="center">
 <select name="search_option">
 <c:choose>
 	<c:when test="${search_option == null || search_option == 'all' }">
