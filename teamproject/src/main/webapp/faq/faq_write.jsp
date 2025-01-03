@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../include/admin_menu.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,11 +28,10 @@ function f_insert() {
 	document.form1.submit();
 }
 </script>
-<%@ include file="../include/header.jsp" %>
 </head>
 <body>
 <h2 align="center">FAQ 글쓰기</h2>
-<form name= "form1" method="post" align="center">
+<form name= "form1" method="post">
 	<table align="center">
 		<tr>
 			<td>카테고리: </td>

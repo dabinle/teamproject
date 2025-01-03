@@ -41,7 +41,7 @@ function n_insert() {
 </head>
 <body>
 <h2 align="center">공지사항 글쓰기</h2>
-<form name= "form1" method="post" enctype="multipart/form-data" align="center">
+<form name= "form1" method="post" enctype="multipart/form-data">
 	<table align="center">
 		<tr>
 			<td>카테고리: </td>
