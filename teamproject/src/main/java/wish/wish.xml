@@ -2,4 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wish">
 
+	<!-- 찜하기 -->
+	<insert id="wish_insert">
+		INSERT INTO wish(wishNum, userID, productNum) VALUES(seq_wish.nextval,#{userID},#{productNum})
+	</insert>
+	
+	<!-- 찜 이미 했는지 확인 -->
+	<select id="wish_count" resultType="int">
+		select count(*) 
+		from wish w, product p, member m
+		where w.productNum = p.productNum and m.userID = w.userID
+		and productNum=#{productNum} AND userID=#{userID}
+	</select>
+	
+	<select id="wish_getproductNum" resultType="int">
+		SELECT p.productNum, p.productName, p.price, p.productImage, p.companyNum, p.p_categoryNum 
+		from wish w, product p, member m
+		where w.productNum = p.productNum and m.userID = w.userID
+		and productNum=#{productNum} AND userID=#{userID}
+	</select>
+	
+	
+	<delete id="wish_delete">
+		delete 
+		from wish w, product p, member m
+		where w.productNum = p.productNum and m.userID = w.userID
+		and productNum=#{productNum} AND userID=#{userID}
+	</delete>
 </mapper>

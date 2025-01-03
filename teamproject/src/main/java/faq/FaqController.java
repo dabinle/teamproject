@@ -56,6 +56,7 @@ public class FaqController extends HttpServlet{
 		} else if(url.indexOf("insert.do") != -1) {
 			FaqDTO dto = new FaqDTO();
 			
+			
 			String adminId = request.getParameter("adminId");
 			String qusetion = request.getParameter("qusetion");
 			String f_answer = request.getParameter("f_answer");
