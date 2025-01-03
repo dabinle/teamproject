@@ -12,7 +12,6 @@ public class CartDTO {
 	private String userID;
 	private int productNum;
 	private int cartAmount;
-	private int purchaseAmount;
 	private String productImage;
 	private String productName;
 	private int price;

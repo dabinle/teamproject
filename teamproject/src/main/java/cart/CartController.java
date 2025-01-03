@@ -66,28 +66,7 @@ public class CartController  extends HttpServlet {
 				dao.update_cart(dto);
 			}
 			response.sendRedirect(path + "/cart_servlet/list.do");
-		} else if (url.indexOf("purchase.do") != -1) {
-			// if (userID == null) {
-			//	response.sendRedirect(path + "/member/login.jsp");
-			//}
-			System.out.println("안녕");
-			CartDTO dto = new CartDTO();
-			dto.setUserID(request.getParameter("userID"));
-			dto.setProductName(request.getParameter("productName"));
-			dto.setProductImage(request.getParameter("productImage"));
-			dto.setProductNum(Integer.parseInt(request.getParameter("productNum")));
-			// dto.setPurchaseAmount(Integer.parseInt(request.getParameter("purchaseAmount")));
-			dto.setPrice(Integer.parseInt(request.getParameter("price")));
-			dao.purchase(dto);
-			response.sendRedirect(path + "/cart_servlet/purchase_list.do");
-			
-		} else if (url.indexOf("purchase_list.do") != -1) {
-				List<CartDTO> items = dao.purchase_list(userID);
-				request.setAttribute("list", items);
-				String page = "/member/purchase_list.jsp";
-				RequestDispatcher rd = request.getRequestDispatcher(page);
-				rd.forward(request, response);
-		}
+		} 
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
