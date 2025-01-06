@@ -11,6 +11,7 @@
 <h1>마이페이지</h1>
 <h4>my 쇼핑</h4>
 <a href="/teamproject/wish/wish_list.jsp">찜</a><br>
+<a href="/teamproject/review/my_review.jsp">리뷰 관리</a><br>
 <h4>my정보</h4>
 <a href="/teamproject/login_servlet/updatePage.do">회원정보 수정</a><br>
 <a href="/teamproject/member/member_delete.jsp">회원 탈퇴</a><br>

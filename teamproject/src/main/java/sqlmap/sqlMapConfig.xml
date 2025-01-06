@@ -28,5 +28,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-co
     	<mapper resource="notice/notice.xml" />
     	<mapper resource="faq/faq.xml"/>
     	<mapper resource="board/board.xml" />
+    	<mapper resource="review/review.xml" />
     </mappers>
 </configuration>
