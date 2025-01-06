@@ -2,18 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="review">
 
-<select id="list" resultType="review.ReviewDTO">
-		select * 
-		    from (
-		        select rownum as rn, A.*
-		        from (
-		            select reviewNum, userID, reviewDate, reviewContent, reviewFile 
-		            from review r
-		            join member m on r.userID = m.userID
-		            order by reviewNum desc
-		        ) A
-		    )
-		    where rn between #{start} and #{end}	 
+	<select id="list" resultType="review.ReviewDTO">
+		select reviewNum, userID, reviewDate, reviewContent, reviewFile 
+		from review r, member m
+	 	where r.userID = m.userID
 	</select>
 
 	<select id="count" resultType="int">

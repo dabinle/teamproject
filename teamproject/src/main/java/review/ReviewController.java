@@ -100,12 +100,12 @@ public class ReviewController extends HttpServlet {
 			int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
 			dto = dao.view(reviewNum);
 			request.setAttribute("dto", dto);
-			RequestDispatcher rd = request.getRequestDispatcher("/review/review_view.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/review/review_edit.jsp");
 			rd.forward(request, response);
 		} else if (url.indexOf("delete.do") != -1) {
 			int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
 			request.setAttribute("dto", dao.view(reviewNum));
-			String page = "/review/edit.jsp";
+			String page = "/review/review_edit.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(page);
 			rd.forward(request, response);
 		} 	

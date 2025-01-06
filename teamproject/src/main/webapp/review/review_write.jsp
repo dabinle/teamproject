@@ -22,7 +22,6 @@ function review_write() {
 		document.form1.reviewScore.focus();
 		return;
 	}
-	console.log("선택된 별점: " + reviewScore);
 	document.form1.action="/teamproject/review_servlet/insert.do";
 	document.form1.submit();
 }
@@ -45,13 +44,11 @@ function review_write() {
 	<tr>
 		<td>별점</td>
 		<td>
-			<select name="reviewScore">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-			</select>
+			<select id="reviewScore" name="reviewScore" class="reviewScore">
+      		<c:forEach var="i" begin="1" end="5">
+      			<option value="${i}">${i}</option>
+      		</c:forEach>
+      	</select>점
 		</td>
 	</tr>
 	<tr>

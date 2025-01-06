@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/menu.jsp" %>
-<%
-    if (session.getAttribute("userID") == null) {
-        response.sendRedirect("/teamproject/member/login.jsp"); 
-        return;
-    }
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +18,7 @@ $(function() {
 <body>
 <h2>리뷰 목록</h2>
 <form name="form1" method="post" action="/teamproject/review_servlet/list.do">
-<button type="button" id="btnWrite">리뷰 작성하기</button>
+<button type="button" id="btnWrite">리뷰 작성하기</button><!-- 해당 상품을 구매한 사람만 보이게 -->
 </form>
 <table border="1" width="900px">
 	<tr>
@@ -36,11 +30,11 @@ $(function() {
 	</tr>
 	<c:forEach var="row" items="${list}">
 	<tr align="center">
-		<td>${dto.userID}</td>
+		<td>${row.userID}</td>
 		<td><img src="/teamproject/images/${row.reviewFile}" width="100px" height="100px"></td>
-		<td>${dto.reviewContent}</td>
-		<td>${dto.reviewDate}</td>
-		<td>${dto.reviewScore}</td>
+		<td>${row.reviewContent}</td>
+		<td>${row.reviewDate}</td>
+		<td>${row.reviewScore}</td>
 	</tr>
 	</c:forEach>
 </table>
