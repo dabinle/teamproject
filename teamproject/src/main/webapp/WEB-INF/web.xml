@@ -27,7 +27,16 @@
   	<servlet-name>HomeController</servlet-name>
   	<url-pattern>/home_servlet/*</url-pattern>
   </servlet-mapping>
-  <!-- 상품 -->
+  <!-- 관리자 상품 -->
+  <servlet>
+  	<servlet-name>ProductAdminController</servlet-name>
+  	<servlet-class>product.ProductAdminController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ProductAdminController</servlet-name>
+  	<url-pattern>/productAdmin_servlet/*</url-pattern>
+  </servlet-mapping>
+  <!-- 회원 상품 -->
   <servlet>
   	<servlet-name>ProductController</servlet-name>
   	<servlet-class>product.ProductController</servlet-class>

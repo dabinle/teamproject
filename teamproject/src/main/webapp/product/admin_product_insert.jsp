@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../include/admin_menu.jsp" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,18 +9,18 @@
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 $(function() {
-	   $("#select").click(function() {
-	      let p_categoryNum = $("#p_parentCategory").val();
-	      $.ajax({
-	         type:"post",
-	         url:"/teamproject/product_servlet/if_category.do",
-	         data : {"p_categoryNum" : p_categoryNum},
-	         success : function(date){
-	            $("#result").html(date);
-	         }
-	      });
-	   });   
-	});
+	$("#select").click(function() {
+		let p_categoryNum = $("#p_parentCategory").val();
+		$.ajax({
+			type:"post",
+			url:"/teamproject/productAdmin_servlet/if_category.do",
+			data : {"p_categoryNum" : p_categoryNum},
+			success : function(date){
+				$("#result").html(date);
+			}
+		});
+	});	
+});
 
 function insert() {
    let productName = document.form1.productName.value;
@@ -41,14 +40,14 @@ function insert() {
    if(price == ""){
       alert("가격을 입력하세요");
       document.form1.price.focus();
-      return;
+      return; 
    }
    if(amount == ""){
       alert("재고량을 입력하세요");
       document.form1.amount.focus();
       return;
    }
-   document.form1.action = "/teamproject/product_servlet/insert.do";
+   document.form1.action = "/teamproject/productAdmin_servlet/insert.do";
    document.form1.submit();
 }
 </script>
@@ -89,7 +88,7 @@ function insert() {
    <br>
    <input type="hidden" name="productNum">
    <input type="button" value="상품등록" onclick="insert()">
-   <input type="button" value="상품목록" onclick="location.href='/teamproject/product_servlet/list.do'">
+   <input type="button" value="상품목록" onclick="location.href='/teamproject/productAdmin_servlet/list.do'">
 </form>
 </body>
 </html>

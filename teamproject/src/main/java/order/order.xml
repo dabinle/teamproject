@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+	<select id="order_one" resultType="product.ProductDTO">
+		select productNum, productName, price, productImage from product where productNum = #{producrNum}
+	</select>
+	
+	<select id="detail_all" resultType="order.OrderDTO">
+		select orderNum, userID, o.productNum, orderAmount, orderDate, productName, productImage, price
+		from orders o, product p
+		where o.productNum = p.productNum and orderDate = #{orderDate}
+	</select>
+	
+	<select id="detail_one" resultType="order.OrderDTO">
+		select orderNum, userID, o.productNum, orderAmount, orderDate, recipient, rec_phoneNum, zipCode, address, addressDetail, productName, productImage, price
+		from orders o, product p
+		where o.productNum = p.productNum and orderDate = #{orderDate} and orderNum = #{orderNum}
+	</select>
+	
+	
+	<select id="list" resultType="order.OrderDTO">
+		select orderNum, userID, o.productNum, orderAmount, orderDate, productName, productImage, price
+		from orders o, product p
+		where o.productNum = p.productNum and userID = #{userID}
+	</select>
+	
+	<insert id="insert">
+		insert into orders (orderNum, userID, productNum, orderDate, orderAmount, recipient, rec_phoneNum, zipCode, address, addressDetail)
+		values (seq_orders.nextval, #{userID}, #{productNum}, #{orderDate}, #{orderAmount}, #{recipient}, #{rec_phoneNum}, #{zipCode}, #{address}, #{addressDetail})
+	</insert>
+</mapper>

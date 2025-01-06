@@ -7,20 +7,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
-$(function() {
-	$("#btnPurchase").click(function() {
-		if(confirm("구매하시겠습니까?")) {
-			document.form1.action="/teamproject/cart_servlet/purchase.do";
-			document.form1.submit();
-		}
-	});
-});
+function order() {
+	let cartAmount = document.form1.cartAmount.value;
+	console.log("cart", cartAmount);
+	let productNum = document.form1.productNum.value;
+	console.log("pro", productNum);
+	document.form1.action="/teamproject/order_servlet/order.do";
+	document.form1.submit();
+}
 </script>
 </head>
 <body>
-<h2>상품 정보</h2>
+<h2>회원 상품 정보</h2>
 <table>
 	<tr>
 		<td><img src="/teamproject/images/${dto.productImage}" width="300px" height="300px"></td>
@@ -48,22 +47,15 @@ $(function() {
 			</tr>
 			<tr>
 				<td colspan="2">
-					<form name="form1" method="post" action="/teamproject/cart_servlet/insert.do">
+					<form name="form1" id="orderForm" method="post" action="/teamproject/cart_servlet/insert.do">
 					<input type="hidden" name="productNum" value="${dto.productNum }">
-						<select name="cartAmount">
+						<select name="cartAmount" id="cartAmount">
 						<c:forEach begin="1" end="10" var="i">
 							<option value="${i}">${i}</option>
 						</c:forEach>
 						</select> 개
+						<input type="button" value="바로구매" onclick="order()">
 						<input type="submit" value="장바구니에 담기">
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<form name="form1" method="post">
-						<input type="hidden" name="productNum" value="${dto.productNum}">
-						<input type="submit" value="바로구매" id="btnPurchase">
 					</form>
 				</td>
 			</tr>
