@@ -6,38 +6,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>찜 목록</title>
+    <meta charset="UTF-8">
+    <title>찜 목록</title>
 </head>
 <body>
-<h2 class="sectiontitle">찜 목록</h2>
-<table class="table" border="1" width="900px">
-    <tr align="center">
-        <th>이미지</th>
-        <th>상품명</th>
-        <th>가격</th>
-        <th>삭제</th>
-    </tr>
-    <c:forEach var="row" items="${list}">
-        <tr align="center">
-            <td>
-            	<input type="checkbox" name="productNum" id="productNum" class="productNum" checked="checked">  NO. ${row.productNum}
-            	<input type="hidden" class="pn" value="${row.productNum}">
-            </td>
-            <td><img src="/teamproject/images/${row.productImage}" style="width:50px; height:50px;"></td>
-            <td>
-                <a href="/teamproject/product_servlet/detail.do?productNum=${row.productNum}">
-                    ${row.productName}
-                </a>
-            </td>
-            <td>
-                <fmt:formatNumber value="${row.price}" pattern="#,###"/>원
-            </td>
-            <td>
-                <input type="button" value="삭제" onclick="location.href='/teamproject/wish_servlet/wish_deleteSelected.do?cartNum=${row.wishNum}'">
-            </td>
-        </tr>
-    </c:forEach>
-</table>
+ <h2>찜 목록</h2>
+
+ <c:choose>
+     <c:when test="${empty list}">
+         <p>찜한 상품이 없습니다.</p>
+     </c:when>
+     <c:otherwise>
+         <table border="1" width="100%">
+             <thead>
+                 <tr>
+                     <th>이미지</th>
+                     <th>상품명</th>
+                     <th>가격</th>
+                     <th>삭제</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <c:forEach var="row" items="${list}">
+                     <tr>
+                         <td>
+                             <img src="/teamproject/images/${row.productImage}" alt="상품 이미지" width="50" height="50">
+                         </td>
+                         <td>
+                             <a href="/teamproject/product_servlet/detail.do?productNum=${row.productNum}">
+                                 ${row.productName}
+                             </a>
+                         </td>
+                         <td>
+                             <fmt:formatNumber value="${row.price}" pattern="#,###"/>원
+                         </td>
+                         <td>
+                             <form action="/teamproject/wish_servlet/wish_deleteSelected.do" method="get">
+                                 <input type="hidden" name="wishNum" value="${row.wishNum}">
+                                 <button type="submit">삭제</button>
+                             </form>
+                         </td>
+                     </tr>
+                 </c:forEach>
+             </tbody>
+         </table>
+     </c:otherwise>
+ </c:choose>
 </body>
 </html>

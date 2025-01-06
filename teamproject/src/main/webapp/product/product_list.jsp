@@ -6,44 +6,6 @@
 <html>
 <meta charset="UTF-8">
 <title>관리자 상품 목록 페이지</title>
-<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script>
-
-$(document).ready(function() {
-	let btn = $(".orders");
-	
-	btn.on("click", function name() {
-		let cartAmount = $("#cartAmount option:selected").val();
-		let productNum = $(this).attr("data-pn");
-		console.log("ee");
-		console.log("ee3", cartAmount, productNum);
-		location.href="/teamproject/cart_servlet/insert.do";
-	});
-
-    $(".wish-btn").on("click", function() {
-        let productNum = $(this).data("product-num");
-        let userID = $(this).data("user-id");
-
-        if (!userID) {
-            alert("로그인이 필요합니다.");
-            location.href = "/teamproject/member/login.jsp"
-            //return;
-        }
-
-        $.ajax({
-            url: "/teamproject/wish_servlet/insert.do",
-            method: "POST",
-            data: { productNum: productNum, userID: userID },
-            success: function(response) {
-                alert("찜 목록에 추가되었습니다.");
-            },
-            error: function() {
-                alert("찜하기에 실패했습니다.");
-            }
-        });
-    });
-});
-</script>
 </head>
 <body>
 <h2>회원상품목록</h2>
@@ -69,7 +31,7 @@ $(document).ready(function() {
       </td>
       <td>${row.description}</td>
       <td><fmt:formatNumber value="${row.price}" pattern="#,###"/>원</td>
-      <td>${row.amount }
+      <td>${row.amount }</td>
       <td>${row.p_categoryNum}<br>${row.p_categoryName }</td>
       <td>${row.companyNum}<br>${row.companyName }</td>
       <td>
@@ -82,15 +44,22 @@ $(document).ready(function() {
       	<br>
       	<input type="hidden" name="productNum" value="${row.productNum }" class="productNum">
       	<input type="submit" value="장바구니 담기">
-      	
       </form>
-      <input type="button" value="바로구매(얘는 안됨)" class="orders" data-pn=${row.productNum }>
       </td>
       <td>
-	    <button type="button" class="wish-btn" data-product-num="${row.productNum}" data-user-id="${sessionScope.userID}">
-	        찜하기
-	    </button>
-	  </td>
+        <c:if test="${not empty sessionScope.userID}">
+            <form method="post" action="/teamproject/wish_servlet/insert.do" onsubmit="this.querySelector('input[type=submit]').disabled = true;">
+                <input type="hidden" name="productNum" value="<c:out value='${row.productNum}' />">
+                <input type="hidden" name="userID" value="${sessionScope.userID}">
+                <input type="submit" value="찜하기">
+            </form>
+        </c:if>
+        <c:if test="${empty sessionScope.userID}">
+            <button onclick="alert('로그인이 필요합니다.'); location.href='/teamproject/member/login.jsp';">
+                찜하기
+            </button>
+        </c:if>
+      </td>
    </tr>
    </c:forEach>
 </table>

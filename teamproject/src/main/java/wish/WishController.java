@@ -28,18 +28,27 @@ public class WishController extends HttpServlet {
 
             if (dao.wishCount(userID, productNum) == 0) { // 중복 여부 확인
                 dao.insertWish(dto);
+                response.setContentType("text/html; charset=UTF-8");
                 response.getWriter().write("<script>alert('찜목록에 추가되었습니다.'); location.href='" + contextPath + "/wish_servlet/list.do';</script>");
             } else {
             	response.getWriter().write("<script>alert('이미 찜목록에 있습니다'); location.href='" + contextPath + "/wish_servlet/list.do';</script>");
             }
         }
         else if (url.indexOf("list.do") != -1) {
-            String userID = request.getParameter("userID");
+            String userID = (String) session.getAttribute("userID"); // 세션에서 userID 가져오기
+            
+            // userID가 없으면 로그인 페이지로 리디렉션
+            if (userID == null) {
+                response.sendRedirect("/teamproject/login.jsp");
+                return;
+            }
+            
             List<WishDTO> list = dao.listWish(userID);
             request.setAttribute("list", list);
             RequestDispatcher rd = request.getRequestDispatcher("/wish/wish_list.jsp");
             rd.forward(request, response);
         }
+
         else if (url.indexOf("wish_deleteSelected.do") != -1) {
 	        int wishNum = Integer.parseInt(request.getParameter("wishNum"));
 	        dao.wish_deleteSelected(wishNum);

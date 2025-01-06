@@ -1,39 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wish">
-	<insert id="wish_insert">
-		insert into wish values(seq_wish.nextval,#{userID},#{productNum})
-	</insert>
-	
-	<select id="detail_wish" resultType="wish.WishDTO">
-		select userID, productNum
-		from wish
-		where wishNum = #{wishNum}		
-	</select>
-	
-	<!-- 찜 이미 했는지 확인 -->
-	<select id="wish_count" resultType="int">
-		select count(*) 
-		from wish w, product p
-		where w.productNum = p.productNum
-		and productNum=#{productNum} and userID=#{userID}
-	</select>
-	
-	<select id="wish_list" resultType="wish.WishDTO">
-		select wishNum, p.productNum, p.productName, p.price, p.productImage
-		from wish w, product p
-		where w.productNum = p.productNum and userID = #{userID}
-		order by wishNum desc
-	</select>
-	
-	<delete id="wish_delete_all">
-		delete from wish
-		where userID = #{userID}
-	</delete>
-	
-	<delete id="wish_delete_selected">
-	    delete from wish 
-	    where wishNum = #{wishNum} 
-	</delete>
 
+    <!-- 찜 목록 조회 쿼리 -->
+	<select id="listWish" resultType="wish.WishDTO">
+	    SELECT w.wishNum, w.productNum, p.productName, p.price, p.productImage
+	    FROM wish w
+	    JOIN product p ON w.productNum = p.productNum
+	    WHERE w.userID = #{userID}
+	    ORDER BY w.wishNum DESC
+	</select>
+	
+	<!-- 찜 목록 추가 쿼리 -->
+	<insert id="insertWish" parameterType="wish.WishDTO">
+	    INSERT INTO wish (wishNum, userID, productNum)
+	    VALUES (seq_wish.nextVal, #{userID}, #{productNum})
+	</insert>
+    
+    <!-- 찜 상세 조회 -->
+    <select id="detail_wish" resultType="wish.WishDTO">
+        select userID, productNum
+        from wish
+        where wishNum = #{wishNum}
+    </select>
+    
+    <!-- 찜 여부 확인 -->
+    <select id="wish_count" resultType="int">
+        select count(*) 
+        from wish w
+        join product p on w.productNum = p.productNum
+        where w.productNum = #{productNum} and w.userID = #{userID}
+    </select>
+    
+    <!-- 모든 찜 삭제 -->
+    <delete id="wish_delete_all">
+        delete from wish
+        where userID = #{userID}
+    </delete>
+    
+    <!-- 선택된 찜 삭제 -->
+    <delete id="wish_delete_selected">
+        delete from wish
+        where wishNum = #{wishNum}
+    </delete>
 </mapper>
