@@ -19,9 +19,30 @@ $(document).ready(function() {
 		console.log("ee3", cartAmount, productNum);
 		location.href="/teamproject/cart_servlet/insert.do";
 	});
+
+    $(".wish-btn").on("click", function() {
+        let productNum = $(this).data("product-num");
+        let userID = $(this).data("user-id");
+
+        if (!userID) {
+            alert("로그인이 필요합니다.");
+            location.href = "/teamproject/member/login.jsp"
+            //return;
+        }
+
+        $.ajax({
+            url: "/teamproject/wish_servlet/insert.do",
+            method: "POST",
+            data: { productNum: productNum, userID: userID },
+            success: function(response) {
+                alert("찜 목록에 추가되었습니다.");
+            },
+            error: function() {
+                alert("찜하기에 실패했습니다.");
+            }
+        });
+    });
 });
-
-
 </script>
 </head>
 <body>
@@ -66,8 +87,10 @@ $(document).ready(function() {
       <input type="button" value="바로구매(얘는 안됨)" class="orders" data-pn=${row.productNum }>
       </td>
       <td>
-      	<button type="button" onclick="#">찜하기</button>
-      </td>
+	    <button type="button" class="wish-btn" data-product-num="${row.productNum}" data-user-id="${sessionScope.userID}">
+	        찜하기
+	    </button>
+	  </td>
    </tr>
    </c:forEach>
 </table>
