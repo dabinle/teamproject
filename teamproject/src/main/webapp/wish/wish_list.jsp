@@ -14,35 +14,27 @@
 <table class="table" border="1" width="900px">
     <tr align="center">
         <th>이미지</th>
-        <th>카테고리명</th>
-        <th>브랜드명</th>
         <th>상품명</th>
         <th>가격</th>
         <th>삭제</th>
     </tr>
     <c:forEach var="row" items="${list}">
         <tr align="center">
-            <!-- 상품 이미지 -->
+            <td>
+            	<input type="checkbox" name="productNum" id="productNum" class="productNum" checked="checked">  NO. ${row.productNum}
+            	<input type="hidden" class="pn" value="${row.productNum}">
+            </td>
             <td><img src="/teamproject/images/${row.productImage}" style="width:50px; height:50px;"></td>
-            <!-- 카테고리 이름 -->
-            <td>${row.p_categoryName}</td>
-            <!-- 상품명 -->
             <td>
                 <a href="/teamproject/product_servlet/detail.do?productNum=${row.productNum}">
                     ${row.productName}
                 </a>
             </td>
-            <!-- 브랜드명 -->
-            <td>${row.companyName}</td>
-            <!-- 상품 가격 -->
             <td>
                 <fmt:formatNumber value="${row.price}" pattern="#,###"/>원
             </td>
-            <!-- 삭제 버튼 -->
             <td>
-                <a href="/teamproject/wish_servlet/delete.do?productNum=${row.productNum}&userID=${sessionScope.userID}" 
-                   class="btn btn-danger" 
-                   onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
+                <input type="button" value="삭제" onclick="location.href='/teamproject/wish_servlet/wish_deleteSelected.do?cartNum=${row.wishNum}'">
             </td>
         </tr>
     </c:forEach>

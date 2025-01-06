@@ -20,13 +20,14 @@ public class WishDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (session != null) session.close();
+            if (session != null) 
+            	session.close();
         }
         return result;
     }
 
     // 찜 추가
-    public void insert(WishDTO dto) {
+    public void insertWish(WishDTO dto) {
         SqlSession session = null;
         try {
             session = Mybatis.getInstance().openSession();
@@ -35,38 +36,38 @@ public class WishDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (session != null) session.close();
+            if (session != null) 
+            	session.close();
         }
     }
 
-    // 찜 목록 조회
-    public List<Map<String, Object>> listWish(String userID) {
+    // 찜 목록 
+    public List<WishDTO> listWish(String userID) {
         SqlSession session = Mybatis.getInstance().openSession();
-        List<Map<String, Object>> list = null;
-        try {
-            list = session.selectList("wish.wish_getproductList", userID);
-        } finally {
-            if (session != null) session.close();
-        }
+        List<WishDTO> list = session.selectList("wish.wish_list", userID);
+        session.close();
         return list;
     }
-
-    // 찜 삭제
-    public void delete(int productNum, String userID) {
-        SqlSession session = null;
-        try {
-            session = Mybatis.getInstance().openSession();
-            Map<String, Object> map = new HashMap<>();
-            map.put("productNum", productNum);
-            map.put("userID", userID);
-            session.delete("wish.wish_delete", map);
-            session.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null)
-                session.close();
-        }
-    }
+    
+    public List<WishDTO> detailWish(int wishNum) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		List<WishDTO> detailWish = session.selectList("wish.detail_wish", wishNum);
+		session.close();
+		return detailWish;
+	}
+    
+    public void wish_deleteAll(String userID) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		session.delete("wish.wish_delete_all", userID);
+		session.commit();
+		session.close();
+	}
+    
+    public void wish_deleteSelected(int wishNum) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		session.delete("wish.wish_delete_selected", wishNum);
+		session.commit();
+		session.close();
+	}
 
 }

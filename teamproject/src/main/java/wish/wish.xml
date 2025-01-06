@@ -2,31 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wish">
 	<insert id="wish_insert">
-		insert into wish(wishNum, userID, productNum) values(seq_wish.nextval,#{userID},#{productNum})
+		insert into wish values(seq_wish.nextval,#{userID},#{productNum})
 	</insert>
+	
+	<select id="detail_wish" resultType="wish.WishDTO">
+		select userID, productNum
+		from wish
+		where wishNum = #{wishNum}		
+	</select>
 	
 	<!-- 찜 이미 했는지 확인 -->
 	<select id="wish_count" resultType="int">
 		select count(*) 
-		from wish w, product p, member m
-		where w.productNum = p.productNum and m.userID = w.userID
-		and productNum=#{productNum} AND userID=#{userID}
+		from wish w, product p
+		where w.productNum = p.productNum
+		and productNum=#{productNum} and userID=#{userID}
 	</select>
 	
-	<select id="wish_getproductList" resultType="map">
-	    select p.productNum, p.productName, p.price, p.productImage, c.companyName, pc.p_categoryName
-	    from wish w
-	    join product p on w.productNum = p.productNum
-	    join company c on p.companyNum = c.companyNum
-	    join product_category pc on p.p_categoryNum = pc.p_categoryNum
-	    where w.userID = #{userID}
-	    order by w.wishNum DESC
+	<select id="wish_list" resultType="wish.WishDTO">
+		select wishNum, p.productNum, p.productName, p.price, p.productImage
+		from wish w, product p
+		where w.productNum = p.productNum and userID = #{userID}
+		order by wishNum desc
 	</select>
-
-	<delete id="wish_delete">
+	
+	<delete id="wish_delete_all">
+		delete from wish
+		where userID = #{userID}
+	</delete>
+	
+	<delete id="wish_delete_selected">
 	    delete from wish 
-	    where productNum = #{productNum} 
-	    and userID = #{userID}
+	    where wishNum = #{wishNum} 
 	</delete>
 
 </mapper>
