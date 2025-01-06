@@ -1,43 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper 
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cart">
-	<insert id="insert_cart">
+	<select id="list" resultType="cart.CartDTO">
+		select cartNum, c.productNum, productName, price, productImage, description, cartAmount, price*cartAmount money
+		from cart c, product p
+		where c.productNum = p.productNum and userID = #{userID}
+		order by cartNum desc
+	</select>
+	<select id="detail_cart" resultType="cart.CartDTO">
+		select userID, productNum, cartAmount
+		from cart
+		where cartNum = #{cartNum}
+	</select>
+	
+	<insert id="insert">
 		insert into cart values (seq_cart.nextval, #{userID}, #{productNum}, #{cartAmount})
 	</insert>
-	
-	<select id="list_cart" resultType="cart.CartDTO">
-		select cartNum, p.productNum, productName, price, cartAmount, price*cartAmount money
-		from member m, cart c, product p
-		where m.userID = c.userID and c.productNum=p.productNum and c.userID=#{userID}
-		order by productName
-	</select>
-	
-	<delete id="delete_cart">
-		delete from cart where cartNum=#{cartNum}
-	</delete>
-	
-	<update id="update_cart">
-		update cart set cartAmount=#{cartAmount} where cartNum=#{cartNum}
+	<update id="update">
+		update cart set cartAmount = #{cartAmount} 
+		where cartNum = #{cartNum}
 	</update>
-	
-	<delete id="clear_cart">
-		delete from cart where userID=#{userID}
+	<delete id="delete_all">
+		delete from cart where userID = #{userID}
+	</delete>
+	<delete id="delete_selected">
+		delete from cart where cartNum = #{cartNum}
 	</delete>
 	
-	<select id="product_money" resultType="cart.CartDTO">
-		select productName, sum(price*cartAmount) money
+	<select id="sum" resultType="int">
+		select nvl(sum(price*cartAmount), 0) sum
 		from cart c, product p
-		where c.productNum=p.productNum
-		group by productName
-		order by productName
-	</select>
-	
-	<select id="sum_money" resultType="int">
-		select nvl(sum(price*cartAmount), 0) money
-		from cart c, product p
-		where c.productNum=p.productNum and userID=#{userID}
+		where p.productNum = c.productNum and userID = #{userID}
 	</select>
 </mapper>

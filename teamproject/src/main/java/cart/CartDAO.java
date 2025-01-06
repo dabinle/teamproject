@@ -1,95 +1,58 @@
 package cart;
-
 import java.util.List;
+
 
 import org.apache.ibatis.session.SqlSession;
 
 import sqlmap.Mybatis;
 
 public class CartDAO {
-	public List<CartDTO> cart_money() {
+	public List<CartDTO> listCart(String userID) {
 		SqlSession session = Mybatis.getInstance().openSession();
-		List<CartDTO> items = session.selectList("cart.product_money");
+		List<CartDTO> list = session.selectList("cart.list", userID);
 		session.close();
-		return items;
-	}
-	
-	public void insert_cart(CartDTO dto) {
-		SqlSession session = null;
-		try {
-			session = Mybatis.getInstance().openSession();
-			session.insert("cart.insert_cart", dto);
-			session.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null)
-				session.close();
-		}
-	}
-	
-	public List<CartDTO> list_cart(String userID) {
-		SqlSession session = null;
-		List<CartDTO> list = null;
-		try {
-			session = Mybatis.getInstance().openSession();
-			list = session.selectList("cart.list_cart", userID);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null)
-				session.close();
-		}
 		return list;
 	}
 	
-	public void delete_cart(int cartNum) {
-		SqlSession session = null;
-		try {
-			session = Mybatis.getInstance().openSession();
-			session.delete("cart.delete_cart", cartNum);
-			session.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null)
-				session.close();
-		}
-	}
-	
-	public void update_cart(CartDTO dto) {
-		SqlSession session = null;
-		try {
-			session = Mybatis.getInstance().openSession();
-			session.update("cart.update_cart", dto);
-			session.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null)
-				session.close();
-		}
-	}
-	
-	public void clear_cart(String userID) {
-		SqlSession session = null;
-		try {
-			session = Mybatis.getInstance().openSession();
-			session.delete("cart.clear_cart", userID);
-			session.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null)
-				session.close();
-		}
-	}
-	
-	public int sum_money(String userID) {
-		int total = 0;
+	public List<CartDTO> detailCart(int cartNum) {
 		SqlSession session = Mybatis.getInstance().openSession();
-		total = session.selectOne("cart.sum_money", userID);
+		List<CartDTO> detailCart = session.selectList("cart.detail_cart", cartNum);
 		session.close();
-		return total;
+		return detailCart;
+	}
+	
+	public void insertCart(CartDTO dto) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		session.insert("cart.insert", dto);
+		session.commit();
+		session.close();
+	}
+	
+	public void updateCart(CartDTO dto) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		session.update("cart.update", dto);
+		session.commit();
+		session.close();
+		}
+	
+	public void deleteAll(String userID) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		session.delete("cart.delete_all", userID);
+		session.commit();
+		session.close();
+	}
+	
+	public void deleteSelected(int cartNum) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		session.delete("cart.delete_selected", cartNum);
+		session.commit();
+		session.close();
+	}
+	
+	public int sumMoney(String userID) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		int sum = session.selectOne("cart.sum", userID);
+		session.close();
+		return sum;
 	}
 }

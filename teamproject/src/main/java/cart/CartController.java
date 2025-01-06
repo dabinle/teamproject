@@ -11,65 +11,69 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import product.ProductDTO;
 
-public class CartController  extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public class CartController extends HttpServlet{
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = request.getRequestURI();
 		String path = request.getContextPath();
-		CartDAO dao = new CartDAO();
 		HttpSession session = request.getSession();
-		String userID = (String) session.getAttribute("userID");
-		String productName = (String) session.getAttribute("productName");
-		String productImage = (String) session.getAttribute("productImage");
-		
-		if (url.indexOf("insert.do") != -1) {
-			if (userID == null) {
-				response.sendRedirect(path + "/member/login.jsp");
-			} else {
-				CartDTO dto = new CartDTO();
-				dto.setUserID(userID);
-				dto.setProductNum(Integer.parseInt(request.getParameter("productNum")));
-				dto.setCartAmount(Integer.parseInt(request.getParameter("cartAmount")));
-				dao.insert_cart(dto);
-				response.sendRedirect(path + "/cart_servlet/list.do");
-			}
-		} else if (url.indexOf("list.do") != -1) {
-			int sum_money = dao.sum_money(userID);
-			int fee = sum_money >= 30000 ? 0 : 3000;
-			int sum = sum_money + fee;
-			Map<String, Object> map = new HashMap<>();
-			map.put("sum_money", sum_money);
-			map.put("fee", fee);
+
+		CartDAO dao = new CartDAO();
+		System.out.println("cart 시작: " + url);
+		if(url.indexOf("list.do")!=-1) {
+			String userID = (String)session.getAttribute("userID");
+			List<CartDTO> list = dao.listCart(userID);
+			request.setAttribute("list", list);
+			int sum = dao.sumMoney(userID);
+			int fee = sum >= 50000 ? 0 : 3000;
+			int total = sum + fee;
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("sum", sum);
+			map.put("fee", fee);
+			map.put("total", total);
 			request.setAttribute("map", map);
-			List<CartDTO> items = dao.list_cart(userID);
-			request.setAttribute("list", items);
-			String page = "/cart/cart_list.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(page);
+			RequestDispatcher rd = request.getRequestDispatcher("/cart/cart_list.jsp");
 			rd.forward(request, response);
-		} else if (url.indexOf("delete.do") != -1) {
-			dao.delete_cart(Integer.parseInt(request.getParameter("cartNum")));
-			response.sendRedirect(path + "/cart_servlet/list.do");
-		} else if (url.indexOf("delete_all.do") != -1) {
-			dao.clear_cart(userID);
-			response.sendRedirect(path + "/cart_servlet/list.do");
-		} else if (url.indexOf("update.do") != -1) {
-			String[] productNum = request.getParameterValues("productNum");
-			String[] cartAmount = request.getParameterValues("cartAmount");
-			String[] cartNum = request.getParameterValues("cartNum");
-			for (int i=0; i<productNum.length; i++) {
-				CartDTO dto = new CartDTO();
-				dto.setUserID(userID);
-				dto.setCartNum(Integer.parseInt(cartNum[i]));
-				dto.setCartAmount(Integer.parseInt(cartAmount[i]));
-				dao.update_cart(dto);
-			}
-			response.sendRedirect(path + "/cart_servlet/list.do");
-		} 
+		}
+		else if (url.indexOf("insert.do")!=-1) {  
+			String userID = (String)session.getAttribute("userID");
+			System.out.println("id"+userID);
+			int productNum = Integer.parseInt(request.getParameter("productNum"));
+			System.out.println("pn"+productNum);
+			int cartAmount = Integer.parseInt(request.getParameter("cartAmount"));
+			System.out.println("cm"+cartAmount);
+			CartDTO dto = new CartDTO();
+			dto.setUserID(userID);
+			dto.setProductNum(productNum);
+			dto.setCartAmount(cartAmount);
+			dao.insertCart(dto);
+			response.sendRedirect("/teamproject/cart_servlet/list.do");
+		}
+		
+		else if (url.indexOf("delete_all.do")!=-1) {
+			String userID = (String)session.getAttribute("userID");
+			dao.deleteAll(userID);
+			response.sendRedirect("/teamproject/cart_servlet/list.do");
+		}
+		
+		else if (url.indexOf("delete_selected.do")!=-1) {
+			int cartNum = Integer.parseInt(request.getParameter("cartNum"));
+			dao.deleteSelected(cartNum);
+			response.sendRedirect("/teamproject/cart_servlet/list.do");
+		}
+		
+		else if (url.indexOf("update.do")!=-1) {
+			int cartNum = Integer.parseInt(request.getParameter("cartNum"));
+			int cartAmount = Integer.parseInt(request.getParameter("cartAmount"));
+			CartDTO dto = new CartDTO();
+			dto.setCartAmount(cartAmount);
+			dto.setCartNum(cartNum);
+			dao.updateCart(dto);
+			response.sendRedirect("/teamproject/cart_servlet/list.do");
+		}
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		doGet(request, response);
 	}
 }
