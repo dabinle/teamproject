@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wish">
-
     <!-- 찜 목록 조회 쿼리 -->
 	<select id="listWish" resultType="wish.WishDTO">
-	    SELECT w.wishNum, w.productNum, p.productName, p.price, p.productImage
-	    FROM wish w
-	    JOIN product p ON w.productNum = p.productNum
-	    WHERE w.userID = #{userID}
-	    ORDER BY w.wishNum DESC
+	    select w.wishNum, w.productNum, p.productName, p.price, p.productImage
+	    from wish w
+	    join product p on w.productNum = p.productNum
+	    where w.userID = #{userID}
+	    order by w.wishNum DESC
 	</select>
 	
 	<!-- 찜 목록 추가 쿼리 -->
 	<insert id="insertWish" parameterType="wish.WishDTO">
-	    INSERT INTO wish (wishNum, userID, productNum)
-	    VALUES (seq_wish.nextVal, #{userID}, #{productNum})
+	    insert into wish (wishNum, userID, productNum)
+	    values (seq_wish.nextVal, #{userID}, #{productNum})
 	</insert>
     
     <!-- 찜 상세 조회 -->
@@ -25,21 +24,15 @@
     </select>
     
     <!-- 찜 여부 확인 -->
-    <select id="wish_count" resultType="int">
-        select count(*) 
-        from wish w
-        join product p on w.productNum = p.productNum
-        where w.productNum = #{productNum} and w.userID = #{userID}
-    </select>
-    
-    <!-- 모든 찜 삭제 -->
-    <delete id="wish_delete_all">
-        delete from wish
-        where userID = #{userID}
-    </delete>
-    
+	<select id="wish_count" resultType="int">
+	    select count(*) 
+	    from wish w
+	    join product p on w.productNum = p.productNum
+	    where w.productNum = #{productNum} and w.userID = #{userID}
+	</select>
+
     <!-- 선택된 찜 삭제 -->
-    <delete id="wish_delete_selected">
+    <delete id="wish_delete">
         delete from wish
         where wishNum = #{wishNum}
     </delete>

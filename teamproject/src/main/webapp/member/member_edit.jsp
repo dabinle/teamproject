@@ -114,8 +114,14 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 <tr>
     <td>우편번호</td>
     <td>
-        <input name="zipCode" id="post_code" value="${dto.zipCode}" readonly>
-        <input type="button" onclick="showPostcode()" value="우편번호 찾기">
+        <c:if test="${dto.zipCode == -1 }">
+          <input name="zipCode" id="post_code" readonly="readonly">
+           <input type="button" onclick="showPostcode()" value="우편번호 찾기">
+       </c:if>
+       <c:if test="${dto.zipCode != -1 }">
+          <input name="zipCode" id="post_code" value="${dto.zipCode}" readonly="readonly">
+           <input type="button" onclick="showPostcode()" value="우편번호 찾기">
+       </c:if>
     </td>
 </tr>
 <tr>

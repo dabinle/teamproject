@@ -17,7 +17,7 @@
          <p>찜한 상품이 없습니다.</p>
      </c:when>
      <c:otherwise>
-         <table border="1" width="100%">
+         <table border="1">
              <thead>
                  <tr>
                      <th>이미지</th>
@@ -41,7 +41,7 @@
                              <fmt:formatNumber value="${row.price}" pattern="#,###"/>원
                          </td>
                          <td>
-                             <form action="/teamproject/wish_servlet/wish_deleteSelected.do" method="get">
+                             <form action="/teamproject/wish_servlet/wish_delete.do" method="get">
                                  <input type="hidden" name="wishNum" value="${row.wishNum}">
                                  <button type="submit">삭제</button>
                              </form>
