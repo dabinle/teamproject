@@ -48,8 +48,7 @@
       </td>
       <td>
         <c:if test="${not empty sessionScope.userID}">
-            <form method="post" action="/teamproject/wish_servlet/insert.do" >
-            																<!-- true이면 submit을 수행하고 false일 경우 submit을 수행하지 않는다. -->
+            <form method="post" action="/teamproject/wish_servlet/insert.do">
                 <input type="hidden" name="productNum" value="<c:out value='${row.productNum}' />">
                 <input type="hidden" name="userID" value="${sessionScope.userID}">
                 <input type="submit" value="찜하기">
