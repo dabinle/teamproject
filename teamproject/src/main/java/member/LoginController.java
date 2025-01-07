@@ -65,8 +65,7 @@ public class LoginController extends HttpServlet{
 	            dto.setAddressDetail(addressDetail);
 	            dao.join(dto);
 	            
-	            response.setContentType("text/html;charset=UTF-8");  // 한글
-	            // 화면에 출력하기 위해
+	            response.setContentType("text/html;charset=UTF-8");
 	            response.getWriter().write("<script> alert('회원가입 되었습니다.'); location.href='" + path + "/member/login.jsp';</script>");
 	         } else if (zipCode == -1){
 	            MemberDTO dto = new MemberDTO();
@@ -78,8 +77,7 @@ public class LoginController extends HttpServlet{
 	            dto.setZipCode(zipCode);
 	            dao.join(dto);
 	            
-	            response.setContentType("text/html;charset=UTF-8");  // 한글
-	            // 화면에 출력하기 위해
+	            response.setContentType("text/html;charset=UTF-8"); 
 	            response.getWriter().write("<script> alert('회원가입 되었습니다.'); location.href='" + path + "/member/login.jsp';</script>");
 	         }
 		} else if (url.indexOf("idCheck.do") != -1) {
