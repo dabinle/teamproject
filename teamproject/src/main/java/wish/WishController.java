@@ -35,11 +35,11 @@ public class WishController extends HttpServlet {
             }
         }
         else if (url.indexOf("list.do") != -1) {
-            String userID = (String) session.getAttribute("userID"); // 세션에서 userID 가져오기
+            String userID = (String) session.getAttribute("userID"); // userID 가져오기
             
             // userID가 없으면 로그인 페이지로
             if (userID == null) {
-                response.sendRedirect("/teamproject/login.jsp");
+                response.sendRedirect("/teamproject/member/login.jsp");
                 return;
             }
             

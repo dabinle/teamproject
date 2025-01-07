@@ -39,8 +39,9 @@ public class LoginController extends HttpServlet{
 		else if (url.indexOf("logout.do") != -1) {
 			HttpSession session = request.getSession();
 			session.invalidate();
-			String page = path + "/home/home.jsp";
-			response.sendRedirect(page);
+			response.setContentType("text/html;charset=UTF-8");  // 한글
+            // 화면에 출력하기 위해
+			response.getWriter().write("<script> alert('로그아웃 되었습니다.'); location.href='" + path + "/home/home.jsp';</script>");
 		} 
 		else if(url.indexOf("join.do") != -1) {
 			String userID = request.getParameter("userID");
@@ -65,9 +66,8 @@ public class LoginController extends HttpServlet{
 	            dao.join(dto);
 	            
 	            response.setContentType("text/html;charset=UTF-8");  // 한글
-	            
-	            // 클라이언트의 화면에 출력하기 위해
-	             response.getWriter().write("<script> alert('회원가입 되었습니다.'); location.href='" + path + "/member/login.jsp';</script>");
+	            // 화면에 출력하기 위해
+	            response.getWriter().write("<script> alert('회원가입 되었습니다.'); location.href='" + path + "/member/login.jsp';</script>");
 	         } else if (zipCode == -1){
 	            MemberDTO dto = new MemberDTO();
 	            dto.setUserID(userID);
@@ -77,10 +77,10 @@ public class LoginController extends HttpServlet{
 	            dto.setPhoneNum(phoneNum);
 	            dto.setZipCode(zipCode);
 	            dao.join(dto);
-	            response.setContentType("text/html;charset=UTF-8");  // 한글
 	            
-	            // 클라이언트의 화면에 출력하기 위해
-	             response.getWriter().write("<script> alert('회원가입 되었습니다.'); location.href='" + path + "/member/login.jsp';</script>");
+	            response.setContentType("text/html;charset=UTF-8");  // 한글
+	            // 화면에 출력하기 위해
+	            response.getWriter().write("<script> alert('회원가입 되었습니다.'); location.href='" + path + "/member/login.jsp';</script>");
 	         }
 		} else if (url.indexOf("idCheck.do") != -1) {
 		    String userID = request.getParameter("userID");

@@ -6,17 +6,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>찜 목록</title>
+<meta charset="UTF-8">
+<title>찜 목록</title>
+<script>
+function delete_wish() {
+	if(confirm("정말로 삭제하시겠습니까?")){
+		document.form1.action = "/teamproject/wish_servlet/wish_delete.do";
+		document.form1.submit();
+	}
+}
+</script>
 </head>
 <body>
  <h2>찜 목록</h2>
-
+<form name="form1" method="post">
  <c:choose>
      <c:when test="${empty list}">
          <p>찜한 상품이 없습니다.</p>
      </c:when>
      <c:otherwise>
+     
          <table border="1">
              <thead>
                  <tr>
@@ -41,10 +50,8 @@
                              <fmt:formatNumber value="${row.price}" pattern="#,###"/>원
                          </td>
                          <td>
-                             <form action="/teamproject/wish_servlet/wish_delete.do" method="get">
-                                 <input type="hidden" name="wishNum" value="${row.wishNum}">
-                                 <button type="submit">삭제</button>
-                             </form>
+                             <input type="hidden" name="wishNum" value="${row.wishNum}">
+                             <input type="button" value="삭제" onclick="delete_wish()">
                          </td>
                      </tr>
                  </c:forEach>
@@ -52,5 +59,6 @@
          </table>
      </c:otherwise>
  </c:choose>
+ </form>
 </body>
 </html>

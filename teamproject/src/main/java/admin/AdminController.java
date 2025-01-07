@@ -40,8 +40,9 @@ public class AdminController extends HttpServlet{
 		} else if (url.indexOf("logout.do") != -1){
 			HttpSession session = request.getSession();
 			session.invalidate();
-			String page = path + "/home/home.jsp";
-			response.sendRedirect(page);
+			response.setContentType("text/html;charset=UTF-8");  // 한글
+            // 화면에 출력하기 위해
+			response.getWriter().write("<script> alert('로그아웃 되었습니다.'); location.href='" + path + "/home/home.jsp';</script>");
 		}
 	}
 	
