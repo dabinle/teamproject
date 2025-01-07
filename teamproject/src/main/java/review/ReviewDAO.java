@@ -85,10 +85,19 @@ public class ReviewDAO {
 		return list;
 	}
 	
+	public List<ReviewDTO> my_review(String userID) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		List<ReviewDTO> list = session.selectList("review.my_review", userID);
+		session.close();
+		return list;
+	}
+
+	
 	public int count() {
 		int result = 0;
-		SqlSession session = Mybatis.getInstance().openSession();
+		SqlSession session = null;
 		try {
+			session = Mybatis.getInstance().openSession();
 			result = session.selectOne("review.count");
 		} catch (Exception e) {
 			e.printStackTrace();

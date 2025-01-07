@@ -9,13 +9,11 @@
 <script>
 $(function() {
 	$("#btnEdit").click(function() {
-		//console.log("gk");
 		document.form1.action="/teamproject/board_servlet/check_pwd.do";
 		document.form1.submit();
 	});
 	
 	$("#btnEdit2").click(function() {
-		console.log("gk");
 		document.form1.action="/teamproject/board_servlet/admin.do";
 		document.form1.submit();
 	});

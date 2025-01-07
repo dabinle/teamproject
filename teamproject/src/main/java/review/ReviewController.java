@@ -12,8 +12,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import jakarta.websocket.Session;
 
-// @MultipartConfig(maxFileSize = 1024 * 1024 * 10, location ="c:/upload/")
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10, location ="c:/upload/")
 public class ReviewController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -78,12 +79,10 @@ public class ReviewController extends HttpServlet {
 				e.printStackTrace();
 			} 
 			String userID = request.getParameter("userID");
-			//String reviewTitle = request.getParameter("reviewTitle");
 			String reviewContent = request.getParameter("reviewContent");
 			int reviewScore = Integer.parseInt(request.getParameter("reviewScore"));
 			int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
 			dto.setUserID(userID);
-			//dto.setReviewTitle(reviewTitle);
 			dto.setReviewContent(reviewContent);
 			dto.setReviewScore(reviewScore);
 			dto.setReviewNum(reviewNum);
@@ -100,15 +99,21 @@ public class ReviewController extends HttpServlet {
 			int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
 			dto = dao.view(reviewNum);
 			request.setAttribute("dto", dto);
-			RequestDispatcher rd = request.getRequestDispatcher("/review/review_edit.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/review/my_review_edit.jsp");
 			rd.forward(request, response);
 		} else if (url.indexOf("delete.do") != -1) {
 			int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
 			request.setAttribute("dto", dao.view(reviewNum));
-			String page = "/review/review_edit.jsp";
+			String page = "/review/my_review_edit.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(page);
 			rd.forward(request, response);
-		} 	
+		} else if (url.indexOf("abc.do") != -1) {
+			String userID = request.getParameter("userID");
+			List<ReviewDTO> list = dao.my_review(userID);
+			request.setAttribute("list", list);
+			RequestDispatcher rd = request.getRequestDispatcher("/review/my_review.jsp");
+			rd.forward(request, response);
+		}
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

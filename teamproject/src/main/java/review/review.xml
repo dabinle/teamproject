@@ -3,10 +3,17 @@
 <mapper namespace="review">
 
 	<select id="list" resultType="review.ReviewDTO">
-		select reviewNum, userID, reviewDate, reviewContent, reviewFile 
-		from review r, member m
-	 	where r.userID = m.userID
+   	 	select reviewNum, userID, reviewDate, reviewContent, reviewFile, reviewScore
+    	from review 
 	</select>
+
+	<select id="my_review" resultType="review.ReviewDTO">
+    	select reviewNum, userID, reviewDate, reviewContent, reviewFile, reviewScore
+    	from review
+    	where userID = #{userID, jdbcType=VARCHAR}
+	</select>
+
+
 
 	<select id="count" resultType="int">
 		select count(*) from review
@@ -21,7 +28,7 @@
 		(reviewNum, userID,  reviewContent, reviewFile, reviewScore) 
 		values 
 		((select nvl (max(reviewNum)+1, 1) from review), #{userID}, 
-		#{reviewTitle}, #{reviewContent}, #{reviewFile}, #{reviewScore})
+		 #{reviewContent}, #{reviewFile}, #{reviewScore})
 	</insert>
 	
 	<update id="update">

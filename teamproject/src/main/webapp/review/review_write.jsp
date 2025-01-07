@@ -1,5 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+    if (session.getAttribute("userID") == null && session.getAttribute("adminId") == null) {
+        response.sendRedirect("/teamproject/member/login.jsp"); 
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,17 +14,10 @@
 <script>
 function review_write() {
 	let reviewContent = document.form1.reviewContent.value;
-	let reviewScore = document.form1.reviewScore.value;
 	
 	if (reviewContent == "") {
 		alert("내용을 입력하세요");
 		document.form1.reviewContent.focus();
-		return;
-	}
-	
-	if (reviewScore == "") {
-		alert("별점을 입력하세요");
-		document.form1.reviewScore.focus();
 		return;
 	}
 	document.form1.action="/teamproject/review_servlet/insert.do";
@@ -30,7 +28,7 @@ function review_write() {
 <body>
 <%@ include file="../include/menu.jsp" %>
 <h2>리뷰 작성</h2>
-<form name="form1" method="post" enctype="multipart.form-data">
+<form name="form1" method="post" enctype="multipart/form-data">
 <table>
 	<tr>
     	<td align="center">아이디</td>
