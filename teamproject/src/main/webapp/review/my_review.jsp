@@ -22,7 +22,7 @@
 		<c:if test="${row.userID eq sessionScope.userID}">
 			<tr align="center">
 				<td><img src="/teamproject/images/${row.reviewFile}" width="100px" height="100px"></td>
-				<td><a href="/teamproject/review_servlet/view.do?reviewNum=${row.reviewNum }">${row.reviewContent}</a></td>
+				<td><a href="/teamproject/review_servlet/view.do?reviewNum=${row.reviewNum}">${row.reviewContent}</a></td>
 				<td>${row.reviewDate}</td>
 				<td>${row.reviewScore}</td>
 			</tr>

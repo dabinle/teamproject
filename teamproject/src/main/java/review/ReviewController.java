@@ -1,5 +1,6 @@
 package review;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -63,50 +64,18 @@ public class ReviewController extends HttpServlet {
 			dto.setReviewFile(reviewFile);
 			dao.insert(dto);
 			response.sendRedirect(contextPath + "/review_servlet/list.do");
-		} else if (url.indexOf("update.do") != -1) {
-			ServletContext application = request.getSession().getServletContext();
-			String img_path = application.getRealPath("/images/");
-			String reviewFile = "-";
-			try {
-				for (Part part : request.getParts()) {
-					reviewFile = part.getSubmittedFileName();
-					if (reviewFile != null && !reviewFile.equals("null") && !reviewFile.equals("")) {
-						part.write(img_path + reviewFile);
-						break;
-					}
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} 
-			String userID = request.getParameter("userID");
-			String reviewContent = request.getParameter("reviewContent");
-			int reviewScore = Integer.parseInt(request.getParameter("reviewScore"));
-			int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
-			dto.setUserID(userID);
-			dto.setReviewContent(reviewContent);
-			dto.setReviewScore(reviewScore);
-			dto.setReviewNum(reviewNum);
-			if (reviewFile == null || reviewFile.trim().equals("")) {
-				ReviewDTO dto2 = dao.view(reviewNum);
-				reviewFile = dto2.getReviewFile();
-				dto.setReviewFile(reviewFile);
-			} else {
-				dto.setReviewFile(reviewFile);
-			}
-			dao.update(dto);
-			response.sendRedirect(contextPath + "/review_serlvet/list.do");
 		} else if (url.indexOf("view.do") != -1) {
 			int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
 			dto = dao.view(reviewNum);
 			request.setAttribute("dto", dto);
-			RequestDispatcher rd = request.getRequestDispatcher("/review/my_review_edit.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/review/my_review_view.jsp");
 			rd.forward(request, response);
 		} else if (url.indexOf("delete.do") != -1) {
-			int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
-			request.setAttribute("dto", dao.view(reviewNum));
-			String page = "/review/my_review_edit.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(page);
-			rd.forward(request, response);
+		    int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
+		    String userID = request.getParameter("userID"); 
+		    dao.delete(reviewNum);
+		    String page = contextPath + "/review_servlet/abc.do?userID=" + userID + "&reviewNum=" + reviewNum;
+		    response.sendRedirect(page); 
 		} else if (url.indexOf("abc.do") != -1) {
 			String userID = request.getParameter("userID");
 			List<ReviewDTO> list = dao.my_review(userID);

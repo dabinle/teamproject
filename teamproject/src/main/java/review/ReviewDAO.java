@@ -92,6 +92,20 @@ public class ReviewDAO {
 		return list;
 	}
 
+	public String getFilename(int reviewNum) {
+		String result = null;
+		SqlSession session = null;
+		try {
+			session = Mybatis.getInstance().openSession();
+			result = session.selectOne("review.filename", reviewNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		return result;
+	}
 	
 	public int count() {
 		int result = 0;

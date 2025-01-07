@@ -13,14 +13,12 @@
     	where userID = #{userID, jdbcType=VARCHAR}
 	</select>
 
-
+	<select id="filename" resultType="String">
+		select reviewFile from review where reviewNum=#{reviewNum}
+	</select>
 
 	<select id="count" resultType="int">
 		select count(*) from review
-	</select>
-	
-	<select id="filename" resultType="String">
-		select reviewFile from review where reviewNum=#{reviewNum}
 	</select>
 	
 	<insert id="insert">
@@ -33,6 +31,7 @@
 	
 	<update id="update">
 		update review set 
+		reviewScore=#{reviewScore},
 		reviewContent=#{reviewContent},
 		reviewFileName=#{reviewFile},
 		where reviewNum=#{reviewNum}
