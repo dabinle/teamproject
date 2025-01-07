@@ -57,10 +57,9 @@ function list(page) {
 </select>
 <input name="keyword" value="${keyword}">
 <input type="submit" value="검색" id="btnSearch">
-<!-- <button type="button" id="btnWrite">글쓰기</button>  -->
 <c:if test="${sessionScope.userID != null }">
 	<input type="hidden" id="userID" value="${sessionScope.userID}">
-    <button type="button" id="btnWrite">글쓰기</button>
+    <button type="button" id="btnWrite">문의하기</button>
 </c:if>
 </form>
 <table border="1" width="900px" align="center">
