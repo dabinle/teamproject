@@ -19,7 +19,7 @@ function wish_delete(wishNum) {
 </script>
 </head>
 <body>
-<h2>찜 목록</h2>
+<h2 align="center">찜 목록</h2>
 <form name="form1" method="post">
 <input type="hidden" name="wishNum"> 
 <c:choose>
@@ -27,7 +27,7 @@ function wish_delete(wishNum) {
     <p>찜한 상품이 없습니다.</p>
 </c:when>
 <c:otherwise>
-<table border="1">
+<table border="1" align="center">
    <tr>
        <th>이미지</th>
        <th>상품명</th>
