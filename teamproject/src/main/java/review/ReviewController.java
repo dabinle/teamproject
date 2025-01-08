@@ -30,7 +30,7 @@ public class ReviewController extends HttpServlet {
 			int productNum = Integer.parseInt(request.getParameter("productNum"));
 			int count = dao.count(productNum);
 			int cur_page = 1;
-			
+			System.out.println("Received productNum: " + productNum);
 			if (request.getParameter("cur_page") != null) {
 				cur_page = Integer.parseInt(request.getParameter("cur_page"));
 			}

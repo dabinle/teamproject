@@ -14,18 +14,24 @@
 <title>리뷰 작성 페이지</title>
 <script src="http://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
-function review_write() {
-	let reviewContent = document.form1.reviewContent.value;
-	
-	if (reviewContent == "") {
-		alert("내용을 입력하세요");
-		document.form1.reviewContent.focus();
-		return;
-	}
-
-    document.form1.action = "/teamproject/review_servlet/insert.do?productNum=${productNum}";
-    document.form1.submit();
-}
+$(function () {
+    $("#btnWrite").click(function () {
+        let reviewContent = $("#reviewContent").val();
+        
+        if(reviewContent == "") {
+			alert("내용을 입력하세요.");
+			$("#reviewContent").focus();
+			return;
+		}
+        document.form1.action = "/teamproject/review_servlet/insert.do?productNum=${param.productNum}";
+        document.form1.submit();
+    });
+    
+    $("#btnList").click(function() {
+		document.form1.action="/teamproject/review_servlet/list.do";
+		document.form1.submit();
+	});
+});
 </script>
 </head>
 <body>
@@ -61,9 +67,8 @@ function review_write() {
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-			<input type="button" value="등록" onclick="review_write()">
-			<input type="button" value="목록" onclick="location.href='/teamproject/review_servlet/list.do'">
-		</td>
+			<input type="button" value="등록" id="btnWrite">
+			<input type="button" value="목록" id="btnList">
 	</tr>
 </table>
 </form>
