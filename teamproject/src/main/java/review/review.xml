@@ -5,6 +5,7 @@
 	<select id="list" resultType="review.ReviewDTO">
    	 	select reviewNum, userID, reviewDate, reviewContent, reviewFile, reviewScore
     	from review 
+    	where productNum=#{productNum}
 	</select>
 
 	<select id="my_review" resultType="review.ReviewDTO">
@@ -18,16 +19,15 @@
 	</select>
 
 	<select id="count" resultType="int">
-		select count(*) from review
+		select count(*) from review where productNum=#{productNum}
 	</select>
 	
 	<insert id="insert">
-		insert into review 
-		(reviewNum, userID,  reviewContent, reviewFile, reviewScore) 
-		values 
-		((select nvl (max(reviewNum)+1, 1) from review), #{userID}, 
-		 #{reviewContent}, #{reviewFile}, #{reviewScore})
+	    insert into review (reviewNum, userID, productNum, reviewContent, reviewFile, reviewScore) 
+	    values ((select nvl(max(reviewNum)+1, 1) from review), #{userID}, #{productNum}, 
+	    #{reviewContent}, #{reviewFile}, #{reviewScore})
 	</insert>
+
 	
 	<update id="update">
 		update review set 

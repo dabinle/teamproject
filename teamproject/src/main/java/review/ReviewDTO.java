@@ -10,6 +10,7 @@ import lombok.ToString;
 public class ReviewDTO {
 	private int reviewNum;
 	private String userID;
+	private int productNum;
 	private String reviewTitle;
 	private String reviewContent;
 	private String reviewFile;

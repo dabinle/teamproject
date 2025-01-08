@@ -67,7 +67,7 @@ public class ReviewDAO {
 		}
 	}
 	
-	public List<ReviewDTO> list(int pageStart, int pageEnd) {
+	public List<ReviewDTO> list(int pageStart, int pageEnd, int productNum) {
 		List<ReviewDTO> list = null;
 		SqlSession session = null;
 		try {
@@ -75,6 +75,7 @@ public class ReviewDAO {
 			Map<String, Object> map = new HashMap<>();
 			map.put("start", pageStart);
 			map.put("end", pageEnd);
+			map.put("productNum", productNum);
 			list = session.selectList("review.list", map);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,12 +108,12 @@ public class ReviewDAO {
 		return result;
 	}
 	
-	public int count() {
+	public int count(int productNum) {
 		int result = 0;
 		SqlSession session = null;
 		try {
 			session = Mybatis.getInstance().openSession();
-			result = session.selectOne("review.count");
+			result = session.selectOne("review.count", productNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

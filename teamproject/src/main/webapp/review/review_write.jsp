@@ -4,6 +4,8 @@
         response.sendRedirect("/teamproject/member/login.jsp"); 
         return;
     }
+	
+	// String productNum = request.getParameter("productNum");
 %>
 <!DOCTYPE html>
 <html>
@@ -20,8 +22,9 @@ function review_write() {
 		document.form1.reviewContent.focus();
 		return;
 	}
-	document.form1.action="/teamproject/review_servlet/insert.do";
-	document.form1.submit();
+
+    document.form1.action = "/teamproject/review_servlet/insert.do?productNum=${productNum}";
+    document.form1.submit();
 }
 </script>
 </head>
@@ -29,6 +32,9 @@ function review_write() {
 <%@ include file="../include/menu.jsp" %>
 <h2>리뷰 작성</h2>
 <form name="form1" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="productNum" value="${param.productNum}">
+	<h3>Product Number: ${param.productNum}</h3>
+
 <table>
 	<tr>
     	<td align="center">아이디</td>

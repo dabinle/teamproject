@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import jakarta.websocket.Session;
+import product.ProductDAO;
+import product.ProductDTO;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10, location ="c:/upload/")
 public class ReviewController extends HttpServlet {
@@ -23,18 +25,22 @@ public class ReviewController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		ReviewDAO dao = new ReviewDAO();
 		ReviewDTO dto = new ReviewDTO();
+	
 		if (url.indexOf("list.do") != -1) {
-			int count = dao.count();
+			int productNum = Integer.parseInt(request.getParameter("productNum"));
+			int count = dao.count(productNum);
 			int cur_page = 1;
+			
 			if (request.getParameter("cur_page") != null) {
 				cur_page = Integer.parseInt(request.getParameter("cur_page"));
 			}
 			PageUtil page = new PageUtil(count, cur_page);
 			int start = page.getPageBegin();
 			int end = page.getPageEnd();
-			List<ReviewDTO> list = dao.list(start, end);
+			List<ReviewDTO> list = dao.list(start, end, productNum);
 			request.setAttribute("list", list);
 			request.setAttribute("page", page);
+			request.setAttribute("productNum", productNum);
 			RequestDispatcher rd = request.getRequestDispatcher("/review/review_list.jsp");
 			rd.forward(request, response);
 		} else if (url.indexOf("insert.do") != -1) {
@@ -55,9 +61,11 @@ public class ReviewController extends HttpServlet {
 			String userID = request.getParameter("userID");
 			String reviewContent = request.getParameter("reviewContent");
 			int reviewScore = Integer.parseInt(request.getParameter("reviewScore"));
+			int productNum = Integer.parseInt(request.getParameter("productNum"));
 			dto.setUserID(userID);
 			dto.setReviewContent(reviewContent);
 			dto.setReviewScore(reviewScore);
+			dto.setProductNum(productNum);
 			if (reviewFile == null || reviewFile.trim().equals("")) {
 				reviewFile = "-";
 			}
