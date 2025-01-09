@@ -19,6 +19,13 @@
 			where rn between #{start} and #{end} 
 	</select>
 	
+	<select id="board.check_reply" resultType="int">
+	    select count(*)
+	    from board
+	    where groupNum = #{groupNum} and reDepth > 0
+	</select>
+	
+	
 	<select id="count" resultType="int">
 		select count(*) from board
 	</select>
@@ -30,7 +37,6 @@
 	    where b.boardNum = #{boardNum} 
 	    and m.userPwd = mypack.encrypt(#{userPwd, jdbcType=VARCHAR})
 	</select>
-
 	
 	<select id="admin_check_pwd" resultType="String">
 		select adminPwd 
@@ -143,6 +149,6 @@
 	</update>
 	
 	<delete id="delete">
-		delete from board where boardNum=#{boardNum}
+		delete from board where boardNum=#{boardNum} or groupNum=#{groupNum}
 	</delete>
 </mapper>

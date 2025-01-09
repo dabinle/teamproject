@@ -263,6 +263,7 @@ public class BoardController extends HttpServlet {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			String userPwd = request.getParameter("userPwd");
 			String result = dao.check_pwd(boardNum, userPwd);
+			
 			if (result != null) {
 				dao.delete(boardNum);
 				String page = contextPath + "/board_servlet/list.do";
@@ -273,7 +274,7 @@ public class BoardController extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher(page);
 				rd.forward(request, response);
 			}
-		} else if (url.indexOf("abc.do") != -1) {
+		}  else if (url.indexOf("abc.do") != -1) {
 			int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 			String adminPwd = request.getParameter("adminPwd");
 			String result = dao.admin_check_pwd(boardNum, adminPwd);
