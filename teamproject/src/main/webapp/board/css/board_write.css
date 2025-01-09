@@ -9,7 +9,7 @@
 body {
   width: 100%;
   background-color: #fdf2f5; /* Very light pink background */
-  font-family: 'Pangolin', sans-serif; /* 귀여운 Pangolin 폰트 */
+  font-family: 'Arial', sans-serif; /* Arial font */
 }
 
 div {
@@ -38,9 +38,8 @@ table th, table td {
 
 table th {
   background-color: #f9e7f1; /* Very soft and barely visible pink for headers */
-  color: #9f7b8b; /* Soft muted pinkish-gray text */
+  color: #7a4c6c; /* Muted dark pink text */
   font-weight: 600;
-  font-family: 'Dancing Script', cursive; /* 귀여운 Dancing Script 폰트 */
 }
 
 input, textarea {
@@ -51,7 +50,7 @@ input, textarea {
   background-color: #fff7f9; /* Extremely light pink for input fields */
   font-size: 14px;
   color: #333;
-  font-family: 'Pangolin', sans-serif; /* 귀여운 Pangolin 폰트 */
+  font-family: 'Arial', sans-serif; /* Arial font */
 }
 
 input:focus, textarea:focus {
@@ -74,7 +73,7 @@ textarea {
   color: white;
   cursor: pointer;
   transition: background-color 0.3s;
-  font-family: 'Pangolin', sans-serif; /* 귀여운 Pangolin 폰트 */
+  font-family: 'Arial', sans-serif; /* Arial font */
 }
 
 .btn:hover {
@@ -86,5 +85,5 @@ h3 {
   color: #f59bb4; /* Soft pink for headings */
   font-size: 26px;
   text-align: center;
-  font-family: 'Dancing Script', cursive; /* 귀여운 Dancing Script 폰트 */
+  font-family: 'Arial', sans-serif; /* Arial font */
 }
