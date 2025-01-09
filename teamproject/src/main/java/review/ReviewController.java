@@ -28,19 +28,11 @@ public class ReviewController extends HttpServlet {
 	
 		if (url.indexOf("list.do") != -1) {
 			int productNum = Integer.parseInt(request.getParameter("productNum"));
-			int count = dao.count(productNum);
-			int cur_page = 1;
-			System.out.println("Received productNum: " + productNum);
-			if (request.getParameter("cur_page") != null) {
-				cur_page = Integer.parseInt(request.getParameter("cur_page"));
-			}
-			PageUtil page = new PageUtil(count, cur_page);
-			int start = page.getPageBegin();
-			int end = page.getPageEnd();
-			List<ReviewDTO> list = dao.list(start, end, productNum);
+			List<ReviewDTO> list = dao.list(productNum);
+			
 			request.setAttribute("list", list);
-			request.setAttribute("page", page);
 			request.setAttribute("productNum", productNum);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/review/review_list.jsp");
 			rd.forward(request, response);
 		} else if (url.indexOf("insert.do") != -1) {
@@ -71,7 +63,7 @@ public class ReviewController extends HttpServlet {
 			}
 			dto.setReviewFile(reviewFile);
 			dao.insert(dto);
-			response.sendRedirect(contextPath + "/review_servlet/list.do");
+			response.sendRedirect(contextPath + "/review_servlet/list.do?productNum=" + productNum);
 		} else if (url.indexOf("view.do") != -1) {
 			int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
 			dto = dao.view(reviewNum);

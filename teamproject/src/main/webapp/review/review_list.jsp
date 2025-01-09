@@ -23,7 +23,6 @@ $(function() {
 <form name="form1" method="post" action="/teamproject/review_servlet/list.do">
 	<input type="hidden" name="productNum" value="${productNum}">
 	<button type="button" id="btnWrite">리뷰 작성하기</button>
-	<c:out value="${productNum}" />
 </form>
 <table border="1" width="900px">
 	<tr>

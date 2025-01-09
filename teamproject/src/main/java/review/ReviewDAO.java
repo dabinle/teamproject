@@ -67,7 +67,7 @@ public class ReviewDAO {
 		}
 	}
 	
-	public List<ReviewDTO> list(int pageStart, int pageEnd, int productNum) {
+	public List<ReviewDTO> page(int pageStart, int pageEnd, int productNum) {
 		List<ReviewDTO> list = null;
 		SqlSession session = null;
 		try {
@@ -75,6 +75,23 @@ public class ReviewDAO {
 			Map<String, Object> map = new HashMap<>();
 			map.put("start", pageStart);
 			map.put("end", pageEnd);
+			map.put("productNum", productNum);
+			list = session.selectList("review.list", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		return list;
+	}
+	
+	public List<ReviewDTO> list(int productNum) {
+		List<ReviewDTO> list = null;
+		SqlSession session = null;
+		try {
+			session = Mybatis.getInstance().openSession();
+			Map<String, Object> map = new HashMap<>();
 			map.put("productNum", productNum);
 			list = session.selectList("review.list", map);
 		} catch (Exception e) {

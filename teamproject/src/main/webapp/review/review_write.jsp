@@ -39,8 +39,6 @@ $(function () {
 <h2>리뷰 작성</h2>
 <form name="form1" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="productNum" value="${param.productNum}">
-	<h3>Product Number: ${param.productNum}</h3>
-
 <table>
 	<tr>
     	<td align="center">아이디</td>
@@ -49,7 +47,7 @@ $(function () {
 	</tr>
 	<tr>
 		<td>내용</td>
-		<td><textarea rows="5" cols="60" name="reviewContent"></textarea></td>
+		<td><textarea rows="5" cols="60" name="reviewContent" id="reviewContent"></textarea></td>
 	</tr>
 	<tr>
 		<td>별점</td>
