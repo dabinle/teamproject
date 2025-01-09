@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="./css/join.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
@@ -130,6 +131,7 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 </script>
 </head>
 <body>
+<div id="con"></div>
 <h2 align="center">회원가입</h2>
 <h3 align="center">*는 필수 항목입니다.</h3>
 <form name="form1" method="post" align="center">
