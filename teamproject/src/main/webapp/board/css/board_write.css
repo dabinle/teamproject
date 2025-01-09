@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  background-color: #fdf2f5; /* Very light pink background */
+  font-family: 'Pangolin', sans-serif; /* 귀여운 Pangolin 폰트 */
+}
+
+div {
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+table {
+  width: 75%;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fef6f9; /* Almost invisible light pink */
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+table th, table td {
+  border: 1px solid #f6d9e3; /* Very subtle light pink border */
+  text-align: center;
+  padding: 12px;
+}
+
+table th {
+  background-color: #f9e7f1; /* Very soft and barely visible pink for headers */
+  color: #9f7b8b; /* Soft muted pinkish-gray text */
+  font-weight: 600;
+  font-family: 'Dancing Script', cursive; /* 귀여운 Dancing Script 폰트 */
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #f6d9e3; /* Soft pinkish border */
+  border-radius: 6px;
+  background-color: #fff7f9; /* Extremely light pink for input fields */
+  font-size: 14px;
+  color: #333;
+  font-family: 'Pangolin', sans-serif; /* 귀여운 Pangolin 폰트 */
+}
+
+input:focus, textarea:focus {
+  border-color: #f59bb4; /* Soft pinkish-red focus color */
+  outline: none;
+}
+
+textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+.btn {
+  width: 150px;
+  padding: 12px;
+  margin-top: 20px;
+  background-color: #f59bb4; /* Stronger, visible pink button */
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: 'Pangolin', sans-serif; /* 귀여운 Pangolin 폰트 */
+}
+
+.btn:hover {
+  background-color: #d88198; /* Darker pink on hover */
+}
+
+h3 {
+  margin: 10px 0;
+  color: #f59bb4; /* Soft pink for headings */
+  font-size: 26px;
+  text-align: center;
+  font-family: 'Dancing Script', cursive; /* 귀여운 Dancing Script 폰트 */
+}

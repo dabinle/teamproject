@@ -11,6 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- <link rel="stylesheet" href="/teamproject/board/css/board_list.css"> -->
 <title>1:1문의 목록 페이지</title>
 <script src="http://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
@@ -25,7 +26,9 @@ function list(page) {
 </script>
 </head>
 <body>
+<header>
 <h2 align="center">1:1 문의</h2>
+</header>
 <form name="form1" method="post" action="/teamproject/board_servlet/search.do" align="center">
 <select name="search_option">
 <c:choose>

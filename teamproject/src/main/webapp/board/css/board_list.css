@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+header{
+	display: grid;
+	justify-content: center;
+	background-color: #e1dddb;
+}
+
+nav{
+	display: grid;
+	grid-template-colums:auto auto;
+	grid-gap:10px;
+	justify-content: center;
+}
+
+section{
+	display: grid;
+	justify-content: center;
+}
+
+footer{
+	display: grid;
+	justify-content: center;
+	background-color:#e1dddb;
+}
