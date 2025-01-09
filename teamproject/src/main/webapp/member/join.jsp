@@ -148,7 +148,7 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 		</td>
 	</tr>
 	<tr>
-		<td>* 이메일</td>
+		<td>* 이메일</td>                                                                                                                            
 		<td><input name="email" placeholder="이메일 입력"></td>
 	</tr>
 	

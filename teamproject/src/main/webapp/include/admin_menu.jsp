@@ -5,13 +5,15 @@
 <div style="text-align: right;">
 <c:choose>
 	<c:when test="${sessionScope.admin_adminId == null}">
-		<a href="/teamproject/admin/admin_login.jsp">관리자 로그인</a> | 
-		<a href="/teamproject/member/memberCenter.jsp" style="text-decoration: none; color: black;">고객센터</a>
+		<span><a href="/teamproject/admin/admin_login.jsp">관리자 로그인</a></span>
+		<span><a href="/teamproject/member/memberCenter.jsp" style="text-decoration: none; color: black;">고객센터</a></span>
+		<span><a href="/teamproject/admin/admin_login.jsp">상품목록</a></span>
 	</c:when>
 	<c:otherwise>
 		${sessionScope.admin_adminName}님이 로그인중입니다.
-		<a href="/teamproject/member/memberCenter.jsp" style="text-decoration: none; color: black;">고객센터</a>
-		<a href="/teamproject/admin_servlet/logout.do">로그아웃</a>
+		<span><a href="/teamproject/member/memberCenter.jsp" style="text-decoration: none; color: black;">고객센터</a></span>
+		<span><a href="/teamproject/productAdmin_servlet/list.do" style="text-decoration: none; color: black;">상품목록</a></span>
+		<span><a href="/teamproject/admin_servlet/logout.do">로그아웃</a></span>
 	</c:otherwise>
 </c:choose>
 </div>
