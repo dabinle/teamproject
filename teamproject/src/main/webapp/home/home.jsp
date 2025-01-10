@@ -13,7 +13,7 @@ function couponList() {
 		type:"get",
 		url:"/teamproject/coupon_servlet/list.do",
 		success: function (txt) {
-			$("#contents").html(txt);
+			$(".contents").html(txt);
 		}
 	});
 }
@@ -23,7 +23,7 @@ function category() {
 		type:"get",
 		url:"/teamproject/product_servlet/selected_category.do",
 		success: function (txt) {
-			$("#contents").html(txt);
+			$(".contents").html(txt);
 		}
 	});
 }
