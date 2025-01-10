@@ -7,7 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/teamproject/faq/css/faq_list.css">
 <title>FAQ</title>
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -108,7 +107,7 @@
    </tr>
 </table>
 <c:if test="${sessionScope.adminId != null }">
-    <button class="btn" type="button" id="btnWrite">글쓰기</button>
+    <button type="button" id="btnWrite">글쓰기</button>
 </c:if>
 </body>
 </html>
