@@ -60,7 +60,7 @@ $(function() {
 </script>
 </head>
 <body>
-<h2 style="text-align: center;">1:1문의 질문</h2>
+<h2>문의하기</h2>
 <form name="form1" method="post" action="/teamproject/board_servlet/insert.do" enctype="multipart/form-data">
 <table border="1" width="700px">
 	<tr>

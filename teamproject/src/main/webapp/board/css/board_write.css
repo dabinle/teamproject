@@ -1,60 +1,63 @@
 @charset "UTF-8";
 
 * {
-  margin: 0;
+  margin: 10;
   padding: 0;
   box-sizing: border-box;
 }
 
 body {
   width: 100%;
-  background-color: #fdf2f5; /* Very light pink background */
-  font-family: 'Arial', sans-serif; /* Arial font */
+  background-color: #f5f1ee; 
+}
+
+h2 {
+	text-align: center;
+	color: #000000; 
 }
 
 div {
   margin: 0 auto;
   background-color: #ffffff;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  border-radius: 10px; 
 }
 
 table {
-  width: 75%;
+  width: 80%;
   margin: 20px auto;
   padding: 20px;
   border-radius: 10px;
-  background-color: #fef6f9; /* Almost invisible light pink */
+  background-color: #fef6f9; 
   border: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 table th, table td {
-  border: 1px solid #f6d9e3; /* Very subtle light pink border */
+  border: 1px solid #ffffff; 
   text-align: center;
   padding: 12px;
 }
 
 table th {
-  background-color: #f9e7f1; /* Very soft and barely visible pink for headers */
-  color: #7a4c6c; /* Muted dark pink text */
+  background-color: #f9e7f1; 
+  color: #7a4c6c; 
   font-weight: 600;
 }
 
 input, textarea {
   width: 100%;
   padding: 12px;
-  border: 1px solid #f6d9e3; /* Soft pinkish border */
+  border: 1px solid #ffffff; 
   border-radius: 6px;
-  background-color: #fff7f9; /* Extremely light pink for input fields */
+  background-color: #ffffff; 
   font-size: 14px;
   color: #333;
-  font-family: 'Arial', sans-serif; /* Arial font */
+  font-family: 'Arial', sans-serif; 
 }
 
 input:focus, textarea:focus {
-  border-color: #f59bb4; /* Soft pinkish-red focus color */
+  border-color: #ffffff; 
   outline: none;
 }
 
@@ -67,23 +70,23 @@ textarea {
   width: 150px;
   padding: 12px;
   margin-top: 20px;
-  background-color: #f59bb4; /* Stronger, visible pink button */
+  background-color: #df3278; 
   border: none;
   border-radius: 6px;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s;
-  font-family: 'Arial', sans-serif; /* Arial font */
+  font-family: 'Arial', sans-serif; 
 }
 
 .btn:hover {
-  background-color: #d88198; /* Darker pink on hover */
+  background-color: #d88198; 
 }
 
 h3 {
   margin: 10px 0;
-  color: #f59bb4; /* Soft pink for headings */
+  color: #f59bb4; 
   font-size: 26px;
   text-align: center;
-  font-family: 'Arial', sans-serif; /* Arial font */
+  font-family: 'Arial', sans-serif; 
 }
