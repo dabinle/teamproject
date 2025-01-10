@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ include file="../include/admin_menu.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/teamproject/product/css/admin_product_insert.css">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -76,7 +78,7 @@ function insert() {
          <option value="${row.p_categoryNum}">[${row.p_categoryNum}] ${row.p_categoryName}</option>
       </c:forEach>
    </select>
-   <input type="button" id="select" value="카테고리선택">
+   <input class="btn2" type="button" id="select" value="카테고리선택">
    <br>
    <div id="result">하위 카테고리 : </div>
    <label for="comanyNum">회사명:</label>
@@ -87,8 +89,8 @@ function insert() {
    </select>
    <br>
    <input type="hidden" name="productNum">
-   <input type="button" value="상품등록" onclick="insert()">
-   <input type="button" value="상품목록" onclick="location.href='/teamproject/productAdmin_servlet/list.do'">
+   <input class="btn" type="button" value="상품등록" onclick="insert()">
+   <input class="btn" type="button" value="상품목록" onclick="location.href='/teamproject/productAdmin_servlet/list.do'">
 </form>
 </body>
 </html>

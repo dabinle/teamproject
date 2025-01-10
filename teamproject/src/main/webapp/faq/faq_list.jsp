@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/teamproject/faq/css/faq_list.css">
 <title>FAQ</title>
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -48,7 +49,7 @@
     </c:choose>
 </select>
 
-<input name="keyword" value="${keyword}" placeholder="검색 키워드를 입력하세요">
+<input type="text" name="keyword" value="${keyword}" placeholder="검색 키워드를 입력하세요">
 <input type="submit" value="검색" id="btnSearch">
 </form>
 <table border="1" width="900px" align="center">
@@ -107,7 +108,7 @@
    </tr>
 </table>
 <c:if test="${sessionScope.adminId != null }">
-    <button type="button" id="btnWrite">글쓰기</button>
+    <button class="btn" type="button" id="btnWrite">글쓰기</button>
 </c:if>
 </body>
 </html>

@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/teamproject/product/css/admin_product_list.css">
     <title>관리자 상품 목록 페이지</title>
     <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -25,7 +26,7 @@ color: red;
 </head>
 <body>
 <h2>상품목록</h2>
-<button type="button" id="btn_insert">상품등록</button>
+<button class="btn" type="button" id="btn_insert">상품등록</button>
 <table border="1" width="800px">
    <tr align="center">
       <th>상품번호</th>

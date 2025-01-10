@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/teamproject/board/css/view.css">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./css/faq_view.css">
 </head>
 <body>
 <c:choose>
@@ -24,28 +24,26 @@
 		<td align="center">
 			<table>
 				<tr>
-					<td>카테고리</td>
-					<td>${dto.f_categoryName}</td>
+					<td class="a">카테고리</td>
+					<td class="b">${dto.f_categoryName}</td>
 				</tr>
 				<tr>
-					<td>작성자</td>
-					<td>${dto.adminId}</td>
+					<td class="a">작성자</td>
+					<td class="b">${dto.adminId}</td>
 				</tr>
 				<tr>
-					<td>자주 묻는 질문</td>
-					<td>${dto.qusetion }</td>
+					<td class="a">자주 묻는 질문</td>
+					<td class="b">${dto.qusetion }</td>
 				</tr>
 				<tr>
-					<td>답변</td>
-					<td>${dto.f_answer }</td>
+					<td class="a">답변</td>
+					<td class="b">${dto.f_answer }</td>
 				</tr>
 				<tr>
-					<td><input type="hidden" name="faqNum " value="${dto.faqNum }">
-				</tr>
-				<tr>
-					<td><input type="button" value="목록" onclick="location.href='/teamproject/faq_servlet/list.do'"></td>
+					<input type="hidden" name="faqNum " value="${dto.faqNum }">
 				</tr>
 			</table>
+			<input class="btn" type="button" value="목록" onclick="location.href='/teamproject/faq_servlet/list.do'">
 		</td>
 	</tr>
 </table>

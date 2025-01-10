@@ -17,6 +17,10 @@ h2 {
 	color: #000000; 
 }
 
+select {
+	width: 50px;
+}
+
 div {
   margin: 0 auto;
   background-color: #ffffff;
@@ -42,7 +46,7 @@ table th, table td {
 
 table th {
   background-color: #ffffff; 
-  color: #000000; 
+  color: #7a4c6c; 
   font-weight: 600;
 }
 
@@ -79,7 +83,7 @@ textarea {
 }
 
 .btn:hover {
-  background-color: #ffffff; 
+  background-color: #ca296a; 
 }
 
 h3 {

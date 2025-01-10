@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/teamproject/board/css/view.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -44,12 +45,10 @@
 					<td>${dto.noticeContent}</td>
 				</tr>
 				<tr>
-					<td><input type="hidden" name="noticeNum" value="${dto.noticeNum}">
-				</tr>
-				<tr>
-					<td><input type="button" value="목록" onclick="location.href='/teamproject/notice_servlet/list.do'"></td>
+					<input type="hidden" name="noticeNum" value="${dto.noticeNum}">
 				</tr>
 			</table>
+			<input class="btn" type="button" value="목록" onclick="location.href='/teamproject/notice_servlet/list.do'">
 		</td>
 	</tr>
 </table>

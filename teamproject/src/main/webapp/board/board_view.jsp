@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/teamproject/board/css/view.css">
 <title>1:1문의 상세 페이지</title>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
@@ -92,21 +93,21 @@ $(function() {
 			<c:choose>
 	    		<c:when test="${dto.re_depth == 0}">
 			        <c:if test="${dto.userID == sessionScope.userID}">
-			            <input type="button" value="수정/삭제" id="btnEdit">
+			            <input class="btn" type="button" value="수정/삭제" id="btnEdit">
 			        </c:if>
 			    </c:when>
 			    <c:when test="${dto.re_depth > 0}">        
 			        <c:if test="${dto.adminId == sessionScope.adminId}">
-			            <input type="button" value="수정/삭제" id="btnEdit2">
+			            <input class="btn" type="button" value="수정/삭제" id="btnEdit2">
 			        </c:if>
 			    </c:when>
 			</c:choose>
 			<c:if test="${sessionScope.adminId != null && dto.re_depth == 0}">
     			<input type="hidden" id="adminId" value="${sessionScope.adminId}">
-    			<button type="button" id="btnReply">답변</button>
+    			<button class="btn" type="button" id="btnReply">답변</button>
 			</c:if>
 
-			<input type="button" value="목록" id="btnList">
+			<input class="btn" type="button" value="목록" id="btnList">
 		</td>
 	</tr>
 </table>

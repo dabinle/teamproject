@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Dancing+Script&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/teamproject/board/css/board_write.css">
+<link rel="stylesheet" href="/teamproject/faq/css/faq_write.css">
 <title>1:1 문의 글쓰기 페이지</title>
 <script src="http://code.jquery.com/jquery-3.7.1.js"></script>
 <script>

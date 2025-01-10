@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/teamproject/board/css/board_list.css">
+<link rel="stylesheet" href="/teamproject/faq/css/faq_list.css">
 <title>1:1문의 목록 페이지</title>
 <script src="http://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
@@ -26,9 +26,7 @@ function list(page) {
 </script>
 </head>
 <body>
-<header>
 <h2 align="center">1:1 문의</h2>
-</header>
 <form name="form1" method="post" action="/teamproject/board_servlet/search.do" align="center">
 <select name="search_option">
 <c:choose>
@@ -58,12 +56,8 @@ function list(page) {
 	</c:when>
 </c:choose>
 </select>
-<input name="keyword" value="${keyword}">
+<input type="text" name="keyword"  value="${keyword != null ? keyword : ''}" placeholder="검색 키워드를 입력하세요">
 <input type="submit" value="검색" id="btnSearch">
-<c:if test="${sessionScope.userID != null }">
-	<input type="hidden" id="userID" value="${sessionScope.userID}">
-    <button type="button" id="btnWrite">문의하기</button>
-</c:if>
 </form>
 <table border="1" width="900px" align="center">
 	<tr>
@@ -123,5 +117,10 @@ function list(page) {
 		</td>
 	</tr>
 </table>
+
+<c:if test="${sessionScope.userID != null }">
+	<input type="hidden" id="userID" value="${sessionScope.userID}">
+    <button class="btn" type="button" id="btnWrite">문의하기</button>
+</c:if>
 </body>
 </html>

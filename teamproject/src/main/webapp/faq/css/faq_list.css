@@ -8,14 +8,18 @@
 
 body {
   width: 100%;
-  background-color: #f5f1ee; 
+  background-color: #ffffff;  /* 전체 배경색 */
+}
+
+header {
+  background-color: #ffffff;  /* header 부분 배경색을 흰색으로 */
 }
 
 h2 {
-	margin:15;
-	text-align: center;
-	color: #000000;
-	background-color:#f5f1ee;  
+  margin: 15px auto;
+  text-align: center;
+  color: #000000;
+
 }
 
 div {
@@ -26,30 +30,75 @@ div {
 }
 
 nav {
-	border-color: #ffffff;
-	background-color: #f5f1ee;
+  border-color: #ffffff;
+  background-color: #f5f1ee;
 }
 
 table {
-  height: 150px;
+  height: 200px;
+  width: 1200px;
   margin: 30px auto;  
   padding: 10px;
-  background-color: #ffffff; 
-  
+  background-color: #ffffff;
+  position: relative; 
 }
 
 .btn {
+	position: absolute;
+	top:500px;
+	left: 135px;
   width: 70px;
   height: 40px;
   margin-top: 10px;
+  margin-left: 220px;
   background-color: #df3278; 
   border: none;
   border-radius: 6px;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s;
+  
 }
 
 .btn:hover {
-  background-color: #ffffff; 
+  background-color: #ca296a; 
+}
+
+/* select 요소 크기 키우기 */
+select {
+  width: 100px;  /* 원하는 크기로 설정 */
+  height: 40px;  /* 높이 설정 */
+  font-size: 16px;  /* 글자 크기 설정 */
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* input[type="text"]에 스타일 적용 */
+input[type="text"] {
+  width: 300px !important;  /* 크기 설정 */
+  height: 40px !important;  /* 높이 설정 */
+  font-size: 16px !important;  /* 글자 크기 설정 */
+  padding: 5px !important;
+  border-radius: 6px !important;
+  border: 1px solid #ccc !important;
+}
+
+
+/* submit 버튼 크기 키우기 */
+input#btnSearch {
+  width: 60px !important;
+  height: 40px !important;
+  background-color: #df3278 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  color: white !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s !important;
+}
+
+
+input[type="submit"]:hover {
+  background-color: #ca296a;
 }

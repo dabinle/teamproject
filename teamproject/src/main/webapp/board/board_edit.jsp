@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/teamproject/faq/css/faq_edit.css">
 <title>1:1문의 수정 페이지</title>
 <script src="http://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
@@ -86,6 +87,7 @@ $(function() {
 </script>
 </head>
 <body>
+<h2>1:1문의 수정</h2>
 <form name="form1" method="post" enctype="multipart/form-data">
 <table border="1" width="700px">
 	<tr>
@@ -131,14 +133,14 @@ $(function() {
 			<c:choose>
 	    		<c:when test="${dto.re_depth == 0}">
 			        <c:if test="${dto.userID == sessionScope.userID}">
-			            <input type="button" value="수정" id="btnUpdate">
-			            <input type="button" value="삭제" id="btnDelete">
+			            <input class="btn" type="button" value="수정" id="btnUpdate">
+			            <input class="btn" type="button" value="삭제" id="btnDelete">
 			        </c:if>
 			    </c:when>
 			    <c:when test="${dto.re_depth > 0}">        
 			        <c:if test="${dto.adminId == sessionScope.adminId}">
-			            <input type="button" value="수정" id="btnUpdate2">
-			            <input type="button" value="삭제" id="btnDelete2">
+			            <input class="btn" type="button" value="수정" id="btnUpdate2">
+			            <input class="btn" type="button" value="삭제" id="btnDelete2">
 			        </c:if>
 			    </c:when>
 			</c:choose>

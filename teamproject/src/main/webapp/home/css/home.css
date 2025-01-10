@@ -1,14 +1,9 @@
 @charset "UTF-8";
 
-header, main, nav, contents, footer {
+ main, nav, contents, footer {
 	text-align: center;
 	font-size: 20px;
 	font-weight: bold;
-}
-
-header {
-	border: 2px solid yellow;
-	height: 100px;
 }
 
 main {
@@ -20,6 +15,10 @@ main {
 
 nav {
 	border: 2px solid pink;
+}
+
+body {
+	background-color: #ffffff;
 }
 
 nav a {

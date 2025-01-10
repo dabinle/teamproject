@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+/* 전역 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  background-color: #f5f1ee;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  margin: 40px 0;
+  text-align: center;
+  color: #000000;
+  font-size: 32px;
+}
+
+select {
+  width: 150px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #000000; 
+  border-radius: 6px;
+  background-color: #ffffff; 
+  font-size: 14px;
+  color: #000000;
+}
+
+input:focus, textarea:focus {
+  border-color: #ffffff; 
+  outline: none;
+}
+
+textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+div {
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+table {
+  width: 80%;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-collapse: collapse;
+  border-radius: 8px;
+}
+
+/* a 셀의 스타일 */
+table td.a {
+  font-size: 16px;
+  padding: 20px;
+  text-align: left;
+  width: 40%; /* 'a' 셀의 너비는 40% */
+  height: 50px;
+  font-weight: bold;
+}
+
+/* b 셀의 스타일 */
+table td.b {
+  font-size: 16px;
+  padding: 20px;
+  text-align: left;
+  width: 60%; /* 'b' 셀의 너비는 'a'의 두 배 */
+  height: 50px;
+}
+
+/* 기본 td 스타일 */
+table td {
+  border: 1px solid #000000;
+  text-align: center;
+  padding: 20px;
+  height: 50px;
+  font-size: 16px;
+}
+
+/* 목록 버튼 스타일 */
+.btn {
+  width: 100px;
+  padding: 16px;
+  margin-top: 30px;
+  background-color: #df3278;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* 버튼 hover 시 스타일 */
+.btn:hover {
+  background-color: #ca296a;
+}

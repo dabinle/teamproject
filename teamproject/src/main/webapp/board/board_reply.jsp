@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/teamproject/faq/css/faq_edit.css">
 <title>1:1문의 답변 페이지</title>
 <script src="http://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
@@ -73,7 +74,7 @@ $(function() {
 	<tr>
 		<td colspan="2" align="center">
 			<input type="hidden" name="boardNum" value="${dto.boardNum}">
-			<input type="button" value="확인" id="btnSave">
+			<input class="btn" type="button" value="확인" id="btnSave">
 		</td>
 	</tr>
 </table>

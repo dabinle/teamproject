@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../include/admin_menu.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/teamproject/faq/css/faq_edit.css">
 <title>Insert title here</title>
 <script>
 	function delete_product() {
@@ -87,9 +88,9 @@
    <tr>
       <td colspan="2" align="center">
          <input type="hidden" name="productNum" value="${dto.productNum }"> 
-         <input type="button" value="수정" onclick="update_product()">
-         <input type="button" value="삭제" onclick="delete_product()">
-         <input type="button" value="목록" onclick="location.href='/teamproject/productAdmin_servlet/list.do'">
+         <input class="btn" type="button" value="수정" onclick="update_product()">
+         <input class="btn" type="button" value="삭제" onclick="delete_product()">
+         <input class="btn" type="button" value="목록" onclick="location.href='/teamproject/productAdmin_servlet/list.do'">
       </td>
    </tr>
 </table>

@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/teamproject/faq/css/faq_list.css">
 <title>공지사항</title>
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -34,7 +35,7 @@
       <option value="n_categoryName" ${search_option == 'n_categoryName' ? 'selected' : ''}>카테고리</option>
    </select>
 
-   <input name="keyword" value="${keyword != null ? keyword : ''}" placeholder="검색 키워드를 입력하세요">
+   <input type="text" name="keyword" value="${keyword != null ? keyword : ''}" placeholder="검색 키워드를 입력하세요">
    <input type="submit" value="검색" id="btnSearch">
 </form>
 
@@ -97,7 +98,7 @@
 </table>
 
 <c:if test="${sessionScope.adminId != null}">
-   <button type="button" id="btnWrite">글쓰기</button>
+   <button class="btn" type="button" id="btnWrite">글쓰기</button>
 </c:if>
 </body>
 </html>
