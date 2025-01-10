@@ -25,10 +25,20 @@ function IdFind() {
 
     document.form1.action = "/teamproject/login_servlet/idFind.do";
     document.form1.submit();
+    
+    $.ajax({
+    	type: "post",
+    	url: "/teamproject/login_servlet/idFind.do",
+    	data: {"userName": userName, "email": email},
+    	success: function (txt) {
+			$("#result").html(txt);
+		}
+    });
 }
 </script>
 </head>
 <body>
+<div id="result">
 <h2 align="center">아이디 찾기</h2>
 <form name="form1" method="post" align="center">
 <table align="center">
@@ -47,5 +57,6 @@ function IdFind() {
 	</tr>
 </table>
 </form>
+</div>
 </body>
 </html>

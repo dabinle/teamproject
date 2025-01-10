@@ -63,6 +63,15 @@
   	<servlet-name>CartController</servlet-name>
   	<url-pattern>/cart_servlet/*</url-pattern>
   </servlet-mapping>
+  <!-- 주문상세 -->
+  <servlet>
+  	<servlet-name>OrderController</servlet-name>
+  	<servlet-class>order.OrderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>OrderController</servlet-name>
+  	<url-pattern>/order_servlet/*</url-pattern>
+  </servlet-mapping>
   <!-- 1:1문의 - 파일 업로드 -->
   <servlet>
   	<servlet-name>UploadController</servlet-name>
@@ -98,6 +107,15 @@
   <servlet-mapping>
   	<servlet-name>FaqController</servlet-name>
   	<url-pattern>/faq_servlet/*</url-pattern>
+  </servlet-mapping>
+   <!-- 쿠폰 -->
+  <servlet>
+  	<servlet-name>CouponController</servlet-name>
+  	<servlet-class>coupon.CouponController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CouponController</servlet-name>
+  	<url-pattern>/coupon_servlet/*</url-pattern>
   </servlet-mapping>
   <!-- 찜 -->
   <servlet>

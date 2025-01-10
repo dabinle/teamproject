@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="coupon">
+	<select id="list" resultType="coupon.CouponDTO">
+		select * from coupon
+	</select>
+	
+	
+	<insert id="insert">
+		insert into couponDetail (couponID, couponNum, userID)
+		values (seq_couponDetail.nextval, #{couponNum}, #{userID})
+	</insert>
+	<update id="done">
+		update couponDetail
+		set couponStatus = 1, orderDate = #{orderDate}
+		where couponID = #{couponID}
+	</update>
+	<update id="cancel">
+		update couponDetail
+		set couponStatus = 0
+		where couponID = #{couponID}
+	</update>
+	<delete id="delete">
+		delete from couponDetail
+		where couponID = #{couponID} and couponStatus = 1
+	</delete>
+	
+	<select id="detail" resultType="coupon.CouponDTO">
+		select c.couponNum, couponName, couponPrice, couponImage
+		from coupon c, couponDetail cm
+		where c.couponNum = cm.couponNum and orderDate = #{orderDate} and userID = #{userID}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(*) from couponDetail where userID = #{userID} and couponNum = #{couponNum}
+	</select>
+
+	
+	<resultMap type="coupon.CouponDTO" id="Coupon">
+		<result column="couponNum" property="couponNum"/>
+		<result column="couponName" property="couponName"/>
+		<result column="couponImage" property="couponImage"/>
+		<result column="couponPrice" property="couponPrice"/>
+		<result column="couponCount" property="couponCount"/>
+		<result column="couponStart" property="couponStart"/>
+		<result column="couponEnd" property="couponEnd"/>
+		<collection resultMap="CouponMember" property="couponmemberDTO"></collection>
+	</resultMap>
+	
+	<resultMap type="coupon.CouponMemberDTO" id="CouponMember">
+		<result column="couponID" property="couponID"/>
+		<result column="couponNum" property="couponNum"/>
+		<result column="userID" property="userID"/>
+		<result column="couponStatus" property="couponStatus"/>
+	</resultMap>
+	
+	<select id="able_list" resultMap="Coupon">
+		select couponName, couponImage, couponPrice, couponCount, couponStart, couponEnd,
+        couponID, c.couponNum, userID, couponStatus
+		from coupon c, couponDetail cm
+		where c.couponNum = cm.couponNum and userID = #{userID} and couponStatus = 0
+		order by couponPrice
+	</select>
+	
+	<select id="disable_list" resultMap="Coupon">
+		select couponName, couponImage, couponPrice, couponCount, couponStart, couponEnd,
+        couponID, c.couponNum, userID, couponStatus
+		from coupon c, couponDetail cm
+		where c.couponNum = cm.couponNum and userID = #{userID} and couponStatus = 1
+		order by couponPrice
+	</select>
+	
+	
+	
+	
+</mapper>

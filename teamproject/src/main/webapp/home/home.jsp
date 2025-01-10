@@ -6,6 +6,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+function couponList() {
+	$.ajax({
+		type:"get",
+		url:"/backup/coupon_servlet/list.do",
+		success: function (txt) {
+			$("#contents").html(txt);
+		}
+	});
+}
+
+function category() {
+	$.ajax({
+		type:"get",
+		url:"/backup/product_servlet/selected_category.do",
+		success: function (txt) {
+			$("#contents").html(txt);
+		}
+	});
+}
+</script>
 <link rel="stylesheet" href="./css/home.css">
 </head>
 <body>
@@ -13,11 +35,9 @@
 <header>Header</header>
 <main>
 	<nav>
-		<a href="#">카테고리</a>
-		<a href="/teamproject/product_servlet/cus_list.do">신상</a>
-		<a href="#">랭킹</a>
-		<a href="#">추천</a>
-		<a href="#">쿠폰</a>
+		<a href="javascript:void(0);" onclick="category(); return false;">카테고리</a>
+		<a href="/backup/product_servlet/list.do">신상</a>
+		<a href="javascript:void(0);" onclick="couponList(); return false;">쿠폰</a>
 	</nav>
 	<div class="contents">Contents</div>
 </main>
