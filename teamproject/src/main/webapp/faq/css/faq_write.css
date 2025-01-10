@@ -17,6 +17,10 @@ h2 {
 	color: #000000; 
 }
 
+select {
+	width: 50px;
+}
+
 div {
   margin: 0 auto;
   background-color: #ffffff;
@@ -25,14 +29,15 @@ div {
 }
 
 table {
-  width: 600px;
+  width: 900px;
+  height: 600px;
   margin: 30px auto;  
   padding: 30px;
   background-color: #ffffff; 
   border: none;
 }
 
-table th{
+table th, table td {
   border: 1px solid #000000; 
   text-align: center;
   padding: 12px;

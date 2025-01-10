@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../home/css/home.css">
+<link rel="stylesheet" href="/teamproject/notice/css/notice_write.css">
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 function n_insert() {
@@ -71,8 +72,8 @@ function n_insert() {
 		<tr>
 			<td colspan="2">
 			<input type="hidden" name="noticeNum">
-			<input type="button" value="등록" onclick="n_insert()">
-			<input type="button" value="목록" onclick="location.href='/teamproject/notice_servlet/list.do'">
+			<input class="btn" type="button" value="등록" onclick="n_insert()">
+			<input class="btn" type="button" value="목록" onclick="location.href='/teamproject/notice_servlet/list.do'">
 			</td>	
 		</tr>
 	</table>

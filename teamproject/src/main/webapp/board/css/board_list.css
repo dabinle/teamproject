@@ -1,25 +1,19 @@
 @charset "UTF-8";
 
-header{
-	display: grid;
-	justify-content: center;
-	background-color: #e1dddb;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-nav{
-	display: grid;
-	grid-template-colums:auto auto;
-	grid-gap:10px;
-	justify-content: center;
+body {
+  width: 100%;
+  background-color: #f5f1ee; 
 }
 
-section{
-	display: grid;
-	justify-content: center;
-}
-
-footer{
-	display: grid;
-	justify-content: center;
-	background-color:#e1dddb;
+div {
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 10px; 
 }
