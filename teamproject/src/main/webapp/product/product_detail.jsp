@@ -65,7 +65,6 @@ function wish() {
                             <input type="button" value="바로구매" onclick="order()">
                             <input type="submit" value="장바구니에 담기">
                             <input type="button" value="찜하기" onclick="wish()"><br>
-	                        <a href="/teamproject/review_servlet/list.do?productNum=${dto.productNum}">리뷰</a>
                         </td>
                     </tr>
                 </table>
@@ -73,5 +72,6 @@ function wish() {
         </tr>
     </table>
 </form>
+<div>리뷰수: ${count }개 <input type="button" value="상품리뷰" onclick="location.href='/backup/review_servlet/list.do?productNum=${productNum }'"></div>
 </body>
 </html>

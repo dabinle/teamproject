@@ -14,4 +14,11 @@
    	from product p, product_category pc, company c
     where p.p_categoryNum = pc.p_categoryNum and p.companyNum = c.companyNum and productNum = #{productNum}
    </select>
+   
+   <select id="p_all_category" resultType="product.ProductCategoryDTO">
+   	select * from product_category where p_parentcategory is null
+   </select>
+   <select id="all_category" resultType="product.ProductCategoryDTO">
+   	select * from product_category where p_parentcategory is not null
+   </select>
 </mapper>

@@ -19,7 +19,7 @@
       <th>재고량</th>
       <th>카테고리번호/이름</th>
       <th>업체번호/이름</th>
-      <th>장바구니 담기<br>구매</th>
+      <th>장바구니 담기</th>
       <th>찜하기</th>
    </tr>
    <c:forEach var="row" items="${list}">

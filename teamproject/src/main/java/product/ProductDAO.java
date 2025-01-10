@@ -20,4 +20,20 @@ public class ProductDAO {
 		  session.close();
 		  return dto;
 	}
+	   
+	// 부모 카테고리 리스트
+	public List<ProductCategoryDTO> p_allCategory() {
+		SqlSession session = Mybatis.getInstance().openSession();
+		List<ProductCategoryDTO> p_categoryList = session.selectList("product.p_all_category");
+		session.close();
+		return p_categoryList;
+	}
+		
+	// 전체카테고리 리스트
+	public List<ProductCategoryDTO> allCategory() {
+		SqlSession session = Mybatis.getInstance().openSession();
+		List<ProductCategoryDTO> categoryList = session.selectList("product.all_category");
+		session.close();
+		return categoryList;
+	}   
 }

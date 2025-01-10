@@ -36,11 +36,11 @@ public class CouponController extends HttpServlet{
 				couponmemberDTO.setCouponNum(couponNum);
 				couponmemberDTO.setUserID(userID);
 				couponmemberDAO.insert(couponmemberDTO);
-				response.sendRedirect("/backup/home/home.jsp");
+				response.sendRedirect("/teamproject/home/home.jsp");
 			}
 			else {
 				response.setContentType("text/html;charset=UTF-8"); 
-	            response.getWriter().write("<script> alert('이미 존재합니다.'); location.href='/backup/home/home.jsp';</script>");
+	            response.getWriter().write("<script> alert('이미 존재합니다.'); location.href='/teamproject/home/home.jsp';</script>");
 			}
 			// 일단은 홈으로 가는데 그 페이지에 남도록 바꿔야함
 			
@@ -61,7 +61,7 @@ public class CouponController extends HttpServlet{
 		else if (url.indexOf("delete.do")!=-1) {
 			int couponID = Integer.parseInt(request.getParameter("couponID"));
 			couponmemberDAO.delete(couponID);
-			response.sendRedirect("/backup/member/myPageHome.jsp");
+			response.sendRedirect("/teamproject/member/myPageHome.jsp");
 		}
 	}
 	

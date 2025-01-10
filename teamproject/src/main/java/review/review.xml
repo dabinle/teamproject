@@ -3,9 +3,9 @@
 <mapper namespace="review">
 
 	<select id="list" resultType="review.ReviewDTO">
-   	 	select reviewNum, userID, reviewDate, reviewContent, reviewFile, reviewScore
-    	from review 
-    	where productNum=#{productNum}
+   	 	select reviewNum, r.userID, reviewDate, reviewContent, reviewFile, reviewScore
+    	from review r, orders o
+        where r.orderNum = o.orderNum and productNum = #{productNum}
 	</select>
 
 	<select id="my_review" resultType="review.ReviewDTO">
@@ -19,7 +19,7 @@
 	</select>
 
 	<select id="count" resultType="int">
-		select count(*) from review where productNum=#{productNum}
+		select count(*) from review r, orders o where r.orderNum = o.orderNum and productNum = #{productNum}
 	</select>
 	
 	<insert id="insert">
