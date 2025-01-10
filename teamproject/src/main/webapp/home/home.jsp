@@ -11,7 +11,7 @@
 function couponList() {
 	$.ajax({
 		type:"get",
-		url:"/backup/coupon_servlet/list.do",
+		url:"/teamproject/coupon_servlet/list.do",
 		success: function (txt) {
 			$("#contents").html(txt);
 		}
@@ -21,7 +21,7 @@ function couponList() {
 function category() {
 	$.ajax({
 		type:"get",
-		url:"/backup/product_servlet/selected_category.do",
+		url:"/teamproject/product_servlet/selected_category.do",
 		success: function (txt) {
 			$("#contents").html(txt);
 		}
@@ -36,7 +36,7 @@ function category() {
 <main>
 	<nav>
 		<a href="javascript:void(0);" onclick="category(); return false;">카테고리</a>
-		<a href="/backup/product_servlet/list.do">신상</a>
+		<a href="/teamproject/product_servlet/list.do">신상</a>
 		<a href="javascript:void(0);" onclick="couponList(); return false;">쿠폰</a>
 	</nav>
 	<div class="contents">Contents</div>
