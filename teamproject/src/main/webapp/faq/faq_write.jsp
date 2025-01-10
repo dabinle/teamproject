@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../home/css/home.css">
+<link rel="stylesheet" href="/teamproject/faq/css/faq_write.css">
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 function f_insert() {
@@ -57,8 +58,8 @@ function f_insert() {
 		<tr>
 			<td colspan="2">
 			<input type="hidden" name="faqNum">
-			<input type="button" value="등록" onclick="f_insert()">
-			<input type="button" value="목록" onclick="location.href='/teamproject/faq_servlet/list.do'">
+			<input class="btn" type="button" value="등록" onclick="f_insert()">
+			<input class="btn" type="button" value="목록" onclick="location.href='/teamproject/faq_servlet/list.do'">
 			</td>	
 		</tr>
 	</table>
