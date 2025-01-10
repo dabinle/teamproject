@@ -43,6 +43,8 @@ function setInfo() {
     let totalKind = 0;
     let fee = 0;
     let totalMoney = 0;
+    let couponPrice = 0;
+    couponPrice = parseInt($("#select_coupon option:selected").val());
 
     $(".info").each(function(index, element) {
             totalPrice += parseInt($(element).find(".price").val());
@@ -59,11 +61,12 @@ function setInfo() {
 		fee = 3000;
 	}
 
-    totalMoney = totalPrice + fee;
+    totalMoney = totalPrice + fee - couponPrice;
 
     $(".totalPrice").text(totalPrice.toLocaleString());
     $(".totalCount").text(totalCount);
     $(".totalKind").text(totalKind);
+    $(".coupon").text(couponPrice);
     $(".fee").text(fee);
     $(".totalMoney").text(totalMoney.toLocaleString());
 }
@@ -74,6 +77,7 @@ $(document).ready(function() {
 
 
 $(document).on("click", ".orders", function() {
+	setInfo();
 	let form_contents = "";
 	
 	let recipient = document.form1.recipient.value;
@@ -109,23 +113,50 @@ $(document).on("click", ".orders", function() {
 		console.log("ss",productNum); 
 		let orderAmount = $(element).find(".amount").val();
 		console.log("ss", orderAmount); 
-		let orderDate = new Date().getTime();
 		let productNum_input = "<input name='productNum' type='hidden' value='" + productNum + "'>";
 	    let orderAmount_input = "<input name='orderAmount' type='hidden' value='" + orderAmount + "'>";
-	    let orderDate_input = "<input name='orderDate' type='hidden' value='" + orderDate + "'>";
+
 	    
 	    form_contents += productNum_input;
 	    form_contents += orderAmount_input;
-	    form_contents += orderDate_input;
 
 		
 		 // 빼고 위에서 index + 1 할 수도
 	});
+	let orderDate = new Date().getTime();
+    let orderDate_input = "<input name='orderDate' type='hidden' value='" + orderDate + "'>";
+    form_contents += orderDate_input;
 	
 	console.log("eee", form_contents);
 	$(".order_form").append(form_contents);
 	$(".order_form").submit();
 });
+
+function selected_coupon() {
+	let form_contents = "";
+	let couponID = $("#select_coupon > option:selected").attr("value2");
+	if(couponID == null){
+		couponID = 0;
+	}
+	console.log("id", couponID);
+    let couponPrice = $("#select_coupon option:selected").val();
+    if(couponPrice == null){
+    	couponPrice = 0;
+    }
+    
+    let couponID_input = "<input name='couponID' type='hidden' value='" + couponID + "'>";
+	let couponPrice_input = "<input name='couponPrice' type='hidden' value='" + couponPrice + "'>";
+	
+	form_contents += couponID_input;
+	form_contents += couponPrice_input;
+	
+	$(".coupon_contents").html(form_contents);
+	console.log("eee", form_contents);
+
+	
+	setInfo();
+}
+
 
 
 
@@ -188,34 +219,44 @@ $(document).on("click", ".orders", function() {
 <label for="addressDetail">상세주소:</label>
 <input type="text" name="addressDetail" id="addressDetail">
 
+<h3>쿠폰 선택</h3>
+<select id="select_coupon"> <!-- 0 이라고 하면 0 되나 -->
+	<option value="0" selected="selected">==쿠폰 선택==</option>
+	<c:forEach var="row" items="${ableList }">
+		<option value2=${row.couponmemberDTO[0].couponID } value="${row.couponPrice }">${row.couponName }</option>
+	</c:forEach>
+</select>
+<div class="coupon_contents"></div>
 <h3>결제 정보</h3>
 <table border="1">
-    <br>
     <div style="border: solid 1px black;">
-    	<table>
+    	<table border="1">
 	   		<tr align="center">
 		        <td>총 주문 상품수 :  </td>
 		        <td><span class="totalKind"></span>종  <span class="totalCount"></span>개</td>
 	        </tr>
     	</table>
-    	<table>
+    	<table border="1">
     		<tr align="center">
     			<th>총 가격</th>
+    			<th>쿠폰 가격</th>
     			<th>배송비</th>
     			<th>주문 금액</th>
+    			<th>구매</th>
     		</tr>
     		<tr align="center">
-    			<td><span class="totalPrice">0</span> 원 + </td>
-    			<td><span class="fee">0</span> 원 = </td>
+    			<td><span class="totalPrice">0</span> 원 </td>
+    			<td><span class="coupon">0</span> 원 </td>
+    			<td><span class="fee">0</span> 원  </td>
     			<td><span class="totalMoney">0</span> 원</td>
+    			<td>
+    				<input type="hidden" value="${Mdto.userID }" name="userID">
+					<input type="button" value="구매하기" class="orders" onclick="selected_coupon()">
+    			</td>
     		</tr>
     	</table>
     </div>
-
 </table>
-
-<input type="hidden" value="${Mdto.userID }" name="userID">
-<input type="button" value="구매하기" class="orders">
 </form>
 </body>
 </html>

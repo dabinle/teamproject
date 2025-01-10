@@ -51,4 +51,12 @@ public class OrderDAO {
 		session.close();
 		return list;
 	}
+	
+	// 주문 취소
+	public void delete(int orderNum) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		session.delete("order.delete", orderNum);
+		session.commit();
+		session.close();
+	}
 }

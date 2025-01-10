@@ -1,6 +1,7 @@
 package cart;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -55,4 +56,31 @@ public class CartDAO {
 		session.close();
 		return sum;
 	}
+	
+	// 주문 후 장바구니 삭제
+	public void ordered_delete(String userID, int productNum) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userID", userID);
+		map.put("productNum", productNum);
+		session.delete("cart.ordered_delete", map);
+		session.commit();
+		session.close();
+	}
+	
+	// 장바구니 존재 여부
+	public int count(CartDTO dto) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		int count = session.selectOne("cart.count", dto);
+		session.close();
+		return count;
+	}
+	
+	// 존재하면 수량 update
+	public void merge(CartDTO dto) {
+		SqlSession session = Mybatis.getInstance().openSession();
+		session.update("cart.merge", dto);
+		session.commit();
+		session.close();
+		}
 }

@@ -16,6 +16,7 @@ function setInfo() {
     let totalKind = 0;
     let fee = 0;
     let totalMoney = 0;
+    let couponPrice = document.getElementById("couponPrice").value;
 
     $(".info").each(function(index, element) {
             totalPrice += parseInt($(element).find(".price").val());
@@ -32,11 +33,12 @@ function setInfo() {
 		fee = 3000;
 	}
 
-    totalMoney = totalPrice + fee;
+    totalMoney = totalPrice + fee - couponPrice;
 
     $(".totalPrice").text(totalPrice.toLocaleString());
     $(".totalCount").text(totalCount);
     $(".totalKind").text(totalKind);
+    $(".couponPrice").text(couponPrice.toLocaleString());
     $(".fee").text(fee);
     $(".totalMoney").text(totalMoney.toLocaleString());
 }
@@ -125,11 +127,16 @@ $(document).ready(function() {
     		<tr align="center">
     			<th>총 가격</th>
     			<th>배송비</th>
+    			<th>쿠폰</th>
     			<th>주문 금액</th>
     		</tr>
     		<tr align="center">
     			<td><span class="totalPrice">0</span> 원 + </td>
-    			<td><span class="fee">0</span> 원 = </td>
+    			<td><span class="fee">0</span> 원 - </td>
+    			<td>
+    				<input type="hidden" value="${couponPrice }" name="couponPrice" id="couponPrice">
+    				<span class="couponPrice">0</span> 원 = 
+    			</td>
     			<td><span class="totalMoney">0</span> 원</td>
     		</tr>
     	</table>

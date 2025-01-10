@@ -11,12 +11,18 @@
 <script>
 function Information() {
     let totalPrice = 0;
+    let totalMoney = 0;
+    let couponPrice = document.getElementById("couponPrice").value;
+    console.log(couponPrice);
 
     $(".info").each(function(index, element) {
     	totalPrice += parseInt($(element).find(".price").val());
     });
+    
+    totalMoney = totalPrice - couponPrice;
 
     $(".totalPrice").text(totalPrice.toLocaleString());
+    $(".totalMoney").text(totalMoney.toLocaleString());
 }
 
 $(document).ready(function() {
@@ -93,8 +99,16 @@ $(document).ready(function() {
 	</tr>
 	<tr align="center">
 		<td><span class="totalPrice">0</span> 원</td>
-		<td>-#,###원</td>
-		<td>주문 금액 - 쿠폰(나중에)</td>
+		<td>
+		<input type="hidden" value="${Cdto.couponPrice }" id="couponPrice">
+		<c:choose>
+			<c:when test="${Cdto.couponPrice > 0}">
+				${Cdto.couponPrice }원
+			</c:when>
+			<c:otherwise>[사용안함]</c:otherwise>
+		</c:choose>
+		</td>
+		<td><span class="totalMoney">0</span> 원</td>
 	</tr>
 </table>
 </div>

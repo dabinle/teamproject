@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cart.CartDAO;
+import coupon.CouponDTO;
+import coupon.CouponMemberDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -26,6 +29,8 @@ public class OrderController extends HttpServlet{
 		HttpSession session = request.getSession();
 		MemberDAO memberDAO = new MemberDAO();
 		OrderDAO orderDAO = new OrderDAO();
+		CartDAO cartDAO = new CartDAO();
+		CouponMemberDAO couponmemberDAO = new CouponMemberDAO();
 		System.out.println("order 시작: "+ url);
 		
 		if(url.indexOf("order.do")!=-1) {
@@ -33,6 +38,8 @@ public class OrderController extends HttpServlet{
 			System.out.println("userID: "+ userID);
 			MemberDTO memberDTO =  memberDAO.getMemberInfo(userID);
 			request.setAttribute("Mdto",memberDTO);
+			List<CouponDTO> ableList = couponmemberDAO.ableList(userID);
+			request.setAttribute("ableList", ableList);
 			
 			String[] str_productNum = request.getParameterValues("productNum");
 			System.out.println("str_productNum:"+ Arrays.toString(str_productNum));
@@ -66,16 +73,18 @@ public class OrderController extends HttpServlet{
 			MemberDTO memberDTO =  memberDAO.getMemberInfo(userID);
 			request.setAttribute("Mdto",memberDTO);
 			
-
+			int couponPrice = Integer.parseInt(request.getParameter("couponPrice"));
+			System.out.println("couponPrice:"+couponPrice);
+			request.setAttribute("couponPrice", couponPrice);
+			
 
 			String[] str_productNum = request.getParameterValues("productNum");
 			System.out.println("str_productNum:"+ Arrays.toString(str_productNum));
 	        String[] str_orderAmount = request.getParameterValues("orderAmount");
 	        System.out.println("str_orderAmount:"+str_orderAmount);
 	        System.out.println("str_orderAmount:"+ Arrays.toString(str_orderAmount));
-	        String[] str_orderDate = request.getParameterValues("orderDate");
-	        System.out.println("str_orderDate:"+str_orderDate);
-	        System.out.println("str_orderDate:"+ Arrays.toString(str_orderDate));
+	        Long orderDate = Long.parseLong(request.getParameter("orderDate"));
+	        System.out.println("orderDate:"+orderDate);
 	        String recipient = request.getParameter("recipient");
 	        System.out.println("recipient:"+recipient);
 			String rec_phoneNum = request.getParameter("rec_phoneNum");
@@ -87,6 +96,11 @@ public class OrderController extends HttpServlet{
 			String addressDetail = request.getParameter("addressDetail");
 			System.out.println("addressDetail:"+addressDetail);
 			
+			int couponID = Integer.parseInt(request.getParameter("couponID"));
+			System.out.println("couponID:"+couponID);
+			couponmemberDAO.selected(couponID, orderDate);
+
+			
 	        List<ProductDTO> productList = new ArrayList<>();
 	        List<Integer> orderAmountList = new ArrayList<>();
 // 배열로 안할 수도
@@ -97,13 +111,14 @@ public class OrderController extends HttpServlet{
 				orderDTO.setProductNum(Integer.parseInt(str_productNum[i]));
 				ProductDTO productDTO =  orderDAO.orderOne(Integer.parseInt(str_productNum[i]));
 				orderDTO.setOrderAmount(Integer.parseInt(str_orderAmount[i]));
-				orderDTO.setOrderDate(Long.parseLong(str_orderDate[i]));
+				orderDTO.setOrderDate(orderDate);
 				orderDTO.setRecipient(recipient);
 				orderDTO.setRec_phoneNum(rec_phoneNum);
 				orderDTO.setZipCode(zipCode);
 				orderDTO.setAddress(address);
 				orderDTO.setAddressDetail(addressDetail);
 				orderDAO.insert(orderDTO);
+				cartDAO.ordered_delete(userID,Integer.parseInt(str_productNum[i]));
 				
 				productList.add(productDTO);
 	            orderAmountList.add(Integer.parseInt(str_orderAmount[i]));
@@ -138,8 +153,13 @@ public class OrderController extends HttpServlet{
 		}
 		
 		else if (url.indexOf("detail.do")!=-1) {
+			String userID = (String)session.getAttribute("userID");
+			System.out.println("userID:"+userID);
 			Long orderDate = Long.parseLong(request.getParameter("orderDate"));
 			System.out.println("orderDate:"+orderDate);
+			CouponDTO couponDTO = couponmemberDAO.detail(orderDate, userID);
+			System.out.println("couponDTO:"+couponDTO);
+			request.setAttribute("Cdto", couponDTO);
 			int orderNum = Integer.parseInt(request.getParameter("orderNum"));
 			System.out.println("orderNum:"+orderNum);
 			OrderDTO orderDTO = orderDAO.detailOne(orderDate, orderNum);
@@ -150,6 +170,13 @@ public class OrderController extends HttpServlet{
 			request.setAttribute("orderedList", orderList);
 			RequestDispatcher rd = request.getRequestDispatcher("/order/order_detail.jsp");
 			rd.forward(request, response);
+		}
+		
+		else if (url.indexOf("delete.do")!=-1) {
+			int orderNum = Integer.parseInt(request.getParameter("orderNum"));
+			System.out.println("orderNum"+orderNum);
+			orderDAO.delete(orderNum);
+			response.sendRedirect(path +"/member/myPageHome.jsp");
 		}
 	}
 	

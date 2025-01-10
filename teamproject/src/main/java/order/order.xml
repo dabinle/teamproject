@@ -28,4 +28,7 @@
 		insert into orders (orderNum, userID, productNum, orderDate, orderAmount, recipient, rec_phoneNum, zipCode, address, addressDetail)
 		values (seq_orders.nextval, #{userID}, #{productNum}, #{orderDate}, #{orderAmount}, #{recipient}, #{rec_phoneNum}, #{zipCode}, #{address}, #{addressDetail})
 	</insert>
+	<delete id="delete">
+		delete from orders where orderNum = #{orderNum}
+	</delete>
 </mapper>

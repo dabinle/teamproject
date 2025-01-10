@@ -24,6 +24,7 @@ public class CartController extends HttpServlet{
 			String userID = (String)session.getAttribute("userID");
 			List<CartDTO> list = dao.listCart(userID);
 			request.setAttribute("list", list);
+			// 이거 이제 사용 안함 
 			int sum = dao.sumMoney(userID);
 			int fee = sum >= 50000 ? 0 : 3000;
 			int total = sum + fee;
