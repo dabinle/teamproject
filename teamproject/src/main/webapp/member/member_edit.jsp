@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./css/2join.css">
+<link rel="stylesheet" href="./css/3join.css">
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
@@ -84,9 +84,8 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 <div id="con">
 <div id="login">
 <div id="login_form">
-<h2 align="center">회원정보 수정</h2>
+<h2 class="login" style="letter-spacing:-1px;">회원정보 수정</h2>
 <form name="form1" method="post" align="center">
-<table align="center">
 	<label>
 		<p style="text-align: left; font-size:12px; color:#666">이름</p>
 		<input type="text" name="userName" value="${dto.userName}" class="size">
@@ -119,39 +118,36 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 		<p></p>
 	</label>
 	
-	<tr>
-    	<td>전화번호</td>
-    	<td><input name="phoneNum" value="${dto.phoneNum}"></td>
-	</tr>
-	<tr>
-    	<td>우편번호</td>
-	    <td>
-	        <c:if test="${dto.zipCode == -1 }">
-	          <input name="zipCode" id="post_code" readonly="readonly">
-	           <input type="button" onclick="showPostcode()" value="우편번호 찾기">
+	<label>
+		<p style="text-align: left; font-size:12px; color:#666">우편번호
+		 <c:if test="${dto.zipCode == -1 }">
+		 	  <input type="button" onclick="showPostcode()" value="우편번호 찾기"></p>
+	          <input name="zipCode" id="post_code" readonly="readonly" class="size">
 	       </c:if>
 	       <c:if test="${dto.zipCode != -1 }">
-	          <input name="zipCode" id="post_code" value="${dto.zipCode}" readonly="readonly">
-	           <input type="button" onclick="showPostcode()" value="우편번호 찾기">
+	          <input type="button" onclick="showPostcode()" value="우편번호 찾기"><br>
+	          <input name="zipCode" id="post_code" value="${dto.zipCode}" readonly="readonly" class="size">
 	       </c:if>
-	    </td>
-	</tr>
-	<tr>
-    	<td>주소</td>
-    	<td><input name="address" id="address" value="${dto.address}" size="60"></td>
-	</tr>
-	<tr>
-    	<td>상세주소</td>
-    	<td><input name="addressDetail" id="addressDetail" value="${dto.addressDetail}"></td>
-	</tr>
-
-	<tr>
-		<td colspan="2" align="center">
-			<input type="button" value="수정" onclick="member_update()"> 
-			<input type="button" value="홈" onclick="location.href='/teamproject/home/home.jsp'"> 
-		</td>
-	</tr> 
-</table>
+		<p></p>
+	</label>
+	
+	<label>
+		<p style="text-align: left; font-size:12px; color:#666">주소</p>
+		<input type="text" name="address" id="address" value="${dto.address}" size="60" class="size">
+		<p></p>
+	</label>
+	
+	<label>
+		<p style="text-align: left; font-size:12px; color:#666">상세주소</p>
+		<input type="text" name="addressDetail" id="addressDetail" value="${dto.addressDetail}" class="size">
+		<p></p>
+	</label>
+	
+	<p>
+		<input type="button" value="수정" onclick="member_update()" class="btn"><br>
+		<p></p>
+		<input type="button" value="홈" onclick="location.href='/teamproject/home/home.jsp'" class="btn"> 
+	</p>
 </form>
 </div>
 </div>
