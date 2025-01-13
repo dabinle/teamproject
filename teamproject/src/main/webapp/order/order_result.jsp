@@ -47,7 +47,7 @@ $(document).ready(function() {
    setInfo();
 });
 </script>
-<link rel="stylesheet" type="text/css" href="/teamproject/order/css/order_result.css">
+<link rel="stylesheet" type="text/css" href="/teamproject/order/css/result.css">
 </head>
 <body>
 <div id="Container">

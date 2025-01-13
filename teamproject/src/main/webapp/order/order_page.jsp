@@ -161,7 +161,7 @@ function selected_coupon() {
 
 
 </script>
-<link rel="stylesheet" type="text/css" href="./css/order_page.css">
+<link rel="stylesheet" type="text/css" href="/teamproject/order/css/page.css">
 </head>
 <body>
 
