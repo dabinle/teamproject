@@ -84,7 +84,7 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 <div id="con">
 <div id="login">
 <div id="login_form">
-<h2 class="login" style="letter-spacing:-1px;">회원정보 수정</h2>
+<h2 class="login">회원정보 수정</h2>
 <form name="form1" method="post" align="center">
 	<label>
 		<p style="text-align: left; font-size:12px; color:#666">이름</p>
