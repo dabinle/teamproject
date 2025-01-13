@@ -28,7 +28,7 @@ public class WishController extends HttpServlet {
             if (dao.wishCount(userID, productNum) == 0) { 
                 dao.insertWish(dto);
                 response.setContentType("text/html; charset=UTF-8");
-                response.getWriter().write("<script>alert('찜목록에 추가되었습니다.'); location.href='" + contextPath + "/wish_servlet/list.do';</script>");
+                response.getWriter().write("<script>alert('찜목록에 추가되었습니다.'); location.href='" + contextPath + "/member/myPageHome.jsp';</script>");
             } else {
                 response.setContentType("text/html; charset=UTF-8");
                 response.getWriter().write("<script>alert('이미 찜목록에 있습니다'); location.href='" + contextPath + "/product_servlet/list.do';</script>");
@@ -52,7 +52,12 @@ public class WishController extends HttpServlet {
         else if (url.indexOf("wish_delete.do") != -1) {
             int wishNum = Integer.parseInt(request.getParameter("wishNum"));
             dao.wish_delete(wishNum);
-            response.sendRedirect("/teamproject/wish_servlet/list.do");
+            String referer = request.getHeader("Referer");
+            if (referer != null) {
+                response.sendRedirect(referer);
+            } else {
+                response.sendRedirect("/teamproject/wish_servlet/list.do"); // fallback
+            }
         }
     }
 

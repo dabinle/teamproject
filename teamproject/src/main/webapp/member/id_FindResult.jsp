@@ -12,7 +12,7 @@
         if ("noID".equals(message)) {
     %>
         <p>이름과 이메일에 해당하는 아이디를 찾을 수 없습니다.</p>
-        <button type="button" onclick="location.href='/teamproject/id_find.jsp'">다시 찾기</button>
+        <button type="button" onclick="location.href='/teamproject/member/id_find.jsp'">다시 찾기</button>
     <%
         } else {
             String userID = (String) request.getAttribute("userID");
@@ -24,6 +24,6 @@
             }
         }
     %>
-    <a href="/teamproject/member/login.jsp">로그인</a>
+    <button type="button" onclick="location.href='/teamproject/member/login.jsp'">로그인</button>
 </body>
 </html>

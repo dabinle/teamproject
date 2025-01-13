@@ -29,13 +29,13 @@
 	
 		<label>
 		<p style="text-align: left; font-size:12px; color:#666">아이디</p>
-		<input type="text" name="adminId" class="size">
+		<input type="text" name="adminId" placeholder="아이디 입력" class="size">
 		<p></p>
 		</label>
 	
 		<label>
 		<p style="text-align: left; font-size:12px; color:#666">비밀번호</p>
-		<input type="password" name="adminPwd" class="size">
+		<input type="password" name="adminPwd" placeholder="비밀번호 입력" class="size">
 		<p></p>
 		</label>
 	<tr>

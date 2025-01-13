@@ -135,7 +135,7 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 <div id="login">
 <div id="login_form">
 <h2 class="login" style="letter-spacing:-1px;">회원가입</h2>
-<h3 class="login" style="letter-spacing:-1px;">*는 필수 항목입니다.</h3>
+<h4>*는 필수 항목입니다.</h4>
 <form name="form1" method="post" align="center">
 	<label>
 		<p style="text-align: left; font-size:12px; color:#666">* 이름</p>
