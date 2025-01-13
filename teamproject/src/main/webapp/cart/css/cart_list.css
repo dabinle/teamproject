@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+/* 전체 레이아웃 설정 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+
+#Contents {
+    width: 1300px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 28px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 장바구니 테이블 */
+#cart_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#cart_table th, #cart_table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+#cart_table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+#cart_table td {
+    vertical-align: middle;
+}
+
+/* 상품 정보 */
+#p_info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#p_info img {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* 수량 조정 버튼 */
+#up_down {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: 10px;
+}
+
+#up_down input[type="button"] {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#up_down input[type="button"]:hover {
+    background-color: #e0e0e0;
+}
+
+#up_down span {
+    font-size: 16px;
+}
+
+/* 결제 정보 */
+#o_info {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+#o_info table {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#o_info table td {
+    font-size: 18px;
+    padding: 10px;
+    text-align: center;
+}
+
+#c_control {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#c_control input[type="button"] {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #5cb85c;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#c_control input[type="button"]:hover {
+    background-color: #4cae4c;
+}
+
+/* 체크박스 */
+input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}

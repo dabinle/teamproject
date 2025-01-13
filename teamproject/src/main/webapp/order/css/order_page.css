@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+/* 결제 페이지 공통 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+#Container {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+#Contents {
+    padding: 20px;
+}
+
+h2, h3 {
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #343a40;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 14px;
+    background-color: #ffffff;
+}
+
+table th, table td {
+    padding: 10px 15px;
+    border: 1px solid #dee2e6;
+    text-align: left;
+    vertical-align: middle;
+}
+
+table th {
+    background-color: #f1f3f5;
+    font-weight: bold;
+    color: #495057;
+    text-align: center;
+}
+
+table td {
+    color: #343a40;
+}
+
+input[type="text"], input[type="button"], select {
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    margin: 5px 0;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #495057;
+}
+
+input[type="button"], .orders {
+    cursor: pointer;
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+input[type="button"]:hover, .orders:hover {
+    background-color: #218838;
+}
+
+.coupon_contents, .totalPrice, .totalCount, .totalKind, .fee, .totalMoney, .coupon {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.coupon_contents {
+    margin-top: 10px;
+}
+
+div[style="border: solid 1px black;"] {
+    border-color: #ced4da;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+input[readonly] {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+#select_coupon {
+    margin-bottom: 20px;
+}
+
+input[type="text"]#addressDetail {
+    width: 95%;
+}
+
+input[type="text"]#zipCode {
+    width: calc(75% - 10px);
+    display: inline-block;
+}
+
+input[type="button"][onclick="showPostcode()"] {
+    width: calc(25% - 10px);
+    display: inline-block;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+input[type="button"][onclick="showPostcode()"]:hover {
+    background-color: #0056b3;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 600px) {
+    h2, h3 {
+        font-size: 18px;
+    }
+
+    table th, table td {
+        font-size: 12px;
+    }
+
+    input[type="text"], input[type="button"], select {
+        font-size: 12px;
+    }
+}
