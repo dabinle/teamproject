@@ -44,9 +44,8 @@ table {
 }
 
 .btn {
-	position: absolute;
-	top:500px;
-	left: 135px;
+  position: absolute;
+  left: 135px;
   width: 70px;
   height: 40px;
   margin-top: 10px;

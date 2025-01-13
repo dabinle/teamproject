@@ -22,7 +22,6 @@ $(function() {
 <h2>리뷰 목록</h2>
 <form name="form1" method="post" action="/teamproject/review_servlet/list.do">
 	<input type="hidden" name="productNum" value="${productNum}">
-	<button type="button" id="btnWrite">리뷰 작성하기</button>
 </form>
 <table border="1" width="900px">
 	<tr>
