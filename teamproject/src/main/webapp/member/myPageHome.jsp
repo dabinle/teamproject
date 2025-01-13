@@ -71,10 +71,11 @@ function memberDelete() {
 }
 
 </script>
+<link rel="stylesheet" type="text/css" href="/teamproject/member/css/myPageHome.css">
 </head>
 <body>
-<h2 style="text-align: center;">마이페이지</h2>
-<div style="border: solid 2px black; text-align: center;">
+<h2>마이페이지</h2>
+<div>
 	<span><span style="font-size: 20px; font-weight: bold;">${sessionScope.userName}</span> 님의 페이지</span>
 	<ul>
 		<a href="javascript:void(0);" onclick="wishList(); return false;">위시 리스트</a>
