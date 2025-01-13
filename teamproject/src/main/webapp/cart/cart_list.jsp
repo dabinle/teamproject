@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="./css/cart.css">
+<link rel="stylesheet" type="text/css" href="/teamproject/cart/css/cart.css">
 <link rel="shortcut icon" href="#">
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
