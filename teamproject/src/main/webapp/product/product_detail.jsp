@@ -27,15 +27,6 @@ function wish() {
     }
 }
 
-function productDetail() {
-   $.ajax({
-      type:"get",
-      success: function (txt) {
-         $("#detail").html("<img alt='상품상세사진' src='/teamproject/images/${dto.productImage }'>");
-      }
-   });
-}
-
 function productReview() {
    let productNum = document.form1.productNum.value;
    $.ajax({
@@ -43,7 +34,7 @@ function productReview() {
       data: {"productNum":productNum},
       url:"/teamproject/review_servlet/list.do",
       success: function (txt) {
-         $("#detail").html(txt);
+         $("#detail").html(txt).show();
       }
    });
 }
@@ -59,7 +50,7 @@ function productReview() {
             <p id="cosReview">
                <span>고객리뷰</span>
                <span>별점넣을거</span>
-               <span>(${count }건)</span>
+               <span><a href="javascript:void(0)" onclick="productReview(); return false;">(${count })건</a></span>
             </p>
          </div>
          <div id="right">
@@ -84,14 +75,7 @@ function productReview() {
             </p>
          </div>   
       </div>
-      <div>
-         <ul id="p_nav">
-            <li><a href="javascript:void(0)" onclick="productDetail(); return false;">상품상세설명</a></li>
-            <li><a href="javascript:void(0)" onclick="productReview(); return false;">상품리뷰(${count })</a></li>
-         </ul>
-      </div>
       <div id="detail">
-         <img alt="상품상세사진" src="/teamproject/images/${dto.productImage }">
       </div>
    </div>
 </div>
