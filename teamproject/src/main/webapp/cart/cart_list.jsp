@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="./css/cart_list.css">
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 // 체크박스 오류남 ㅠ
