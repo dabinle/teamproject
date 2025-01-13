@@ -23,8 +23,8 @@
 	</select>
 	
 	<insert id="insert">
-	    insert into review (reviewNum, userID, productNum, reviewContent, reviewFile, reviewScore) 
-	    values ((select nvl(max(reviewNum)+1, 1) from review), #{userID}, #{productNum}, 
+	    insert into review (reviewNum, userID, orderNum, reviewContent, reviewFile, reviewScore) 
+	    values ((select nvl(max(reviewNum)+1, 1) from review), #{userID}, #{orderNum}, 
 	    #{reviewContent}, #{reviewFile}, #{reviewScore})
 	</insert>
 
