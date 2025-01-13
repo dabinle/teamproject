@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./css/cart_list.css">
+<link rel="shortcut icon" href="#">
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 // 체크박스 오류남 ㅠ
@@ -65,7 +65,7 @@ $(document).ready(function() {
             url: "/teamproject/cart_servlet/update.do",
             data: {"cartNum": cartNum, "cartAmount": cartAmount},
             success: function(date) {
-            	location.reload(); 
+               location.reload(); 
                 setInfo();
             }
         });
@@ -85,8 +85,8 @@ $(document).ready(function() {
             url: "/teamproject/cart_servlet/update.do",
             data: {"cartNum": cartNum, "cartAmount": cartAmount},
             success: function(date) {
-            	location.reload(); 
-            	setInfo();
+               location.reload(); 
+               setInfo();
             }
         });
     });
@@ -112,10 +112,10 @@ function setInfo() {
     if (totalPrice >= 50000) {
         fee = 0;
     } else if (totalPrice == 0) {
-		fee = 0;
-	} else {
-		fee = 3000;
-	}
+      fee = 0;
+   } else {
+      fee = 3000;
+   }
 
     totalMoney = totalPrice + fee;
 
@@ -160,101 +160,94 @@ $(document).on('click', '.btnOrder', function() {
     $(".order_form").submit();
 });
 
-
-
-
 </script>
+<link rel="stylesheet" type="text/css" href="./css/cart_list.css">
 </head>
 <body>
-<h1 style="text-align: center;">장바구니</h1>
-<c:choose>
-    <c:when test="${map.sum == 0}">
-        <div style="font-weight: bold; font-size: 20px; text-align: center;">
-            장바구니가 비어있습니다.<br>
-            <input type="button" value="상품목록" onclick="location.href='/teamproject/product_servlet/list.do'">
-        </div>
-    </c:when>
-    <c:otherwise>
-    <form name="form1" action="/teamproject/order_servlet/order.do" method="post" class="order_form">
-    <table border="1" width="800px">
-        <tr align="center">
-            <th><input type="checkbox" name="checkAll" id="checkAll" checked="checked">상품번호</th>
-            <th>이미지</th>
-            <th>상품명</th>
-            <th>가격</th>
-            <th>수량</th>
-            <th>총 가격</th>
-            <th>삭제</th>
-        </tr>
-        <c:forEach var="row" items="${list}" varStatus="status">
-        <tr align="center">
-            <td class="cart_info">
-                <input type="checkbox" name="productNum" id="productNum" class="productNum" checked="checked">  NO. ${row.productNum}
-                <input type="hidden" class="price" value="${row.price}">
-                <input type="hidden" class="money" value="${row.money}">
-                <input type="hidden" class="amount" value="${row.cartAmount}">
-                <input type="hidden" class="pn" value="${row.productNum}">
-            </td>
-            <td>
-                <img src="../images/${row.productImage}" width="100px" height="100px">
-            </td>
-            <td>${row.productName}</td>
-            <td><fmt:formatNumber pattern="#,###" value="${row.price}"></fmt:formatNumber></td>
-            <td>
-                <input type="button" value="-" class="btnDown" data-cart-num="${row.cartNum}" data-amount="${row.cartAmount}"><br>
-                <span>
-                    <input type="number" name="cartAmount" id="cartAmount" class="cartAmount" value="${row.cartAmount}" readonly="readonly">
-                    <input type="hidden" name="cartNum" class="cartNum" value="${row.cartNum}">
-                </span>
-                <br><input type="button" value="+" class="btnUp" data-cart-num="${row.cartNum}" data-amount="${row.cartAmount}">
-            </td>
-            <td>
-                <div id="price">
-                    <fmt:formatNumber pattern="#,###" value="${row.money}"></fmt:formatNumber>
+<div id="Container">
+   <div id="Contents">
+      <h1>장바구니</h1>
+      <c:choose>
+          <c:when test="${map.sum == 0}">
+              <div style="font-weight: bold; font-size: 20px; text-align: center;">
+               장바구니가 비어있습니다.<br>
+               <input type="button" value="상품목록" onclick="location.href='/teamproject/product_servlet/list.do'">
+              </div>
+          </c:when>
+            <c:otherwise>
+             <form name="form1" action="/teamproject/order_servlet/order.do" method="post" class="order_form">
+                <table id="cart_table">
+                    <tr>
+                        <th><input type="checkbox" name="checkAll" id="checkAll" checked="checked">상품번호</th>
+                        <th>상품정보</th>
+                        <th>판매가</th>
+                        <th>수량</th>
+                        <th>구매가</th>
+                        <th></th>
+                    </tr>
+                    <c:forEach var="row" items="${list}" varStatus="status">
+                    <tr>
+                        <td class="cart_info">
+                            <input type="checkbox" name="productNum" id="productNum" class="productNum" checked="checked">  NO. ${row.productNum}
+                            <input type="hidden" class="price" value="${row.price}">
+                            <input type="hidden" class="money" value="${row.money}">
+                            <input type="hidden" class="amount" value="${row.cartAmount}">
+                            <input type="hidden" class="pn" value="${row.productNum}">
+                        </td>
+                        <td>
+                           <div id="p_info">
+                              <img src="../images/${row.productImage}" width="100px" height="100px">
+                              <span>${row.productName }</span>
+                           </div>
+                            
+                        </td>
+                        <td><fmt:formatNumber pattern="#,###" value="${row.price}"></fmt:formatNumber>원</td>
+                        <td>
+                           <div id="up_down">
+                              <input type="button" value="-" class="btnDown" data-cart-num="${row.cartNum}" data-amount="${row.cartAmount}">
+                               <span>
+                                   <input type="number" name="cartAmount" id="cartAmount" class="cartAmount" value="${row.cartAmount}" readonly="readonly">
+                                   <input type="hidden" name="cartNum" class="cartNum" value="${row.cartNum}">
+                               </span>
+                               <input type="button" value="+" class="btnUp" data-cart-num="${row.cartNum}" data-amount="${row.cartAmount}">
+                           </div>
+                        </td>
+                        <td>
+                            <div id="price">
+                                <fmt:formatNumber pattern="#,###" value="${row.money}"></fmt:formatNumber>원
+                            </div>
+                        </td>
+                        <td>
+                            <input type="button" value="삭제" onclick="location.href='/teamproject/cart_servlet/delete_selected.do?cartNum=${row.cartNum}'">
+                        </td>
+                    </tr>
+                    </c:forEach>
+                </table>
+                <div style="text-align: center; font-size: 30px; font-weight: bold;">결제 정보</div>         
+                <div id="o_info">
+                   <table>
+                        <tr align="center">
+                          <td>총 주문 상품수 :  </td>
+                          <td><span class="totalKind"></span>종  <span class="totalCount"></span>개</td>
+                       </tr>
+                   </table>
+                   <table>
+                      <tr align="center">
+                         <td><p>총 판매가</p><span class="totalPrice">0</span> 원</td>
+                         <td><p>배송비</p><span class="fee">0</span> 원</td>
+                         <td><p>주문 금액</p><span class="totalMoney">0</span> 원</td>
+                      </tr>
+                   </table>
+                   <div id="c_control">
+                      <input type="button" value="전체삭제" onclick="location.href='/teamproject/cart_servlet/delete_all.do'">
+                      <input type="button" value="주문" class="btnOrder">
+                      <input type="button" value="상품목록" onclick="location.href='/teamproject/product_servlet/list.do'">
+                   </div>
                 </div>
-            </td>
-            <td>
-                <input type="button" value="삭제" onclick="location.href='/teamproject/cart_servlet/delete_selected.do?cartNum=${row.cartNum}'">
-            </td>
-        </tr>
-        </c:forEach>
-    </table>
-    <br>
-    <div>결제 정보</div>
-    <br>
-    <div style="border: solid 1px black;">
-    	<table>
-	   		<tr align="center">
-		        <td>총 주문 상품수 :  </td>
-		        <td><span class="totalKind"></span>종  <span class="totalCount"></span>개</td>
-	        </tr>
-    	</table>
-    	<table>
-    		<tr align="center">
-    			<th>총 가격</th>
-    			<th>배송비</th>
-    			<th>주문 금액</th>
-    		</tr>
-    		<tr align="center">
-    			<td><span class="totalPrice">0</span> 원 + </td>
-    			<td><span class="fee">0</span> 원 = </td>
-    			<td><span class="totalMoney">0</span> 원</td>
-    		</tr>
-    	</table>
-    </div>
-    <br>
-    <div>
-	    <input type="button" value="전체삭제" onclick="location.href='/teamproject/cart_servlet/delete_all.do'">
-	    <input type="button" value="주문" class="btnOrder">
-	    <input type="button" value="상품목록" onclick="location.href='/teamproject/product_servlet/list.do'">
-    </div>
-    </form>
-    
-    <!-- <form action="/backup/order_servlet/order.do" method="post" class="order_form">
-
-	</form>	 -->
-    
-    </c:otherwise>
-</c:choose>
+             </form>
+          </c:otherwise>
+      </c:choose>
+   </div>
+</div>
 </body>
 </html>
