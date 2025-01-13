@@ -44,42 +44,46 @@ public class LoginController extends HttpServlet{
 			response.getWriter().write("<script> alert('로그아웃 되었습니다.'); location.href='" + path + "/home/home.jsp';</script>");
 		} 
 		else if(url.indexOf("join.do") != -1) {
-			String userID = request.getParameter("userID");
-	         String userName = request.getParameter("userName");
-	         String email = request.getParameter("email");
-	         String userPwd = request.getParameter("userPwd");
-	         String phoneNum = request.getParameter("phoneNum");
-	         int zipCode = -1;
-	         String address = request.getParameter("address");
-	         String addressDetail = request.getParameter("addressDetail");
-	         if(zipCode != -1) {
-	            zipCode = Integer.parseInt(request.getParameter("zipCode"));
-	            MemberDTO dto = new MemberDTO();
-	            dto.setUserID(userID);
-	            dto.setUserName(userName);
-	            dto.setEmail(email);
-	            dto.setUserPwd(userPwd);
-	            dto.setPhoneNum(phoneNum);
-	            dto.setZipCode(zipCode);
-	            dto.setAddress(address);
-	            dto.setAddressDetail(addressDetail);
-	            dao.join(dto);
-	            
-	            response.setContentType("text/html;charset=UTF-8");
-	            response.getWriter().write("<script> alert('회원가입 되었습니다.'); location.href='" + path + "/member/login.jsp';</script>");
-	         } else if (zipCode == -1){
-	            MemberDTO dto = new MemberDTO();
-	            dto.setUserID(userID);
-	            dto.setUserName(userName);
-	            dto.setEmail(email);
-	            dto.setUserPwd(userPwd);
-	            dto.setPhoneNum(phoneNum);
-	            dto.setZipCode(zipCode);
-	            dao.join(dto);
-	            
-	            response.setContentType("text/html;charset=UTF-8"); 
-	            response.getWriter().write("<script> alert('회원가입 되었습니다.'); location.href='" + path + "/member/login.jsp';</script>");
-	         }
+		    String userID = request.getParameter("userID");
+		    String userName = request.getParameter("userName");
+		    String email = request.getParameter("email");
+		    String userPwd = request.getParameter("userPwd");
+		    String phoneNum = request.getParameter("phoneNum");
+
+		    // zipCode를 가져오고 null이나 빈 값이 아닌 경우에만 정수로 변환
+		    String zipCodeStr = request.getParameter("zipCode");
+		    int zipCode = -1;  // 기본값은 -1
+		    if (zipCodeStr != null && !zipCodeStr.isEmpty()) {
+		        zipCode = Integer.parseInt(zipCodeStr);  // zipCode 값 설정
+		    }
+
+		    String address = request.getParameter("address");
+		    String addressDetail = request.getParameter("addressDetail");
+
+		    // zipCode가 유효한 경우 처리
+		    MemberDTO dto = new MemberDTO();
+		    dto.setUserID(userID);
+		    dto.setUserName(userName);
+		    dto.setEmail(email);
+		    dto.setUserPwd(userPwd);
+		    dto.setPhoneNum(phoneNum);
+
+		    // zipCode가 -1이 아니면 주소를 추가
+		    if (zipCode != -1) {
+		        dto.setZipCode(zipCode);
+		        dto.setAddress(address);
+		        dto.setAddressDetail(addressDetail);
+		    } else {
+		        // zipCode가 -1일 경우, 주소를 포함하지 않음
+		        dto.setZipCode(zipCode);  // -1인 상태로 저장
+		    }
+
+		    // 회원가입 처리
+		    dao.join(dto);
+
+		    response.setContentType("text/html;charset=UTF-8");
+		    response.getWriter().write("<script> alert('회원가입 되었습니다.'); location.href='" + path + "/member/login.jsp';</script>");
+
 		} else if (url.indexOf("idCheck.do") != -1) {
 		    String userID = request.getParameter("userID");
 		    boolean exists = dao.idCheck(userID); // true면 아이디가 이미 존재

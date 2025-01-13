@@ -25,16 +25,21 @@
     </select>
 	
 	<insert id="join">
-		<choose>
-            <when test="address == null and addressDetail == null">
-               insert into member (userID, userName, userPwd, email, phoneNum, zipCode)
-               values (#{userID}, #{userName}, MYPACK.ENCRYPT(#{userPwd}), #{email}, #{phoneNum}, #{zipCode})
-            </when>
-            <otherwise>
-               insert into member values (#{userID}, #{userName}, MYPACK.ENCRYPT(#{userPwd}), #{email}, #{phoneNum}, #{zipCode}, #{address}, #{addressDetail})
-            </otherwise>
-      </choose>
+	    <choose>
+	        <!-- zipCode가 -1일 경우 -->
+	        <when test="zipCode == -1">
+	            insert into member (userID, userName, userPwd, email, phoneNum, zipCode)
+	            values (#{userID}, #{userName}, MYPACK.ENCRYPT(#{userPwd}), #{email}, #{phoneNum}, #{zipCode})
+	        </when>
+	        
+	        <!-- zipCode가 -1이 아닐 경우 (주소와 상세주소도 추가) -->
+	        <otherwise>
+	            insert into member (userID, userName, userPwd, email, phoneNum, zipCode, address, addressDetail)
+	            values (#{userID}, #{userName}, MYPACK.ENCRYPT(#{userPwd}), #{email}, #{phoneNum}, #{zipCode}, #{address}, #{addressDetail})
+	        </otherwise>
+	    </choose>
 	</insert>
+
 	
 	<update id="update">
 		update member set userName=#{userName}, userPwd=mypack.encrypt(#{userPwd}), phoneNum=#{phoneNum}, zipCode=#{zipCode}, address=#{address}, addressDetail=#{addressDetail} where userID=#{userID}
