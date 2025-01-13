@@ -19,12 +19,21 @@ public class ProductController extends HttpServlet{
 		ReviewDAO reviewDAO = new ReviewDAO();
 		System.out.println("시작");
 		if(url.indexOf("list.do")!=-1) {
-			List<ProductDTO> list = dao.listProduct();
-			request.setAttribute("list", list);
-			System.out.println("회원상품 리스트: "+list);
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/product/product_list.jsp");
-			rd.forward(request, response);
+			String searchkey = "all";
+	         String search = "";
+	         if(request.getParameter("searchkey")!=null) {
+	            searchkey = request.getParameter("searchkey");
+	         }
+	         if(request.getParameter("search")!=null) {
+	            search = request.getParameter("search");
+	         }
+	         List<ProductDTO> list = dao.listProduct(searchkey, search);
+	         request.setAttribute("list", list);
+	         request.setAttribute("searchkey", searchkey);
+	         request.setAttribute("search", search);
+	         System.out.println("회원상품 리스트: "+list);
+	         RequestDispatcher rd = request.getRequestDispatcher("/product/product_list.jsp");
+	         rd.forward(request, response);
 		}
 		else if (url.indexOf("detail.do")!=-1) {
 			int productNum = Integer.parseInt(request.getParameter("productNum"));

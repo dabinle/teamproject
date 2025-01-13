@@ -18,34 +18,33 @@ function p_search() {
 </head>
 <body>
 <div id="Wrapper">
+   <div id="header">
+      <form name="search_form" method="post">
+         <select name="searchkey">
+            <c:if test="${searchkey == null || searchkey == 'all' }">
+               <option value="all" selected>전체검색</option>
+                    <option value="companyName">브랜드</option>
+                    <option value="p_categoryName">카테고리</option>
+            </c:if>
+            <c:if test="${searchkey == 'companyName'}">
+               <option value="all">전체검색</option>
+                    <option value="companyName" selected>브랜드</option>
+                    <option value="p_categoryName">카테고리</option>
+            </c:if>
+            <c:if test="${searchkey == 'p_categoryName'}">
+               <option value="all">전체검색</option>
+                    <option value="companyName">브랜드</option>
+                    <option value="p_categoryName" selected>카테고리</option>
+            </c:if>
+         </select>
+         <input type="text" name="search" value="${search }" placeholder="검색어를 입력하세요">
+         <input type="button" value="검색" onclick="p_search()">
+      </form>
+   </div>
    <div id="Container">
-      <div id="header">
-         <form name="search_form" method="post">
-            <select name="searchkey">
-               <c:if test="${searchkey == null || searchkey == 'all' }">
-                  <option value="all" selected>전체검색</option>
-                     <option value="companyName">브랜드</option>
-                     <option value="p_categoryName">카테고리</option>
-               </c:if>
-               <c:if test="${searchkey == 'companyName'}">
-                  <option value="all">전체검색</option>
-                     <option value="companyName" selected>브랜드</option>
-                     <option value="p_categoryName">카테고리</option>
-               </c:if>
-               <c:if test="${searchkey == 'p_categoryName'}">
-                  <option value="all">전체검색</option>
-                     <option value="companyName">브랜드</option>
-                     <option value="p_categoryName" selected>카테고리</option>
-               </c:if>
-            </select>
-            <input type="text" name="search" value="${search }" placeholder="검색어를 입력하세요">
-            <input type="button" value="검색" onclick="p_search()">
-         </form>
-      </div>
       <div id="Contents">
-            <div><span>"${search }"</span> 을/를 검색하신 결과입니다.</div>
-            <h1>상품</h1>
-             <c:forEach var="row" items="${list}" varStatus="status">
+            <h1>브랜드별 상품</h1>
+             <c:forEach var="row" items="${comProductList}" varStatus="status">
                  <c:if test="${status.index % 4 == 0}">
                      <ul class="product-row">
                  </c:if>

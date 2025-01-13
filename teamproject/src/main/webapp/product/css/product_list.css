@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+#Wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+#Contents {
+   overflow: auto;
+   width : 1300px;
+   margin: 0 auto;
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+}
+
+#Contents h1 {
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+li {
+
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 315px;
+    margin: 0 5px;
+    height: 520px;
+}
+
+#img {
+   margin: 10px 17.5px;
+}
+
+.p_name {
+   text-align: center;
+}
+
+.p_name a:nth-child(1) {
+   color: #696969;
+   text-decoration: none;
+   font-size: 18px;
+   font-weight: 800px;
+}
+
+.p_name a:nth-child(2) {
+   text-decoration: none;
+   color:black;
+   font-size: 18px;
+   font-weight: 800px;
+}
+
+.price {
+   text-align: center;
+   
+}
+
+#input {
+   display: flex;
+   justify-content: center;
+}
+
+
+form {
+   display: flex;
+   justify-content: center;
+   
+}
+
+form > select,
+form > input {
+   margin: 0 8px;
+}
+
+select, input,
+button, input[value="찜하기"] {
+   height: 30px;
+}
+
+/* 반응형 처리 */
+@media (max-width: 1200px) {
+    li {
+        width: calc(33.33% - 20px); /* 3개씩 배치 */
+    }
+}
+
+@media (max-width: 768px) {
+    li {
+        width: calc(50% - 20px); /* 2개씩 배치 */
+    }
+}
+
+@media (max-width: 480px) {
+    li {
+        width: 100%; /* 1개씩 배치 */
+    }
+}

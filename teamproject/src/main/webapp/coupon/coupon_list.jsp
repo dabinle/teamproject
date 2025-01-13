@@ -13,27 +13,20 @@
 </script>
 </head>
 <body>
-<div style="border: solid 1px black;">
-	<table border="1">
-		<tr>
-			<th>쿠폰</th>
-			<th>다운로드</th>
-		</tr>
-		<c:forEach var="row" items="${couponList }">
-			<tr>
-				<td>
-					<img src="/teamproject/images/${row.couponImage }" width="600px" height="120px">
-				</td>
-				<td>
-				<form name="form1" method="post" action="/teamproject/coupon_servlet/insert.do">
-					<input type="hidden" name="couponNum" value="${row.couponNum }">
-					<input type="submit" value="다운로드">
-				</form>
-					
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
+   <h2>쿠폰 목록</h2>
+<div id="coupon_list">
+   <c:forEach var="row" items="${couponList  }">
+      <div id="coupon">
+         <p>${row.couponName }</p>
+         <img alt="쿠폰" src="/teamproject/images/coupon/${row.couponImage }" width="330px" height="120px">
+         <p>
+         <form name="form1" method="post" action="/teamproject/coupon_servlet/insert.do">
+               <input type="hidden" name="couponNum" value="${row.couponNum }">
+               <input type="submit" value="다운로드">
+            </form>
+         </p>
+      </div>
+   </c:forEach>
 </div>
 </body>
 </html>

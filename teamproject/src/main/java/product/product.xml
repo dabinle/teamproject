@@ -6,6 +6,14 @@
       select productNum, productName, description, price, amount, p.p_categoryNum, p.companyNum, productImage, pc.p_categoryName, c.companyName 
       from product p, product_category pc, company c
       where p.p_categoryNum = pc.p_categoryNum and p.companyNum = c.companyNum
+      and ${searchkey} like '%' || #{search} || '%'
+      order by productNum
+   </select>
+   <select id="all_list_product" resultType="product.ProductDTO">
+      select productNum, productName, description, price, amount, p.p_categoryNum, p.companyNum, productImage, pc.p_categoryName, c.companyName 
+      from product p, product_category pc, company c
+      where p.p_categoryNum = pc.p_categoryNum and p.companyNum = c.companyNum
+      and  (pc.p_categoryName like '%' || #{search} || '%' or productName like '%' || #{search} || '%' or c.companyName like '%' || #{search} || '%')
       order by productNum
    </select>
 

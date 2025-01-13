@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="./css/2join.css">
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
@@ -80,57 +81,69 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 </script>
 </head>
 <body>
-
+<div id="con">
+<div id="login">
+<div id="login_form">
 <h2 align="center">회원정보 수정</h2>
 <form name="form1" method="post" align="center">
 <table align="center">
+	<label>
+		<p style="text-align: left; font-size:12px; color:#666">이름</p>
+		<input type="text" name="userName" value="${dto.userName}" class="size">
+		<p></p>
+	</label>
+	
+	<label>
+		<p style="text-align: left; font-size:12px; color:#666">아이디</p>
+		<input type="text" name="userID" value="${dto.userID}" readonly class="size">
+		<input type="hidden" name="userID" value="${dto.userID}">
+		<p></p>
+	</label>
+	
+	<label>
+		<p style="text-align: left; font-size:12px; color:#666">이메일</p>
+		<input name="email" value="${dto.email}" readonly class="size">
+		<input type="hidden" name="email" value="${dto.email}">
+		<p></p>
+	</label>
+	
+	<label>
+		<p style="text-align: left; font-size:12px; color:#666">비밀번호</p>
+		<input type="password" name="userPwd" value="${dto.userPwd}" class="size">
+		<p></p>
+	</label>
+	
+	<label>
+		<p style="text-align: left; font-size:12px; color:#666">전화번호</p>
+		<input type="text" name="phoneNum" value="${dto.phoneNum}" class="size">
+		<p></p>
+	</label>
+	
 	<tr>
-    <td>이름</td>
-    <td><input name="userName" value="${dto.userName}"></td>
-</tr>
-<tr>
-    <td>아이디</td>
-    <td>
-        <input name="userID" value="${dto.userID}" readonly>
-        <input type="hidden" name="userID" value="${dto.userID}">
-    </td>
-</tr>
-<tr>
-    <td>이메일</td>
-    <td>
-        <input name="email" value="${dto.email}" readonly>
-        <input type="hidden" name="email" value="${dto.email}">
-    </td>
-</tr>
-<tr>
-    <td>비밀번호</td>
-    <td><input type="password" name="userPwd" value="${dto.userPwd}"></td>
-</tr>
-<tr>
-    <td>전화번호</td>
-    <td><input name="phoneNum" value="${dto.phoneNum}"></td>
-</tr>
-<tr>
-    <td>우편번호</td>
-    <td>
-        <c:if test="${dto.zipCode == -1 }">
-          <input name="zipCode" id="post_code" readonly="readonly">
-           <input type="button" onclick="showPostcode()" value="우편번호 찾기">
-       </c:if>
-       <c:if test="${dto.zipCode != -1 }">
-          <input name="zipCode" id="post_code" value="${dto.zipCode}" readonly="readonly">
-           <input type="button" onclick="showPostcode()" value="우편번호 찾기">
-       </c:if>
-    </td>
-</tr>
-<tr>
-    <td>주소</td>
-    <td><input name="address" id="address" value="${dto.address}" size="60"></td>
-</tr>
-<tr>
-    <td>상세주소</td>
-    <td><input name="addressDetail" id="addressDetail" value="${dto.addressDetail}"></td>
-</tr>
+    	<td>전화번호</td>
+    	<td><input name="phoneNum" value="${dto.phoneNum}"></td>
+	</tr>
+	<tr>
+    	<td>우편번호</td>
+	    <td>
+	        <c:if test="${dto.zipCode == -1 }">
+	          <input name="zipCode" id="post_code" readonly="readonly">
+	           <input type="button" onclick="showPostcode()" value="우편번호 찾기">
+	       </c:if>
+	       <c:if test="${dto.zipCode != -1 }">
+	          <input name="zipCode" id="post_code" value="${dto.zipCode}" readonly="readonly">
+	           <input type="button" onclick="showPostcode()" value="우편번호 찾기">
+	       </c:if>
+	    </td>
+	</tr>
+	<tr>
+    	<td>주소</td>
+    	<td><input name="address" id="address" value="${dto.address}" size="60"></td>
+	</tr>
+	<tr>
+    	<td>상세주소</td>
+    	<td><input name="addressDetail" id="addressDetail" value="${dto.addressDetail}"></td>
+	</tr>
 
 	<tr>
 		<td colspan="2" align="center">
@@ -140,5 +153,8 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 	</tr> 
 </table>
 </form>
+</div>
+</div>
+</div>
 </body>
 </html>
