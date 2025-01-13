@@ -93,7 +93,7 @@ $(document).ready(function() {
                       <input type="hidden" class="amount" value="${orderAmount}">
                   </td>
                   <td>${Pdto.productName}</td>
-                  <td><img src="/teamsproject/images/${Pdto.productImage}" width="100px" height="100px"></td>
+                  <td><img src="/teamproject/images/${Pdto.productImage}" width="100px" height="100px"></td>
                   <td><fmt:formatNumber value="${Pdto.price}" pattern="#,###"></fmt:formatNumber>원</td>
                   <td>${orderAmount}개</td>
                   <td><fmt:formatNumber value="${Pdto.price * orderAmount}" pattern="#,###"></fmt:formatNumber>원</td>
