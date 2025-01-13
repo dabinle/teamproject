@@ -78,7 +78,7 @@ function write() {
             </tr>
             <tr>
                <td colspan="2" align="center">
-                  <input type="submit" value="등록" onclick="write()">
+                  <input type="submit" value="등록">
                   <input type="button" value="목록" onclick="location.href='/teamproject/review_servlet/abc.do'">
             </tr>
          </table>
