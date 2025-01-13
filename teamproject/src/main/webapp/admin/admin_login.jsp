@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/teamproject/member/css/login.css">
 <title>관리자 로그인</title>
 <c:if test="${param.message == 'error'}">
 	<script>
@@ -19,23 +20,33 @@
 </c:if>
 </head>
 <body>
-<h2 align="center">관리자 로그인</h2>
+<div id="con">
+<div id="login">
+<div id="login_form">
+<h2 class="login" style="letter-spacing: -1px;">관리자 로그인</h2>
 <form method="post" name="form1" action="/teamproject/admin_servlet/login.do" align="center">
 <table align="center">
+	
+		<label>
+		<p style="text-align: left; font-size:12px; color:#666">아이디</p>
+		<input type="text" name="adminId" class="size">
+		<p></p>
+		</label>
+	
+		<label>
+		<p style="text-align: left; font-size:12px; color:#666">비밀번호</p>
+		<input type="password" name="adminPwd" class="size">
+		<p></p>
+		</label>
 	<tr>
-		<td>아이디</td>
-		<td><input name="adminId"></td>
-	</tr>
-	<tr>
-		<td>비밀번호</td>
-		<td><input type="password" name="adminPwd"></td>
-	</tr>
-	<tr>
-		<td colspan="2" align="center">
-			<input type="submit" value="로그인">
-		</td>
+		<p>
+			<input type="submit" value="로그인" class="btn">
+		</p>
 	</tr>
 </table>
 </form>
+</div>
+</div>
+</div>
 </body>
 </html>
