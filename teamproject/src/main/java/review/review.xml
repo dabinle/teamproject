@@ -28,6 +28,11 @@
 	    #{reviewContent}, #{reviewFile}, #{reviewScore})
 	</insert>
 
+	<select id="detail" resultType="product.ProductDTO">
+      select p.productNum, productName, productImage
+      from product p, orders o
+      where p.productNum = o.productNum and orderNum = ${orderNum}
+   </select>
 	
 	<update id="update">
 		update review set 

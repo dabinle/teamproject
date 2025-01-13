@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import board.BoardDTO;
+import product.ProductDTO;
 import sqlmap.Mybatis;
 
 public class ReviewDAO {
@@ -168,4 +169,12 @@ public class ReviewDAO {
 		}
 		return dto;
 	}
+	
+	public ProductDTO detail(int orderNum) {
+		   SqlSession session = Mybatis.getInstance().openSession();
+		   ProductDTO productDTO = session.selectOne("review.detail", orderNum);
+		   session.close();
+		   return productDTO;
+		   }
+
 }
