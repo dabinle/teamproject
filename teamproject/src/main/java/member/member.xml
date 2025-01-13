@@ -25,14 +25,16 @@
     </select>
 	
 	<insert id="join">
-	    INSERT INTO member (userID, userName, userPwd, email, phoneNum, zipCode, address, addressDetail)
-	    VALUES (#{userID}, #{userName}, MYPACK.ENCRYPT(#{userPwd}), #{email}, #{phoneNum}, 
-	        <if test="zipCode != -1">#{zipCode}</if>, 
-	        <if test="address != null">#{address}</if>, 
-	        <if test="addressDetail != null">#{addressDetail}</if>
-	    )
+		<choose>
+            <when test="address == null and addressDetail == null">
+               insert into member (userID, userName, userPwd, email, phoneNum, zipCode)
+               values (#{userID}, #{userName}, MYPACK.ENCRYPT(#{userPwd}), #{email}, #{phoneNum}, #{zipCode})
+            </when>
+            <otherwise>
+               insert into member values (#{userID}, #{userName}, MYPACK.ENCRYPT(#{userPwd}), #{email}, #{phoneNum}, #{zipCode}, #{address}, #{addressDetail})
+            </otherwise>
+      </choose>
 	</insert>
-
 	
 	<update id="update">
 		update member set userName=#{userName}, userPwd=mypack.encrypt(#{userPwd}), phoneNum=#{phoneNum}, zipCode=#{zipCode}, address=#{address}, addressDetail=#{addressDetail} where userID=#{userID}
