@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./css/2join.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
@@ -131,76 +130,61 @@ function showPostcode() { // http://dmaps.daum.net/map_js_init/postcode.v2.js안
 </script>
 </head>
 <body>
-<div id="con">
-<div id="login">
-<div id="login_form">
-<h2 class="login" style="letter-spacing:-1px;">회원가입</h2>
-<h3 class="login" style="letter-spacing:-1px;">*는 필수 항목입니다.</h3>
+<h2 align="center">회원가입</h2>
+<h3 align="center">*는 필수 항목입니다.</h3>
 <form name="form1" method="post" align="center">
-	<label>
-		<p style="text-align: left; font-size:12px; color:#666">* 이름</p>
-		<input type="text" name="userName" placeholder="이름 입력" class="size">
-		<p></p>
-	</label>
+<table align="center">
+	<tr>
+		<td>* 이름</td>
+		<td><input name="userName" placeholder="이름 입력"></td>
+	</tr>
+	<tr>
+		<td>* 아이디</td>
+		<td><input name="userID" placeholder="아이디 입력">
+			<input type="button" value="중복확인" id="checkBtn" onclick="idCheck()">
+
+		</td>
+	</tr>
+	<tr>
+		<td>* 이메일</td>
+		<td><input name="email" placeholder="이메일 입력"></td>
+	</tr>
 	
-	<label>
-		<p style="text-align: left; font-size:12px; color:#666">* 아이디
-		<input type="button" value="중복확인" id="checkBtn" onclick="idCheck()"></p>
-		<input type="text" name="userID" placeholder="아이디 입력" class="size">
-		<p></p>
-	</label>
-	
-	<label>
-		<p style="text-align: left; font-size:12px; color:#666">* 이메일</p>
-		<input type="text" name="email" placeholder="이메일 입력" class="size">
-		<p></p>
-	</label>
-	
-	<label>
-		<p style="text-align: left; font-size:12px; color:#666">* 비밀번호</p>
-		<input type="password" id="userPwd" name="userPwd" placeholder="비밀번호 입력" class="size">
-		<p></p>
-	</label>
-	
-	<label>
-		<p style="text-align: left; font-size:12px; color:#666">* 비밀번호 확인</p>
-		<input type="password" id="userPwdCheck" name="userPwd2" onkeyup="checkPwd()" placeholder="비밀번호 확인" class="size"><div id="checkMsg"></div>
-		<p></p>
-	</label>
-	
-	<label>
-		<p style="text-align: left; font-size:12px; color:#666">* 전화번호</p>
-		<input type="text" name="phoneNum" placeholder="전화번호" class="size">
-		<p></p>
-	</label>
-	
-	<label>
-		<p style="text-align: left; font-size:12px; color:#666">우편번호
-		<input type="button" onclick="showPostcode()" value="우편번호 찾기"></p>
-		<input type="text" name="zipCode" id="post_code" placeholder="우편번호 입력" readonly class="size">
-		<p></p>
-	</label>
-	 
-	<label>
-		<p style="text-align: left; font-size:12px; color:#666">주소</p>
-		<input type="text" name="address" id="address" placeholder="주소 입력" class="size">
-		<p></p>
-	</label>
-	
-	<label>
-		<p style="text-align: left; font-size:12px; color:#666">상세주소</p>
-		<input type="text" name="addressDetail" id="addressDetail" placeholder="상세주소 입력" class="size">
-		<p></p>
-	</label>
-	
-	<p>
-		<input type="button" value="회원가입" onclick="join()" class="btn"> 
-	</p>
+	<tr>
+		<td>* 비밀번호</td>
+		<td><input type="password" id="userPwd" name="userPwd" placeholder="비밀번호 입력"></td>
+	</tr>
+	<tr>
+		<td>* 비밀번호 확인</td>
+		<td><input type="password" id="userPwdCheck" name="userPwd2" onkeyup="checkPwd()" placeholder="비밀번호 확인"><div id="checkMsg"></div></td>
+		
+	</tr> 
+	<tr>
+		<td>* 전화번호</td>
+		<td><input name="phoneNum" placeholder="전화번호"></td>
+	</tr>
+	<tr>
+		<td>우편번호</td>
+		<td><input name="zipCode" id="post_code" placeholder="우편번호 입력" readonly>
+		<input type="button" onclick="showPostcode()" value="우편번호 찾기">
+		</td>
+	</tr>
+	<tr>
+		<td>주소</td> 
+		<td><input name="address" id="address" size="60" placeholder="주소 입력"></td>
+	</tr>
+	<tr>
+		<td>상세주소</td>
+		<td><input name="addressDetail" id="addressDetail" placeholder="상세주소 입력"></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<input type="button" value="회원가입" onclick="join()"> 
+		</td>
+	</tr> 
+</table>
 <input type="hidden" id="idCheckStatus" value="N"> <!-- 중복 확인 상태를 관리하는 hidden 필드 -->
 <input type="hidden" id="PwdCheckStatus" value="N">
 </form>
-</div>
-</div>
-</div>
 </body>
 </html>
