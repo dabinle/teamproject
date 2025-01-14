@@ -5,6 +5,7 @@
 <div style="text-align: right;">
 <c:choose>
 	<c:when test="${sessionScope.userID == null}">
+		<span><a href="/teamproject/home/home.jsp" style="text-decoration: none; color: black;">HOME</a></span>
 		<span><a href="/teamproject/member/join.jsp" style="text-decoration: none; color: black;">회원가입</a></span> 
 		<span><a href="/teamproject/member/login.jsp" style="text-decoration: none; color: black;">로그인</a></span> 
 		<span><a href="/teamproject/member/login.jsp" style="text-decoration: none; color: black;">장바구니</a></span> 

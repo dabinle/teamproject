@@ -246,7 +246,7 @@ function selected_coupon() {
          </tr>
       </table>
       <h3>쿠폰 선택</h3>
-      <select id="select_coupon"> <!-- 0 이라고 하면 0 되나 -->
+      <select id="select_coupon" onchange="setInfo()"> <!-- 0 이라고 하면 0 되나 -->
          <option value="0" selected="selected">==쿠폰 선택==</option>
          <c:forEach var="row" items="${ableList }">
             <option value2=${row.couponmemberDTO[0].couponID } value="${row.couponPrice }">${row.couponName }</option>

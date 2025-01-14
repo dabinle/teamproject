@@ -42,26 +42,7 @@ function p_search() {
       </form>
    </div>
    <div id="Container">
-      <div id="Contents">
-      		<h1>	
-      			<c:choose>
-           			<c:when test="${param.companyNum == '1'}">
-                    	"마몽드"에 대한 검색 결과
-                    </c:when>
-                    <c:when test="${param.companyNum == '2'}">
-                        달바
-                    </c:when>
-                    <c:when test="${param.companyNum == '3'}">
-						페리페라
-                    </c:when>
-	       			<c:when test="${param.companyNum == '4'}">
-						닥터지
-                    </c:when>
-                    <c:otherwise>
-                        브랜드별 상품
-                    </c:otherwise>
-                </c:choose>
-            </h1>
+      <div id="Contents">	
              <c:forEach var="row" items="${comProductList}" varStatus="status">
                  <c:if test="${status.index % 4 == 0}">
                      <ul class="product-row">

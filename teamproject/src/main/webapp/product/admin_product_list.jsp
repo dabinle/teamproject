@@ -25,7 +25,7 @@ color: red;
 </style>  
 </head>
 <body>
-<h2>상품목록</h2>
+<h2>관리자 상품 목록</h2>
 <button class="btn" type="button" id="btn_insert">상품등록</button>
 <table border="1" width="800px">
    <tr align="center">
