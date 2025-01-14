@@ -73,19 +73,27 @@
     }
 
     nav a, main > nav > #category-container > span > a {
-        color: white;
-        text-decoration: none;
-        font-weight:800;
-        font-size: 23px;
-        padding: 10px;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-    }
-   
-   main > nav > #category-container > span > a {
-      position: relative;
-      top:10px;
-   }
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    
+    line-height: 1.5;
+    
+    display: inline-block; /* inline 요소를 block처럼 취급하여, 중앙 정렬할 수 있도록 */
+    text-align: center; /* 글자 수평 중앙 정렬 */
+}
+
+#category-container, main > nav > #category-container > span {
+    display: flex; /* 플렉스 박스를 사용하여 자식 요소들(여기서는 a)을 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    height: 100%; /* 부모 요소에 높이를 주어 자식 요소들이 수직으로 정렬될 수 있도록 */
+}
+
 
 
 
@@ -99,7 +107,20 @@
     }
 
    
+#n1 {
+        text-align: center; /* 네비게이션 내 모든 a 태그를 수평 중앙 정렬 */
+    }
 
+    #n1 a {
+        color: black;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        display: inline-block; /* a 태그를 inline-block으로 변경하여, text-align이 적용되도록 */
+    }
 
 
 div > span> a

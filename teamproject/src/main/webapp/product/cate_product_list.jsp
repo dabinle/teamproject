@@ -84,7 +84,7 @@ function p_search() {
                           </form>
                       </c:if>
                         <c:if test="${empty sessionScope.userID}">
-                          <button onclick="alert('로그인이 필요합니다.'); location.href='/teamproject/member/login.jsp';">
+                          <button  onclick="alert('로그인이 필요합니다.'); location.href='/teamproject/member/login.jsp';">
                               찜하기
                           </button>
                       </c:if>
@@ -96,7 +96,6 @@ function p_search() {
                     </c:if>
              </c:forEach>
       </div>
-      <div id="paging">페이지</div>
    </div>
 </div>
 </body>

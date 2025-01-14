@@ -8,21 +8,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>카테고리</h2>
-<div style="border: solid 1px black;">
+<div id="cate">
 <c:forEach var="pc" items="${P_Clist }">
-		<div style="border: solid 1px black; display: inline-block; margin: 10px 20px;">
-			<ul style="display: inline-block; list-style-type: none; text-align: left; margin: 0;">
-				<strong><a href="#">[${pc.p_categoryNum }] ${pc.p_categoryName }</a></strong>
-				<c:forEach var="c" items="${Clist }">
-					<c:if test="${c.p_parentCategory == pc.p_categoryNum }">
-						<li><a href="#">[${c.p_categoryNum }] ${c.p_categoryName }</a></li>
-					</c:if>
-				</c:forEach>
-			</ul>
-		</div>
+      <div id="cate_list">
+         <ul>
+            <li id="p_cate"><a href="/teamproject/product_servlet/cate_product.do?p_categoryNum=${pc.p_categoryNum }">${pc.p_categoryName }</a></li>
+            <c:forEach var="c" items="${Clist }">
+               <c:if test="${c.p_parentCategory == pc.p_categoryNum }">
+                  <li id="c_cate"><a href="/teamproject/product_servlet/cate_product.do?p_categoryNum=${c.p_categoryNum }"> ${c.p_categoryName }</a></li>
+               </c:if>
+            </c:forEach>
+         </ul>
+      </div>
 </c:forEach>
 </div>
-
 </body>
 </html>

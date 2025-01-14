@@ -32,8 +32,23 @@ div {
 nav {
   border-color: #ffffff;
   background-color: #f5f1ee;
+  font-style: #000000;
+  text-align: center;
 }
-
+nav a, main > nav > #category-container > span > a {
+        color: white;
+        text-decoration: none;
+        font-weight:800;
+        font-size: 23px;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+   
+   main > nav > #category-container > span > a {
+      position: relative;
+      top:10px;
+   }
 table {
   height: 200px;
   width: 1200px;

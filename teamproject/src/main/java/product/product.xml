@@ -9,6 +9,7 @@
       and ${searchkey} like '%' || #{search} || '%'
       order by productNum
    </select>
+   
    <select id="all_list_product" resultType="product.ProductDTO">
       select productNum, productName, description, price, amount, p.p_categoryNum, p.companyNum, productImage, pc.p_categoryName, c.companyName 
       from product p, product_category pc, company c
@@ -26,6 +27,21 @@
    <select id="p_all_category" resultType="product.ProductCategoryDTO">
    	select * from product_category where p_parentcategory is null
    </select>
+   
+    <select id="cate_product" resultType="product.ProductDTO">
+      select productNum, productName, description, price, amount, p.p_categoryNum, p.companyNum, productImage, pc.p_categoryName, c.companyName 
+    from product p, product_category pc, company c
+    where p.p_categoryNum = pc.p_categoryNum and p.companyNum = c.companyNum and p.p_categoryNum = #{p_categoryNum}
+    order by productNum
+   </select>
+   
+   <select id="com_product" resultType="product.ProductDTO">
+      select productNum, productName, description, price, amount, p.p_categoryNum, p.companyNum, productImage, pc.p_categoryName, c.companyName 
+    from product p, product_category pc, company c
+    where p.p_categoryNum = pc.p_categoryNum and p.companyNum = c.companyNum and p.companyNum = #{companyNum}
+    order by productNum
+   </select>
+   
    <select id="all_category" resultType="product.ProductCategoryDTO">
    	select * from product_category where p_parentcategory is not null
    </select>

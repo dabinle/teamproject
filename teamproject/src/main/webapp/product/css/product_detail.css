@@ -137,6 +137,32 @@ h2 {
     background-color: #218838;
 }
 
+input[value="찜하기"] {
+   height: 30px;
+   color: #fff;
+   border-radius: 5px;
+   background-color: #df3278; 
+   border: none;
+   
+}
+
+input[value="바로구매"] {
+   height: 30px;
+   background-color: #3498db;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   
+}
+
+input[value="장바구니 담기"] {
+  padding: 5px;
+  background-color: #5cb85c;
+  border: none;
+  color: white;
+  border-radius: 5px;
+}
+
 #p_nav {
     list-style: none;
     display: flex;

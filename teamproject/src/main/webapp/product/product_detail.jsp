@@ -43,13 +43,13 @@ function productReview() {
 <body>
 <div id="Container">
    <div id="Contents">
-      <div><h2>회원 상품 정보</h2></div>
+      
       <div id="p_info">
          <div id="left">
             <img alt="상품사진" src="/teamproject/images/${dto.productImage }" width="300px" height="300px">
             <p id="cosReview">
-               <span>고객리뷰</span>
-               <span>별점넣을거</span>
+               <span>고객 리뷰</span>
+               
                <span><a href="javascript:void(0)" onclick="productReview(); return false;">(${count })건</a></span>
             </p>
          </div>
@@ -68,7 +68,7 @@ function productReview() {
                             <option value="${i}">${i}</option>
                          </c:forEach>
                       </select> 개
-                      <input type="submit" value="장바구니에 담기">
+                      <input type="submit" value="장바구니 담기">
                      </form>
                      <input type="button" value="바로구매" onclick="order()">
                      <input type="button" value="찜하기" onclick="wish()">

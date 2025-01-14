@@ -88,9 +88,37 @@ form > input {
    margin: 0 8px;
 }
 
-select, input,
-button, input[value="찜하기"] {
+
+button {
    height: 30px;
+   background-color: #3498db;
+        color: white;
+   
+}
+
+input[value="찜하기"] {
+   height: 30px;
+   color: #fff;
+   border-radius: 5px;
+   background-color: #df3278; 
+   border: none;
+   
+}
+
+input[value="검색"] {
+   height: 30px;
+   background-color: #3498db;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   
+}
+
+input[value="장바구니 담기"] {
+  background-color: #5cb85c;
+  border: none;
+  color: white;
+  border-radius: 5px;
 }
 
 /* 반응형 처리 */
@@ -111,3 +139,4 @@ button, input[value="찜하기"] {
         width: 100%; /* 1개씩 배치 */
     }
 }
+

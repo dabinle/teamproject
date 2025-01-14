@@ -47,4 +47,19 @@ public class ProductDAO {
 		session.close();
 		return categoryList;
 	}   
+	
+	// 카테고리별 상품 리스트
+	   public List<ProductDTO> categoryProduct(int p_categoryNum) {
+	      SqlSession session = Mybatis.getInstance().openSession();
+	      List<ProductDTO> cateProductList = session.selectList("product.cate_product", p_categoryNum);
+	      session.close();
+	      return cateProductList;
+	   }
+	   // 브랜드별 상품 리스트
+	   public List<ProductDTO> companyProduct(int companyNum) {
+	      SqlSession session = Mybatis.getInstance().openSession();
+	      List<ProductDTO> comProductList = session.selectList("product.com_product", companyNum);
+	      session.close();
+	      return comProductList;
+	   }
 }

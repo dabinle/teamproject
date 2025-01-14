@@ -43,8 +43,10 @@ function p_search() {
          </form>
       </div>
       <div id="Contents">
-            <div><span>"${search }"</span> 을/를 검색하신 결과입니다.</div>
-            <h1>상품</h1>
+            <c:if test="${search != '' }">
+               <div><span>"${search }"</span> 을/를 검색하신 결과입니다.</div>
+            </c:if>
+            
              <c:forEach var="row" items="${list}" varStatus="status">
                  <c:if test="${status.index % 4 == 0}">
                      <ul class="product-row">

@@ -14,10 +14,10 @@ public class ProductController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = request.getRequestURI();
 		String path = request.getContextPath();
-		System.out.println("url: "+url+" path: "+path);
+		
 		ProductDAO dao = new ProductDAO();
 		ReviewDAO reviewDAO = new ReviewDAO();
-		System.out.println("시작");
+		
 		if(url.indexOf("list.do")!=-1) {
 			String searchkey = "all";
 	         String search = "";
@@ -31,14 +31,14 @@ public class ProductController extends HttpServlet{
 	         request.setAttribute("list", list);
 	         request.setAttribute("searchkey", searchkey);
 	         request.setAttribute("search", search);
-	         System.out.println("회원상품 리스트: "+list);
+	         
 	         RequestDispatcher rd = request.getRequestDispatcher("/product/product_list.jsp");
 	         rd.forward(request, response);
 		}
 		else if (url.indexOf("detail.do")!=-1) {
 			int productNum = Integer.parseInt(request.getParameter("productNum"));
 			request.setAttribute("productNum", productNum);
-			System.out.println("상품번호:" +productNum);
+			
             ProductDTO dto = dao.detailProduct(productNum);  
             request.setAttribute("dto", dto);
             int count = reviewDAO.count(productNum);
@@ -55,6 +55,24 @@ public class ProductController extends HttpServlet{
 			RequestDispatcher rd = request.getRequestDispatcher("/product/all_category.jsp");
 			rd.forward(request, response);
 		}
+		
+		   else if (url.indexOf("cate_product.do")!=-1) {
+		         int p_categoryNum = Integer.parseInt(request.getParameter("p_categoryNum"));
+		         List<ProductDTO> cateProductList = dao.categoryProduct(p_categoryNum);
+		         request.setAttribute("cateProductList", cateProductList);
+		         RequestDispatcher rd = request.getRequestDispatcher("/product/cate_product_list.jsp");
+		         rd.forward(request, response);
+		      }
+		      
+		      else if (url.indexOf("com_product.do")!=-1) {
+		         int companyNum = Integer.parseInt(request.getParameter("companyNum"));
+		         System.out.println("ee:"+companyNum);
+		         List<ProductDTO> comProductList = dao.companyProduct(companyNum);
+		         System.out.println("e22e:"+comProductList);
+		         request.setAttribute("comProductList", comProductList);
+		         RequestDispatcher rd = request.getRequestDispatcher("/product/com_product_list.jsp");
+		         rd.forward(request, response);
+		      }
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
