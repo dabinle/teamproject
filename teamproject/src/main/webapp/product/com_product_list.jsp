@@ -43,9 +43,10 @@ function p_search() {
    </div>
    <div id="Container">
       <div id="Contents">
-      		<c:choose>
+      		<h1>	
+      			<c:choose>
            			<c:when test="${param.companyNum == '1'}">
-                    	마몽드 
+                    	"마몽드"에 대한 검색 결과
                     </c:when>
                     <c:when test="${param.companyNum == '2'}">
                         달바
